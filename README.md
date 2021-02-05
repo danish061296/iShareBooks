@@ -18,7 +18,7 @@
 | member1      |ykc@mail.sfsu.edu       | yogeskc         |
 | member2      |dsiddiqui@mail.sfsu.edu | danish061296    |
 | member3      |abrown22@mail.sfsu.edu  |aryannayazmin    |
-| member4      |                        |                 |
+| member4      |aneralla@mail.sfsu.edu  |AbishekNeralla   |
 | member5      |                        |                 |
 | member6      |                        |                 |
 
