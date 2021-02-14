@@ -11,14 +11,14 @@ import NavigationBar from './components/NavigationBar';
 function App() {
   return (
     <div className="app">
-      <NavigationBar />
+      <NavigationBar className="nav"/>
       <Router>
         <Switch>
           <Route exact path="/" component={Yangesh} />
           <Route path="/danish" component={Danish} />
           <Route path="/abishek" component={Abishek} />
           <Route path="/aryanna" component={Aryanna} />
-          <Route path="/zaid" component={Zaid} />
+          <Route path="/zaid" component   = {Zaid} />
           <Route path="/pramod" component={Pramod} />
         </Switch>
       </Router>
