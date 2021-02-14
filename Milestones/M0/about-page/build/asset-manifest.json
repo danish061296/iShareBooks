@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9382b29f.chunk.css",
+    "main.js": "/static/js/main.52a94683.chunk.js",
+    "main.js.map": "/static/js/main.52a94683.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6f0e1d9d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6f0e1d9d.js.map",
+    "static/js/2.a72339d9.chunk.js": "/static/js/2.a72339d9.chunk.js",
+    "static/js/2.a72339d9.chunk.js.map": "/static/js/2.a72339d9.chunk.js.map",
+    "static/js/3.a11b977f.chunk.js": "/static/js/3.a11b977f.chunk.js",
+    "static/js/3.a11b977f.chunk.js.map": "/static/js/3.a11b977f.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.9382b29f.chunk.css.map": "/static/css/main.9382b29f.chunk.css.map",
+    "static/js/2.a72339d9.chunk.js.LICENSE.txt": "/static/js/2.a72339d9.chunk.js.LICENSE.txt",
+    "static/media/Danish.682c7798.jpg": "/static/media/Danish.682c7798.jpg",
+    "static/media/poc.54f7d7db.png": "/static/media/poc.54f7d7db.png",
+    "static/media/pramod.bd8fe4d0.jpg": "/static/media/pramod.bd8fe4d0.jpg",
+    "static/media/zaid.af64c036.jpeg": "/static/media/zaid.af64c036.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6f0e1d9d.js",
+    "static/js/2.a72339d9.chunk.js",
+    "static/css/main.9382b29f.chunk.css",
+    "static/js/main.52a94683.chunk.js"
+  ]
+}
