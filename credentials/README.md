@@ -7,15 +7,17 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP
-2. SSH username
-3. SSH password or key.
+1. Server URL or IP   :http://35.236.6.208/
+Note: Please paste the following in the terminal after installing gcloud:(apt install gcloud
+2. SSH username:gcloud beta compute ssh --zone "us-west2-a" "swe" --project "alert-shape-286200" 
+3. SSH password or key: team 
     <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.
+4. Database URL or IP and port used.: MySQL Database has been set up inside the gcloud Instance which can be accessed with the same SSH command >>mysql
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
+5. Database username: team4user
+6. Database password: Secure1234!
+
+7. Database name (basically the name that contains all your tables):team4App
 8. Instructions on how to use the above information.
 
 # Most important things to Remember
