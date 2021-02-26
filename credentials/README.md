@@ -7,7 +7,7 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP   :http://35.236.6.208/
+1. Server URL or IP   http://ec2-13-58-237-215.us-east-2.compute.amazonaws.com:3000/
 Note: Please paste the following in the terminal after installing gcloud:(apt install gcloud
 2. SSH username:gcloud beta compute ssh --zone "us-west2-a" "swe" --project "alert-shape-286200" 
 3. SSH password or key: team 
