@@ -1,26 +1,25 @@
-# Credentials Folder
+# Credentials
 
-## The purpose of this folder is to store all credentials needed to log into your server and databases. This is important for many reasons. But the two most important reasons is
-    1. Grading , servers and databases will be logged into to check code and functionality of application. Not changes will be unless directed and coordinated with the team.
-    2. Help. If a class TA or class CTO needs to help a team with an issue, this folder will help facilitate this giving the TA or CTO all needed info AND instructions for logging into your team's server. 
+1. Server URL: http://ec2-13-58-237-215.us-east-2.compute.amazonaws.com / Webpage: http://ec2-13-58-237-215.us-east-2.compute.amazonaws.com:3000
+2. SSH username: ubuntu
+3. SSH key - download .pem file
+4. Database URL: team3-db.cw9zowcwenob.us-east-2.rds.amazonaws.com, port: 3306
+5. Database username: root
+6. Database password: password
+7. Database name: team3-db
+
+## How to Log In to AWS EC2 SSH
+1. Download sec4team3.pem file and store it in a secure directory.
+2. Open your terminal or command line.
+3. Type the following: ssh -i "/dir/sec4team3.pem" ubuntu@ec2-13-58-237-215.us-east-2.compute.amazonaws.com
+3.1 Replace dir with the location of the downloaded file.
+4. Press enter and you will now have access to the server terminal.
+
+## How to Log In to AWS RDS
+1. Set the endpoint to the Database URL.
+2. Set the port to 3306.
+3. Enter the database name in the connection name field.
+4. Enter the database username and password.
 
 
-# Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
-
-1. Server URL or IP   http://ec2-13-58-237-215.us-east-2.compute.amazonaws.com:3000/
-Note: Please paste the following in the terminal after installing gcloud:(apt install gcloud
-2. SSH username:gcloud beta compute ssh --zone "us-west2-a" "swe" --project "alert-shape-286200" 
-3. SSH password or key: team 
-    <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.: MySQL Database has been set up inside the gcloud Instance which can be accessed with the same SSH command >>mysql
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username: team4user
-6. Database password: Secure1234!
-
-7. Database name (basically the name that contains all your tables):team4App
-8. Instructions on how to use the above information.
-
-# Most important things to Remember
-## These values need to kept update to date throughout the semester. <br>
-## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
-## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
+(up-to-date as of 26 Feb 2021)
