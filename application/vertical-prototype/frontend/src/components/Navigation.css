@@ -50,6 +50,16 @@
   background: white !important;
 }
 
+@media screen and (max-width: 768px) {
+  .signup__btn {
+    font-size: 10px !important;
+  }
+
+  .nav__link {
+    font-size: 10px;
+  }
+}
+
 .navbar__logoLink {
   cursor: pointer;
   text-decoration: none;

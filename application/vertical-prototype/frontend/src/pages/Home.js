@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import About from '../components/About';
 import Services from '../components/Services';
-import Faq from '../components/Faq';
+import Trending from '../components/Trending';
 import Footer from '../components/Footer';
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <Navigation />
       <About />
-      <Faq />
+      <Trending />
       <Services />
       <Footer />
     </div>

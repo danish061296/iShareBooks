@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  height: 75vh;
+  height: 80vh;
   background: black;
   position: relative;
   z-index: 1;
@@ -27,6 +27,27 @@
   object-fit: cover;
   background: #232a34;
   opacity: 0.7;
+}
+
+.custom-shape-divider-bottom-1616326519 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1616326519 svg {
+  position: relative;
+  display: block;
+  width: calc(127% + 1.3px);
+  height: 137px;
+}
+
+.custom-shape-divider-bottom-1616326519 .shape-fill {
+  fill: #f5f5f7;
 }
 
 .about__title {
