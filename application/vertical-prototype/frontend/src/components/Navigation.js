@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as LinkR } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Navigation = () => {
   const [logo, setLogo] = useState(false);
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   const showLogo = () => {
     if (window.scrollY >= 70) {
@@ -23,48 +29,6 @@ const Navigation = () => {
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           <Nav className="ml-auto ">
-            <Link
-              className="nav__link"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="about"
-              smooth={true}
-              duration={1000}
-            >
-              About
-            </Link>
-            <Link
-              className="nav__link"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="services"
-              smooth={true}
-              duration={1000}
-            >
-              Services
-            </Link>
-            <Link
-              className="nav__link"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="trending"
-              smooth={true}
-              duration={1000}
-            >
-              FAQ
-            </Link>
             <Link
               className="nav__link"
               style={{
@@ -102,6 +66,7 @@ const Navigation = () => {
           <Nav className="ml-auto ">
             <Link
               className="nav__link"
+              data-aos="slide-down"
               style={{
                 color: '#D3D3D3',
                 textDecoration: 'none',
@@ -116,6 +81,7 @@ const Navigation = () => {
             </Link>
             <Link
               className="nav__link"
+              data-aos="slide-down"
               style={{
                 color: '#D3D3D3',
                 textDecoration: 'none',
@@ -130,6 +96,7 @@ const Navigation = () => {
             </Link>
             <Link
               className="nav__link"
+              data-aos="slide-down"
               style={{
                 color: '#D3D3D3',
                 textDecoration: 'none',
@@ -164,11 +131,9 @@ const Navigation = () => {
 
       <div className="navbar__second">
         <h1 className="navbar__logo" href="/home">
-          iShareBooks
-          {/* <Link className="navbar__logoLink" to="#home">
+          <LinkR className="navbar__logoLink" to="/">
             iShareBooks
-          </Link> */}
-          {/* <a href="/">iShareBooks</a> */}
+          </LinkR>
         </h1>
         <div className="navbar__icons">
           <ShoppingCartIcon className="cart" />
