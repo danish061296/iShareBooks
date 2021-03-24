@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-scroll';
+import {Link as LinkR} from 'react-router-dom';
 import './Navigation.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -53,7 +54,7 @@ const Navigation = () => {
           >
             FAQ
           </Link>
-          <Link
+          <LinkR
             className="nav__link"
             style={{
               color: '#D3D3D3',
@@ -61,10 +62,10 @@ const Navigation = () => {
               marginRight: '20px',
               cursor: 'pointer',
             }}
-            to="#login"
+            to="/login"
           >
-            Log In
-          </Link>
+            Login
+          </LinkR>
         </Nav>
 
         <Button variant="outline-success signup__btn" href="/registration">
