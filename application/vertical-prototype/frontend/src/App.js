@@ -4,13 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Link,
-  Route,
-  BrowserRouter,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
   return (
