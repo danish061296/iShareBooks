@@ -39,7 +39,7 @@ export default function Register() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
           Sign Up
         </Typography>
         <form className={classes.form} noValidate>
@@ -52,7 +52,7 @@ export default function Register() {
                 required
                 fullWidth
                 id="firstName"
-                label="Full Name"
+                label="Username"
                 autoFocus
               />
             </Grid>
@@ -84,7 +84,13 @@ export default function Register() {
                 control={
                   <Checkbox value="allowExtraEmails" color="color: #28918a" />
                 }
-                label="I want to receive fun updates about books via email."
+                // label="I want to receive fun updates about books via email."
+                label={
+                  <Typography variant="body2" color="textSecondary">
+                    By clicking sign up, you agree to our Terms and Privacy
+                    Policy.
+                  </Typography>
+                }
               />
             </Grid>
           </Grid>
