@@ -50,7 +50,8 @@ const About = () => {
         </div>
       </div>
       <Button variant="success explore__btn" data-aos="fade-up">
-        Explore Now! <ArrowForwardIosIcon fontSize="small" />
+        Explore Now!{' '}
+        <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
       </Button>
       <div class="custom-shape-divider-bottom-1616326519">
         <svg

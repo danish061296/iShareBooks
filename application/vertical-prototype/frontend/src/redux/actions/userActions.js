@@ -8,6 +8,11 @@ export const setPassword = (password) => ({
   password,
 });
 
+export const setEmail = (email) => ({
+  type: 'SET_EMAIL',
+  email,
+});
+
 export const setIsLoggedIn = (isLoggedIn) => ({
   type: 'SET_LOGGED_IN',
   isLoggedIn,

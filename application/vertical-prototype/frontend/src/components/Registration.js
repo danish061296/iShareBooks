@@ -11,6 +11,13 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setUsername,
+  setEmail,
+  setPassword,
+  setIsLoggedIn,
+} from '../redux/actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+  const username = useSelector((state) => state.userReducer.username);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -46,14 +58,15 @@ export default function Register() {
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="uname"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="username"
                 label="Username"
                 autoFocus
+                onChange={(e) => dispatch(setUsername(e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>
@@ -65,6 +78,7 @@ export default function Register() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={(e) => dispatch(setEmail(e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,6 +91,7 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => dispatch(setPassword(e.target.value))}
               />
             </Grid>
             <Grid item xs={12}>

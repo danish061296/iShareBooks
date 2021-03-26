@@ -144,4 +144,10 @@
   .searchBar {
     font-size: 15px;
   }
+  .explore__btn {
+    font-size: 10px !important;
+  }
+  .arrow__icon {
+    font-size: 10px !important;
+  }
 }

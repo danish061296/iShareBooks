@@ -13,13 +13,16 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
+import { useSelector } from 'react-redux';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import './Login.css';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         iShareBooks
       </Link>
       {new Date().getFullYear()}
@@ -50,9 +53,32 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const username = useSelector((state) => state.userReducer.username);
+
+  const initialValues = {
+    email: '',
+    password: '',
+    remember: false,
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Please enter a valid email!')
+      .required('Email is required!'),
+    password: Yup.string()
+      .min(8, 'Password must contain at least 8 characters!')
+      .required('Password is required!'),
+  });
+
+  const onSubmit = (values, props) => {
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+  };
+
   return (
     <div>
-      {' '}
       <Navigation />
       <div className="login__Container">
         <Container component="main" maxWidth="xs">
@@ -61,50 +87,67 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
               Login
             </Typography>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="signinButton"
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item>
-                  <Link href="/registration" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+            {/* <form className={classes.form} noValidate> */}
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+            >
+              {(props) => (
+                <Form>
+                  <Field
+                    as={TextField}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="email"
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    helperText={<ErrorMessage name="email" />}
+                  />
+                  <Field
+                    as={TextField}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    helperText={<ErrorMessage name="password" />}
+                  />
+                  <Field
+                    as={FormControlLabel}
+                    name="remember"
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="signinButton"
+                  >
+                    Sign In
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+            <Grid container>
+              <Grid item>
+                <Link href="/registration" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
               </Grid>
-            </form>
+            </Grid>
+            {/* </form> */}
           </div>
           <Box mt={8}>
             <Copyright />

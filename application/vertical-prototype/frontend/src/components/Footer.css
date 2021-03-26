@@ -1,6 +1,6 @@
-.footer {
+/* .footer {
   position: relative;
-}
+} */
 
 .upward__btn {
   background-color: white !important;
@@ -8,11 +8,53 @@
   border: none !important;
   position: absolute;
   right: 20px;
-  bottom: 20px;
+  bottom: 80px;
   z-index: 99;
 }
 
 .upward__btn:hover {
   background-color: rgb(212, 238, 232) !important;
   border: none !important;
+}
+
+.Fcontent {
+  height: 180px;
+  color: white;
+  background-color: #18504c;
+  width: 100%;
+  text-align: left;
+  opacity: 90%;
+  border-top: solid white;
+}
+
+.copyright {
+  margin-left: 70%;
+  margin-right: 10%;
+  padding-top: 7em;
+  position: absolute;
+  font-size: x-small;
+  text-align: right;
+  width: 25%;
+}
+
+@media screen and (max-width: 768px) {
+  .copyright {
+    font-size: 8px;
+    margin-top: 30px;
+  }
+}
+
+.left {
+  float: left;
+  width: 50%;
+}
+
+.fcontent {
+  padding-bottom: 80px;
+  margin-top: 10px;
+  position: inherit;
+}
+
+.center {
+  size: 100px;
 }

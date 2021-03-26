@@ -1,6 +1,7 @@
 const initState = () => ({
-  username: 'Danish ',
+  username: '',
   password: '',
+  email: '',
   isLoggedIn: false,
 });
 
@@ -11,16 +12,23 @@ const userReducer = (state = initState(), action) => {
         ...state,
         username: action.username,
       };
-    case 'SET_LOGGED_IN':
+    case 'SET_EMAIL':
       return {
         ...state,
-        isLoggedIn: action.isLoggedIn,
+        email: action.email,
       };
     case 'SET_PASSWORD':
       return {
         ...state,
         password: action.password,
       };
+
+    case 'SET_LOGGED_IN':
+      return {
+        ...state,
+        isLoggedIn: action.isLoggedIn,
+      };
+
     default:
       return state;
   }

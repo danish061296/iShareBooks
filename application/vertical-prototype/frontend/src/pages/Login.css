@@ -10,3 +10,7 @@
   color: white !important;
   border: 1px solid #18504c !important;
 }
+
+.MuiFormHelperText-root {
+  color: red !important;
+}
