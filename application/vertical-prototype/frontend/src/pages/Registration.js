@@ -19,6 +19,7 @@ import {
   setPassword,
   setIsLoggedIn,
 } from '../redux/actions/userActions';
+import axios from 'axios';
 import './Registration.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +48,32 @@ const Registration = () => {
 
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const username = useSelector((state) => state.userReducer.username);
+  const email = useSelector((state) => state.userReducer.email);
+  const password = useSelector((state) => state.userReducer.password);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const registerUser = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    console.log(username);
+    console.log(email);
+    console.log(password);
+
+    axios
+      .post('http://localhost:3001/register', registerUser)
+      .then((response) => console.log(response.data))
+      .catch((e) => console.log(e));
+
+    console.log('Submitted');
+  };
 
   return (
     <div>
       <Navigation />
-      {/* Hi {username} */}
       <div className="signup__container">
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -71,6 +93,7 @@ const Registration = () => {
                     id="username"
                     label="Username"
                     autoFocus
+                    value={username}
                     onChange={(e) => dispatch(setUsername(e.target.value))}
                   />
                 </Grid>
@@ -83,6 +106,7 @@ const Registration = () => {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={email}
                     onChange={(e) => dispatch(setEmail(e.target.value))}
                   />
                 </Grid>
@@ -96,6 +120,7 @@ const Registration = () => {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={password}
                     onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
                 </Grid>
@@ -123,6 +148,7 @@ const Registration = () => {
                 variant="contained"
                 color="color:#28918a !important;"
                 className="signup__btn"
+                onClick={handleSubmit}
                 // className={classes.submit}
               >
                 Sign Up

@@ -54,6 +54,8 @@ export default function SignIn() {
   const classes = useStyles();
 
   const username = useSelector((state) => state.userReducer.username);
+  const email = useSelector((state) => state.userReducer.email);
+  const password = useSelector((state) => state.userReducer.password);
 
   const initialValues = {
     email: '',
@@ -70,11 +72,18 @@ export default function SignIn() {
       .required('Password is required!'),
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted');
+  };
+
   const onSubmit = (values, props) => {
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 2000);
+    console.log('Messageeee');
+    console.log(values);
   };
 
   return (
@@ -134,6 +143,7 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                     className="signinButton"
+                    onClick={handleSubmit}
                   >
                     Sign In
                   </Button>
