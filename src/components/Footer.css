@@ -1,0 +1,26 @@
+.footer {
+  position: relative;
+}
+
+.upward__btn {
+  background-color: white !important;
+  color: #18504c !important;
+  border: none !important;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99;
+}
+
+.upward__btn:hover {
+  background-color: rgb(212, 238, 232) !important;
+  border: none !important;
+}
+
+
+.font2 {
+  color: rgb(3, 0, 0);
+  font-weight: 50;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+}
