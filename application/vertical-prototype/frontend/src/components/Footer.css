@@ -15,6 +15,7 @@
 .upward__btn:hover {
   background-color: rgb(212, 238, 232) !important;
   border: none !important;
+  outline: none !important;
 }
 
 .Fcontent {
@@ -28,6 +29,8 @@
 }
 
 .copyright {
+  display: flex;
+  justify-content: space-around;
   margin-left: 70%;
   margin-right: 10%;
   padding-top: 7em;

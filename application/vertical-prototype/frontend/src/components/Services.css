@@ -1,10 +1,44 @@
 .services {
-  background: green;
+  background: white;
   color: black;
-  height: 90vh;
+  height: 120vh;
+  width: 100vw;
   font-size: 50px;
 }
-\.font1 {
+
+.services__container {
+  margin-top: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.services__card {
+  background-color: green !important;
+}
+
+.services__description {
+  z-index: 99;
+  color: white;
+  position: absolute;
+}
+
+.services__image {
+  /* background-color: #2e3236 !important; */
+  opacity: 2.8 !important;
+  object-fit: contain !important;
+}
+
+.services__btn {
+  background-color: white !important;
+  border-radius: 30px !important;
+  color: #18504c !important;
+  border: none !important;
+}
+
+.font1 {
   color: rgb(3, 0, 0);
   font-weight: 50;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

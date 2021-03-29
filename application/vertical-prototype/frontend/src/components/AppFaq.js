@@ -10,7 +10,7 @@ import './Faq.css';
 
 const AppFaq = () => {
   return (
-    <div className="faq__container">
+    <div className="faq__container" id="faq">
       <div className="faq">
         <NavbarBrand
           style={{

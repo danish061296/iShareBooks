@@ -13,7 +13,17 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import {
+  setEmail,
+  setPassword,
+  setIsLoggedIn,
+} from '../redux/actions/userActions';
+import Axios from 'axios';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './Login.css';
@@ -52,10 +62,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const username = useSelector((state) => state.userReducer.username);
   const email = useSelector((state) => state.userReducer.email);
   const password = useSelector((state) => state.userReducer.password);
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
   const initialValues = {
     email: '',
@@ -70,25 +82,95 @@ export default function SignIn() {
     password: Yup.string()
       .min(8, 'Password must contain at least 8 characters!')
       .required('Password is required!'),
+    remember: Yup.boolean().oneOf([true], 'You must select the checkbox'),
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted');
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const loginUser = {
+  //     email: email,
+  //     password: password,
+  //   };
+
+  //   Axios.post('http://localhost:3001/login', loginUser)
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  // .then((response) => {
+  //   if (response.data.auth) {
+  //     dispatch(setIsLoggedIn(true));
+  //     console.log(response.data);
+  //     return <Redirect to="/buyService" />;
+  //   } else {
+  //     dispatch(setIsLoggedIn(false));
+  //     return <Redirect to="/" />;
+  //   }
+  // })
+
+  //     .catch((e) => console.log(e));
+  //   console.log('Login Submitted');
+  // };
 
   const onSubmit = (values, props) => {
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 2000);
-    console.log('Messageeee');
-    console.log(values);
+    // e.preventDefault();
+
+    dispatch(setEmail(values.email));
+    dispatch(setPassword(values.password));
+
+    const payload = {
+      ...values,
+    };
+
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 1000);
+
+    console.log(payload.email);
+
+    const loginUser = {
+      email: payload.email,
+      password: payload.password,
+    };
+    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
+      console.log(response.data.message);
+      if (response.data.auth) {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+        dispatch(setIsLoggedIn(response.data.auth));
+        history.push('/buyService');
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      }
+    });
+
+    dispatch(setEmail(payload.email));
+    dispatch(setEmail(payload.password));
   };
 
   return (
     <div>
       <Navigation />
+      <ReactNotification />
       <div className="login__Container">
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -115,8 +197,10 @@ export default function SignIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    // value={email}
                     autoFocus
                     helperText={<ErrorMessage name="email" />}
+                    // onChange={(e) => dispatch(setEmail(e.target.value))}
                   />
                   <Field
                     as={TextField}
@@ -128,8 +212,10 @@ export default function SignIn() {
                     label="Password"
                     type="password"
                     id="password"
+                    // value={password}
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
+                    // onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
                   <Field
                     as={FormControlLabel}
@@ -143,7 +229,7 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                     className="signinButton"
-                    onClick={handleSubmit}
+                    // onClick={handleSubmit}
                   >
                     Sign In
                   </Button>
@@ -157,7 +243,6 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
-            {/* </form> */}
           </div>
           <Box mt={8}>
             <Copyright />

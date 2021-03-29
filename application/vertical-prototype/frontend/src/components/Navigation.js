@@ -103,7 +103,7 @@ const Navigation = () => {
                 marginRight: '20px',
                 cursor: 'pointer',
               }}
-              to="trending"
+              to="faq"
               smooth={true}
               duration={1000}
             >

@@ -12,6 +12,9 @@
   color: white !important;
   background-color: #47afa8 !important;
 }
+.MuiFormHelperText-root {
+  color: red !important;
+}
 
 /* .signup__container {
     height: 80vh;

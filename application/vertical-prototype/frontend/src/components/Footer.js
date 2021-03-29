@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navbar, Container, NavbarBrand } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { animateScroll as scroll } from 'react-scroll';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import {
   TiSocialTwitter,
   TiSocialLinkedin,
   TiSocialFacebook,
 } from 'react-icons/ti';
-import { AiOutlineCopyright } from 'react-icons/ai';
 import './Footer.css';
 
 const Footer = () => {
@@ -19,15 +19,13 @@ const Footer = () => {
         dark
         style={{ height: '300px', background: '#18504c' }}
       >
-        {/* <Container>
-          <NavbarBrand style={{ color: 'white' }}>Footer</NavbarBrand>
-        </Container> */}
         <div className="Fcontent">
           <div className="fcontent">
             <section className="left">
               About
               <section>Privacy</section>
               <section>FAQ</section>
+              <section>Contact:</section>
             </section>
             <section className="center">
               Social
@@ -42,11 +40,16 @@ const Footer = () => {
           </div>
 
           <div className="copyright">
-            <AiOutlineCopyright />
-            <h7>2021 Copyright iSHARE INC</h7>
+            <h7>Terms of Sale</h7>
+            <h7>Terms of Use</h7>
+
+            <p>© 2021 Copyright iSHARE INC</p>
           </div>
         </div>
-        <Button variant="success upward__btn">
+        <Button
+          variant="success upward__btn"
+          onClick={() => scroll.scrollToTop()}
+        >
           <ArrowUpwardIcon />
         </Button>
       </Navbar>
