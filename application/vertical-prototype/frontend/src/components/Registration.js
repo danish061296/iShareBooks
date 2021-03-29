@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './Registration.css';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
         paper: {
@@ -32,13 +35,34 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+
   export default function Register() {
     const classes = useStyles();
+    const validationSchema = yup.object({
+      username: yup
+        .string('Enter your username')
+        .min(3, 'Username must be at least 3 characters'),
+      email: yup
+        .string('Enter your email')
+        .email('Enter a valid email')
+        .required('Email is required'),
+      password: yup
+        .string('Enter your password')
+        .min(8, 'Password should be of minimum 8 characters length')
+        .required('Password is required'),
+    });
 
-    const handleSubmit = e => {
-      e.preventDefault();
-      console.log("submit");
-    };
+      const formik = useFormik({
+        initialValues: {
+          username: '',
+          email: ' ',
+          password: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+          JSON.stringify(values, null, 2);
+        },
+      });
   
     return (
       <Container component="main" maxWidth="xs">
@@ -47,17 +71,21 @@ const useStyles = makeStyles((theme) => ({
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit} >
+          <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={1}>
               <Grid item xs={12} >
                 <TextField
                   autoComplete="fname"
-                  name="firstName"
+                  name="username"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
-                  label="Full Name"
+                  id="username"
+                  label="Username"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  error={formik.touched.username && Boolean(formik.errors.username)}
+                  helperText={formik.touched.username && formik.errors.username}
                   autoFocus
                 />
               </Grid>
@@ -69,6 +97,10 @@ const useStyles = makeStyles((theme) => ({
                   id="email"
                   label="Email Address"
                   name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   autoComplete="email"
                 />
               </Grid>
@@ -81,6 +113,10 @@ const useStyles = makeStyles((theme) => ({
                   label="Password"
                   type="password"
                   id="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                   autoComplete="current-password"
                 />
               </Grid>
@@ -112,7 +148,6 @@ const useStyles = makeStyles((theme) => ({
         <Box mt={5}>
         </Box>
       </Container>
-    );
+    )};
 
-      
- }
+ReactDOM.render(<Register />, document.getElementById('root'));
