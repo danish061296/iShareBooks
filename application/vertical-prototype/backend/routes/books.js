@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../dataBase.js');
-const fs = require('fs');
-var FileReader = require('filereader');
+// const fs = require('fs');
+// var FileReader = require('filereader');
 const router = express.Router();
 
 router.post('/search', (req, res) => {
@@ -10,7 +10,7 @@ router.post('/search', (req, res) => {
   var query;
   const searchType = 'any';
   //searchField = "Co";
-  if (searchType == 'any' || searchField == '' || searchField == searchType) {
+  if (searchType == 'any')
     query =
       'SELECT * FROM Book WHERE title LIKE ' +
       db.escape('%' + searchField + '%') +
@@ -18,15 +18,16 @@ router.post('/search', (req, res) => {
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
       db.escape('%' + searchField + '%');
-  } else if ((searchType = 'department')) {
+  else
     query =
       'SELECT * FROM Book WHERE ' +
       searchType +
       ' LIKE ' +
       db.escape('%' + searchField + '%');
-  } else {
-    query = 'SELECT * FROM Book ORDER BY title ASC LIMIT 6';
-  }
+
+  // } else {
+  //   query = 'SELECT * FROM Book ORDER BY title ASC LIMIT 6';
+  // }
 
   db.query(query, (err, results) => {
     if (err) {
