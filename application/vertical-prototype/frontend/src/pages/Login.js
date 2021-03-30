@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
@@ -30,6 +31,47 @@ function Copyright() {
   );
 }
 
+=======
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Navigation from '../components/Navigation';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setEmail,
+  setPassword,
+  setIsLoggedIn,
+} from '../redux/actions/userActions';
+import Axios from 'axios';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import './Login.css';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/">
+        iShareBooks
+      </Link>
+      {new Date().getFullYear()}
+    </Typography>
+  );
+}
+
+>>>>>>> Danish
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -52,6 +94,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+<<<<<<< HEAD
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -120,6 +163,168 @@ export default function SignIn() {
       </Box>
     </Container>
     </div>
+=======
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const initialValues = {
+    email: '',
+    password: '',
+    remember: false,
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Please enter a valid email!')
+      .required('Email is required!'),
+    password: Yup.string()
+      .min(8, 'Password must contain at least 8 characters!')
+      .required('Password is required!'),
+    remember: Yup.boolean().oneOf([true], 'You must select the checkbox'),
+  });
+
+  const onSubmit = (values, props) => {
+    // e.preventDefault();
+
+    dispatch(setEmail(values.email));
+    dispatch(setPassword(values.password));
+
+    const payload = {
+      ...values,
+    };
+
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 1000);
+
+    console.log(payload.email);
+
+    const loginUser = {
+      email: payload.email,
+      password: payload.password,
+    };
+    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
+      console.log(response.data);
+      if (response.data.auth) {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+        localStorage.setItem('token', response.data.token);
+        dispatch(setIsLoggedIn(response.data.auth));
+        history.push('/buyService');
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+        dispatch(setIsLoggedIn(false));
+        dispatch(setEmail(''));
+      }
+    });
+
+    // dispatch(setEmail(payload.email));
+    // dispatch(setEmail(payload.password));
+  };
+
+  return (
+    <div>
+      <Navigation />
+      <ReactNotification />
+      <div className="login__Container">
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
+              Login
+            </Typography>
+            {/* <form className={classes.form} noValidate> */}
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+            >
+              {(props) => (
+                <Form>
+                  <Field
+                    as={TextField}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="email"
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    // value={email}
+                    autoFocus
+                    helperText={<ErrorMessage name="email" />}
+                    // onChange={(e) => dispatch(setEmail(e.target.value))}
+                  />
+                  <Field
+                    as={TextField}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    // value={password}
+                    autoComplete="current-password"
+                    helperText={<ErrorMessage name="password" />}
+                    // onChange={(e) => dispatch(setPassword(e.target.value))}
+                  />
+                  <Field
+                    as={FormControlLabel}
+                    name="remember"
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="signinButton"
+                    // onClick={handleSubmit}
+                  >
+                    Sign In
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+            <Grid container>
+              <Grid item>
+                <Link href="/registration" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
+>>>>>>> Danish
     </div>
   );
 }

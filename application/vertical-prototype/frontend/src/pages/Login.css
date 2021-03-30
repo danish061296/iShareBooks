@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .login__Container {
     background-color: whitesmoke !important;
 }
@@ -11,3 +12,21 @@
     border: 1px solid #18504C !important;
 
 }
+=======
+/* .login__Container {
+  background-color: white !important;
+} */
+.signinButton {
+  background-color: #18504c !important;
+}
+
+.signinButton:hover {
+  background-color: #28918a !important;
+  color: white !important;
+  border: 1px solid #18504c !important;
+}
+
+.MuiFormHelperText-root {
+  color: red !important;
+}
+>>>>>>> Danish

@@ -50,12 +50,32 @@
   background: white !important;
 }
 
+@media screen and (max-width: 768px) {
+  .signup__btn {
+    font-size: 10px !important;
+  }
+
+  .nav__link {
+    font-size: 10px;
+  }
+}
+
 .navbar__logoLink {
   cursor: pointer;
+<<<<<<< HEAD
   text-decoration: none!important;
+=======
+  text-decoration: none !important;
+>>>>>>> Danish
   color: black !important;
 }
 
 .cart {
   font-size: 25px;
 }
+
+/* @media screen and (max-width: 768px) {
+  .navbar__title {
+    font-size: 20px !important;
+  }
+} */
