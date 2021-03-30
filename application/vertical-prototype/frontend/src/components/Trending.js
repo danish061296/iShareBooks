@@ -13,6 +13,7 @@ const Trending = () => {
     Aos.init({ duration: 1600 });
   }, []);
 
+  const searchField = useSelector((state) => state.userReducer.searchField);
   const imageBuffer = useSelector((state) => state.userReducer.imageBuffer);
   const posts = useSelector((state) => state.userReducer.posts);
 
@@ -26,11 +27,11 @@ const Trending = () => {
   ];
 
   return (
-    <div className="trending__container" data-aos="fade-right">
+    <div className="trending__container" data-aos="fade-right" id="trending">
       {posts.length > 0 && (
         <div className="trending__container">
           <div className="trending__title">
-            <h1 className="trending">Now Trending!!!</h1>
+            <h3 className="trending">Showing results for {searchField}...</h3>
           </div>
           <Carousel breakPoints={breakPoints}>
             {posts.map((post, index) => {

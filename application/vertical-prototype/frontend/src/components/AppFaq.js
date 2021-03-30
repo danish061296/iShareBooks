@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavbarBrand } from 'react-bootstrap';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -6,10 +6,16 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './Faq.css';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const AppFaq = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="faq__container" id="faq">
+    <div className="faq__container" id="faq" data-aos="fade-right">
       <div className="faq">
         <NavbarBrand
           style={{

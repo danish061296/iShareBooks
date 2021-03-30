@@ -6,11 +6,7 @@ import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setSearchField,
-  setImageBuffer,
-  setPosts,
-} from '../redux/actions/userActions';
+import { setSearchField, setPosts } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -34,6 +30,10 @@ const About = () => {
             console.log(response.data);
             console.log('Data coming from search');
             dispatch(setPosts(response.data));
+            window.scrollBy({
+              top: 500,
+              behavior: 'smooth',
+            });
           } else {
             dispatch(setPosts([]));
           }
@@ -55,6 +55,10 @@ const About = () => {
           console.log(response.data);
           console.log('Data coming from search');
           dispatch(setPosts(response.data));
+          window.scrollBy({
+            top: 500,
+            behavior: 'smooth',
+          });
         } else {
           dispatch(setPosts([]));
         }
