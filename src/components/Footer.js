@@ -6,6 +6,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
+<<<<<<< Updated upstream
     <div>
       <Navbar
         className="footer"
@@ -76,3 +77,13 @@ const Footer = () => {
 };
 
 export default Footer;
+=======
+    <div> Hi 
+
+    </div>
+  )
+};
+
+export default Footer;
+
+>>>>>>> Stashed changes
