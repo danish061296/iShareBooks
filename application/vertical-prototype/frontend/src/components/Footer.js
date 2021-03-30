@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';

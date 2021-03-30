@@ -3,6 +3,9 @@ const initState = () => ({
   password: '',
   email: '',
   isLoggedIn: false,
+  searchField: '',
+  imageBuffer: '',
+  posts: [],
 });
 
 const userReducer = (state = initState(), action) => {
@@ -27,6 +30,21 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
+      };
+    case 'SET_SEARCH_FIELD':
+      return {
+        ...state,
+        searchField: action.searchField,
+      };
+    case 'SET_IMAGE_BUFFER':
+      return {
+        ...state,
+        imageBuffer: action.imageBuffer,
+      };
+    case 'SET_POSTS':
+      return {
+        ...state,
+        posts: action.posts,
       };
 
     default:

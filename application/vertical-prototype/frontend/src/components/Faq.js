@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container, NavbarBrand } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { NavbarBrand } from 'react-bootstrap';
 import './Faq.css';
 
 const Faq = () => {

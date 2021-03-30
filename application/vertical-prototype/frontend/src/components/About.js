@@ -4,6 +4,13 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
 import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
+import Axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setSearchField,
+  setImageBuffer,
+  setPosts,
+} from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -11,6 +18,53 @@ const About = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
+  const dispatch = useDispatch();
+
+  const searchField = useSelector((state) => state.userReducer.searchField);
+
+  const handleKeyDown = (e) => {
+    const search = {
+      searchField: searchField,
+    };
+
+    if (e.key === 'Enter') {
+      Axios.post('http://localhost:3001/search', search)
+        .then((response) => {
+          if (response.data) {
+            console.log(response.data);
+            console.log('Data coming from search');
+            dispatch(setPosts(response.data));
+          } else {
+            dispatch(setPosts([]));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const handleClick = () => {
+    const search = {
+      searchField: searchField,
+    };
+
+    Axios.post('http://localhost:3001/search', search)
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+          console.log('Data coming from search');
+          dispatch(setPosts(response.data));
+        } else {
+          dispatch(setPosts([]));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    console.log('Search clicked');
+  };
 
   return (
     <div className="about" style={{ position: 'relative' }}>
@@ -35,8 +89,12 @@ const About = () => {
           type="text"
           placeholder="Search by textbook name, department..."
           required
+          onKeyDown={handleKeyDown}
+          onChange={(e) => dispatch(setSearchField(e.target.value))}
         />
-        <SearchIcon className="search__icon" />
+        <button onClick={handleClick} className="search__btn">
+          <SearchIcon className="search__icon" />
+        </button>
       </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">

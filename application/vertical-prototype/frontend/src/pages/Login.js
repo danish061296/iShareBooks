@@ -1,5 +1,4 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -8,14 +7,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import {
   setEmail,
   setPassword,
@@ -65,10 +62,6 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const email = useSelector((state) => state.userReducer.email);
-  const password = useSelector((state) => state.userReducer.password);
-  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
-
   const initialValues = {
     email: '',
     password: '',
@@ -85,32 +78,6 @@ export default function SignIn() {
     remember: Yup.boolean().oneOf([true], 'You must select the checkbox'),
   });
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const loginUser = {
-  //     email: email,
-  //     password: password,
-  //   };
-
-  //   Axios.post('http://localhost:3001/login', loginUser)
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  // .then((response) => {
-  //   if (response.data.auth) {
-  //     dispatch(setIsLoggedIn(true));
-  //     console.log(response.data);
-  //     return <Redirect to="/buyService" />;
-  //   } else {
-  //     dispatch(setIsLoggedIn(false));
-  //     return <Redirect to="/" />;
-  //   }
-  // })
-
-  //     .catch((e) => console.log(e));
-  //   console.log('Login Submitted');
-  // };
-
   const onSubmit = (values, props) => {
     // e.preventDefault();
 
@@ -121,10 +88,10 @@ export default function SignIn() {
       ...values,
     };
 
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 1000);
 
     console.log(payload.email);
 
@@ -133,7 +100,7 @@ export default function SignIn() {
       password: payload.password,
     };
     Axios.post('http://localhost:3001/login', loginUser).then((response) => {
-      console.log(response.data.message);
+      console.log(response.data);
       if (response.data.auth) {
         store.addNotification({
           title: '',
@@ -146,6 +113,7 @@ export default function SignIn() {
             showIcon: true,
           },
         });
+        localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
         history.push('/buyService');
       } else {
@@ -160,11 +128,13 @@ export default function SignIn() {
             showIcon: true,
           },
         });
+        dispatch(setIsLoggedIn(false));
+        dispatch(setEmail(''));
       }
     });
 
-    dispatch(setEmail(payload.email));
-    dispatch(setEmail(payload.password));
+    // dispatch(setEmail(payload.email));
+    // dispatch(setEmail(payload.password));
   };
 
   return (

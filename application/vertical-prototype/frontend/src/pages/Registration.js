@@ -17,7 +17,7 @@ import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setUsername,
   setEmail,
@@ -50,12 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const Registration = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
   const ref = useRef(null);
-
-  const username = useSelector((state) => state.userReducer.username);
-  const email = useSelector((state) => state.userReducer.email);
-  const password = useSelector((state) => state.userReducer.password);
 
   const initialValues = {
     username: '',
@@ -80,43 +75,43 @@ const Registration = () => {
     ),
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const registerUser = {
-      username: username,
-      email: email,
-      password: password,
-    };
+  //   const registerUser = {
+  //     username: username,
+  //     email: email,
+  //     password: password,
+  //   };
 
-    console.log(username);
+  //   console.log(username);
 
-    //   console.log(username);
-    //   console.log(email);
-    //   console.log(password);
+  //   console.log(username);
+  //   console.log(email);
+  //   console.log(password);
 
-    // try {
-    //   const response = await Axios.post('http://localhost:3001/register', {
-    //     registerUser,
-    //   });
-    //   console.log(response);
-    //   history.push('/login');
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  // try {
+  //   const response = await Axios.post('http://localhost:3001/register', {
+  //     registerUser,
+  //   });
+  //   console.log(response);
+  //   history.push('/login');
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
-    // Axios.post('http://localhost:3001/register', registerUser).then(
-    //   (response) => {
-    //     console.log(response);
-    //   }
-    // );
+  // Axios.post('http://localhost:3001/register', registerUser).then(
+  //   (response) => {
+  //     console.log(response);
+  //   }
+  // );
 
-    // dispatch(setUsername(''));
-    // dispatch(setEmail(''));
-    // dispatch(setPassword(''));
+  // dispatch(setUsername(''));
+  // dispatch(setEmail(''));
+  // dispatch(setPassword(''));
 
-    console.log('Sign up Submitted');
-  };
+  //   console.log('Sign up Submitted');
+  // };
 
   const onSubmit = (values, props) => {
     const payload = {
