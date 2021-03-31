@@ -5,24 +5,28 @@ const db = require('../dataBase.js');
 const router = express.Router();
 
 router.post('/search', (req, res) => {
-  const { searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+  const { searchField, searchType } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   console.log(searchField);
+  console.log(searchType);
   var query;
-  const searchType = 'any';
+  // const searchType = 'any';
   //searchField = "Co";
-  if (searchType == 'any')
+  if (searchType)
+    query =
+      `SELECT * FROM Book WHERE ${searchType} LIKE ` +
+      db.escape('%' + searchField + '%');
+  // query =
+  //   'SELECT * FROM Book WHERE ' +
+  //   searchType +
+  //   ' LIKE ' +
+  //   db.escape('%' + searchField + '%');
+  else
     query =
       'SELECT * FROM Book WHERE title LIKE ' +
       db.escape('%' + searchField + '%') +
       ' OR author LIKE ' +
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
-      db.escape('%' + searchField + '%');
-  else
-    query =
-      'SELECT * FROM Book WHERE ' +
-      searchType +
-      ' LIKE ' +
       db.escape('%' + searchField + '%');
 
   // } else {
