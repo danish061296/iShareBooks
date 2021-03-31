@@ -41,13 +41,16 @@
 }
 
 .signup__btn {
+  z-index: 99 !important;
+  background-color: #0d2c29 !important;
   color: white !important;
   border: 1px solid white !important;
+  border: none !important;
 }
 
 .signup__btn:hover {
-  color: #28918a !important;
-  background: white !important;
+  color: #18504c !important;
+  background-color: white !important;
 }
 
 @media screen and (max-width: 768px) {

@@ -4,6 +4,8 @@ import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -43,7 +45,11 @@ const Navigation = () => {
             </LinkR>
           </Nav>
 
-          <Button variant="outline-success signup__btn" href="/registration">
+          <Button
+            // className="sign__btn"
+            variant="outline-success signup__btn"
+            href="/registration"
+          >
             Sign Up
           </Button>
         </Navbar>
@@ -136,7 +142,10 @@ const Navigation = () => {
           </LinkR>
         </h1>
         <div className="navbar__icons">
-          <ShoppingCartIcon className="cart" />
+          <Tippy content="shopping cart" placement="bottom">
+            <ShoppingCartIcon className="cart" />
+          </Tippy>
+
           <p>0</p>
         </div>
       </div>

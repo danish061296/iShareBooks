@@ -17,7 +17,7 @@ const Trending = () => {
   const imageBuffer = useSelector((state) => state.userReducer.imageBuffer);
   const posts = useSelector((state) => state.userReducer.posts);
 
-  console.log(imageBuffer);
+  // console.log(imageBuffer);
 
   const breakPoints = [
     { width: 500, itemsToShow: 1 },

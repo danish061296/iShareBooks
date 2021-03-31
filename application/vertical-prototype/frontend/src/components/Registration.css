@@ -8,9 +8,10 @@
 }
 
 .signup__btn:hover {
-  border: 1px solid #18504c !important;
-  color: white !important;
-  background-color: #47afa8 !important;
+  background: white !important;
+
+  /* border: 1px solid #18504c !important; */
+  color: #18504c !important;
 }
 
 /* .signup__container {

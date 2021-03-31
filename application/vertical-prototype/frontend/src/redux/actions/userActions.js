@@ -22,6 +22,10 @@ export const setSearchField = (searchField) => ({
   type: 'SET_SEARCH_FIELD',
   searchField,
 });
+export const setSearchType = (searchType) => ({
+  type: 'SET_SEARCH_TYPE',
+  searchType,
+});
 
 export const setImageBuffer = (imageBuffer) => ({
   type: 'SET_IMAGE_BUFFER',

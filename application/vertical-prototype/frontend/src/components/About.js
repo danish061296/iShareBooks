@@ -2,11 +2,16 @@ import React, { useEffect } from 'react';
 import './About.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
-import { Button } from 'react-bootstrap';
+
+import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchField, setPosts } from '../redux/actions/userActions';
+import {
+  setSearchField,
+  setPosts,
+  setSearchType,
+} from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -14,13 +19,20 @@ const About = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const searchField = useSelector((state) => state.userReducer.searchField);
+  const searchType = useSelector((state) => state.userReducer.searchType);
+
+  const handleSelect = (e) => {
+    console.log(`The selected is ${e}`);
+    dispatch(setSearchType(e));
+  };
 
   const handleKeyDown = (e) => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     if (e.key === 'Enter') {
@@ -47,6 +59,7 @@ const About = () => {
   const handleClick = () => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     Axios.post('http://localhost:3001/search', search)
@@ -99,6 +112,19 @@ const About = () => {
         <button onClick={handleClick} className="search__btn">
           <SearchIcon className="search__icon" />
         </button>
+      </div>
+      <div className="filter__btn">
+        <DropdownButton
+          // className="dropdown__btn"
+          variant=" dropdown__btn"
+          alignRight
+          title="Filter By"
+          id="dropdown-menu-align-right"
+          onSelect={handleSelect}
+        >
+          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
+          <Dropdown.Item eventKey="department">Department</Dropdown.Item>
+        </DropdownButton>
       </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">
