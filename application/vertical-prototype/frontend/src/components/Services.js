@@ -7,7 +7,7 @@ const Services = () => {
     <div id="services">
       {/* // <div className="rowC"> */}
       <div className="services__title">
-        <h2>Services</h2>
+        <h1 className='service'>Services</h1>
       </div>
 
       {/* <div className="f3 fw4 pa3 mv0 row"> */}
@@ -21,7 +21,7 @@ const Services = () => {
               ></img>
               <h1>Buy Books! </h1>
               <p> -buy anybooks you like </p>
-              <button class="buy" type="button">
+              <button className="buy" type="button">
                 Buy Here{' '}
               </button>
             </div>
@@ -36,7 +36,7 @@ const Services = () => {
               ></img>
               <h1>Sell Your Books! </h1>
               <p>-Sell anybooks you like</p>
-              <button class="sell" type="button">
+              <button className="sell" type="button">
                 {' '}
                 Sell Here{' '}
               </button>
@@ -52,7 +52,7 @@ const Services = () => {
               ></img>
               <h1>Trade Books! </h1>
               <p> -Trade anybooks you like </p>
-              <button class="trade" type="button">
+              <button className="trade" type="button">
                 Trade Here{' '}
               </button>
             </div>

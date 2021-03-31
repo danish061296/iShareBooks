@@ -26,7 +26,11 @@
 .services__card {
   background-color: green !important;
 }
-
+.service {
+  color: black;
+  padding-left: 50%;
+  border: solid;
+}
 .services__description {
   z-index: 99;
   color: white;
@@ -49,7 +53,7 @@
 .font1 {
   color: rgb(3, 0, 0);
   font-weight: 50;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   position: relative;
 }
 
@@ -59,11 +63,32 @@
   position: relative;
 }
 
+.free,
+.buy,
+.sell,
+.trade {
+  border: none;
+  outline: none;
+  height: 40px;
+  width: 343px;
+  margin-bottom: 10px;
+  background-color: rgb(38, 100, 100);
+  color: white;
+  font-size: 20px;
+  border-radius: 40px;
+}
+.free:hover,
+.buy:hover,
+.sell:hover,
+.trade:hover {
+  background-color: rgb(6, 150, 150);
+}
+
 /*replace the content value with the
 corresponding value from the list below*/
 
 .element:before {
-  content: '\f000';
+  content: "\f000";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;

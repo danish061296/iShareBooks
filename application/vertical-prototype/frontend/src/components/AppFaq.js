@@ -26,6 +26,7 @@ const AppFaq = () => {
         >
           FAQs
         </NavbarBrand>
+        <container className='faq_div'>
         <Accordion className="faq__accor">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon className="expand__icon" />}
@@ -180,6 +181,8 @@ const AppFaq = () => {
             </Typography>
           </AccordionDetails>
         </Accordion>
+
+        </container>
       </div>
     </div>
   );
