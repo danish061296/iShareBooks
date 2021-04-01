@@ -187,12 +187,12 @@ export default function SignIn() {
                     helperText={<ErrorMessage name="password" />}
                     // onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
-                  <Field
+                  {/* <Field
                     as={FormControlLabel}
                     name="remember"
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
-                  />
+                  /> */}
                   <Button
                     type="submit"
                     fullWidth

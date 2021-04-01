@@ -2,12 +2,9 @@ import React from 'react';
 import './Trending.css';
 import Carousel from 'react-elastic-carousel';
 import Card from './Card';
-// import Image from './book1.jpg';
 import { useSelector } from 'react-redux';
-
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import { post } from '../../../backend/routes/books';
 
 const Trending = () => {
   React.useEffect(() => {
@@ -15,14 +12,10 @@ const Trending = () => {
   }, []);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const imageBuffer = useSelector((state) => state.userReducer.imageBuffer);
   const posts = useSelector((state) => state.userReducer.posts);
   const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
-  console.log(randomMsg)
-
- 
-  
+  console.log(randomMsg);
 
   const breakPoints = [
     { width: 500, itemsTo0how: 1 },
@@ -33,12 +26,12 @@ const Trending = () => {
 
   return (
     <div className="trending__container" data-aos="fade-right" id="trending">
-      {randomMsg && (
+      {randomMsg && posts.length > 0 && (
         <div className="trending__container">
           <div className="trending__title">
             <h3 className="trending"> {randomMsg}</h3>
           </div>
-       
+
           <Carousel breakPoints={breakPoints}>
             {posts.map((post, index) => {
               return <Card key={index} number={index} image={post.image} />;
@@ -46,12 +39,12 @@ const Trending = () => {
           </Carousel>
         </div>
       )}
-       {!randomMsg && (
+      {!randomMsg && posts.length > 0 && (
         <div className="trending__container">
           <div className="trending__title">
             <h3 className="trending"> Showing Results for {searchField}</h3>
           </div>
-       
+
           <Carousel breakPoints={breakPoints}>
             {posts.map((post, index) => {
               return <Card key={index} number={index} image={post.image} />;
@@ -59,18 +52,20 @@ const Trending = () => {
           </Carousel>
         </div>
       )}
-      
+
       {posts.length == 0 && (
         <div className="trending__container">
-        <div className="trending__title">
-          <h3 className="trending">Sorry No {searchField} ... Similar Ones</h3>
-        </div>
-        
-             
+          <div className="trending__title">
+            <h3 className="trending">Trending Books</h3>
+          </div>
+          <Carousel breakPoints={breakPoints}>
+            {posts.map((post, index) => {
+              return <Card key={index} number={index} image={post.image} />;
+            })}
+          </Carousel>
         </div>
       )}
-
-    </div>//main div
+    </div> //main div
   );
 };
 

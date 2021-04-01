@@ -2,30 +2,56 @@ import React, { useEffect } from 'react';
 import './About.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setSearchField,
-  setImageBuffer,
   setPosts,
   setrandomMsg,
+  setSearchType,
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const About = () => {
- 
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
- 
- //sending data to redux
+
+  //sending data to redux
   const dispatch = useDispatch();
 
-
   const searchField = useSelector((state) => state.userReducer.searchField);
+  const posts = useSelector((state) => state.userReducer.posts);
+
+  // useEffect(() => {
+  //   const search = {
+  //     searchField: searchField,
+  //   };
+  //   Axios.post('http://localhost:3001/search', search)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         console.log(response.data);
+  //         if (posts.length === 0) {
+  //           //sending data to redux
+  //           // dispatch(setrandomMsg(response.data));
+  //           dispatch(setPosts(response.data));
+  //         } else {
+  //           console.log('Data coming from search click');
+  //           dispatch(setPosts(response.data));
+  //           dispatch((setrandomMsg = ''));
+  //         }
+  //       } else {
+  //         dispatch(setPosts([]));
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const handleKeyDown = (e) => {
     const search = {
@@ -34,30 +60,41 @@ const About = () => {
 
     if (e.key === 'Enter') {
       Axios.post('http://localhost:3001/search', search)
-      .then((response) => {
-        if (response.data) {
-          console.log(response.data);
-          if(response.data.msg ){
-            //sending data to redux
-            dispatch(setrandomMsg(response.data.msg))
-            dispatch(setPosts(response.data.results))
+        .then((response) => {
+          if (response.data) {
+            console.log(response.data);
+            if (response.data.msg) {
+              //sending data to redux
+              dispatch(setrandomMsg(response.data.msg));
+              dispatch(setPosts(response.data.results));
+              window.scrollBy({
+                top: 500,
+                behavior: 'smooth',
+              });
+            } else {
+              console.log('Data coming from search click');
+              dispatch(setPosts(response.data));
+              dispatch(setrandomMsg(''));
+              window.scrollBy({
+                top: 500,
+                behavior: 'smooth',
+              });
+            }
+          } else {
+            dispatch(setPosts([]));
           }
-          else{
-          console.log('Data coming from search click');
-          dispatch(setPosts(response.data));
-          dispatch(setrandomMsg='');
-        }
-        } else {
-          dispatch(setPosts([]));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-
   };
-  
+
+  const handleSelect = (e) => {
+    console.log(`The selected is ${e}`);
+    dispatch(setSearchType(e));
+  };
+
   const handleClick = () => {
     const search = {
       searchField: searchField,
@@ -67,16 +104,23 @@ const About = () => {
       .then((response) => {
         if (response.data) {
           console.log(response.data);
-          if(response.data.msg ){
+          if (response.data.msg) {
             //sending data to redux
-            dispatch(setrandomMsg(response.data.msg))
-            dispatch(setPosts(response.data.results))
+            dispatch(setrandomMsg(response.data.msg));
+            dispatch(setPosts(response.data.results));
+            window.scrollBy({
+              top: 500,
+              behavior: 'smooth',
+            });
+          } else {
+            console.log('Data coming from search click');
+            dispatch(setPosts(response.data));
+            dispatch((setrandomMsg = ''));
+            window.scrollBy({
+              top: 500,
+              behavior: 'smooth',
+            });
           }
-          else{
-          console.log('Data coming from search click');
-          dispatch(setPosts(response.data));
-          dispatch(setrandomMsg='');
-        }
         } else {
           dispatch(setPosts([]));
         }
@@ -87,8 +131,6 @@ const About = () => {
 
     console.log('Search clicked');
   };
-
-
 
   return (
     <div className="about" style={{ position: 'relative' }}>
@@ -119,6 +161,19 @@ const About = () => {
         <button onClick={handleClick} className="search__btn">
           <SearchIcon className="search__icon" />
         </button>
+      </div>
+      <div className="filter__btn">
+        <DropdownButton
+          // className="dropdown__btn"
+          variant=" dropdown__btn"
+          alignRight
+          title="Filter By"
+          id="dropdown-menu-align-right"
+          onSelect={handleSelect}
+        >
+          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
+          <Dropdown.Item eventKey="department">Department</Dropdown.Item>
+        </DropdownButton>
       </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">
