@@ -26,6 +26,7 @@ const About = () => {
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
+  const searchType = useSelector((state) => state.userReducer.searchType);
 
   // useEffect(() => {
   //   const search = {
@@ -56,6 +57,7 @@ const About = () => {
   const handleKeyDown = (e) => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     if (e.key === 'Enter') {
@@ -98,6 +100,7 @@ const About = () => {
   const handleClick = () => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     Axios.post('http://localhost:3001/search', search)

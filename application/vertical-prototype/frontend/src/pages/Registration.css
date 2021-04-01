@@ -16,6 +16,9 @@
   color: red !important;
 }
 
+.input__field {
+  margin-bottom: 20px !important;
+}
 /* .signup__container {
     height: 80vh;
     background: #1a1f1e !important;

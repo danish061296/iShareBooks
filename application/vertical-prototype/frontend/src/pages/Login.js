@@ -29,7 +29,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="/login">
         iShareBooks
       </Link>
       {new Date().getFullYear()}
@@ -65,7 +65,6 @@ export default function SignIn() {
   const initialValues = {
     email: '',
     password: '',
-    remember: false,
   };
 
   const validationSchema = Yup.object().shape({
@@ -75,7 +74,6 @@ export default function SignIn() {
     password: Yup.string()
       .min(8, 'Password must contain at least 8 characters!')
       .required('Password is required!'),
-    remember: Yup.boolean().oneOf([true], 'You must select the checkbox'),
   });
 
   const onSubmit = (values, props) => {
@@ -132,9 +130,6 @@ export default function SignIn() {
         dispatch(setEmail(''));
       }
     });
-
-    // dispatch(setEmail(payload.email));
-    // dispatch(setEmail(payload.password));
   };
 
   return (
@@ -158,6 +153,7 @@ export default function SignIn() {
                 <Form>
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -167,13 +163,12 @@ export default function SignIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    // value={email}
                     autoFocus
                     helperText={<ErrorMessage name="email" />}
-                    // onChange={(e) => dispatch(setEmail(e.target.value))}
                   />
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -182,17 +177,10 @@ export default function SignIn() {
                     label="Password"
                     type="password"
                     id="password"
-                    // value={password}
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
-                    // onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
-                  {/* <Field
-                    as={FormControlLabel}
-                    name="remember"
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  /> */}
+
                   <Button
                     type="submit"
                     fullWidth

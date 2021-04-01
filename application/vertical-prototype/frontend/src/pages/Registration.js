@@ -154,6 +154,7 @@ const Registration = () => {
                   <Grid item xs={12}>
                     <Field
                       as={TextField}
+                      className="input__field"
                       autoComplete="uname"
                       name="username"
                       variant="outlined"
@@ -170,6 +171,7 @@ const Registration = () => {
                   <Grid item xs={12}>
                     <Field
                       as={TextField}
+                      className="input__field"
                       variant="outlined"
                       required
                       fullWidth

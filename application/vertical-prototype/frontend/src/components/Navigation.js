@@ -58,6 +58,7 @@ const Navigation = () => {
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           <NavbarBrand className="navbar__title">
             <LinkR
+              className="title__link"
               style={{
                 color: 'white',
                 textDecoration: 'none',

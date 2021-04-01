@@ -53,7 +53,7 @@ const Trending = () => {
         </div>
       )}
 
-      {posts.length == 0 && (
+      {posts.length === 0 && (
         <div className="trending__container">
           <div className="trending__title">
             <h3 className="trending">Trending Books</h3>
