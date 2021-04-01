@@ -18,6 +18,7 @@ const Trending = () => {
   const posts = useSelector((state) => state.userReducer.posts);
 
   // console.log(imageBuffer);
+  
 
   const breakPoints = [
     { width: 500, itemsToShow: 1 },
@@ -40,12 +41,21 @@ const Trending = () => {
           </Carousel>
         </div>
       )}
-      {posts.length === 0 && (
-        <div className="no__card">
-          <h3>Sorry we couldn't find any results....</h3>
+      {posts.length =='' && (
+        <div className="trending__container">
+        <div className="trending__title">
+          <h3 className="trending">Sorry No {searchField} ... Similar Ones</h3>
+        </div>
+        <Carousel breakPoints={breakPoints}>
+          {posts.map((post, index) => {
+            return <Card key={index} number={index} image={post.image} />;
+          })}
+        </Carousel>
+
         </div>
       )}
-    </div>
+
+    </div>//main div
   );
 };
 
