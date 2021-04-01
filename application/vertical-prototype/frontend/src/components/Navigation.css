@@ -1,0 +1,80 @@
+.navbar__first {
+  height: 50px;
+  font-size: 15px;
+  background: #28918a !important;
+}
+
+.navbar__second {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  height: 70px;
+  width: 100%;
+  background: #f7f8fa !important;
+}
+
+.navbar__logo {
+  color: black !important;
+  font-size: 40px !important;
+  font-weight: 700 !important;
+  margin-left: 30px;
+  flex: 0.8;
+  text-decoration: none !important;
+}
+
+.navbar__logo {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar__icons {
+  margin-top: 8px;
+  justify-self: flex-end;
+  display: flex;
+  cursor: pointer;
+}
+
+.nav__link:hover {
+  color: white !important;
+  border-bottom: 1px solid white;
+}
+
+.signup__btn {
+  z-index: 99 !important;
+  background-color: #0d2c29 !important;
+  color: white !important;
+  border: 1px solid white !important;
+  border: none !important;
+}
+
+.signup__btn:hover {
+  color: #18504c !important;
+  background-color: white !important;
+}
+
+@media screen and (max-width: 768px) {
+  .signup__btn {
+    font-size: 10px !important;
+  }
+
+  .nav__link {
+    font-size: 10px;
+  }
+}
+
+.navbar__logoLink {
+  cursor: pointer;
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.cart {
+  font-size: 25px;
+}
+
+/* @media screen and (max-width: 768px) {
+  .navbar__title {
+    font-size: 20px !important;
+  }
+} */
