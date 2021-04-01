@@ -56,8 +56,13 @@ function suggestions(){
             results[index].image = bytes.toString();
           }
         });
-        console.log("Received")
-         return res.send({msg:results})
+
+        //  return res.send(results);
+
+        return res.send({ 
+                results:results,
+                msg: "No Results Were Found: Similar Books Available!"
+        })
 
          
 

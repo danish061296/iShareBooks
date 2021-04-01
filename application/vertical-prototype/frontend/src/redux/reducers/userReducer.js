@@ -7,8 +7,9 @@ const initState = () => ({
   searchType: '',
   imageBuffer: '',
   posts: [],
+  randomMsg:''
 });
-
+//Side Note: Type has to match the case
 const userReducer = (state = initState(), action) => {
   switch (action.type) {
     case 'SET_USERNAME':
@@ -51,6 +52,11 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         posts: action.posts,
+      };
+    case 'SET_RANDOM_MSG':
+      return {
+        ...state,
+        randomMsg: action.randomMsg,
       };
 
     default:

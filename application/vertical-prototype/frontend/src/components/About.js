@@ -10,6 +10,7 @@ import {
   setSearchField,
   setImageBuffer,
   setPosts,
+  setrandomMsg,
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -19,7 +20,10 @@ const About = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
+ 
+ //sending data to redux
   const dispatch = useDispatch();
+
 
   const searchField = useSelector((state) => state.userReducer.searchField);
 
@@ -30,18 +34,26 @@ const About = () => {
 
     if (e.key === 'Enter') {
       Axios.post('http://localhost:3001/search', search)
-        .then((response) => {
-          if (response.data) {
-            console.log(response.data);
-            console.log('Data coming from search');
-            dispatch(setPosts(response.data));
-          } else {
-            dispatch(setPosts([]));
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+          if(response.data.msg ){
+            //sending data to redux
+            dispatch(setrandomMsg(response.data.msg))
+            dispatch(setPosts(response.data.results))
           }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          else{
+          console.log('Data coming from search click');
+          dispatch(setPosts(response.data));
+          dispatch(setrandomMsg='');
+        }
+        } else {
+          dispatch(setPosts([]));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
 
   };
@@ -55,8 +67,16 @@ const About = () => {
       .then((response) => {
         if (response.data) {
           console.log(response.data);
+          if(response.data.msg ){
+            //sending data to redux
+            dispatch(setrandomMsg(response.data.msg))
+            dispatch(setPosts(response.data.results))
+          }
+          else{
           console.log('Data coming from search click');
           dispatch(setPosts(response.data));
+          dispatch(setrandomMsg='');
+        }
         } else {
           dispatch(setPosts([]));
         }

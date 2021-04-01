@@ -36,3 +36,7 @@ export const setPosts = (posts) => ({
   type: 'SET_POSTS',
   posts,
 });
+export const setrandomMsg= (randomMsg) => ({
+  type: 'SET_RANDOM_MSG',
+  randomMsg,
+});
