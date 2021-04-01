@@ -38,18 +38,34 @@ function suggestions(){
         
       let obj = JSON.parse(suggest); 
 
-      for(let i = 0; i <obj.length; i++){ 
+      //for(let i = 0; i <obj.length; i++){ 
           
-          let img = obj[i].image
+          //let img = obj[i].image
+          
+          
          // console.log(obj[i].image);
-          var bytes = Buffer.from(img, 'base64');
-          console.log(bytes);
-             
-        
+         // let bytes = Buffer.from(img, 'base64').toString();
+          
+         // console.log(bytes);
+
+          //var bytes = Buffer.from(obj.image, 'base64');
+  			//	results[i].image = bytes.toString();
+        results.forEach(function (book, index) {
+          if (book.image) {
+            var bytes = Buffer.from(book.image, 'base64');
+            results[index].image = bytes.toString();
+          }
+        });
+        console.log("Received")
+         return res.send({msg:results})
+
+         
+
           //So far Coverted into byte  need to return an image 
 
-      }
+    //  }
      
+      //return res.send({msg:"NO DATA"})
 
 
     })
@@ -74,8 +90,8 @@ function suggestions(){
           res.send(results);   
          }else {
          
-          let a = suggestions(); 
-          res.send(a);
+          suggestions(); 
+         
 
          }//else
 

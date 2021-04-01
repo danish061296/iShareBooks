@@ -16,8 +16,13 @@ const Trending = () => {
   const searchField = useSelector((state) => state.userReducer.searchField);
   const imageBuffer = useSelector((state) => state.userReducer.imageBuffer);
   const posts = useSelector((state) => state.userReducer.posts);
+  
+  
+  //console.log( 'POSTSSS ' +JSON.stringify(posts));
 
-  // console.log(imageBuffer);
+  let mm = JSON.stringify(posts);
+ 
+ // console.log('POSTT '+mm[]['msg']);
   
 
   const breakPoints = [
@@ -34,6 +39,7 @@ const Trending = () => {
           <div className="trending__title">
             <h3 className="trending">Showing results for {searchField}...</h3>
           </div>
+       
           <Carousel breakPoints={breakPoints}>
             {posts.map((post, index) => {
               return <Card key={index} number={index} image={post.image} />;
@@ -46,12 +52,13 @@ const Trending = () => {
         <div className="trending__title">
           <h3 className="trending">Sorry No {searchField} ... Similar Ones</h3>
         </div>
+        
         <Carousel breakPoints={breakPoints}>
           {posts.map((post, index) => {
             return <Card key={index} number={index} image={post.image} />;
           })}
         </Carousel>
-
+        
         </div>
       )}
 
