@@ -1,7 +1,7 @@
 import React from 'react';
 import './Trending.css';
 
-const Card = ({ key, number, image }) => {
+const Card = ({ key, number, image, defaultImage }) => {
   return (
     <div>
       {image && (

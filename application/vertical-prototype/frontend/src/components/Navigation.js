@@ -30,6 +30,14 @@ const Navigation = () => {
     <>
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
+          <Button
+            // className="sign__btn"
+            variant="outline-success signup__btn"
+            href="/"
+          >
+            Home
+          </Button>
+
           <Nav className="ml-auto ">
             <LinkR
               className="nav__link"
