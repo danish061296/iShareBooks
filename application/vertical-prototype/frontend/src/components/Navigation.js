@@ -142,7 +142,7 @@ const Navigation = () => {
           </LinkR>
         </h1>
         <div className="navbar__icons">
-          <Tippy content="shopping cart" placement="bottom">
+          <Tippy content="Will be implemented in the future" placement="bottom">
             <ShoppingCartIcon className="cart" />
           </Tippy>
 

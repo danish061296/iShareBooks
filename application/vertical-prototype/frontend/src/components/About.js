@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import Tippy, { tippy } from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import {
   setSearchField,
   setPosts,
@@ -186,14 +188,18 @@ const About = () => {
           </p>
         </div>
       </div>
+
+      <Tippy content='Will be implemented in the Fulute' placement='bottom'>
       <Button variant="success explore__btn" data-aos="fade-up">
         Explore Now!{' '}
         <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
       </Button>
+      </Tippy>
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
+
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
