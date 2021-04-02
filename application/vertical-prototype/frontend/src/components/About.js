@@ -13,6 +13,8 @@ import {
   setrandomMsg,
   setSearchType,
 } from '../redux/actions/userActions';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -189,10 +191,13 @@ const About = () => {
           </p>
         </div>
       </div>
-      <Button variant="success explore__btn" data-aos="fade-up">
-        Explore Now!{' '}
-        <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
-      </Button>
+      <Tippy content="Will be implemented in the future" placement="bottom">
+        <Button variant="success explore__btn" data-aos="fade-up">
+          Explore Now!{' '}
+          <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
+        </Button>
+      </Tippy>
+
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
