@@ -97,7 +97,7 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
+    Axios.post('http://'+window.location.hostname+':3001/login', loginUser).then((response) => {
       console.log(response.data);
       if (response.data.auth) {
         store.addNotification({
