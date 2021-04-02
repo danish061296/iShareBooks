@@ -6,7 +6,7 @@ const { query } = require('../dataBase.js');
 const router = express.Router();
 
 router.post('/search', (req, res) => {
-  const { searchType, searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+  const { searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
 
   let query;
 
@@ -33,10 +33,10 @@ router.post('/search', (req, res) => {
     });
   }
 
-  // let searchType = 'any';
+  let searchType = 'any';
 
   //searchField = "Co";
-  if (searchType == 'title' || searchType == 'department')
+  if (searchType == 'any')
     query =
       'SELECT * FROM Book WHERE title LIKE ' +
       db.escape('%' + searchField + '%') +
@@ -44,7 +44,7 @@ router.post('/search', (req, res) => {
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
       db.escape('%' + searchField + '%');
-  else if (!searchField) {
+  else if (searchField == '') {
     suggestions();
     //  query = "SELECT * FROM BOOK ORDER BY title ASC LIMIT 8";
   } else if (searchType != 'any') {
