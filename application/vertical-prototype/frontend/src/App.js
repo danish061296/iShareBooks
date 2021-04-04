@@ -4,7 +4,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ProtectedRoute from './ProtectedRoute';
+import About from './pages/About';
+
 import ServiceBuy from './pages/ServiceBuy';
+import Privacy from "./pages/Privacy"
 import { useSelector } from 'react-redux';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -24,6 +27,8 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/about" component={About} />
         </Switch>
       </Router>
     </div>
