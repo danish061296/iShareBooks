@@ -15,12 +15,41 @@
 
 | Student Name    | Student Email          | GitHub Username |
 |    :---:        |     :---:              |     :---:       |
-| Yangesh KC      |ykc@mail.sfsu.edu       |yogeskc         |
-| Danish Siddiqui |dsiddiqui@mail.sfsu.edu |danish061296    |
+| Yangesh KC      |ykc@mail.sfsu.edu       |yogeskc          |
+| Danish Siddiqui |dsiddiqui@mail.sfsu.edu |danish061296     |
 | Aryanna Brown   |abrown22@mail.sfsu.edu  |aryannayazmin    |
 | AbishekNeralla  |aneralla@mail.sfsu.edu  |AbishekNeralla   |
 | Pramod Khatri   |pkhatri1@mail.sfsu.edu  |pramodkhatri10   |
 | Zaid Alkkhatib  |zalkhatib@mail.sfsu.edu |zaidalkhatib     |
-| member7         |ywu23@mail.sfsu.edu     |yuhua21223       |
+| Yuhua           |ywu23@mail.sfsu.edu     |yuhua21223       |
 | Mark Jovero     |mjovero@mail.sfsu.edu   |Mark-Jovero      |
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
+
+
+
+# Credentials
+1. Server URL: http://13.58.93.59/ Webpage: http://13.58.93.59:3000
+2. SSH username: ubuntu
+3. SSH key - download sec4team4.pem file
+
+Note: To Access Database Download latest version of Mysql Workbench, create a server and enter the credential below: 
+4. Database hostname: "book.c4ounpymqddx.us-east-1.rds.amazonaws.com" port: 3306
+5. Database username: root
+6. Database password: Zaedzaed12
+7. Database name: book
+
+## How to Log In to AWS EC2 SSH
+1. Download sec4team3.pem file and store it in a secure directory.
+2. Open your terminal or command line.
+3. Type the following: ssh -i "sec4team4.pem" ubuntu@ec2-13-58-93-59.us-east-2.compute.amazonaws.com
+3.1 Replace dir with the location of the downloaded file.
+4. Press enter and you will now have access to the server terminal.
+
+## How to Log In to AWS RDS
+1. Set the endpoint to the Database URL.
+2. Set the port to 3306.
+3. Enter the database name in the connection name field.
+4. Enter the database username and password.
+
+
+(up-to-date as of 5 April 2021)

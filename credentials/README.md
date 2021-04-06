@@ -6,7 +6,7 @@
 4. Database URL: "book.c4ounpymqddx.us-east-1.rds.amazonaws.com" port: 3306
 5. Database username: root
 6. Database password: Zaedzaed12
-7. Database name: book, mydb
+7. Database name: book
 
 ## How to Log In to AWS EC2 SSH
 1. Download sec4team3.pem file and store it in a secure directory.
