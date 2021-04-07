@@ -30,40 +30,13 @@ const Navigation = () => {
     <>
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
-          <Button
+          {/* <Button
             // className="sign__btn"
             variant="outline-success signup__btn"
             href="/"
           >
             Home
-          </Button>
-
-          <Nav className="ml-auto ">
-            <LinkR
-              className="nav__link"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="/login"
-            >
-              Log In
-            </LinkR>
-          </Nav>
-
-          <Button
-            // className="sign__btn"
-            variant="outline-success signup__btn"
-            href="/registration"
-          >
-            Sign Up
-          </Button>
-        </Navbar>
-      )}
-      {logo && (
-        <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
+          </Button> */}
           <NavbarBrand className="navbar__title">
             <LinkR
               className="title__link"
@@ -78,52 +51,8 @@ const Navigation = () => {
               iShareBooks
             </LinkR>
           </NavbarBrand>
+
           <Nav className="ml-auto ">
-            <Link
-              className="nav__link"
-              data-aos="slide-down"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="about"
-              smooth={true}
-              duration={1000}
-            >
-              About
-            </Link>
-            <Link
-              className="nav__link"
-              data-aos="slide-down"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="services"
-              smooth={true}
-              duration={1000}
-            >
-              Services
-            </Link>
-            <Link
-              className="nav__link"
-              data-aos="slide-down"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="faq"
-              smooth={true}
-              duration={1000}
-            >
-              FAQ
-            </Link>
             <LinkR
               className="nav__link"
               style={{
@@ -138,12 +67,110 @@ const Navigation = () => {
             </LinkR>
           </Nav>
 
-          <Button variant="outline-success signup__btn" href="/registration">
-            Sign Up
-          </Button>
+          <LinkR
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+
+              cursor: 'pointer',
+            }}
+            to="/registration"
+          >
+            <Button variant="outline-success signup__btn">Sign Up</Button>
+          </LinkR>
         </Navbar>
       )}
+      {logo && (
+        <div>
+          <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
+            <NavbarBrand className="navbar__title">
+              <LinkR
+                className="title__link"
+                style={{
+                  color: 'white',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  fontSize: 25,
+                }}
+                to="/"
+              >
+                iShareBooks
+              </LinkR>
+            </NavbarBrand>
+            <Nav className="ml-auto ">
+              <Link
+                className="nav__link"
+                data-aos="slide-down"
+                style={{
+                  color: '#D3D3D3',
+                  textDecoration: 'none',
+                  marginRight: '20px',
+                  cursor: 'pointer',
+                }}
+                to="about"
+                smooth={true}
+                duration={1000}
+              >
+                About
+              </Link>
+              <Link
+                className="nav__link"
+                data-aos="slide-down"
+                style={{
+                  color: '#D3D3D3',
+                  textDecoration: 'none',
+                  marginRight: '20px',
+                  cursor: 'pointer',
+                }}
+                to="services"
+                smooth={true}
+                duration={1000}
+              >
+                Services
+              </Link>
+              <Link
+                className="nav__link"
+                data-aos="slide-down"
+                style={{
+                  color: '#D3D3D3',
+                  textDecoration: 'none',
+                  marginRight: '20px',
+                  cursor: 'pointer',
+                }}
+                to="faq"
+                smooth={true}
+                duration={1000}
+              >
+                FAQ
+              </Link>
+              <LinkR
+                className="nav__link"
+                style={{
+                  color: '#D3D3D3',
+                  textDecoration: 'none',
+                  marginRight: '20px',
+                  cursor: 'pointer',
+                }}
+                to="/login"
+              >
+                Log In
+              </LinkR>
+            </Nav>
 
+            <LinkR
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+
+                cursor: 'pointer',
+              }}
+              to="/registration"
+            >
+              <Button variant="outline-success signup__btn">Sign Up</Button>
+            </LinkR>
+          </Navbar>
+        </div>
+      )}
       <div className="navbar__second">
         <h1 className="navbar__logo" href="/home">
           <LinkR className="navbar__logoLink" to="/">

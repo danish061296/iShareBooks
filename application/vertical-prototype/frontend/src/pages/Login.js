@@ -194,7 +194,7 @@ export default function SignIn() {
                 </Form>
               )}
             </Formik>
-            <Grid container>
+            <Grid container className="signin__link">
               <Grid item>
                 <Link href="/registration" variant="body2">
                   {"Don't have an account? Sign Up"}
