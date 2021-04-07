@@ -140,7 +140,7 @@
 
 .filter__btn {
   z-index: 99;
-  width: 32%;
+  width: 30%;
   margin: 6px;
   align-self: flex-end;
 }
@@ -180,5 +180,28 @@
   }
   .dropdown__btn {
     font-size: 10px !important;
+  }
+  .about {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    height: 65vh;
+    background: black;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    height: 80vh;
+    background: black;
+    position: relative;
+    z-index: 1;
   }
 }

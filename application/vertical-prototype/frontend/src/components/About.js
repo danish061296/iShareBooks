@@ -15,6 +15,7 @@ import {
   setrandomMsg,
   setSearchType,
 } from '../redux/actions/userActions';
+import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -28,6 +29,7 @@ const About = () => {
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
+  const searchType = useSelector((state) => state.userReducer.searchType);
 
   // useEffect(() => {
   //   const search = {
@@ -58,6 +60,7 @@ const About = () => {
   const handleKeyDown = (e) => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     if (e.key === 'Enter') {
@@ -100,6 +103,7 @@ const About = () => {
   const handleClick = () => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     Axios.post('http://'+window.location.hostname+':3001/search', search)
@@ -188,13 +192,13 @@ const About = () => {
           </p>
         </div>
       </div>
-
-      <Tippy content='Will be implemented in the Fulute' placement='bottom'>
-      <Button variant="success explore__btn" data-aos="fade-up">
-        Explore Now!{' '}
-        <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
-      </Button>
+      <Tippy content="Will be implemented in the future" placement="bottom">
+        <Button variant="success explore__btn" data-aos="fade-up">
+          Explore Now!{' '}
+          <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
+        </Button>
       </Tippy>
+
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"

@@ -29,7 +29,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="/login">
         iShareBooks
       </Link>
       {new Date().getFullYear()}
@@ -152,6 +152,7 @@ export default function SignIn() {
                 <Form>
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -166,6 +167,7 @@ export default function SignIn() {
                   />
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -190,7 +192,7 @@ export default function SignIn() {
                 </Form>
               )}
             </Formik>
-            <Grid container>
+            <Grid container className="signin__link">
               <Grid item>
                 <Link href="/registration" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -198,7 +200,7 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </div>
-          <Box mt={8}>
+          <Box mt={38}>
             <Copyright />
           </Box>
         </Container>

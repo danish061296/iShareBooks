@@ -29,3 +29,10 @@
   font-weight: 700;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.default__image {
+  display: flex;
+}
+.default__img {
+  margin-right: 40px;
+}

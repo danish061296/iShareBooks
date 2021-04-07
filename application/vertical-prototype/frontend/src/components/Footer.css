@@ -1,6 +1,6 @@
-/* .footer {
-  position: relative;
-} */
+.footer__container {
+  height: 200px;
+}
 
 .upward__btn {
   background-color: white !important;
@@ -33,7 +33,7 @@
   justify-content: space-around;
   margin-left: 70%;
   margin-right: 10%;
-  padding-top: 7em;
+  padding-top: 65px;
   position: absolute;
   font-size: x-small;
   text-align: right;
@@ -43,7 +43,16 @@
 @media screen and (max-width: 768px) {
   .copyright {
     font-size: 8px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
+    display: flex;
+    justify-content: space-around;
+    margin-left: 53%;
+    margin-right: 60%;
+    padding-top: 75px;
+    position: absolute;
+
+    text-align: right;
+    width: 45%;
   }
 }
 
