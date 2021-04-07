@@ -32,7 +32,7 @@
 2. SSH username: ubuntu
 3. SSH key - download sec4team4.pem file
 
-Note: To Access Database Download latest version of Mysql Workbench, create a server and enter the credential below: 
+Note: To Access Database Download latest version of Mysql Workbench, create a server and enter the credential below:  and also make sure to npm start the backend folder.
 4. Database hostname: "book.c4ounpymqddx.us-east-1.rds.amazonaws.com" port: 3306
 5. Database username: root
 6. Database password: Zaedzaed12
