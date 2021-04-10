@@ -6,20 +6,9 @@ import Registration from './pages/Registration';
 import ProtectedRoute from './ProtectedRoute';
 import ServiceBuy from './pages/ServiceBuy';
 import { useSelector } from 'react-redux';
+import Checkout from './pages/Checkout';
 
-<<<<<<< HEAD
-
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Link,
-  Route,
-  BrowserRouter,
-} from 'react-router-dom';
-=======
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
->>>>>>> Danish
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
@@ -31,6 +20,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/registration" component={Registration} />
+          <Route path ="/checkout" component={Checkout} />
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}

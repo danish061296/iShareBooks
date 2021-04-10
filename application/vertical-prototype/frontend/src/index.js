@@ -8,10 +8,10 @@ import 'react-notifications-component/dist/theme.css';
 import rootReducer from './redux/reducers/rootReducer';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const store = createStore(rootReducer);
 
-import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <Provider store={store}>

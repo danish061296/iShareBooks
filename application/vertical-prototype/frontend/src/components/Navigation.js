@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link as LinkR } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import {Link as LinkR} from 'react-router-dom';
 import './Navigation.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Aos from 'aos';
@@ -27,65 +26,6 @@ const Navigation = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
-        <Nav className="ml-auto ">
-          <Link
-            className="nav__link"
-            style={{
-              color: '#D3D3D3',
-              textDecoration: 'none',
-              marginRight: '20px',
-              cursor: 'pointer',
-            }}
-            to="about"
-            smooth={true}
-            duration={1000}
-          >
-            About
-          </Link>
-          <Link
-            className="nav__link"
-            style={{
-              color: '#D3D3D3',
-              textDecoration: 'none',
-              marginRight: '20px',
-              cursor: 'pointer',
-            }}
-            to="services"
-            smooth={true}
-            duration={1000}
-          >
-            Services
-          </Link>
-          <Link
-            className="nav__link"
-            style={{
-              color: '#D3D3D3',
-              textDecoration: 'none',
-              marginRight: '20px',
-              cursor: 'pointer',
-            }}
-            to="faq"
-            smooth={true}
-            duration={1000}
-          >
-            FAQ
-          </Link>
-          <LinkR
-            className="nav__link"
-            style={{
-              color: '#D3D3D3',
-              textDecoration: 'none',
-              marginRight: '20px',
-              cursor: 'pointer',
-            }}
-            to="/login"
-          >
-            Login
-          </LinkR>
-        </Nav>
-=======
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           <Nav className="ml-auto ">
@@ -182,7 +122,6 @@ const Navigation = () => {
               Log In
             </LinkR>
           </Nav>
->>>>>>> Danish
 
           <Button variant="outline-success signup__btn" href="/registration">
             Sign Up

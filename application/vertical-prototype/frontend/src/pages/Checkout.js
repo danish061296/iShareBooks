@@ -13,6 +13,26 @@ import Typography from '@material-ui/core/Typography';
 import Address from './Address';
 import CardPayment from './CardPayment';
 import OrderReview from './OrderReview';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const muiTheme = createMuiTheme({
+    overrides: {
+        MuiStepIcon: {
+            root: {
+                color: 'red', // or 'rgba(0, 0, 0, 1)'
+                '&$active': {
+                    color: 'yellow',
+                },
+                '&$completed': {
+                    color: 'blue',
+                },
+            },
+        },
+    }
+});
+
 
 function Copyright() {
   return (
@@ -92,20 +112,16 @@ export default function Checkout() {
   };
 
   return (
+   <div className="checkout__Container">
+     <Navigation />
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            iShareBooks
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>
+          <MuiThemeProvider muiTheme={muiTheme}>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
               <Step key={label}>
@@ -113,6 +129,7 @@ export default function Checkout() {
               </Step>
             ))}
           </Stepper>
+          </MuiThemeProvider>
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
@@ -149,5 +166,7 @@ export default function Checkout() {
         <Copyright />
       </main>
     </React.Fragment>
+    <Footer />
+    </div>
   );
 }
