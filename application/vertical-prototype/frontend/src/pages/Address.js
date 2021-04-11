@@ -8,6 +8,45 @@ import './Address.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  address1: '',
+  address2:'',
+  city:'',
+  state:'',
+  zip:'',
+  country:'',
+  useForBilling: false,
+};
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'firstName is too short!')
+    .required('firstName is required!'),
+    lastName: Yup.string()
+    .min(2, 'lastName is too short!')
+    .required('lastName is required!'),
+    address1: Yup.string()
+    .min(5, 'address is too short!')
+    .required('address1 is required!'),
+    city: Yup.string()
+    .min(2, 'city is too short!')
+    .required('city is required!'),
+    state: Yup.string()
+    .min(1, 'state is too short!')
+    .required('state is required!'),
+    zip: Yup.string()
+    .min(5, 'zip code is too short!')
+    .required('zip code is required!'),
+    country: Yup.string()
+    .min(2, 'country is too short!')
+    .required('country is required!'),
+});
+
+
+
 export default function Address() {
 
   return (
@@ -15,9 +54,16 @@ export default function Address() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      <Formik
+              //innerRef={ref}
+              initialValues={initialValues}
+              //onSubmit={onSubmit}
+              validationSchema={validationSchema}
+            >
+      <Form>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={5}>
-          <TextField
+          <Field as ={TextField}
           error
             required
             id="firstName"
@@ -25,24 +71,24 @@ export default function Address() {
             label="First name"
             fullWidth
             autoComplete="given-name"
-            helperText="This field is required"
+            helperText="required*"
           />
         </Grid>
         <Grid item xs={12} sm={5}>
-          <TextField
-            required
+        <Field as ={TextField}      
+              required
             error
             id="lastName"
             name="lastName"
             label="Last name"
             fullWidth
             autoComplete="family-name"
-            helperText="This field is required"
+            helperText="required*"
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            required
+        <Field as ={TextField}  
+                  required
             error
             validate
             id="address1"
@@ -50,12 +96,12 @@ export default function Address() {
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
-            helperText="This field is required"
+            helperText="required*"
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            id="address2"
+        <Field as ={TextField}   
+                 id="address2"
             name="address2"
             label="Address line 2 (optional)"
             fullWidth
@@ -63,28 +109,29 @@ export default function Address() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
+        <Field as ={TextField}    
+                required
             error
             id="city"
             name="city"
             label="City"
             fullWidth
-            autoComplete="shipping address-level2"
-            helperText="This field is required"
+            helperText="required*"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField 
+        <Field as ={TextField}      
+          required
+          error
           id="state"
            name="state" 
            label="State/Province/Region" 
            fullWidth
-           helperText="This field is required"
+           helperText="required*"
            />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+        <Field as ={TextField}      
             required
             error
             id="zip"
@@ -95,8 +142,8 @@ export default function Address() {
             helperText="This field is required"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
+        {/* <Grid item xs={12} sm={6}>
+        <Field as ={TextField}      
             required
             error
             id="country"
@@ -106,7 +153,7 @@ export default function Address() {
             autoComplete="shipping country"
             helperText="This field is required"
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
@@ -114,6 +161,8 @@ export default function Address() {
           />
         </Grid>
       </Grid>
+      </Form>
+      </Formik>
     </React.Fragment>
    
   );
