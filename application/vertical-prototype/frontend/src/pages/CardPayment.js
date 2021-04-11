@@ -8,10 +8,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const initialValues = {
-  cardName: '',
-  cardNumber: '',
-  cvv: '',
-  expDate:'',
+  cardName: "",
+  cardNumber: "",
+  cvv: "",
+  expDate: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -20,11 +20,11 @@ const validationSchema = Yup.object().shape({
     .required("Card number is required!"),
   cardNumber: Yup.string()
     .min(16, "Card number is too short!")
-    .max(16,"invalid card number!")
+    .max(16, "invalid card number!")
     .required("Card number is required!"),
   cvv: Yup.string()
     .min(3, "cvv is too short!")
-    .max(4,"cvv is invalid")
+    .max(4, "cvv is invalid")
     .required("cvv is required!"),
   expDate: Yup.string()
     .min(5, "expiray date is too short!")
@@ -37,62 +37,75 @@ export default function CardPayment() {
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField
-          error
-            required
-            id="cardName"
-            label="Name on card"
-            fullWidth
-            autoComplete="cc-name"
-            helperText="required*"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-          error
-            required
-            id="cardNumber"
-            label="Card number"
-            fullWidth
-            autoComplete="cc-number"
-            helperText="required*"
 
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-          error
-            required
-            id="expDate"
-            label="Expiry date"
-            fullWidth
-            autoComplete="cc-exp"
-            helperText="required*"
-
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            error
-            id="cvv"
-            label="CVV"
-            helperText="Last three digits on signature strip"
-            fullWidth
-            autoComplete="cc-csc"
-            helperText="required*"
-
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
-          />
-        </Grid>
-      </Grid>
+      <Formik
+        //innerRef={ref}
+        initialValues={initialValues}
+        //onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Field
+                as={TextField}
+                error
+                required
+                id="cardName"
+                label="Name on card"
+                fullWidth
+                autoComplete="cc-name"
+                helperText="required*"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Field
+                as={TextField}
+                error
+                required
+                id="cardNumber"
+                label="Card number"
+                fullWidth
+                autoComplete="cc-number"
+                helperText="required*"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Field
+                as={TextField}
+                error
+                required
+                id="expDate"
+                label="Expiry date"
+                fullWidth
+                autoComplete="cc-exp"
+                helperText="required*"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Field
+                as={TextField}
+                required
+                error
+                id="cvv"
+                label="CVV"
+                helperText="Last three digits on signature strip"
+                fullWidth
+                autoComplete="cc-csc"
+                helperText="required*"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox color="secondary" name="saveCard" value="yes" />
+                }
+                label="Remember credit card details for next time"
+              />
+            </Grid>
+          </Grid>
+        </Form>
+      </Formik>
     </React.Fragment>
   );
 }
