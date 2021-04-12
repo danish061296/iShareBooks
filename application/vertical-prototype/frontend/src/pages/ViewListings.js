@@ -10,38 +10,6 @@ import Footer from '../components/Footer';
 
 const ViewListings = () => {
   const cart = useSelector((state) => state.userReducer.cart);
-  //   let cart = [
-  //     {
-  //       id: '355363',
-  //       title: 'Computer Book',
-  //       author: 'John Doe',
-  //       department: 'Computer Science',
-  //       isbn: 123567894,
-  //       price: 10.67,
-  //       image:
-  //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc',
-  //     },
-  //     {
-  //       id: '732352',
-  //       title: 'Literature Book',
-  //       author: 'Alice Jane',
-  //       department: 'Literature',
-  //       isbn: 123535464,
-  //       price: 30.99,
-  //       image:
-  //         'https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg',
-  //     },
-  //     {
-  //       id: '356234',
-  //       title: 'English Book',
-  //       author: 'Bob Michaels',
-  //       department: 'English',
-  //       isbn: 837748374,
-  //       price: 27.01,
-  //       image:
-  //         'https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg',
-  //     },
-  //   ];
 
   return (
     <div className="viewlistings__container">
@@ -73,6 +41,7 @@ const ViewListings = () => {
                     author={item.author}
                     department={item.department}
                     isbn={item.isbn}
+                    condition={item.condition}
                     price={item.price}
                     image={item.image}
                   />

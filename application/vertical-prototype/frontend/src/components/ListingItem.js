@@ -3,7 +3,16 @@ import { Star } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
 
-const ListingItem = ({ id, title, author, department, isbn, price, image }) => {
+const ListingItem = ({
+  id,
+  title,
+  author,
+  department,
+  isbn,
+  condition,
+  price,
+  image,
+}) => {
   // remove item from the cart
   const removeFromCart = () => {};
 
@@ -23,6 +32,10 @@ const ListingItem = ({ id, title, author, department, isbn, price, image }) => {
         <p className="listingitem__item__department">
           <strong>Department: </strong>
           {department}
+        </p>
+        <p className="listingitem__item__condition">
+          <strong>Condition: </strong>
+          {condition}
         </p>
         <p className="listingitem__item__isbn">
           <strong>ISBN: </strong>

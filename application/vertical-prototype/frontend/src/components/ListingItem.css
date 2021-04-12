@@ -4,7 +4,7 @@
   margin-top: 10px;
   margin-left: 10px;
   border-radius: 10px;
-  height: 270px;
+  height: 300px;
   /* z-index: 1; */
 }
 
@@ -33,6 +33,13 @@
   color: #1e504c;
   text-align: center;
   width: 70px;
+}
+
+.listingitem__item__author,
+.listingitem__item__department,
+.listingitem__item__isbn,
+.listingitem__item__condition {
+  font-size: 15px;
 }
 
 .listingitem__item__button {
@@ -76,16 +83,20 @@
   }
 
   .listingitem__item__author {
-    font-size: 12px;
+    font-size: 10px;
   }
   .listingitem__item__department {
-    font-size: 12px;
+    font-size: 10px;
   }
   .listingitem__item__isbn {
-    font-size: 12px;
+    font-size: 10px;
   }
   .listingitem__item__price {
-    font-size: 12px;
+    font-size: 10px;
+  }
+
+  .listingitem__item__condition {
+    font-size: 10px;
   }
   .listingitem__item__button {
     font-size: 10px !important;
