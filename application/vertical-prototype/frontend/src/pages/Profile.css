@@ -1,0 +1,135 @@
+.login__Container {
+  height: 70vh;
+}
+
+.signinButton {
+  background-color: #18504c !important;
+}
+
+.signinButton:hover {
+  background-color: #28918a !important;
+  color: white !important;
+  border: 1px solid #18504c !important;
+}
+
+.MuiFormHelperText-root {
+  color: red !important;
+}
+
+.input__field {
+  margin-bottom: 20px !important;
+}
+
+.signin__link {
+  margin-top: 15px;
+}
+
+.profile__Container {
+  background-color: white !important;
+  border: 1px solid #18504c !important;
+  width: 85%;
+  height: 1100px;
+  margin-left: 7.5%;
+}
+
+.top {
+  background-color: #20736dc9 !important;
+  height: 200px;
+}
+
+.image_circle {
+  width: 270px;
+  height: 270px;
+  top: 75px;
+  position: relative;
+  background-color: #d5e8d4d7;
+  border: 1px solid black;
+  border-radius: 250px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.user_information {
+  height: 350px;
+  position: relative;
+  top: 150px;
+  text-align: center;
+  margin: auto;
+}
+
+.username {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 18px;
+}
+
+.rating_num {
+  font-size: 65px;
+}
+
+.rating_vis {
+  position: relative;
+  margin: auto !important;
+}
+
+.stars {
+  position: relative;
+  display: inline-block;
+  margin: auto !important;
+}
+
+.user_books_container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  bottom: -145px;
+  background-color: #e6e6e6;
+}
+
+.user_books_container h2 {
+  position: relative;
+  padding: 10px;
+  right: 90px;
+}
+
+.button_container {
+  position: relative;
+  float: right;
+  right: 30px;
+  top: 65px;
+}
+
+.num_books {
+  position: relative;
+  float: left !important;
+  top: 75px;
+  padding: 10px;
+  padding-left: 20px !important;
+  left: 30px;
+  font-size: 25px;
+  text-decoration: underline;
+}
+
+.delete_button {
+  border: 1px solid #1a504c !important;
+  font-size: 20px !important;
+  border-radius: 10px;
+  width: 175px;
+}
+
+.save_button {
+  background-color: #1a504c !important;
+  font-size: 20px !important;
+  border-radius: 10px;
+  width: 175px;
+  color: white !important;
+  right: 10px;
+}
+
+.save_button:hover {
+  background-color: #223f3d !important;
+}
