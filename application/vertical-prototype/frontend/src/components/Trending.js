@@ -78,7 +78,7 @@ const Trending = () => {
               style={{ width: 300, height: 350 }}
               className="default__img"
               src={defaultImage}
-              alt="default_image"
+              alt="default image"
             />
             <img
               style={{ width: 300, height: 350 }}
@@ -95,7 +95,7 @@ const Trending = () => {
           </div>
         </div>
       )}
-    </div>
+    </div> //main div
   );
 };
 

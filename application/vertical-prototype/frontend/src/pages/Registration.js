@@ -107,7 +107,7 @@ const Registration = () => {
     };
 
     console.log(registerUser.username);
-    Axios.post('http://'+window.location.hostname+':3001/register', registerUser).then(
+    Axios.post('http://localhost:3001/register', registerUser).then(
       (response) => {
         console.log(response.data);
         if (!response.data.registered) {
@@ -237,7 +237,7 @@ const Registration = () => {
                   Sign Up
                 </Button>
 
-                <Grid container justify="flex-end" className="signup__link">
+                <Grid container justify="flex-end">
                   <Grid item>
                     <Link href="/login" variant="body2">
                       Already have an account? Log in

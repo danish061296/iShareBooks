@@ -7,14 +7,13 @@ import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import Tippy, { tippy } from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import {
   setSearchField,
   setPosts,
   setrandomMsg,
   setSearchType,
 } from '../redux/actions/userActions';
+import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -64,7 +63,7 @@ const About = () => {
     };
 
     if (e.key === 'Enter') {
-      Axios.post('http://'+window.location.hostname+':3001/search', search)
+      Axios.post('http://localhost:3001/search', search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -106,7 +105,7 @@ const About = () => {
       searchType: searchType,
     };
 
-    Axios.post('http://'+window.location.hostname+':3001/search', search)
+    Axios.post('http://localhost:3001/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);
@@ -203,7 +202,6 @@ const About = () => {
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
-
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >

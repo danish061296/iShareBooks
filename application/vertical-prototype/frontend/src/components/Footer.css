@@ -33,7 +33,7 @@
   justify-content: space-around;
   margin-left: 70%;
   margin-right: 10%;
-  padding-top: 65px;
+  padding-top: 7em;
   position: absolute;
   font-size: x-small;
   text-align: right;
@@ -42,17 +42,8 @@
 
 @media screen and (max-width: 768px) {
   .copyright {
-    font-size: 8px;
+    font-size: 10px;
     /* margin-top: 30px; */
-    display: flex;
-    justify-content: space-around;
-    margin-left: 53%;
-    margin-right: 60%;
-    padding-top: 75px;
-    position: absolute;
-
-    text-align: right;
-    width: 45%;
   }
 }
 
@@ -62,11 +53,13 @@
 }
 
 .fcontent {
-  padding-bottom: 80px;
-  margin-top: 10px;
+  padding-bottom: 100px;
+  margin-top: 20px;
   position: inherit;
+  font-size: 25px;
+  color: white;
 }
 
 .center {
-  size: 100px;
+  size: 300px;
 }

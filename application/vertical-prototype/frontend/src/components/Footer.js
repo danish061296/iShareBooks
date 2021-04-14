@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
@@ -11,6 +11,7 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import './Footer.css';
+import  {Link}  from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -22,21 +23,26 @@ const Footer = () => {
         style={{ height: '300px', background: '#18504c' }}
       >
         <div className="Fcontent">
-          <div className="fcontent">
-            <section className="left">
-              About
-              <section>Privacy</section>
-              <section>FAQ</section>
+         <div className="fcontent">
+            
+           <section className="left" type = "button">
+              
+              <Link to="/about" >About</Link>
+              <section><a  href="/privacy">Privacy</a></section>
+              
+              <section><Link to="/faq">FAQ</Link>
+         
+              </section>
               <section>Contact:</section>
             </section>
             <section className="center">
               Social
               <section>
-                <TiSocialTwitter circle="true" />
+               <a  href="https://twitter.com/home"> <TiSocialTwitter circle="true"  /></a>
 
-                <TiSocialLinkedin />
+               <a href="https://LinkedIn.com"> <TiSocialLinkedin /> </a>
 
-                <TiSocialFacebook />
+               <a href="https://facebook.com"> <TiSocialFacebook /> </a>
               </section>
             </section>
           </div>

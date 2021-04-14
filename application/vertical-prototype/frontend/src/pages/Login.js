@@ -97,7 +97,7 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post('http://'+window.location.hostname+':3001/login', loginUser).then((response) => {
+    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
       console.log(response.data);
       if (response.data.auth) {
         store.addNotification({
@@ -143,6 +143,7 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
               Login
             </Typography>
+            {/* <form className={classes.form} noValidate> */}
             <Formik
               initialValues={initialValues}
               onSubmit={onSubmit}
@@ -186,13 +187,14 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                     className="signinButton"
+                    // onClick={handleSubmit}
                   >
                     Sign In
                   </Button>
                 </Form>
               )}
             </Formik>
-            <Grid container className="signin__link">
+            <Grid container>
               <Grid item>
                 <Link href="/registration" variant="body2">
                   {"Don't have an account? Sign Up"}
