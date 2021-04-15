@@ -17,6 +17,7 @@ app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', require('./routes/books'));
+app.use('/', require('./routes/trending_books'));
 app.use('/', require('./routes/auth'));
 app.use('/', require('./routes/post'));
 app.use('/', require('./routes/comments'));

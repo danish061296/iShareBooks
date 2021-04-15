@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/posts", (req, res) => {
   console.log("Dsad");
-  const { description, price } = JSON.parse(req.body.data);
+  const { description, price, condition } = JSON.parse(req.body.data);
   if (!req.files) {
     return res.status(500).send("no file was uplaoded");
   }
@@ -21,7 +21,7 @@ router.post("/posts", (req, res) => {
       return res.status(500).send(err);
     }
     const data = [image, description, price];
-    let inserSql = `INSERT INTO posts (image,description,price) VALUES (?)`;
+    let inserSql = `INSERT INTO posts (image,description,price,condition) VALUES (?)`;
     db.query(inserSql, [data], (err, results) => {
       if (err) {
         console.log(err);
