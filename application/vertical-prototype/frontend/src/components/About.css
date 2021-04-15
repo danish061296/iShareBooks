@@ -124,14 +124,19 @@
   width: 95%;
 }
 
-.search__icon {
+.search__btn {
   color: black;
   background-color: teal;
-  width: 100%;
-  font-size: 70px !important;
+  width: 10%;
+  font-size: 40px !important;
   border-radius: 0px 0px 25px 0px;
   cursor: pointer !important;
+  border: none;
   z-index: 99;
+}
+
+.search__icon {
+  font-size: 50px !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -142,6 +147,19 @@
     font-size: 10px;
   }
   .searchBar {
-    font-size: 15px;
+    font-size: 10px;
+  }
+  .explore__btn {
+    font-size: 10px !important;
+  }
+  .arrow__icon {
+    font-size: 10px !important;
+  }
+  .search__btn {
+    font-size: 40px !important;
+    width: 15% !important;
+  }
+  .search__icon {
+    font-size: 30px !important;
   }
 }

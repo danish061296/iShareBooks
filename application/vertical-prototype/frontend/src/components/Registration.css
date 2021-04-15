@@ -1,3 +1,19 @@
-button[submit]{
-    color: #28918a !important;
+/* button[submit] {
+  color: #28918a !important;
+} */
+
+.signup__btn {
+  background-color: #18504c !important;
+  border: none !important;
 }
+
+.signup__btn:hover {
+  border: 1px solid #18504c !important;
+  color: white !important;
+  background-color: #47afa8 !important;
+}
+
+/* .signup__container {
+  height: 80vh;
+  background: #1a1f1e !important;
+} */

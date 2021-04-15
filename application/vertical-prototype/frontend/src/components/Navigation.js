@@ -29,7 +29,7 @@ const Navigation = () => {
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           <Nav className="ml-auto ">
-            <Link
+            <LinkR
               className="nav__link"
               style={{
                 color: '#D3D3D3',
@@ -37,10 +37,10 @@ const Navigation = () => {
                 marginRight: '20px',
                 cursor: 'pointer',
               }}
-              to="#login"
+              to="/login"
             >
               Log In
-            </Link>
+            </LinkR>
           </Nav>
 
           <Button variant="outline-success signup__btn" href="/registration">
@@ -103,13 +103,13 @@ const Navigation = () => {
                 marginRight: '20px',
                 cursor: 'pointer',
               }}
-              to="trending"
+              to="faq"
               smooth={true}
               duration={1000}
             >
               FAQ
             </Link>
-            <Link
+            <LinkR
               className="nav__link"
               style={{
                 color: '#D3D3D3',
@@ -117,10 +117,10 @@ const Navigation = () => {
                 marginRight: '20px',
                 cursor: 'pointer',
               }}
-              to="#login"
+              to="/login"
             >
               Log In
-            </Link>
+            </LinkR>
           </Nav>
 
           <Button variant="outline-success signup__btn" href="/registration">
