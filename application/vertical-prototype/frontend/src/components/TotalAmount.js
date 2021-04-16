@@ -7,14 +7,16 @@ import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 const TotalAmount = () => {
-  const arrayOfBooks = [{name: 'zaid', cost: 20}];
+  const arrayOfBooks = [
+    {name: 'c++', price: 110, id: 43434341},
+    {name: 'js', price: 300, id: 9943},
+  ];
 
   const cart = useSelector((state) => state.userReducer.cart);
 
   const handleCheckout = async () => {
     console.log('clicked');
     const res = await axios.post('http://localhost:3001/pay', arrayOfBooks);
-
     window.open(res.data);
   };
 
