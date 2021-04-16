@@ -12,10 +12,22 @@ paypal.configure({
     'EAPpS2WLG-Cke7m9k8QeSnaanF5zUUYsCvDEMlxt6JW2KOf_1pIrPxOI5YC7VYqOo5CJMuvyzLDPbDM9',
 });
 router.post('/pay', (req, res) => {
-  const bookName = req.body.name;
-  const bookCost = req.body.cost;
-  const bookId = req.body.id;
+  console.log('recived');
+  // const arrayOfBooks = req.body;
+  // console.log(...arrayOfBooks);
+  // const bookName = req.body.name;
+  // const bookCost = req.body.cost;
+  // const bookId = req.body.id;
+  let booksCost = 100;
+  // for (let i = 0; i < arrayOfBooks.length(); i++) {
+  //   booksCost += arrayOfBooks[i].cost;
+  // }
 
+  // "name": "item",
+  //               "sku": "item",
+  //               "price": "1.00",
+  //               "currency": "USD",
+  //               "quantity": 1
   const create_payment_json = {
     intent: 'sale',
     payer: {
@@ -28,19 +40,15 @@ router.post('/pay', (req, res) => {
     transactions: [
       {
         item_list: {
-          items: [
-            {
-              name: bookName,
-              sku: 'item',
-              price: bookCost,
-              currency: 'USD',
-              quantity: 1,
-            },
-          ],
+          name: 'item',
+          sku: 'item',
+          price: '1.00',
+          currency: 'USD',
+          quantity: 1,
         },
         amount: {
           currency: 'USD',
-          total: bookCost,
+          total: booksCost,
         },
         description: 'book sale transaction',
       },

@@ -14,9 +14,9 @@ router.get('/', (req, res) => {
     }
   });
 });
+
 router.post('/register', (req, res) => {
-  console.log('dsads');
-  const { username, email, password } = req.body;
+  const {username, email, password} = req.body;
   const values = [email];
   var sql = `SELECT email from users where email=?`;
   db.query(sql, [values], (err, results) => {
@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
             if (err) {
               res.status(500).send('token error');
             } else {
-              res.json({ token });
+              res.json({token});
             }
           }
         );
@@ -73,11 +73,9 @@ router.post('/register', (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
     if (!email || !password) {
-      return res
-        .status(400)
-        .send({ message: 'Please enter email and password' });
+      return res.status(400).send({message: 'Please enter email and password'});
     }
     db.query(
       'SELECT * FROM users WHERE email = ?',

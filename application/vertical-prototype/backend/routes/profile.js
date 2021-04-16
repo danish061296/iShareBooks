@@ -16,6 +16,7 @@ router.get('/profile/:id', (req, res) => {
   });
 });
 
+//update user data
 router.put('/profile/:id', (req, res) => {
   const id = req.params.id;
   const updateItem = Object.keys(req.body); //old value
