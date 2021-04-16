@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setEmail,
   setPassword,
@@ -141,7 +141,6 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
               Login
             </Typography>
-            {/* <form className={classes.form} noValidate> */}
             <Formik
               initialValues={initialValues}
               onSubmit={onSubmit}

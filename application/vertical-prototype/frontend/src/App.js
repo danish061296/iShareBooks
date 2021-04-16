@@ -10,9 +10,11 @@ import Profile from './pages/Profile';
 import RatingMessage from './pages/RatingMessage';
 import ViewListings from './pages/ViewListings';
 import BuyBooks from './pages/BuyBooks';
+import TradeBooks from './pages/TradeBooks';
+import FreeBooks from './pages/FreeBooks';
+import TradeBookModal from './pages/TradeBookModal';
 
 import { useSelector } from 'react-redux';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
@@ -30,6 +32,9 @@ const App = () => {
           <Route path="/rating" component={RatingMessage} />
           <Route path="/viewlistings" component={ViewListings} />
           <Route path="/buybooks" component={BuyBooks} />
+          <Route path="/tradebooks" component={TradeBooks} />
+          <Route path="/freebooks" component={FreeBooks} />
+
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}

@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -193,7 +194,7 @@ const About = () => {
       </div>
       <Tippy content="Will be implemented in the future" placement="bottom">
         <Button variant="success explore__btn" data-aos="fade-up">
-          Explore Now!{' '}
+          Explore Now!
           <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
         </Button>
       </Tippy>

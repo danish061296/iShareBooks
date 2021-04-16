@@ -72,13 +72,13 @@
   outline: none;
   height: 40px;
   text-align: center;
-  width: 320px;
+  width: 300px;
   /* width: 70%; */
   margin-bottom: 10px;
   background-color: rgb(38, 100, 100);
   color: white;
   font-size: 20px;
-  border-radius: 40px;
+  border-radius: 10px;
 }
 .free:hover,
 .buy:hover,
