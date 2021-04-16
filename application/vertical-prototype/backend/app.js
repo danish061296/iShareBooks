@@ -14,7 +14,7 @@ app.use(
 );
 app.use(fileUpload());
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', require('./routes/books'));
 app.use('/', require('./routes/auth'));
@@ -22,6 +22,7 @@ app.use('/', require('./routes/post'));
 app.use('/', require('./routes/comments'));
 app.use('/', require('./routes/paypal'));
 app.use('/', require('./routes/trending_books'));
+app.use('/', require('./routes/profile'));
 app.use(cookieParser());
 const port = process.env.PORT || 3001;
 app.listen(port, (req, res) => {

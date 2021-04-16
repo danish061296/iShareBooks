@@ -5,19 +5,37 @@ const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.post('/search', (req, res) => {
-  const { searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+router.get('/search', (req, res) => {
+  //freebooks
+  //tradebooks
+  //paidbooks
+  const { searchField, searchType, searchTable } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
 
   let query;
 
+  //searchField = "Co";
+  if (searchType == 'any')
+    query =
+      `SELECT * FROM ${searchTable} WHERE title LIKE ` +
+      db.escape('%' + searchField + '%') +
+      ' OR author LIKE ' +
+      db.escape('%' + searchField + '%') +
+      ' OR department LIKE ' +
+      db.escape('%' + searchField + '%');
+  else if (searchField == '') {
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  } else if (searchType != 'any') {
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  }
+
   function suggestions() {
-    query = 'SELECT * FROM Book ORDER BY title ASC LIMIT 8';
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
     db.query(query, (err, results) => {
-      // let suggest = JSON.stringify(results);
+      let suggest = JSON.stringify(results);
       //console.log(JSON.parse(suggest))
       // console.log('Printig Results: ' + suggest)
 
-      // let obj = JSON.parse(suggest);
+      let obj = JSON.parse(suggest);
 
       results.forEach(function (book, index) {
         if (book.image) {
@@ -31,24 +49,6 @@ router.post('/search', (req, res) => {
         msg: 'No Results Were Found: Similar Books Available!',
       });
     });
-  }
-
-  let searchType = 'any';
-
-  //searchField = "Co";
-  if (searchType == 'any')
-    query =
-      'SELECT * FROM Book WHERE title LIKE ' +
-      db.escape('%' + searchField + '%') +
-      ' OR author LIKE ' +
-      db.escape('%' + searchField + '%') +
-      ' OR department LIKE ' +
-      db.escape('%' + searchField + '%');
-  else if (searchField == '') {
-    suggestions();
-    //  query = "SELECT * FROM BOOK ORDER BY title ASC LIMIT 8";
-  } else if (searchType != 'any') {
-    query = 'SELECT * FROM BOOK ORDER BY title ASC LIMIT 8';
   }
 
   db.query(query, (err, results) => {
@@ -68,9 +68,9 @@ router.post('/search', (req, res) => {
         res.send(results);
       } else {
         suggestions();
-      }
-    }
-  });
-});
+      } //else
+    } //else
+  }); //dbque ry
+}); //routerPost
 
 module.exports = router;
