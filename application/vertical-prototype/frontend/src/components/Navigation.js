@@ -6,11 +6,14 @@ import './Navigation.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { useSelector } from 'react-redux';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const Navigation = () => {
   const [logo, setLogo] = useState(false);
+
+  const cart = useSelector((state) => state.userReducer.cart);
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -177,12 +180,15 @@ const Navigation = () => {
             iShareBooks
           </LinkR>
         </h1>
-        <div className="navbar__icons">
-          <Tippy content="Will be implemented in the future" placement="bottom">
-            <ShoppingCartIcon className="cart" />
-          </Tippy>
 
-          <p>0</p>
+        <div className="navbar__icons">
+          <LinkR className="cart__link" to="/viewlistings">
+            {/* <Tippy content="Will be implemented in the future" placement="bottom"> */}
+            <ShoppingCartIcon className="cart" />
+            {/* </Tippy> */}
+
+            <p>{cart?.length}</p>
+          </LinkR>
         </div>
       </div>
     </>

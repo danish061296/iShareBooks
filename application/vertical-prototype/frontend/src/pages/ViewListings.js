@@ -7,10 +7,12 @@ import Navigation from '../components/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Footer from '../components/Footer';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 const ViewListings = () => {
   const cart = useSelector((state) => state.userReducer.cart);
 
+  console.log(cart);
   return (
     <div className="viewlistings__container">
       <Navigation />
@@ -30,7 +32,9 @@ const ViewListings = () => {
           ) : (
             <div>
               <div className="cart__number">
-                <h4 className="viewlisting__message">Your Cart (3)</h4>
+                <h4 className="viewlisting__message">
+                  Your Cart ({cart?.length})
+                </h4>
               </div>
               {cart.map((item, i) => {
                 return (

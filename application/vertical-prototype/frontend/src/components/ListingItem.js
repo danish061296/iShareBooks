@@ -2,6 +2,8 @@ import React from 'react';
 import { Star } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
+import { removeFromCart } from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const ListingItem = ({
   id,
@@ -13,8 +15,12 @@ const ListingItem = ({
   price,
   image,
 }) => {
+  const dispatch = useDispatch();
+
   // remove item from the cart
-  const removeFromCart = () => {};
+  const handleRemove = () => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <div className="listingitem__item">
@@ -57,7 +63,7 @@ const ListingItem = ({
               </p>
             ))}
         </div> */}
-        <Button onClick={removeFromCart} className="listingitem__item__button">
+        <Button onClick={handleRemove} className="listingitem__item__button">
           REMOVE FROM CART
         </Button>
       </div>

@@ -42,6 +42,11 @@ export const setrandomMsg = (randomMsg) => ({
 });
 
 export const setCartItem = (item) => ({
-  type: 'SET_CART',
+  type: 'ADD_TO_CART',
   item,
+});
+
+export const removeFromCart = (id) => ({
+  type: 'REMOVE_FROM_CART',
+  id,
 });

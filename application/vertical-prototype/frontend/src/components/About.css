@@ -138,6 +138,12 @@
   font-size: 50px !important;
 }
 
+.links {
+  text-decoration: none;
+  z-index: 99;
+  color: white;
+}
+
 .filter__btn {
   z-index: 99;
   width: 30%;

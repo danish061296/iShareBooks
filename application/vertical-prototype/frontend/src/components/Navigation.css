@@ -35,6 +35,10 @@
   cursor: pointer;
 }
 
+.cart__link {
+  text-decoration: none;
+  color: black;
+}
 .nav__link:hover {
   color: white !important;
   border-bottom: 1px solid white;

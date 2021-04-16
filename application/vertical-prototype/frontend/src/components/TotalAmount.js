@@ -4,6 +4,7 @@ import axios from 'axios';
 import './TotalAmount.css';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
+import { getCartTotal } from '../redux/reducers/userReducer';
 
 const TotalAmount = () => {
   const arrayOfBooks = [
@@ -15,7 +16,7 @@ const TotalAmount = () => {
 
   const handleCheckout = async () => {
     console.log('clicked');
-    const res = await axios.post('http://localhost:3001/pay', arrayOfBooks);
+    const res = await axios.post('http://localhost:3001/pay', cart);
     window.open(res.data);
   };
 
@@ -29,7 +30,7 @@ const TotalAmount = () => {
         </div>
         <div className="subtotal__info">
           <p className="subtotal">SUBTOTAL</p>
-          <p className="subtotal__cost">$56.82</p>
+          <p className="subtotal__cost">{getCartTotal(cart)}</p>
           {/* <CurrencyFormat
             renderText={(value) => (
               <>
@@ -39,8 +40,8 @@ const TotalAmount = () => {
                 </p>
               </>
             )}
-            //   value={getCartTotal(cart)}
-            value={13.56}
+            value={getCartTotal(cart)}
+            // value={13.56}
             displayType={'text'}
             decimaleScale={2}
             thousandSeparator={true}
@@ -60,7 +61,7 @@ const TotalAmount = () => {
         </div>
         <div className="total__info">
           <p className="total">TOTAL:</p>
-          <p className="total__cost">$56.82</p>
+          <p className="total__cost">{getCartTotal(cart)}</p>
         </div>
         {/* <Link
           style={{

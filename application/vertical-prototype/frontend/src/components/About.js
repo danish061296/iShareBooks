@@ -151,9 +151,15 @@ const About = () => {
         />
       </div>
       <div className="about__services">
-        <p className="services__link">Buy</p>
-        <p className="services__link">Trade</p>
-        <p className="services__link">Free</p>
+        <Link className="links" to="/buybooks">
+          <p className="services__link">Buy</p>
+        </Link>
+        <Link className="links" to="/tradebooks">
+          <p className="services__link">Trade</p>
+        </Link>
+        <Link className="links" to="/freebooks">
+          <p className="services__link">Free</p>
+        </Link>
       </div>
       <div className="search__content">
         <input
