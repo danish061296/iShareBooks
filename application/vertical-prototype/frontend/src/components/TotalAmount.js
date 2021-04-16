@@ -3,22 +3,23 @@ import CurrencyFormat from 'react-currency-format';
 import axios from 'axios';
 import './TotalAmount.css';
 import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+const TotalAmount = () => {
+  const arrayOfBooks = [
+    { name: 'c++', price: 110, id: 43434341 },
+    { name: 'js', price: 300, id: 9943 },
+  ];
 
-const TotalAmount = ({ cart }) => {
+  const cart = useSelector((state) => state.userReducer.cart);
+
   const handleCheckout = async () => {
-    let checkoutArray = [];
-    const checkObject = {
-      cost: 100,
-      name: 'Englishrs',
-      id: '2',
-    };
-
-    const res = await axios.post('http://localhost:3001/pay', checkObject);
-
+    console.log('clicked');
+    const res = await axios.post('http://localhost:3001/pay', arrayOfBooks);
     window.open(res.data);
   };
+
+  // arrayOfBooks.push();
 
   return (
     <div className="total__amount">
@@ -61,19 +62,23 @@ const TotalAmount = ({ cart }) => {
           <p className="total">TOTAL:</p>
           <p className="total__cost">$56.82</p>
         </div>
-        <Link
+        {/* <Link
           style={{
             color: 'white',
             textDecoration: 'none',
 
             cursor: 'pointer',
           }}
-          className="checkout__link"
-        >
-          <Button onClick={handleCheckout} className="checkout__button">
-            CHECKOUT
-          </Button>
-        </Link>
+          className='checkout__link'
+         
+        > */}
+
+        <button className="checkout__button" onClick={handleCheckout}>
+          {' '}
+          CHECKOUT
+        </button>
+
+        {/* </Link> */}
       </div>
     </div>
   );

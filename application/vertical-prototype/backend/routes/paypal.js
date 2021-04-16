@@ -4,6 +4,8 @@ const cors = require('cors');
 const paypal = require('paypal-rest-sdk');
 const router = express.Router();
 router.use(cors());
+
+//configure paypal
 paypal.configure({
   mode: 'sandbox', //sandbox or live
   client_id:
@@ -11,11 +13,29 @@ paypal.configure({
   client_secret:
     'EAPpS2WLG-Cke7m9k8QeSnaanF5zUUYsCvDEMlxt6JW2KOf_1pIrPxOI5YC7VYqOo5CJMuvyzLDPbDM9',
 });
-router.post('/pay', (req, res) => {
-  const bookName = req.body.name;
-  const bookCost = req.body.cost;
-  const bookId = req.body.id;
 
+/* reciving a post request from the frontebd */
+router.post('/pay', (req, res) => {
+  //getting the array of data from the frontend
+  let arrayOfBooks = req.body;
+
+  //get the total total price of the books
+  let booksPrice = 0;
+  // adding the total price into the books
+
+  for (let i = 0; i < arrayOfBooks.length; i++) {
+    console.log(arrayOfBooks[i].name);
+    booksPrice += arrayOfBooks[i].price;
+    arrayOfBooks[i].quantity = 1;
+    arrayOfBooks[i].sku = 'item';
+    arrayOfBooks[i].currency = 'USD';
+  }
+  let paymentData = JSON.parse(JSON.stringify(arrayOfBooks));
+  paymentData.forEach((d) => {
+    delete d.id;
+  });
+
+  //payment info
   const create_payment_json = {
     intent: 'sale',
     payer: {
@@ -28,19 +48,11 @@ router.post('/pay', (req, res) => {
     transactions: [
       {
         item_list: {
-          items: [
-            {
-              name: bookName,
-              sku: 'item',
-              price: bookCost,
-              currency: 'USD',
-              quantity: 1,
-            },
-          ],
+          items: paymentData,
         },
         amount: {
           currency: 'USD',
-          total: bookCost,
+          total: booksPrice,
         },
         description: 'book sale transaction',
       },
@@ -48,22 +60,30 @@ router.post('/pay', (req, res) => {
   };
 
   paypal.payment.create(create_payment_json, function (error, payment) {
+    console.log('payment', payment);
     if (error) {
-      return res.send(error);
+      console.log(error);
+      // return res.send(error);
       // throw error;
     } else {
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
-          // INSERT INTO soldBooks
-          // (name, cost, id) VALUES
-          const data = [bookName, bookCost, bookId];
-          console.log(data);
-          let sqlQuery = ` INSERT INTO soldBooks (name, cost, id) VALUES (?);DELETE FROM posts WHERE description  = ?; `;
-          db.query(sqlQuery, [data, bookName], (err, results) => {
-            if (err) {
-              console.log(err);
-            }
-          });
+          for (let i = 0; i < arrayOfBooks.length; i++) {
+            const bookName = arrayOfBooks[i].name;
+            const bookCost = arrayOfBooks[i].price;
+            const bookId = arrayOfBooks[i].id;
+            const data = [bookName, bookCost, bookId];
+            console.log(data);
+            let sqlQuery = ` INSERT INTO soldBooks (name, cost, id) VALUES (?);DELETE FROM posts WHERE id  = ?; `;
+            db.query(sqlQuery, [data, bookId], (err, results) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(results);
+              }
+            });
+          }
+
           res.send(link.href);
         }
       });
@@ -82,7 +102,7 @@ router.get('/success', (req, res) => {
       {
         amount: {
           currency: 'USD',
-          total: bookCost,
+          total: 2,
         },
       },
     ],
@@ -96,8 +116,6 @@ router.get('/success', (req, res) => {
         console.log(error.response);
         throw error;
       } else {
-        console.log('Get Payment Response');
-        console.log(JSON.stringify(payment));
         res.send(JSON.stringify(payment));
       }
     }
