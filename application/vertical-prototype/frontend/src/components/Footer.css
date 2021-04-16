@@ -40,6 +40,15 @@
   width: 25%;
 }
 
+.privacy__link {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.privacy__link:hover {
+  color: rgb(212, 209, 209) !important;
+}
+
 @media screen and (max-width: 768px) {
   .copyright {
     font-size: 8px;

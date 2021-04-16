@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import {
@@ -25,7 +26,11 @@ const Footer = () => {
           <div className="fcontent">
             <section className="left">
               About
-              <section>Privacy</section>
+              <section>
+                <Link className="privacy__link" to="/privacy">
+                  Privacy
+                </Link>
+              </section>
               <section>FAQ</section>
               <section>Contact:</section>
             </section>

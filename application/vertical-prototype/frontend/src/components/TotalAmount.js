@@ -1,11 +1,25 @@
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
+import axios from 'axios';
 import './TotalAmount.css';
 import Button from '@material-ui/core/Button';
 
 import { Link } from 'react-router-dom';
 
 const TotalAmount = ({ cart }) => {
+  const handleCheckout = async () => {
+    let checkoutArray = [];
+    const checkObject = {
+      cost: 100,
+      name: 'Englishrs',
+      id: '2',
+    };
+
+    const res = await axios.post('http://localhost:3001/pay', checkObject);
+
+    window.open(res.data);
+  };
+
   return (
     <div className="total__amount">
       <div className="total__amount__top">
@@ -55,9 +69,10 @@ const TotalAmount = ({ cart }) => {
             cursor: 'pointer',
           }}
           className="checkout__link"
-          to="/checkout"
         >
-          <Button className="checkout__button">CHECKOUT</Button>
+          <Button onClick={handleCheckout} className="checkout__button">
+            CHECKOUT
+          </Button>
         </Link>
       </div>
     </div>

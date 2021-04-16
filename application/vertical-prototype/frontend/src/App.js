@@ -12,7 +12,7 @@ import ViewListings from './pages/ViewListings';
 import BuyBooks from './pages/BuyBooks';
 import TradeBooks from './pages/TradeBooks';
 import FreeBooks from './pages/FreeBooks';
-import TradeBookModal from './pages/TradeBookModal';
+import Privacy from './pages/Privacy';
 
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -34,6 +34,7 @@ const App = () => {
           <Route path="/buybooks" component={BuyBooks} />
           <Route path="/tradebooks" component={TradeBooks} />
           <Route path="/freebooks" component={FreeBooks} />
+          <Route path="/privacy" component={Privacy} />
 
           <ProtectedRoute
             path="/buyService"
