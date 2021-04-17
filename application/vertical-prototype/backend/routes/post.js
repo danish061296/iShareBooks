@@ -3,27 +3,66 @@ const db = require("../dataBase.js");
 const router = express.Router();
 // const auth = require("../middleware/auth");
 
-router.post("/post", (req, res) => {
-  const {bookType, bookTitle, bookAuthor, bookCondition, bookImage} = req.body;
-  var query;
-
-  if (bookType == "free" || bookType == "trade")
-    query = "INSERT INTO freebooks (title, author, condition, image) VALUES \
-    ("+db.escape(bookTitle)+", "+db.escape(bookAuthor)+", "+db.escape(bookCondition)+", "+db.escape(bookImage)+")";
-
-  else {
-    const cost = req.body;
-    query = "INSERT INTO freebooks (title, author, condition, image, cost) VALUES \
-    ("+db.escape(bookTitle)+", "+db.escape(bookAuthor)+", "+db.escape(bookCondition)+", "+db.escape(bookImage)+", "+db.escape(cost)+")";
+router.post("/posts", (req, res) => {
+  //get data from the frontend
+  try {
+    const {title, author, cost, department, isbn, type, image} = req.body;
+    console.log(req.body);
+    if (type === "free") {
+      const data = [title, author, department, isbn, image];
+      console.log("free");
+      let query =
+        "INSERT INTO freebooks (title, author, image, department, isbn) VALUES (?)";
+      db.query(query, [data], (err, result) => {
+        if (err) console.log(err);
+        else {
+          res.send({msg: "Successfully added to free books"});
+        }
+      });
+    } else if (type === "trade") {
+      console.log("treade");
+      const data = [title, author, department, isbn, image];
+      let inserSql = `INSERT INTO tradebooks (title, author, department, image, isbn) VALUES (?)`;
+      db.query(inserSql, [data], (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        } else {
+          res.status(00).send({msg: "Successfully added to traded books."});
+        }
+      });
+    } else {
+      console.log("new");
+      const data = [title, author, cost, department, isbn, image];
+      let inserSql = `INSERT INTO paidbooks (title, author, cost, image,department,isbn) VALUES (?)`;
+      db.query(inserSql, [data], (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        } else {
+          res.status(200).send({msg: "Successfully added to paid books"});
+          console.log(results);
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).send(err);
   }
+});
 
-  db.query(query, (err, result) => {
-    if (err)
-      throw err;
-    else
-      console.log("Successfully added a book into database.");
+//NEED FIEXES
+router.get("/post/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(req.params);
+  let inserSql = `SELECT * FROM posts where id=${id}`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("error getting the data");
+    } else {
+      res.send(results);
+    }
   });
-
 });
 
 module.exports = router;
