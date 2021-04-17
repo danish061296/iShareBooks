@@ -2,7 +2,6 @@ const express = require('express');
 const db = require('../dataBase.js');
 const fs = require('fs');
 const { query } = require('../dataBase.js');
-//var FileReader = require('filereader');
 const router = express.Router();
 
 router.post('/search', (req, res) => {

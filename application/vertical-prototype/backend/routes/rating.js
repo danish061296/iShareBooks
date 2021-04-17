@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/update_rating/:id', (req, res) => {
 
 	const id = req.params.id;
-	const newRating = req.body.newRating;
+	const newRating = req.body;
 	
 	let query = "UPDATE Ratings SET accumulated_stars=accumulated_stars+" + newRating + ", total_ratings=total_ratings+1 WHERE user_id=" + id;
 	

@@ -21,7 +21,7 @@ app.use('/', require('./routes/trending_books'));
 app.use('/', require('./routes/auth'));
 app.use('/', require('./routes/post'));
 app.use('/', require('./routes/comments'));
-app.use('/', require('./routes/paypal'));
+//app.use('/', require('./routes/paypal'));
 app.use('/', require('./routes/trending_books'));
 app.use('/', require('./routes/rating'));
 app.use(cookieParser());
