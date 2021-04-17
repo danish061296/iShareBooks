@@ -30,12 +30,23 @@ router.post('/pay', (req, res) => {
     arrayOfBooks[i].sku = 'item';
     arrayOfBooks[i].currency = 'USD';
   }
+  console.log(arrayOfBooks);
+  //copying arrayOfBooks to a new array
   let paymentData = JSON.parse(JSON.stringify(arrayOfBooks));
-  paymentData.forEach((d) => {
-    delete d.id;
-  });
 
-  //payment info
+  //filtering data from the paymentData to make it work for paypal
+  paymentData.forEach((d) => {
+    d.name = d.title;
+    delete d.id;
+    delete d.author;
+    delete d.isbn;
+    delete d.title;
+    delete d.department;
+    delete d.image;
+  });
+  console.log('new ', paymentData);
+
+  /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',
     payer: {
@@ -66,15 +77,32 @@ router.post('/pay', (req, res) => {
       // return res.send(error);
       // throw error;
     } else {
+      /*getting the link to direct to paypal after adding 
+      the data to the soldBooks and deleting from the posts */
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
           for (let i = 0; i < arrayOfBooks.length; i++) {
-            const bookName = arrayOfBooks[i].name;
+            const bookTitle = arrayOfBooks[i].title;
             const bookCost = arrayOfBooks[i].price;
             const bookId = arrayOfBooks[i].id;
-            const data = [bookName, bookCost, bookId];
+            const bookAuthor = arrayOfBooks[i].author;
+            const bookISBN = arrayOfBooks[i].isbn;
+            const bookImage = arrayOfBooks[i].image;
+            const bookDepartment = arrayOfBooks[i].department;
+
+            const data = [
+              bookTitle,
+              bookCost,
+              bookDepartment,
+              bookAuthor,
+              bookISBN,
+              bookImage,
+              bookId,
+            ];
             console.log(data);
-            let sqlQuery = ` INSERT INTO soldBooks (name, cost, id) VALUES (?);DELETE FROM posts WHERE id  = ?; `;
+            let sqlQuery = ` INSERT INTO soldBooks 
+            (title, price, department,author,isbn,image,id)
+             VALUES (?);DELETE FROM posts WHERE id  = ?; `;
             db.query(sqlQuery, [data, bookId], (err, results) => {
               if (err) {
                 console.log(err);
@@ -92,7 +120,7 @@ router.post('/pay', (req, res) => {
     }
   });
 });
-
+//success status
 router.get('/success', (req, res) => {
   const payerId = req.query.PayerID;
   const paymentId = req.query.paymentId;
@@ -102,7 +130,7 @@ router.get('/success', (req, res) => {
       {
         amount: {
           currency: 'USD',
-          total: 2,
+          total: booksPrice,
         },
       },
     ],

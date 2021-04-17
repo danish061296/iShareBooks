@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/posts', (req, res) => {
   //get data from the frontend
   try {
-    const { title, author, cost, department, isbn, type, image } = req.body;
+    const {title, author, cost, department, isbn, type, image} = req.body;
 
     console.log(req.body);
     if (type === 'free') {
@@ -17,7 +17,7 @@ router.post('/posts', (req, res) => {
       db.query(query, [data], (err, result) => {
         if (err) console.log(err);
         else {
-          res.send({ msg: 'Successfully added to free books' });
+          res.send({msg: 'Successfully added to free books'});
         }
       });
     } else if (type === 'trade') {
@@ -29,7 +29,7 @@ router.post('/posts', (req, res) => {
           console.log(err);
           return res.status(500).send(err);
         } else {
-          res.status(00).send({ msg: 'Successfully added to traded books.' });
+          res.status(00).send({msg: 'Successfully added to traded books.'});
         }
       });
     } else if (type === 'paid') {
@@ -41,7 +41,7 @@ router.post('/posts', (req, res) => {
           console.log(err);
           return res.status(500).send(err);
         } else {
-          res.status(200).send({ msg: 'Successfully added to paid books' });
+          res.status(200).send({msg: 'Successfully added to paid books'});
           console.log(results);
         }
       });
@@ -51,7 +51,6 @@ router.post('/posts', (req, res) => {
   }
 });
 
-//NEED FIEXES
 router.get('/post/:id', (req, res) => {
   const id = req.params.id;
   console.log(req.params);
