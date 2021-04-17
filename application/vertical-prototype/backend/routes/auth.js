@@ -5,15 +5,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM users', (err, rows, fields) => {
-    if (!err) {
-      console.log(rows);
-      res.send(rows);
-    } else {
-      console.log(err);
-    }
-  });
+
 });
+
 router.post('/register', (req, res) => {
   console.log('dsads');
   const { username, email, password } = req.body;

@@ -5,7 +5,7 @@ const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.post('/trending_books', (req, res) => {
+router.get('/trending_books', (req, res) => {
 
   let query;
 	let trending_limit_entries = 100;	
@@ -60,7 +60,7 @@ router.post('/trending_books', (req, res) => {
 	
 	
 	/*PASS TRENDING BOOKS TO FRONTEND*/
-	query = "SELECT DISTINCT * FROM paidbooks WHERE EXISTS (SELECT book_id FROM trending WHERE trending.book_id=paidbooks.book_id)";
+	query = "SELECT DISTINCT * FROM paidbooks WHERE EXISTS (SELECT book_id FROM trending WHERE trending.book_id=paidbooks.title)";
 	db.query(query, (err, result) => {
 		if (err)
 			res.status(500).send('error inserting the data into trending', err);
