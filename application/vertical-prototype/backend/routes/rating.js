@@ -5,16 +5,17 @@ const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.get('/update_rating::id', (req, res) => {
+router.get('/update_rating/:id', (req, res) => {
 
 	const id = req.params.id;
-	const newRating = req.body;
+	const newRating = req.body.newRating;
 	
 	let query = "UPDATE Ratings SET accumulated_stars=accumulated_stars+" + newRating + ", total_ratings=total_ratings+1 WHERE user_id=" + id;
 	
 	db.query(query, (err, result) => {
 		if (err)
 			throw err;
+		
 		if (result.affectedRows > 0)
 			return res.send({
         		succeed: true,
@@ -30,7 +31,7 @@ router.get('/update_rating::id', (req, res) => {
 	
 });
 
-router.get('/get_rating::id', (req, res) => {
+router.get('/get_rating/:id', (req, res) => {
 	
 	const id = req.params.id;
 	
@@ -39,6 +40,13 @@ router.get('/get_rating::id', (req, res) => {
 	db.query(query, (err, result) => {
 		if (err)
 			throw err;
+			
+		console.log(result);
+			
+		if (result.length == 0)
+			return res.send({
+        		succeed: false,
+      		});
 			
 		var accum_ratings = result[0].accumulated_stars;
 		var total_ratings = result[0].total_ratings;
