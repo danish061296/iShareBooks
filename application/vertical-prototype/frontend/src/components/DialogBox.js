@@ -55,20 +55,12 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function DialogBox({ children, open, setOpen, title, button }) {
-  //   const [open, setOpen] = React.useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open dialog
-      </Button> */}
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -82,7 +74,7 @@ export default function DialogBox({ children, open, setOpen, title, button }) {
           <Button
             autoFocus
             onClick={handleClose}
-            className="post__book__button"
+            // className="post__book__button"
             color="primary"
           >
             {button}

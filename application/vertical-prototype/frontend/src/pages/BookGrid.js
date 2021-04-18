@@ -25,21 +25,36 @@ const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
 
   return (
     <div>
-      {/* <div className="post__book__grid"> */}
-      <div className="post__book__details">
-        <img
-          style={{ height: 200, width: 200 }}
-          src={image}
-          alt="book_image"
-          className="post__book__image"
-        />
-        <Button className="buy__book__button" onClick={handleAddCart}>
-          Add to cart
-        </Button>
+      {price && (
+        <div className="post__book__details">
+          <img
+            style={{ height: 200, width: 200 }}
+            src={image}
+            alt="book_image"
+            className="post__book__image"
+          />
+          <Button className="buy__book__button" onClick={handleAddCart}>
+            Add to cart
+          </Button>
 
-        <p className="post__book__price">{price}</p>
-      </div>
-      {/* </div> */}
+          <p className="post__book__price">{price}</p>
+        </div>
+      )}
+      {!price && (
+        <div className="post__book__details">
+          <img
+            style={{ height: 200, width: 200 }}
+            src={image}
+            alt="book_image"
+            className="post__book__image"
+          />
+          <Button className="buy__book__button" onClick={handleAddCart}>
+            Add to cart
+          </Button>
+
+          {/* <p className="post__book__price">{price}</p> */}
+        </div>
+      )}
     </div>
   );
 };

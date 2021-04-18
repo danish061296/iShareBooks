@@ -13,6 +13,7 @@ import BuyBooks from './pages/BuyBooks';
 import TradeBooks from './pages/TradeBooks';
 import FreeBooks from './pages/FreeBooks';
 import Privacy from './pages/Privacy';
+import ViewBook from './pages/ViewBook';
 
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -35,7 +36,7 @@ const App = () => {
           <Route path="/tradebooks" component={TradeBooks} />
           <Route path="/freebooks" component={FreeBooks} />
           <Route path="/privacy" component={Privacy} />
-
+          <Route path="/viewbook" component={ViewBook} />
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}

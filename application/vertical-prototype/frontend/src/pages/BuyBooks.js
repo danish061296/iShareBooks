@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import BuyBookModal from './BuyBookModal';
 import BookGrid from './BookGrid';
 
-import { setSearchField, setCartItem } from '../redux/actions/userActions';
+import { setSearchField } from '../redux/actions/userActions';
 
 const BuyBooks = () => {
   const [open, setOpen] = React.useState(false);
@@ -68,31 +68,6 @@ const BuyBooks = () => {
     },
   ];
 
-  // const handleAddCart = (id, title, author, department, isbn, price, image) => {
-  //   const item = {
-  //     id: id,
-  //     title: title,
-  //     author: author,
-  //     department: department,
-  //     isbn: isbn,
-  //     price: price,
-  //     image: image,
-  //   };
-
-  //   console.log(itemsArray.title);
-  //   dispatch(
-  //     setCartItem({
-  //       id: id,
-  //       title: title,
-  //       author: author,
-  //       department: department,
-  //       isbn: isbn,
-  //       price: price,
-  //       image: image,
-  //     })
-  //   );
-  // };
-
   return (
     <div className="buybooks">
       <Navigation />
@@ -121,7 +96,7 @@ const BuyBooks = () => {
                 open={open}
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
-                button="SELL"
+                button="DONE"
               >
                 <BuyBookModal />
               </DialogBox>
