@@ -23,16 +23,17 @@ const ViewBook = ({
         <div className ="viewbook_container">
             <Navigation />
             <div className="viewbook">
-            <div className="viewbook__left">
+            <div className="viewbook_left">
                 <img src={image} alt="book"/>
+                <p className="viewbook_description">Summary/Description of Book</p>
             </div>
-            <div className = "viewbook__information" id="info">
-                <h1 className="viewbook_title">{title}</h1>
-                <p className="viewbook__author">by {author}</p>
-                <p className="viewbook__department">{department}</p>
-                <p className="viewbook__condition">{condition}</p>
-                <p className="viewbook__isbn">ISBN:{isbn}</p>
-                <p className="viewbook__price">${price}</p>
+            <div className = "viewbook_information" id="info">
+                <h1 className="viewbook_title">TITLE{title}</h1>
+                <p className="viewbook_author">by {author}</p>
+                <p className="viewbook_department">Department: {department}</p>
+                <p className="viewbook_condition">Condition: {condition}</p>
+                <p className="viewbook_isbn">ISBN:{isbn}</p>
+                <p className="viewbook_price">${price}</p>
                 <Button onClick={addToCart} className="viewbook__button">Add to cart</Button>
             </div>
             </div>
