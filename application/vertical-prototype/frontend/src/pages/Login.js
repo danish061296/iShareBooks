@@ -2,8 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -29,7 +27,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="/login">
         iShareBooks
       </Link>
       {new Date().getFullYear()}
@@ -65,7 +63,6 @@ export default function SignIn() {
   const initialValues = {
     email: '',
     password: '',
-    remember: false,
   };
 
   const validationSchema = Yup.object().shape({
@@ -75,7 +72,6 @@ export default function SignIn() {
     password: Yup.string()
       .min(8, 'Password must contain at least 8 characters!')
       .required('Password is required!'),
-    remember: Yup.boolean().oneOf([true], 'You must select the checkbox'),
   });
 
   const onSubmit = (values, props) => {
@@ -99,7 +95,7 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
+    Axios.post('http://'+window.location.hostname+':3001/login', loginUser).then((response) => {
       console.log(response.data);
       if (response.data.auth) {
         store.addNotification({
@@ -132,9 +128,6 @@ export default function SignIn() {
         dispatch(setEmail(''));
       }
     });
-
-    // dispatch(setEmail(payload.email));
-    // dispatch(setEmail(payload.password));
   };
 
   return (
@@ -148,7 +141,6 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
               Login
             </Typography>
-            {/* <form className={classes.form} noValidate> */}
             <Formik
               initialValues={initialValues}
               onSubmit={onSubmit}
@@ -158,6 +150,7 @@ export default function SignIn() {
                 <Form>
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -167,13 +160,12 @@ export default function SignIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    // value={email}
                     autoFocus
                     helperText={<ErrorMessage name="email" />}
-                    // onChange={(e) => dispatch(setEmail(e.target.value))}
                   />
                   <Field
                     as={TextField}
+                    className="input__field"
                     variant="outlined"
                     margin="normal"
                     required
@@ -182,31 +174,23 @@ export default function SignIn() {
                     label="Password"
                     type="password"
                     id="password"
-                    // value={password}
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
-                    // onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
-                  <Field
-                    as={FormControlLabel}
-                    name="remember"
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  />
+
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className="signinButton"
-                    // onClick={handleSubmit}
                   >
                     Sign In
                   </Button>
                 </Form>
               )}
             </Formik>
-            <Grid container>
+            <Grid container className="signin__link">
               <Grid item>
                 <Link href="/registration" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -214,7 +198,7 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </div>
-          <Box mt={8}>
+          <Box mt={38}>
             <Copyright />
           </Box>
         </Container>

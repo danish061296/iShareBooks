@@ -8,11 +8,13 @@ import {
   TiSocialLinkedin,
   TiSocialFacebook,
 } from 'react-icons/ti';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import './Footer.css';
 
 const Footer = () => {
   return (
-    <div>
+    <div className="footer__container">
       <Navbar
         className="footer"
         color=""
@@ -50,7 +52,9 @@ const Footer = () => {
           variant="success upward__btn"
           onClick={() => scroll.scrollToTop()}
         >
-          <ArrowUpwardIcon />
+          <Tippy content="Go to top" placement="bottom">
+            <ArrowUpwardIcon />
+          </Tippy>
         </Button>
       </Navbar>
     </div>

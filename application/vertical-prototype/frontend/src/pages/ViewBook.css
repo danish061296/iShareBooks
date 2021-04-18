@@ -1,0 +1,19 @@
+.viewbook {
+    padding: 20px;
+    display: flex;
+    min-height: 100vh;
+}
+  
+.viewbook__left {
+    width: 75%;
+}
+
+img{
+    border: 3px #1e504c;
+}
+
+.viewbook_information{
+    position:relative;
+    left:50px;
+    font-size: 16px;
+}

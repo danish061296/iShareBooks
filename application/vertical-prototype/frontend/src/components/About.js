@@ -2,11 +2,20 @@ import React, { useEffect } from 'react';
 import './About.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchField, setPosts } from '../redux/actions/userActions';
+import Tippy, { tippy } from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import {
+  setSearchField,
+  setPosts,
+  setrandomMsg,
+  setSearchType,
+} from '../redux/actions/userActions';
+import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -14,26 +23,68 @@ const About = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
+
+  //sending data to redux
   const dispatch = useDispatch();
 
   const searchField = useSelector((state) => state.userReducer.searchField);
+  const posts = useSelector((state) => state.userReducer.posts);
+  const searchType = useSelector((state) => state.userReducer.searchType);
+
+  // useEffect(() => {
+  //   const search = {
+  //     searchField: searchField,
+  //   };
+  //   Axios.post('http://localhost:3001/search', search)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         console.log(response.data);
+  //         if (posts.length === 0) {
+  //           //sending data to redux
+  //           // dispatch(setrandomMsg(response.data));
+  //           dispatch(setPosts(response.data));
+  //         } else {
+  //           console.log('Data coming from search click');
+  //           dispatch(setPosts(response.data));
+  //           dispatch((setrandomMsg = ''));
+  //         }
+  //       } else {
+  //         dispatch(setPosts([]));
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const handleKeyDown = (e) => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
     if (e.key === 'Enter') {
-      Axios.post('http://localhost:3001/search', search)
+      Axios.post('http://'+window.location.hostname+':3001/search', search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
-            console.log('Data coming from search');
-            dispatch(setPosts(response.data));
-            window.scrollBy({
-              top: 500,
-              behavior: 'smooth',
-            });
+            if (response.data.msg) {
+              //sending data to redux
+              dispatch(setrandomMsg(response.data.msg));
+              dispatch(setPosts(response.data.results));
+              window.scrollBy({
+                top: 500,
+                behavior: 'smooth',
+              });
+            } else {
+              console.log('Data coming from search click');
+              dispatch(setPosts(response.data));
+              dispatch(setrandomMsg(''));
+              window.scrollBy({
+                top: 500,
+                behavior: 'smooth',
+              });
+            }
           } else {
             dispatch(setPosts([]));
           }
@@ -44,21 +95,38 @@ const About = () => {
     }
   };
 
+  const handleSelect = (e) => {
+    console.log(`The selected is ${e}`);
+    dispatch(setSearchType(e));
+  };
+
   const handleClick = () => {
     const search = {
       searchField: searchField,
+      searchType: searchType,
     };
 
-    Axios.post('http://localhost:3001/search', search)
+    Axios.post('http://'+window.location.hostname+':3001/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);
-          console.log('Data coming from search');
-          dispatch(setPosts(response.data));
-          window.scrollBy({
-            top: 500,
-            behavior: 'smooth',
-          });
+          if (response.data.msg) {
+            //sending data to redux
+            dispatch(setrandomMsg(response.data.msg));
+            dispatch(setPosts(response.data.results));
+            window.scrollBy({
+              top: 500,
+              behavior: 'smooth',
+            });
+          } else {
+            console.log('Data coming from search click');
+            dispatch(setPosts(response.data));
+            dispatch((setrandomMsg = ''));
+            window.scrollBy({
+              top: 500,
+              behavior: 'smooth',
+            });
+          }
         } else {
           dispatch(setPosts([]));
         }
@@ -100,6 +168,19 @@ const About = () => {
           <SearchIcon className="search__icon" />
         </button>
       </div>
+      <div className="filter__btn">
+        <DropdownButton
+          // className="dropdown__btn"
+          variant=" dropdown__btn"
+          alignRight
+          title="Filter By"
+          id="dropdown-menu-align-right"
+          onSelect={handleSelect}
+        >
+          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
+          <Dropdown.Item eventKey="department">Department</Dropdown.Item>
+        </DropdownButton>
+      </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">
           iShare Book, weShare Knowledge!
@@ -111,14 +192,18 @@ const About = () => {
           </p>
         </div>
       </div>
-      <Button variant="success explore__btn" data-aos="fade-up">
-        Explore Now!{' '}
-        <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
-      </Button>
+      <Tippy content="Will be implemented in the future" placement="bottom">
+        <Button variant="success explore__btn" data-aos="fade-up">
+          Explore Now!{' '}
+          <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
+        </Button>
+      </Tippy>
+
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
+
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >

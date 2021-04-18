@@ -1,0 +1,57 @@
+.login__Container {
+  height: 70vh;
+}
+
+.signinButton {
+  background-color: #18504c !important;
+}
+
+.signinButton:hover {
+  background-color: #28918a !important;
+  color: white !important;
+  border: 1px solid #18504c !important;
+}
+
+.MuiFormHelperText-root {
+  color: red !important;
+}
+
+.input__field {
+  margin-bottom: 20px !important;
+}
+
+.signin__link {
+  margin-top: 15px;
+}
+
+.main__container {
+  background-color: white !important;
+  width: 100%;
+  height: 1100px;
+}
+
+.main__container h1 {
+  text-align: center;
+  font-size: 50px;
+  padding-top: 65px;
+}
+
+.main__container h2 {
+  text-align: center;
+  font-size: 35px;
+}
+
+.rating_container {
+  position: relative;
+  width: 100%;
+  display: block !important;
+}
+
+.stars_container {
+  margin: 0 auto !important;
+  display: table !important;
+  padding-left: 65px;
+  padding-right: 65px;
+  border: 1px solid black;
+  border-radius: 10px;
+}

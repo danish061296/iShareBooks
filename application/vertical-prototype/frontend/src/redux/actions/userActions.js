@@ -22,6 +22,10 @@ export const setSearchField = (searchField) => ({
   type: 'SET_SEARCH_FIELD',
   searchField,
 });
+export const setSearchType = (searchType) => ({
+  type: 'SET_SEARCH_TYPE',
+  searchType,
+});
 
 export const setImageBuffer = (imageBuffer) => ({
   type: 'SET_IMAGE_BUFFER',
@@ -31,4 +35,13 @@ export const setImageBuffer = (imageBuffer) => ({
 export const setPosts = (posts) => ({
   type: 'SET_POSTS',
   posts,
+});
+export const setrandomMsg = (randomMsg) => ({
+  type: 'SET_RANDOM_MSG',
+  randomMsg,
+});
+
+export const setCartItem = (item) => ({
+  type: 'SET_CART',
+  item,
 });

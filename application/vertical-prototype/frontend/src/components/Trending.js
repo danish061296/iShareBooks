@@ -2,9 +2,8 @@ import React from 'react';
 import './Trending.css';
 import Carousel from 'react-elastic-carousel';
 import Card from './Card';
-// import Image from './book1.jpg';
 import { useSelector } from 'react-redux';
-
+import defaultImage from './book1.jpg';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -14,13 +13,13 @@ const Trending = () => {
   }, []);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const imageBuffer = useSelector((state) => state.userReducer.imageBuffer);
   const posts = useSelector((state) => state.userReducer.posts);
+  const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
-  console.log(imageBuffer);
+  console.log(randomMsg);
 
   const breakPoints = [
-    { width: 500, itemsToShow: 1 },
+    { width: 500, itemsTo0how: 1 },
     { width: 768, itemsToShow: 2 },
     { width: 1200, itemsToShow: 2 },
     { width: 1500, itemsToShow: 2 },
@@ -28,21 +27,72 @@ const Trending = () => {
 
   return (
     <div className="trending__container" data-aos="fade-right" id="trending">
-      {posts.length > 0 && (
+      {randomMsg && posts.length > 0 && (
         <div className="trending__container">
           <div className="trending__title">
-            <h3 className="trending">Showing results for {searchField}...</h3>
+            <h3 className="trending"> {randomMsg}</h3>
           </div>
+
           <Carousel breakPoints={breakPoints}>
             {posts.map((post, index) => {
-              return <Card key={index} number={index} image={post.image} />;
+              return (
+                <Card
+                  key={index}
+                  number={index}
+                  image={post.image}
+                  defaultImage={defaultImage}
+                />
+              );
             })}
           </Carousel>
         </div>
       )}
+      {!randomMsg && posts.length > 0 && (
+        <div className="trending__container">
+          <div className="trending__title">
+            <h3 className="trending"> Showing Results for {searchField}</h3>
+          </div>
+
+          <Carousel breakPoints={breakPoints}>
+            {posts.map((post, index) => {
+              return (
+                <Card
+                  key={index}
+                  number={index}
+                  image={post.image}
+                  defaultImage={defaultImage}
+                />
+              );
+            })}
+          </Carousel>
+        </div>
+      )}
+
       {posts.length === 0 && (
-        <div className="no__card">
-          <h3>Sorry we couldn't find any results....</h3>
+        <div className="trending__container">
+          <div className="trending__title">
+            <h3 className="trending">Trending Books will appear here!</h3>
+          </div>
+          <div className="default__image">
+            <img
+              style={{ width: 300, height: 350 }}
+              className="default__img"
+              src={defaultImage}
+              alt="default_image"
+            />
+            <img
+              style={{ width: 300, height: 350 }}
+              src={defaultImage}
+              className="default__img"
+              alt="default image"
+            />
+            <img
+              style={{ width: 300, height: 350 }}
+              src={defaultImage}
+              className="default__img"
+              alt="default image"
+            />
+          </div>
         </div>
       )}
     </div>

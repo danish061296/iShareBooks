@@ -27,6 +27,18 @@ import {
 import Axios from 'axios';
 import './Registration.css';
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/registration">
+        iShareBooks
+      </Link>
+      {new Date().getFullYear()}
+    </Typography>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -75,44 +87,6 @@ const Registration = () => {
     ),
   });
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const registerUser = {
-  //     username: username,
-  //     email: email,
-  //     password: password,
-  //   };
-
-  //   console.log(username);
-
-  //   console.log(username);
-  //   console.log(email);
-  //   console.log(password);
-
-  // try {
-  //   const response = await Axios.post('http://localhost:3001/register', {
-  //     registerUser,
-  //   });
-  //   console.log(response);
-  //   history.push('/login');
-  // } catch (error) {
-  //   console.error(error);
-  // }
-
-  // Axios.post('http://localhost:3001/register', registerUser).then(
-  //   (response) => {
-  //     console.log(response);
-  //   }
-  // );
-
-  // dispatch(setUsername(''));
-  // dispatch(setEmail(''));
-  // dispatch(setPassword(''));
-
-  //   console.log('Sign up Submitted');
-  // };
-
   const onSubmit = (values, props) => {
     const payload = {
       ...values,
@@ -133,7 +107,7 @@ const Registration = () => {
     };
 
     console.log(registerUser.username);
-    Axios.post('http://localhost:3001/register', registerUser).then(
+    Axios.post('http://'+window.location.hostname+':3001/register', registerUser).then(
       (response) => {
         console.log(response.data);
         if (!response.data.registered) {
@@ -192,6 +166,7 @@ const Registration = () => {
                   <Grid item xs={12}>
                     <Field
                       as={TextField}
+                      className="input__field"
                       autoComplete="uname"
                       name="username"
                       variant="outlined"
@@ -200,14 +175,13 @@ const Registration = () => {
                       id="username"
                       label="Username"
                       autoFocus
-                      // value={values.username}
                       helperText={<ErrorMessage name="username" />}
-                      // onChange={(e) => dispatch(setUsername(e.target.value))}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Field
                       as={TextField}
+                      className="input__field"
                       variant="outlined"
                       required
                       fullWidth
@@ -215,9 +189,7 @@ const Registration = () => {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
-                      // value={email}
                       helperText={<ErrorMessage name="email" />}
-                      // onChange={(e) => dispatch(setEmail(e.target.value))}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -231,9 +203,7 @@ const Registration = () => {
                       type="password"
                       id="password"
                       autoComplete="current-password"
-                      // value={password}
                       helperText={<ErrorMessage name="password" />}
-                      // onChange={(e) => dispatch(setPassword(e.target.value))}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -267,7 +237,7 @@ const Registration = () => {
                   Sign Up
                 </Button>
 
-                <Grid container justify="flex-end">
+                <Grid container justify="flex-end" className="signup__link">
                   <Grid item>
                     <Link href="/login" variant="body2">
                       Already have an account? Log in
@@ -278,7 +248,9 @@ const Registration = () => {
               </Form>
             </Formik>
           </div>
-          <Box mt={5}></Box>
+          <Box mt={28}>
+            <Copyright />
+          </Box>
         </Container>
       </div>
     </div>

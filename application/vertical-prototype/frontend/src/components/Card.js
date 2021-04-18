@@ -1,7 +1,7 @@
 import React from 'react';
 import './Trending.css';
 
-const Card = ({ key, number, image }) => {
+const Card = ({ key, number, image, defaultImage }) => {
   return (
     <div>
       {image && (
@@ -14,16 +14,6 @@ const Card = ({ key, number, image }) => {
           />
         </div>
       )}
-      {/* {!image && (
-        <div className="card">
-          <img
-            src={`data:image/jpeg;base64,${image}`}
-            alt="card_image"
-            className="card__image"
-            style={{ height: '300px', width: '100%' }}
-          />
-        </div>
-      )} */}
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import './index.css';
 
 const Aryanna = () => {
   //return <div>Aryanna</div>;

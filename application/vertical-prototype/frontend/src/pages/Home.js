@@ -13,7 +13,6 @@ const Home = () => {
       <About />
       <Trending />
       <Services />
-      {/* <Faq /> */}
       <AppFaq />
       <Footer />
     </div>

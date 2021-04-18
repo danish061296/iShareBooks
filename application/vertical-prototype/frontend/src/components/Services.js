@@ -1,105 +1,84 @@
 import React from 'react';
-//import styled from 'styled-components';
-import { Row, Container, Col, Card, Button } from 'react-bootstrap';
-import bookImage from './book1.jpg';
 import './Services.css';
-// import 'tachyons';
-// import ServicesSell from './ServiceSell';
-// import ServiceTrade from './ServiceTrade';
-// import ServiceBuy from './ServiceBuy';
-// import ServiceFree from './ServiceFree';
+import 'tachyons';
 
 const Services = () => {
   return (
-    <div className="services" id="services">
-      <Container fluid="l" className="services__container">
-        <Row style={{ width: '100%' }}>
-          <Col>
-            <Card
-              className="services__card"
-              style={{
-                width: '100%',
-                height: '80%',
-                borderRadius: '0px',
-              }}
-            >
-              <Card.Img
-                className="services__image"
-                variant="top"
-                src={bookImage}
-                style={{
-                  height: '90%',
-                  width: '100%',
-                }}
-              />
-              <p className="services__description">Buy Books From Us.</p>
-              <Card.Body>
-                <Button variant="primary services__btn">Buy Books</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card
-              className="services__card"
-              style={{
-                width: '100%',
-                height: '80%',
-                borderRadius: '0px',
-              }}
-            >
-              <Card.Img
-                className="services__image"
-                variant="top"
-                src={bookImage}
-                style={{ height: '90%', width: '100%' }}
-              />
-              <p className="services__description">Trade Books From Us.</p>
-              <Card.Body>
-                <Button variant="primary services__btn">Trade Books</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        {/* <Row style={{ width: '50%', marginTop: '0px' }}>
-          <Col>
-            <Card
-              style={{
-                width: '100%',
-                height: '80%',
-                borderRadius: '0px',
-                backgroundColor: '#2E3236',
-              }}
-            >
-              <Card.Img
-                variant="top"
-                src={bookImage}
-                style={{ height: '90%', width: '100%' }}
-              />
-              <Card.Body>
-                <Button variant="primary">Free Books</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row> */}
-      </Container>
+    <div id="services">
+      {/* // <div className="rowC"> */}
+      <div className="services__title">
+        <h1 className="service">Services</h1>
+      </div>
+
+      {/* <div className="f3 fw4 pa3 mv0 row"> */}
+      <div className="services__pages">
+        <div className="top__services">
+          <div>
+            <div className="bg-light-white dib br3 pa ma2 grow bw2 shadow-3 card__shrink">
+              <div>
+                <img
+                  alt="books"
+                  src="https://apprecs.org/ios/images/app-icons/256/e3/1147112163.jpg"
+                ></img>
+                <h1 className="service__heading">Buy Books! </h1>
+                <p> -buy anybooks you like </p>
+                <button className="buy" type="button">
+                  Buy Here{' '}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-light-white dib br3 pa ma2 grow bw2 shadow-3 card__shrink">
+              <div>
+                <img
+                  alt="books"
+                  src="https://i.pinimg.com/originals/2b/f9/81/2bf981a86dbb839548305457d5cbf9df.png"
+                ></img>
+                <h1 className="service__heading">Sell Your Books! </h1>
+                <p>-Sell anybooks you like</p>
+                <button className="sell" type="button">
+                  {' '}
+                  Sell Here{' '}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bottom__services">
+          <div>
+            <div className="bg-light-white dib br3 pa ma2 grow bw2 shadow-3 card__shrink">
+              <div>
+                <img
+                  alt="books"
+                  src="https://cdn.iconscout.com/icon/premium/png-256-thumb/trade-1689731-1435793.png"
+                ></img>
+                <h1 className="service__heading">Trade Books! </h1>
+                <p> -Trade anybooks you like </p>
+                <button className="trade" type="button">
+                  Trade Here{' '}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-light-white dib br3 pa ma2 grow bw2 shadow-3 card__shrink">
+              <div>
+                <img
+                  alt="books"
+                  src="https://www.freeiconspng.com/uploads/open-book-icon-free-books-and-education-13.png"
+                ></img>
+                <h1 className="service__heading">Free Books! </h1>
+                <p> -Charity books</p>
+                <button class="free" type="button">
+                  Free Books{' '}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    // <div className="rowC">
-    //   <h1> Services </h1>
-    //   <div className="bg-light-green dib br3 pa ma2 grow bw2 shadow-5 row  ">
-    //     <div>
-    //       <ServiceBuy />
-    //     </div>
-
-    //     <div>
-    //       <ServiceTrade />
-    //     </div>
-
-    //     <div>
-    //       <ServiceFree />
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 export default Services;
