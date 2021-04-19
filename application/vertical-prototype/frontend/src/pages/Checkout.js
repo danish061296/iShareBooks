@@ -150,7 +150,9 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
+                  
                   <Button
+                  type ="submit"
                     variant="contained"
                     color="primary"
                     onClick={handleNext}

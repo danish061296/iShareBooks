@@ -4,9 +4,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Button from '@material-ui/core/Button';
 import "./Address.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
 
 const initialValues = {
   firstName: "",
@@ -16,7 +18,6 @@ const initialValues = {
   city: "",
   state: "",
   zip: "",
-  country: "",
   useForBilling: false,
 };
 
@@ -42,6 +43,26 @@ const validationSchema = Yup.object().shape({
     .required("country is required!"),
 });
 
+const onSubmit = (values, props) => {
+  const payload = {
+    ...values,
+  };
+
+  setTimeout(() => {
+    props.resetForm();
+    // alert(JSON.stringify(payload, null, 2));
+
+    props.setSubmitting(false);
+  }, 2000);
+  
+};
+
+// const [activeStep, setActiveStep] = React.useState(0);
+
+//   const handleNext = () => {
+//     setActiveStep(activeStep + 1);
+//   };
+
 export default function Address() {
   return (
     <React.Fragment className="address__Fragment">
@@ -51,7 +72,7 @@ export default function Address() {
       <Formik
         //innerRef={ref}
         initialValues={initialValues}
-        //onSubmit={onSubmit}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         <Form>
@@ -59,13 +80,12 @@ export default function Address() {
             <Grid item xs={12} sm={5}>
               <Field
                 as={TextField}
-                error
                 required
                 id="firstName"
                 name="firstName"
                 label="First name"
                 fullWidth
-                autoComplete="given-name"
+                autoComplete="First-name"
                 helperText="required*"
               />
             </Grid>
@@ -73,12 +93,11 @@ export default function Address() {
               <Field
                 as={TextField}
                 required
-                error
                 id="lastName"
                 name="lastName"
                 label="Last name"
                 fullWidth
-                autoComplete="family-name"
+                autoComplete="Last-name"
                 helperText="required*"
               />
             </Grid>
@@ -86,7 +105,6 @@ export default function Address() {
               <Field
                 as={TextField}
                 required
-                error
                 validate
                 id="address1"
                 name="address1"
@@ -110,7 +128,6 @@ export default function Address() {
               <Field
                 as={TextField}
                 required
-                error
                 id="city"
                 name="city"
                 label="City"
@@ -122,10 +139,9 @@ export default function Address() {
               <Field
                 as={TextField}
                 required
-                error
                 id="state"
                 name="state"
-                label="State/Province/Region"
+                label="State"
                 fullWidth
                 helperText="required*"
               />
@@ -134,13 +150,12 @@ export default function Address() {
               <Field
                 as={TextField}
                 required
-                error
                 id="zip"
                 name="zip"
-                label="Zip / Postal code"
+                label="Zip"
                 fullWidth
                 autoComplete="shipping postal-code"
-                helperText="This field is required"
+                helperText="required*"
               />
             </Grid>
             {/* <Grid item xs={12} sm={6}>
@@ -164,6 +179,16 @@ export default function Address() {
               />
             </Grid>
           </Grid>
+          <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="next_btn"
+                  //onClick={handleNext}
+                >
+                  NEXT
+                </Button>
         </Form>
       </Formik>
     </React.Fragment>

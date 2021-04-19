@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Checkout from './pages/Checkout';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import TermsOfUse from './pages/TermsOfUse';
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
@@ -21,6 +22,8 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/registration" component={Registration} />
           <Route path ="/checkout" component={Checkout} />
+          <Route path ="/termsofuse" component={TermsOfUse} />
+
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}
