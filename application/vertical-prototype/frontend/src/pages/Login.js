@@ -15,7 +15,8 @@ import {
   setEmail,
   setPassword,
   setIsLoggedIn,
-  setuserId,
+  setUserId,
+  setUsername,
 } from '../redux/actions/userActions';
 
 import Axios from 'axios';
@@ -113,7 +114,8 @@ export default function SignIn() {
         });
         localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
-        dispatch(setuserId(response.data.id));
+        dispatch(setUsername(response.data.username));
+        dispatch(setUserId(response.data.id));
         history.push('/buybooks');
       } else {
         store.addNotification({

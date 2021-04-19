@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import './BuyBooks.css';
+
 import DialogBox from '../components/DialogBox';
 import { useDispatch } from 'react-redux';
 import BuyBookModal from './BuyBookModal';
@@ -38,6 +39,7 @@ const BuyBooks = () => {
   return (
     <div className="buybooks">
       <Navigation />
+
       <div className="buybooks__page">
         <div className="buybooks__container">
           <div className="search__content">

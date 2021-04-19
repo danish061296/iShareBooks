@@ -1,7 +1,7 @@
 const initState = () => ({
   username: '',
   password: '',
-  userid: '',
+  userid: 0,
   email: '',
   isLoggedIn: false,
   searchField: '',
@@ -60,11 +60,11 @@ const userReducer = (state = initState(), action) => {
         ...state,
         posts: action.posts,
       };
-      case 'SET_USERID':
-        return {
-          ...state,
-          userid: action.userid,
-        };
+    case 'SET_USERID':
+      return {
+        ...state,
+        userid: action.userid,
+      };
     case 'SET_VIEW_BOOK':
       console.log(action);
       return {

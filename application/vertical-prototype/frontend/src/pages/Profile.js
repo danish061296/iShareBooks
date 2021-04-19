@@ -1,24 +1,19 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import ReactStars from 'react-rating-stars-component';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link as LinkR } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-import {
-  setEmail,
-  setPassword,
-  setIsLoggedIn,
-} from '../redux/actions/userActions';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
-import * as Yup from 'yup';
 import './Profile.css';
 import Footer from '../components/Footer';
+import Tippy from '@tippyjs/react';
 
 export default function Profile() {
   var rating = 3.7;
+
+  const username = useSelector((state) => state.userReducer.username);
+  const email = useSelector((state) => state.userReducer.email);
 
   return (
     <div>
@@ -35,10 +30,10 @@ export default function Profile() {
 
         <div className="user_information">
           <div className="user_profile_info">
-            <div className="username">John Doe</div>
+            <div className="username">{username}</div>
 
             <div className="email">
-              <a href="">johndoe@gmail.com</a>
+              <a href="">{email}</a>
             </div>
 
             <div className="rating_num">{rating}</div>
@@ -65,7 +60,9 @@ export default function Profile() {
               }}
               to="/profile"
             >
-              <Button className="save_button">Save</Button>
+              <Tippy content="Will be implemented in future" placement="bottom">
+                <Button className="save_button">Save</Button>
+              </Tippy>
             </LinkR>
             <LinkR
               style={{
@@ -75,7 +72,9 @@ export default function Profile() {
               }}
               to="/profile"
             >
-              <Button className="delete_button">Delete</Button>
+              <Tippy content="Will be implemented in future" placement="bottom">
+                <Button className="delete_button">Delete</Button>
+              </Tippy>
             </LinkR>
           </div>
         </div>

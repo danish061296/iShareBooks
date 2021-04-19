@@ -3,9 +3,15 @@ import { Link as LinkR, useHistory } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
+import axios from 'axios';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoggedIn } from '../redux/actions/userActions';
+import {
+  setIsLoggedIn,
+  setEmail,
+  setUsername,
+  setPassword,
+} from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tippy from '@tippyjs/react';
 import ReactNotification from 'react-notifications-component';
@@ -19,6 +25,10 @@ const Navigation = () => {
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
+  const userId = useSelector((state) => state.userReducer.userid);
+
+  console.log(userId);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -29,10 +39,20 @@ const Navigation = () => {
     console.log(`The selected is ${e}`);
 
     if (e == 'profile') {
-      history.push('/profile');
+      axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
+        dispatch(setEmail(response.data[0].email));
+        dispatch(setUsername(response.data[0].name));
+        console.log(response.data[0].name);
+
+        console.log(response.data[0].name);
+      });
+      history.push(`/profile/${userId}`);
     } else if (e == 'logout') {
       if (isLoggedIn) {
         dispatch(setIsLoggedIn(false));
+        dispatch(setUsername(''));
+        dispatch(setEmail(''));
+        dispatch(setPassword(''));
       }
       store.addNotification({
         title: '',

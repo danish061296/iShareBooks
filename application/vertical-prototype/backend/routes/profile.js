@@ -2,9 +2,11 @@ const express = require('express');
 const db = require('../dataBase.js');
 const router = express.Router();
 
-router.get('/profile/:id', (req, res) => {
+router.get('/profile/:userId', (req, res) => {
   console.log('sdads');
-  const id = req.params.id;
+
+  const id = req.params.userId;
+  console.log(id);
   let sql = `SELECT * FROM users where id=${id}`;
   db.query(sql, (err, results) => {
     if (err) {
@@ -17,8 +19,8 @@ router.get('/profile/:id', (req, res) => {
 });
 
 //update user data
-router.put('/profile/:id', (req, res) => {
-  const id = req.params.id;
+router.put('/profile/:userId', (req, res) => {
+  const id = req.params.userId;
   const updateItem = Object.keys(req.body); //old value
   const newItemValue = Object.values(req.body); //newValue
   console.log('key', updateItem);

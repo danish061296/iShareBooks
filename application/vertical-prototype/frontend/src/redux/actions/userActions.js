@@ -7,9 +7,9 @@ export const setPassword = (password) => ({
   type: 'SET_PASSWORD',
   password,
 });
-export const setuserId= (id) => ({
+export const setUserId = (userid) => ({
   type: 'SET_USERID',
-  id,
+  userid,
 });
 
 export const setEmail = (email) => ({
