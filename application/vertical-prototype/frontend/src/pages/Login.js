@@ -111,7 +111,7 @@ export default function SignIn() {
         });
         localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
-        history.push('/buyService');
+        history.push('/buybooks');
       } else {
         store.addNotification({
           title: '',

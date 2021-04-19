@@ -1,23 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { Link as LinkR } from 'react-router-dom';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoggedIn } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tippy from '@tippyjs/react';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 import 'tippy.js/dist/tippy.css';
-import { useSelector } from 'react-redux';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const Navigation = () => {
   const [logo, setLogo] = useState(false);
-
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
+  const history = useHistory();
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
+
+  const handleSelect = (e) => {
+    console.log(`The selected is ${e}`);
+
+    if (e == 'profile') {
+      history.push('/profile');
+    } else if (e == 'logout') {
+      if (isLoggedIn) {
+        dispatch(setIsLoggedIn(false));
+      }
+      store.addNotification({
+        title: '',
+        message: 'You have succussfully logged out!',
+        type: 'success',
+        insert: 'top',
+        container: 'top-center',
+        dismiss: {
+          duration: 2000,
+          showIcon: true,
+        },
+      });
+
+      history.push('/login');
+    }
+    console.log(e);
+    // dispatch(setSearchType(e));
+  };
 
   const showLogo = () => {
     if (window.scrollY >= 70) {
@@ -175,21 +208,39 @@ const Navigation = () => {
         </div>
       )}
       <div className="navbar__second">
-        <h1 className="navbar__logo" href="/home">
+        <ReactNotification />
+
+        {/* <h1 className="navbar__logo" href="/home"> */}
+        <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">
-            iShareBooks
+            <h1>iShareBooks</h1>
           </LinkR>
-        </h1>
+        </div>
+
+        {/* </h1> */}
 
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
-            {/* <Tippy content="Will be implemented in the future" placement="bottom"> */}
             <ShoppingCartIcon className="cart" />
-            {/* </Tippy> */}
 
             <p>{cart?.length}</p>
           </LinkR>
         </div>
+        {isLoggedIn && (
+          <div className="account__btn">
+            <DropdownButton
+              // className="dropdown__btn"
+              variant=" dropdown__btn"
+              alignRight
+              title="Account"
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+              <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+            </DropdownButton>
+          </div>
+        )}
       </div>
     </>
   );

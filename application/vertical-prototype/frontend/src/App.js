@@ -37,6 +37,8 @@ const App = () => {
           <Route path="/freebooks" component={FreeBooks} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/viewbook" component={ViewBook} />
+          <Route path="/profile" component={Profile} />
+
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}
@@ -47,11 +49,11 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />
-          <ProtectedRoute
+          {/* <ProtectedRoute
             path="/profile"
             isLoggedIn={isLoggedIn}
             component={Profile}
-          />
+          /> */}
         </Switch>
       </Router>
     </div>

@@ -18,25 +18,37 @@
   color: black !important;
   font-size: 40px !important;
   font-weight: 700 !important;
-  margin-left: 30px;
-  flex: 0.8;
+  /* margin-left: 30px; */
+  flex: 0.9;
   text-decoration: none !important;
 }
 
 .navbar__logo {
   text-decoration: none;
   cursor: pointer;
+  margin-left: 150px;
 }
 
 .navbar__icons {
   margin-top: 8px;
   justify-self: flex-end;
   display: flex;
+  /* flex-direction: column; */
   cursor: pointer;
 }
 
+.cart {
+  margin-right: 15px;
+  font-size: 28px !important;
+}
+
 .cart__link {
-  text-decoration: none;
+  text-decoration: none !important;
+  color: black;
+}
+
+.profile__link {
+  text-decoration: none !important;
   color: black;
 }
 .nav__link:hover {
