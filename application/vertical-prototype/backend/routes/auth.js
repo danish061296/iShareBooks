@@ -5,14 +5,16 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM users', (err, rows, fields) => {
-    if (!err) {
-      console.log(rows);
-      res.send(rows);
-    } else {
-      console.log(err);
-    }
-  });
+
+  //query db 
+  // db.query('SELECT * FROM users', (err, rows, fields) => {
+  //   if (!err) {
+  //     console.log(rows);
+  //     //res.send(rows);
+  //   } else {
+  //     console.log(err);
+  //   }
+  // });
 });
 
 router.post('/register', (req, res) => {
@@ -83,6 +85,9 @@ router.post('/login', async (req, res) => {
       'SELECT * FROM users WHERE email = ?',
       [email],
       async (err, results) => {
+        if(err){ 
+          console.log("ERRRRR"+err);
+        }
         if (
           results[0] === undefined ||
           !bcrypt.compareSync(password, results[0].password)
@@ -110,12 +115,14 @@ router.post('/login', async (req, res) => {
           res.cookie('jwt', token, cookieOptions);
           res.status(200).send({
             auth: true,
-
+            id: results[0].id, 
+            userName: results[0].name,
             token: token,
             message: "You're successfully logged in.",
           });
         }
       }
+     
     );
   } catch (error) {
     res.status(500).send(error);
