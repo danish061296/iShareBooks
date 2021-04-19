@@ -7,37 +7,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link as LinkR } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-
 import {
   setEmail,
   setPassword,
   setIsLoggedIn,
 } from '../redux/actions/userActions';
-import Axios from 'axios';
-import ReactNotification from 'react-notifications-component';
+import axios from 'axios';
 import * as Yup from 'yup';
 import './Profile.css';
 import Footer from '../components/Footer';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.info.dark,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 export default function Profile() {
   var rating = 3.7;
@@ -45,7 +23,6 @@ export default function Profile() {
   return (
     <div>
       <Navigation />
-
       <div className="profile__Container">
         <div className="top">
           <div className="image_container">

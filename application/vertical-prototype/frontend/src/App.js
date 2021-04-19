@@ -42,6 +42,16 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />
+          <ProtectedRoute
+            path="/buyService"
+            isLoggedIn={isLoggedIn}
+            component={ServiceBuy}
+          />
+          <ProtectedRoute
+            path="/profile"
+            isLoggedIn={isLoggedIn}
+            component={Profile}
+          />
         </Switch>
       </Router>
     </div>

@@ -50,3 +50,8 @@ export const removeFromCart = (id) => ({
   type: 'REMOVE_FROM_CART',
   id,
 });
+
+export const setViewBook = (book) => ({
+  type: 'SET_VIEW_BOOK',
+  book,
+});

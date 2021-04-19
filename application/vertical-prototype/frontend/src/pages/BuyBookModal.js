@@ -12,6 +12,7 @@ const BuyBookModal = () => {
   const [condition, setCondition] = useState('');
   const [cost, setCost] = useState('');
   const [image, setImage] = useState('');
+  const imageRef = React.useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,10 +25,22 @@ const BuyBookModal = () => {
       isbn: isbn,
       type: 'paid',
       condition: condition,
-      image: image,
+      image: image.name,
     };
 
     console.log(paidBook);
+
+    store.addNotification({
+      title: '',
+      message: 'good job herre yoo',
+      type: 'success',
+      insert: 'top',
+      container: 'top-center',
+      dismiss: {
+        duration: 2000,
+        showIcon: true,
+      },
+    });
 
     setTitle('');
     setAuthor('');
@@ -37,27 +50,28 @@ const BuyBookModal = () => {
     setCondition('');
     setImage('');
 
-    axios.post('http://localhost:3001/posts', paidBook).then((response) => {
-      if (!response.data.bookPosted) {
-        alert(response.data.msg);
-      } else {
-        store.addNotification({
-          title: '',
-          message: response.data.msg,
-          type: 'success',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-      }
-    });
+    // axios.post('http://localhost:3001/posts', paidBook).then((response) => {
+    //   if (!response.data.bookPosted) {
+    //     alert(response.data.msg);
+    //   } else {
+    //     store.addNotification({
+    //       title: '',
+    //       message: response.data.msg,
+    //       type: 'success',
+    //       insert: 'top',
+    //       container: 'top-center',
+    //       dismiss: {
+    //         duration: 2000,
+    //         showIcon: true,
+    //       },
+    //     });
+    //   }
+    // });
   };
   return (
     <div>
       <ReactNotification />
+
       <div className="body">
         <div className="left-side">
           <h2 className="head-left">
@@ -121,17 +135,17 @@ const BuyBookModal = () => {
               onChange={(e) => setCost(e.target.value)}
             ></input>
             <p>Upload file</p>
-            {/* <input
+            <input
               id="input-image"
               type="file"
               name="image"
               accept=".jpg, .png, .jpeg"
               // value={image}
               className="form-control"
-              // ref={ref}
+              ref={imageRef}
               onChange={(e) => setImage(e.target.files[0])}
               single="true"
-            /> */}
+            />
             {/* <button className="buttn" type="button">
               Upload Image
             </button> */}

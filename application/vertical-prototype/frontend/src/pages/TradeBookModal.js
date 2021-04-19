@@ -11,6 +11,7 @@ const TradeBookModal = () => {
   const [isbn, setIsbn] = useState('');
   const [condition, setCondition] = useState('');
   const [image, setImage] = useState('');
+  const imageRef = React.useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ const TradeBookModal = () => {
       isbn: isbn,
       type: 'trade',
       condition: condition,
-      image: image,
+      image: image.name,
     };
 
     console.log(tradeBook);
@@ -111,17 +112,17 @@ const TradeBookModal = () => {
               onChange={(e) => setCondition(e.target.value)}
             ></input>
             <p>Upload file</p>
-            {/* <input
+            <input
               id="input-image"
               type="file"
               name="image"
               accept=".jpg, .png, .jpeg"
               // value={image}
               className="form-control"
-              // ref={ref}
+              ref={imageRef}
               onChange={(e) => setImage(e.target.files[0])}
               single="true"
-            /> */}
+            />
             {/* <button className="buttn" type="button">
               Upload Image
             </button> */}

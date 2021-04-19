@@ -8,6 +8,7 @@ import DialogBox from '../components/DialogBox';
 import { useDispatch } from 'react-redux';
 import BuyBookModal from './BuyBookModal';
 import BookGrid from './BookGrid';
+import ViewBook from './ViewBook';
 
 import { setSearchField } from '../redux/actions/userActions';
 
@@ -16,57 +17,23 @@ const BuyBooks = () => {
 
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {};
-  const handleClick = (e) => {};
+  const handleSearch = (e) => {};
+  const handleBookDetail = (
+    id,
+    title,
+    author,
+    department,
+    isbn,
+    condition,
+    price,
+    image
+  ) => {
+    return <ViewBook id={id} />;
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
-  let itemsArray = [
-    {
-      id: '3578363',
-      title: 'Computer Book',
-      author: 'John Doe',
-      department: 'Computer Science',
-      isbn: 123567894,
-      condition: 'Used',
-      price: 120.67,
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc',
-    },
-    {
-      id: '7315352',
-      title: 'Literature Book',
-      author: 'Alice Jane',
-      department: 'Literature',
-      isbn: 123535464,
-      condition: 'New',
-      price: 30.99,
-      image:
-        'https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg',
-    },
-    {
-      id: '356234',
-      title: 'English Book',
-      author: 'Bob Michaels',
-      department: 'English',
-      isbn: 837748374,
-      condition: 'Used',
-      price: 27.01,
-      image:
-        'https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg',
-    },
-    {
-      id: '732352',
-      title: 'Literature Book',
-      author: 'Alice Jane',
-      department: 'Literature',
-      isbn: 123535464,
-      price: 30.99,
-      image:
-        'https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg',
-    },
-  ];
 
   return (
     <div className="buybooks">
@@ -82,7 +49,7 @@ const BuyBooks = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => dispatch(setSearchField(e.target.value))}
             />
-            <button onClick={handleClick} className="search__btn">
+            <button onClick={handleSearch} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
           </div>
@@ -116,6 +83,7 @@ const BuyBooks = () => {
             condition="Used"
             price={27.01}
             image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
+            onClick={handleBookDetail()}
           />
 
           <BookGrid
@@ -127,6 +95,7 @@ const BuyBooks = () => {
             condition="Used"
             price={120.67}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
+            onClick={handleBookDetail()}
           />
           <BookGrid
             id="7315352"
@@ -137,6 +106,7 @@ const BuyBooks = () => {
             condition="New"
             price={30.99}
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
+            onClick={handleBookDetail()}
           />
         </div>
 

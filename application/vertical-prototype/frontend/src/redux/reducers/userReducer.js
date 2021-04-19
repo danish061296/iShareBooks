@@ -7,6 +7,7 @@ const initState = () => ({
   searchType: '',
   imageBuffer: '',
   posts: [],
+  viewBooks: [],
   cart: [],
   randomMsg: '',
 });
@@ -57,6 +58,12 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         posts: action.posts,
+      };
+    case 'SET_VIEW_BOOK':
+      console.log(action);
+      return {
+        ...state,
+        viewBooks: [...state.viewBooks, action.book],
       };
     case 'ADD_TO_CART':
       console.log(action);

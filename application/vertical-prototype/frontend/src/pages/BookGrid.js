@@ -1,12 +1,29 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './BuyBooks.css';
 
-import { setCartItem } from '../redux/actions/userActions';
+import { setCartItem, setViewBook } from '../redux/actions/userActions';
 
 const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
   const dispatch = useDispatch();
+
+  const handleBookDetail = () => {
+    dispatch(
+      setViewBook({
+        id,
+        title,
+        author,
+        department,
+        isbn,
+        price,
+        image,
+      })
+    );
+
+    return <Redirect to="/viewbook" />;
+  };
 
   const handleAddCart = () => {
     // console.log(itemsArray.title);

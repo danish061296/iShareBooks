@@ -81,6 +81,48 @@ router.post('/posts', (req, res) => {
   }
 });
 
+router.get('/paidbooks', (req, res) => {
+  let inserSql = `SELECT * FROM paidbooks`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      res.send({ books: true, results: results });
+    }
+  });
+});
+
+router.get('/tradebooks', (req, res) => {
+  let inserSql = `SELECT * FROM tradebooks`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      res.send({ books: true, results: results });
+    }
+  });
+});
+
+router.get('/freebooks', (req, res) => {
+  let inserSql = `SELECT * FROM freebooks`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      res.send({ books: true, results: results });
+    }
+  });
+});
+
 router.get('/post/:id', (req, res) => {
   const id = req.params.id;
   console.log(req.params);
