@@ -15,7 +15,9 @@ import {
   setEmail,
   setPassword,
   setIsLoggedIn,
+  setuserId,
 } from '../redux/actions/userActions';
+
 import Axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
@@ -111,6 +113,7 @@ export default function SignIn() {
         });
         localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
+        dispatch(setuserId(response.data.id));
         history.push('/buybooks');
       } else {
         store.addNotification({

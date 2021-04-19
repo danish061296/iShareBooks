@@ -13,7 +13,12 @@ app.use(
   })
 );
 app.use(fileUpload());
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use('*',cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use('/', require('./routes/books'));
@@ -24,6 +29,7 @@ app.use('/', require('./routes/paypal'));
 app.use('/', require('./routes/trending_books'));
 app.use('/', require('./routes/profile'));
 app.use('/', require('./routes/rating'));
+
 
 app.use(cookieParser());
 const port = process.env.PORT || 3001;
