@@ -9,9 +9,10 @@ router.get('/search', (req, res) => {
   //freebooks
   //tradebooks
   //paidbooks
-  const { searchField, searchType, searchTable } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
-
+  const { searchField, searchType } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   let query;
+  
+  searchTable = "paidbooks";
 
   //searchField = "Co";
   if (searchType == 'any')

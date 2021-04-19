@@ -64,7 +64,7 @@ const About = () => {
     };
 
     if (e.key === 'Enter') {
-      Axios.post('http://localhost:3001/search', search)
+      Axios.get('http://localhost:3001/search', search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -106,7 +106,7 @@ const About = () => {
       searchType: searchType,
     };
 
-    Axios.post('http://localhost:3001/search', search)
+    Axios.get('http://localhost:3001/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);
