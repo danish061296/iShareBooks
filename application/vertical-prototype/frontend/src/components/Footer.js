@@ -21,16 +21,20 @@ const Footer = () => {
         className="footer"
         color=""
         dark
-        style={{ height: '300px', background: '#18504c' }}
+        style={{ height: '400px', background: '#18504c' }}
       >
         <div className="Fcontent">
           <div className="fcontent">
             <div>
-            <Link to="/about" >
+              <Link to="/about" >
               About
-            </Link>
+              </Link>
             </div>
-            <Link to="/privacy"  > Privacy </Link>
+            
+
+            <li>  <Link to="/TermsOfUse" > Terms of Use </Link>  </li>
+
+
             <section className="center">
               Social
               <section>
@@ -44,8 +48,8 @@ const Footer = () => {
           </div>
 
           <div className="copyright">
-            <h7>Terms of Sale</h7>
-            <h7>Terms of Use</h7>
+            <Link to="/TermsOfSale" > Terms of Sale </Link> 
+            <Link to="/TermsOfUse" > Terms of Use </Link> 
 
             <p>© 2021 Copyright iSHARE INC</p>
           </div>

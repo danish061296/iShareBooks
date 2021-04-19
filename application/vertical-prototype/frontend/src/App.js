@@ -8,6 +8,8 @@ import About from './pages/About';
 
 import ServiceBuy from './pages/ServiceBuy';
 import Privacy from "./pages/Privacy"
+import TermsOfUse from "./pages/TermsOfUse"
+import TermsOfSale from "./pages/TermsOfSale"
 import { useSelector } from 'react-redux';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -29,6 +31,8 @@ const App = () => {
           />
               <Route path="/privacy" component={Privacy} />
               <Route path="/about" component={About} />
+              <Route path="/TermsOfUse" component={TermsOfUse} />
+              <Route path="/TermsOfSale" component={TermsOfSale} />
         </Switch>
       </Router>
     </div>

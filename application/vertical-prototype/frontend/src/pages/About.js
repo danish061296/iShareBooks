@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+
 
 const About = () => {
     return (
-        <div>
-            <h1>About Page </h1> 
-        </div>
+       <div> About Page </div>
     )
 }
 

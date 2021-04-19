@@ -1,6 +1,7 @@
 import React from 'react';
 import './Services.css';
 import 'tachyons';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   return (
@@ -52,9 +53,9 @@ const Services = () => {
               ></img>
               <h1>Trade Books! </h1>
               <p> -Trade anybooks you like </p>
-              <button className="trade" type="button">
+              <Link to =" /Privacy" className="trade" type="button">
                 Trade Here{' '}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import {
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 const About = () => {
  
@@ -83,8 +84,10 @@ const About = () => {
         />
       </div>
       <div className="about__services">
-        <p className="services__link">Buy</p>
-        <p className="services__link">Trade</p>
+        <p className="services__link" >Buy</p>
+        <Link to = "/privacy">Trade</Link>
+        <Link to = "/TermsOfSale">TermsOfSale</Link>
+        <Link to = "/TermsOfSale">TraTermsOfSalede</Link>
         <p className="services__link">Free</p>
       </div>
       <div className="search__content">
@@ -111,10 +114,11 @@ const About = () => {
           </p>
         </div>
       </div>
-      <Button variant="success explore__btn" data-aos="fade-up">
+      <Link to=" privacy " variant="success explore__btn" data-aos="fade-up"
+ >
         Explore Now!{' '}
         <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
-      </Button>
+      </Link>
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
