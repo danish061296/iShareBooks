@@ -39,6 +39,23 @@
   justify-content: space-between;
 }
 
+.subtotal__info p {
+  font-size: 17px;
+}
+
+.shipping__info p {
+  font-size: 17px;
+}
+
+.tax,
+.tax__cost {
+  font-size: 15px;
+}
+
+.shipping__standard {
+  font-size: 17px;
+}
+
 .tax__info {
   /* align-self: flex-start; */
   display: flex;

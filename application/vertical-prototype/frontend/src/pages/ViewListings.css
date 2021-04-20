@@ -1,7 +1,8 @@
 .viewlisting {
   padding: 20px;
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100vh;
 }
 
 .viewlisting__left {

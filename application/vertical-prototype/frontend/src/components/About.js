@@ -152,13 +152,13 @@ const About = () => {
       </div>
       <div className="about__services">
         <Link className="links" to="/buybooks">
-          <p className="services__link">Buy</p>
+          <span className="services__link">Buy</span>
         </Link>
         <Link className="links" to="/tradebooks">
-          <p className="services__link">Trade</p>
+          <span className="services__link">Trade</span>
         </Link>
         <Link className="links" to="/freebooks">
-          <p className="services__link">Free</p>
+          <span className="services__link">Free</span>
         </Link>
       </div>
       <div className="search__content">

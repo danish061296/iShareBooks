@@ -64,7 +64,7 @@ const TradeBookModal = () => {
           </h2>
           <img
             src="https://via.placeholder.com/150"
-            alt="some-image"
+            alt="text-img"
             className="bookpic"
           />
         </div>

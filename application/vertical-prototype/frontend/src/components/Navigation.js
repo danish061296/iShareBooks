@@ -83,7 +83,7 @@ const Navigation = () => {
   window.addEventListener('scroll', showLogo);
 
   return (
-    <>
+    <div>
       {!logo && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           {/* <Button
@@ -233,7 +233,7 @@ const Navigation = () => {
         {/* <h1 className="navbar__logo" href="/home"> */}
         <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">
-            <h1>iShareBooks</h1>
+            <h1 className="logo__heading">iShareBooks</h1>
           </LinkR>
         </div>
 
@@ -242,27 +242,26 @@ const Navigation = () => {
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
             <ShoppingCartIcon className="cart" />
-
-            <p>{cart?.length}</p>
+            <span className="cart__total">{cart?.length}</span>
           </LinkR>
+          {isLoggedIn && (
+            <div className="account__btn">
+              <DropdownButton
+                // className="dropdown__btn"
+                variant=" dropdown__btn"
+                alignRight
+                title="Account"
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+              </DropdownButton>
+            </div>
+          )}
         </div>
-        {isLoggedIn && (
-          <div className="account__btn">
-            <DropdownButton
-              // className="dropdown__btn"
-              variant=" dropdown__btn"
-              alignRight
-              title="Account"
-              id="dropdown-menu-align-right"
-              onSelect={handleSelect}
-            >
-              <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
-              <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
-            </DropdownButton>
-          </div>
-        )}
       </div>
-    </>
+    </div>
   );
 };
 

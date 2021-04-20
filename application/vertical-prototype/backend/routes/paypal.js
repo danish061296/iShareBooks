@@ -19,6 +19,8 @@ router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
 
+  console.log(arrayOfBooks);
+
   //get the total total price of the books
   let booksPrice = 0;
   // adding the total price into the books

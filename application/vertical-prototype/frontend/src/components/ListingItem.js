@@ -47,14 +47,15 @@ const ListingItem = ({
           <strong>ISBN: </strong>
           {isbn}
         </p>
+        <div className="listingitem__bottom">
+          <p className="listingitem__item__price">${price}</p>
+          <Button onClick={handleRemove} className="listingitem__item__button">
+            REMOVE FROM CART
+          </Button>
+        </div>
+      </div>
 
-        <p className="listingitem__item__price">
-          ${price}
-          {/* <small>$</small>
-          <strong>{price}</strong> */}
-        </p>
-
-        {/* <div className="listingitem__item__rating">
+      {/* <div className="listingitem__item__rating">
           {Array(rating)
             .fill()
             .map((_, i) => (
@@ -63,10 +64,6 @@ const ListingItem = ({
               </p>
             ))}
         </div> */}
-        <Button onClick={handleRemove} className="listingitem__item__button">
-          REMOVE FROM CART
-        </Button>
-      </div>
     </div>
   );
 };

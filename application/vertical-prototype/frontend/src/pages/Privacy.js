@@ -10,8 +10,8 @@ const Privacy = () => {
       <div>
         <h1 className="heading">Privacy Policy</h1>
         <div className="container">
-          <body className="bod">
-            <h2 className="h2">Privacy Policy</h2>
+          <div>
+            {/* <h2 className="h2">Privacy Policy</h2> */}
             <p>
               At iShareBooks, accessible from iShareBooks.com, one of our main
               priorities is the privacy of our visitors. This Privacy Policy
@@ -58,7 +58,7 @@ const Privacy = () => {
               encourage you to contact us immediately and we will do our best
               efforts to promptly remove such information from our records.
             </p>
-          </body>
+          </div>
         </div>
       </div>
       <div>
