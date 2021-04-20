@@ -42,7 +42,7 @@ const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
 
   return (
     <div>
-      {price && (
+      {price != 0 && (
         <div className="post__book__details">
           <img
             style={{ height: 200, width: 200 }}
@@ -57,7 +57,7 @@ const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
           <p className="post__book__price">{price}</p>
         </div>
       )}
-      {!price && (
+      {price == 0 && (
         <div className="post__book__details">
           <img
             style={{ height: 200, width: 200 }}
@@ -69,7 +69,7 @@ const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
             Add to cart
           </Button>
 
-          {/* <p className="post__book__price">{price}</p> */}
+          <p className="post__book__price">$0.00</p>
         </div>
       )}
     </div>

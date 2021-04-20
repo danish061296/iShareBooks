@@ -67,7 +67,7 @@ const TradeBooks = () => {
             department="English"
             isbn={837748374}
             condition="Used"
-            // price={27.01}
+            price={0}
             image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
           />
 
@@ -78,7 +78,7 @@ const TradeBooks = () => {
             department="Computer Science"
             isbn={123567894}
             condition="Used"
-            // price={120.67}
+            price={0}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
           />
           <BookGrid
@@ -88,7 +88,7 @@ const TradeBooks = () => {
             department="Literature"
             isbn={123535464}
             condition="New"
-            // price={30.99}
+            price={0}
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
           />
         </div>

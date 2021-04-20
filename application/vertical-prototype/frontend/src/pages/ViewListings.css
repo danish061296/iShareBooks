@@ -1,8 +1,11 @@
+.viewlings__container {
+  height: 100vh;
+}
+
 .viewlisting {
   padding: 20px;
   display: flex;
-  height: 100vh;
-  height: 100vh;
+  height: 100%;
 }
 
 .viewlisting__left {
