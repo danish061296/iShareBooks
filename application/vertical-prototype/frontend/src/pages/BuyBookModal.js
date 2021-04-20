@@ -134,7 +134,7 @@ const BuyBookModal = () => {
               value={cost}
               onChange={(e) => setCost(e.target.value)}
             ></input>
-            <p>Upload file</p>
+            <p className="modal_file">Upload file</p>
             <input
               id="input-image"
               type="file"

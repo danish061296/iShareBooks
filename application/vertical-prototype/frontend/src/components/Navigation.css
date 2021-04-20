@@ -2,6 +2,8 @@
   height: 50px;
   font-size: 15px;
   background: #28918a !important;
+  display: flex !important;
+  justify-content: space-between !important;
 }
 
 .navbar__second {
@@ -35,6 +37,19 @@
 
 .logo__heading {
   margin-left: 30px !important;
+}
+
+.dropaccount__btn {
+  background-color: #18504c !important;
+  color: white !important;
+  outline: none !important;
+  /* background-color: blue !important; */
+}
+
+.dropaccount__btn:hover {
+  background-color: white !important;
+
+  color: #18504c !important;
 }
 
 .navbar__icons {

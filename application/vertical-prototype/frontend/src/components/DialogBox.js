@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import '../pages/BuyBooks.css';
 import Typography from '@material-ui/core/Typography';
+import { useSelector } from 'react-redux';
 
 const styles = (theme) => ({
   root: {
@@ -59,28 +60,57 @@ export default function DialogBox({ children, open, setOpen, title, button }) {
     setOpen(false);
   };
 
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+
   return (
     <div>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {title}
-        </DialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={handleClose}
-            // className="post__book__button"
-            color="primary"
-          >
-            {button}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {isLoggedIn && (
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            {title}
+          </DialogTitle>
+          <DialogContent dividers>{children}</DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={handleClose}
+              // className="post__book__button"
+              color="primary"
+            >
+              {button}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+      {!isLoggedIn && (
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            PERMISSION DENIED!
+          </DialogTitle>
+          <DialogContent dividers>
+            <h3>You must be logged in to post a book.</h3>
+            <h4>Thank You!</h4>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={handleClose}
+              // className="post__book__button"
+              color="primary"
+            >
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </div>
   );
 }

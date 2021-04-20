@@ -26,7 +26,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
   const userId = useSelector((state) => state.userReducer.userid);
-
   console.log(userId);
 
   const history = useHistory();
@@ -84,7 +83,7 @@ const Navigation = () => {
 
   return (
     <div>
-      {!logo && (
+      {isLoggedIn && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           {/* <Button
             // className="sign__btn"
@@ -107,8 +106,21 @@ const Navigation = () => {
               iShareBooks
             </LinkR>
           </NavbarBrand>
+          <div className="account__btn">
+            <DropdownButton
+              // className="dropdown__btn"
+              variant="primary dropaccount__btn"
+              alignRight
+              title="Account"
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+              <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+            </DropdownButton>
+          </div>
 
-          <Nav className="ml-auto ">
+          {/* <Nav className="ml-auto ">
             <LinkR
               className="nav__link"
               style={{
@@ -121,9 +133,9 @@ const Navigation = () => {
             >
               Log In
             </LinkR>
-          </Nav>
+          </Nav> */}
 
-          <LinkR
+          {/* <LinkR
             style={{
               color: 'white',
               textDecoration: 'none',
@@ -133,10 +145,10 @@ const Navigation = () => {
             to="/registration"
           >
             <Button variant="outline-success signup__btn">Sign Up</Button>
-          </LinkR>
+          </LinkR> */}
         </Navbar>
       )}
-      {logo && (
+      {!isLoggedIn && (
         <div>
           <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
             <NavbarBrand className="navbar__title">
@@ -244,7 +256,7 @@ const Navigation = () => {
             <ShoppingCartIcon className="cart" />
             <span className="cart__total">{cart?.length}</span>
           </LinkR>
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <div className="account__btn">
               <DropdownButton
                 // className="dropdown__btn"
@@ -258,7 +270,7 @@ const Navigation = () => {
                 <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
               </DropdownButton>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
