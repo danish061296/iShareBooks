@@ -52,6 +52,14 @@
   color: #18504c !important;
 }
 
+.navbar__left {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .navbar__icons {
   /* margin-top: 10px;
   justify-self: flex-end;
@@ -91,7 +99,7 @@
 
 .signup__btn {
   z-index: 99 !important;
-  background-color: #0d2c29 !important;
+  background-color: #1a504c !important;
   color: white !important;
   border: 1px solid white !important;
   border: none !important;

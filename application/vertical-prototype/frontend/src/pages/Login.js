@@ -114,7 +114,7 @@ export default function SignIn() {
         });
         localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
-        dispatch(setUsername(response.data.username));
+        dispatch(setUsername(response.data.userName));
         dispatch(setUserId(response.data.id));
         history.push('/buybooks');
       } else {

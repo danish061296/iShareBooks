@@ -26,7 +26,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
   const userId = useSelector((state) => state.userReducer.userid);
-  console.log(userId);
+  const username = useSelector((state) => state.userReducer.username);
 
   const history = useHistory();
 
@@ -34,6 +34,7 @@ const Navigation = () => {
     Aos.init({ duration: 1000 });
   }, []);
 
+  // select to redirect to profile/logout pages
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
 
@@ -66,6 +67,8 @@ const Navigation = () => {
       });
 
       history.push('/login');
+    } else if (e == 'home') {
+      history.push('/');
     }
     console.log(e);
     // dispatch(setSearchType(e));
@@ -79,19 +82,12 @@ const Navigation = () => {
     }
   };
 
-  window.addEventListener('scroll', showLogo);
+  // window.addEventListener('scroll', showLogo);
 
   return (
     <div>
       {isLoggedIn && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
-          {/* <Button
-            // className="sign__btn"
-            variant="outline-success signup__btn"
-            href="/"
-          >
-            Home
-          </Button> */}
           <NavbarBrand className="navbar__title">
             <LinkR
               className="title__link"
@@ -106,46 +102,26 @@ const Navigation = () => {
               iShareBooks
             </LinkR>
           </NavbarBrand>
-          <div className="account__btn">
-            <DropdownButton
-              // className="dropdown__btn"
-              variant="primary dropaccount__btn"
-              alignRight
-              title="Account"
-              id="dropdown-menu-align-right"
-              onSelect={handleSelect}
-            >
-              <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
-              <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
-            </DropdownButton>
+          <div className="navbar__left">
+            <p style={{ marginTop: 25, marginRight: 10, color: 'white' }}>
+              Hi! {username.charAt(0).toUpperCase() + username.slice(1)}
+            </p>
+            <div className="account__btn">
+              <DropdownButton
+                // className="dropdown__btn"
+                variant="primary dropaccount__btn"
+                alignRight
+                title="My Account"
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="home">Home</Dropdown.Item>
+
+                <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+              </DropdownButton>
+            </div>
           </div>
-
-          {/* <Nav className="ml-auto ">
-            <LinkR
-              className="nav__link"
-              style={{
-                color: '#D3D3D3',
-                textDecoration: 'none',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-              to="/login"
-            >
-              Log In
-            </LinkR>
-          </Nav> */}
-
-          {/* <LinkR
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-
-              cursor: 'pointer',
-            }}
-            to="/registration"
-          >
-            <Button variant="outline-success signup__btn">Sign Up</Button>
-          </LinkR> */}
         </Navbar>
       )}
       {!isLoggedIn && (
@@ -166,51 +142,56 @@ const Navigation = () => {
               </LinkR>
             </NavbarBrand>
             <Nav className="ml-auto ">
-              <Link
-                className="nav__link"
-                data-aos="slide-down"
-                style={{
-                  color: '#D3D3D3',
-                  textDecoration: 'none',
-                  marginRight: '20px',
-                  cursor: 'pointer',
-                }}
-                to="about"
-                smooth={true}
-                duration={1000}
-              >
-                About
-              </Link>
-              <Link
-                className="nav__link"
-                data-aos="slide-down"
-                style={{
-                  color: '#D3D3D3',
-                  textDecoration: 'none',
-                  marginRight: '20px',
-                  cursor: 'pointer',
-                }}
-                to="services"
-                smooth={true}
-                duration={1000}
-              >
-                Services
-              </Link>
-              <Link
-                className="nav__link"
-                data-aos="slide-down"
-                style={{
-                  color: '#D3D3D3',
-                  textDecoration: 'none',
-                  marginRight: '20px',
-                  cursor: 'pointer',
-                }}
-                to="faq"
-                smooth={true}
-                duration={1000}
-              >
-                FAQ
-              </Link>
+              {window.location.href.slice(-1) == '/' && (
+                <div>
+                  <Link
+                    className="nav__link"
+                    data-aos="slide-down"
+                    style={{
+                      color: '#D3D3D3',
+                      textDecoration: 'none',
+                      marginRight: '20px',
+                      cursor: 'pointer',
+                    }}
+                    to="about"
+                    smooth={true}
+                    duration={1000}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    className="nav__link"
+                    data-aos="slide-down"
+                    style={{
+                      color: '#D3D3D3',
+                      textDecoration: 'none',
+                      marginRight: '20px',
+                      cursor: 'pointer',
+                    }}
+                    to="services"
+                    smooth={true}
+                    duration={1000}
+                  >
+                    Services
+                  </Link>
+                  <Link
+                    className="nav__link"
+                    data-aos="slide-down"
+                    style={{
+                      color: '#D3D3D3',
+                      textDecoration: 'none',
+                      marginRight: '20px',
+                      cursor: 'pointer',
+                    }}
+                    to="faq"
+                    smooth={true}
+                    duration={1000}
+                  >
+                    FAQ
+                  </Link>
+                </div>
+              )}
+
               <LinkR
                 className="nav__link"
                 style={{
@@ -242,35 +223,17 @@ const Navigation = () => {
       <div className="navbar__second">
         <ReactNotification />
 
-        {/* <h1 className="navbar__logo" href="/home"> */}
         <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">
             <h1 className="logo__heading">iShareBooks</h1>
           </LinkR>
         </div>
 
-        {/* </h1> */}
-
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
             <ShoppingCartIcon className="cart" />
             <span className="cart__total">{cart?.length}</span>
           </LinkR>
-          {/* {isLoggedIn && (
-            <div className="account__btn">
-              <DropdownButton
-                // className="dropdown__btn"
-                variant=" dropdown__btn"
-                alignRight
-                title="Account"
-                id="dropdown-menu-align-right"
-                onSelect={handleSelect}
-              >
-                <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
-                <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
-              </DropdownButton>
-            </div>
-          )} */}
         </div>
       </div>
     </div>
