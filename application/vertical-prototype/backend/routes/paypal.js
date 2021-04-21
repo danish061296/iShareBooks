@@ -19,20 +19,18 @@ router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
 
-  console.log(arrayOfBooks);
+  console.log('before', arrayOfBooks);
 
   //get the total total price of the books
-  let booksPrice = 0;
+  let booksPrice = 0.35;
   // adding the total price into the books
 
   for (let i = 0; i < arrayOfBooks.length; i++) {
-    console.log(arrayOfBooks[i].name);
     booksPrice += arrayOfBooks[i].price;
     arrayOfBooks[i].quantity = 1;
     arrayOfBooks[i].sku = 'item';
     arrayOfBooks[i].currency = 'USD';
   }
-  console.log(arrayOfBooks);
   //copying arrayOfBooks to a new array
   let paymentData = JSON.parse(JSON.stringify(arrayOfBooks));
 
@@ -46,7 +44,6 @@ router.post('/pay', (req, res) => {
     delete d.department;
     delete d.image;
   });
-  console.log('new ', paymentData);
 
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
@@ -101,13 +98,13 @@ router.post('/pay', (req, res) => {
               bookImage,
               bookId,
             ];
-            console.log(data);
+
             let sqlQuery = ` INSERT INTO soldBooks 
             (title, price, department,author,isbn,image,id)
              VALUES (?);DELETE FROM posts WHERE id  = ?; `;
             db.query(sqlQuery, [data, bookId], (err, results) => {
               if (err) {
-                console.log(err);
+                console.log(err, 'error inserting data');
               } else {
                 console.log(results);
               }
