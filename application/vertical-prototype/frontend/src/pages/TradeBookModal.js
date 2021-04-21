@@ -4,87 +4,72 @@ import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 
-const BuyBookModal = () => {
+const TradeBookModal = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [department, setDepartment] = useState('');
   const [isbn, setIsbn] = useState('');
   const [condition, setCondition] = useState('');
-  const [cost, setCost] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const paidBook = {
+    const tradeBook = {
       title: title,
       author: author,
-      cost: cost,
       department: department,
       isbn: isbn,
-      type: 'paid',
+      type: 'trade',
       condition: condition,
       image: image.name,
     };
 
-    console.log(paidBook);
-
-    store.addNotification({
-      title: '',
-      message: 'good job herre yoo',
-      type: 'success',
-      insert: 'top',
-      container: 'top-center',
-      dismiss: {
-        duration: 2000,
-        showIcon: true,
-      },
-    });
+    console.log(tradeBook);
 
     setTitle('');
     setAuthor('');
-    setCost('');
     setDepartment('');
     setIsbn('');
     setCondition('');
     setImage('');
 
-    // axios.post('http://localhost:3001/posts', paidBook).then((response) => {
-    //   if (!response.data.bookPosted) {
-    //     alert(response.data.msg);
-    //   } else {
-    //     store.addNotification({
-    //       title: '',
-    //       message: response.data.msg,
-    //       type: 'success',
-    //       insert: 'top',
-    //       container: 'top-center',
-    //       dismiss: {
-    //         duration: 2000,
-    //         showIcon: true,
-    //       },
-    //     });
-    //   }
-    // });
+    axios.post('http://localhost:3001/posts', tradeBook).then((response) => {
+      if (!response.data.bookPosted) {
+        alert(response.data.msg);
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      }
+    });
   };
+
   return (
     <div>
       <ReactNotification />
-
       <div className="body">
         <div className="left-side">
           <h2 className="head-left">
-            Sell Your Book To Help Your Friends For Easy Access
+            Trade Your Book To Help Your Friends For Easy Access
           </h2>
           <img
             src="https://via.placeholder.com/150"
-            alt="some-image"
+            alt="text-img"
             className="bookpic"
           />
         </div>
         <div className="box">
-          <h1 className="head-right">Sell A Book</h1>
+          <h2 className="head-right">Trade A Book</h2>
           <div className="form">
             <p>Title</p>
             <input
@@ -126,15 +111,7 @@ const BuyBookModal = () => {
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
             ></input>
-            <p>Cost</p>
-            <input
-              type="text"
-              name="cost"
-              placeholder="$"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
-            ></input>
-            <p className="modal_file">Upload file</p>
+            <p>Upload file</p>
             <input
               id="input-image"
               type="file"
@@ -150,7 +127,7 @@ const BuyBookModal = () => {
               Upload Image
             </button> */}
             <button className="buttn" type="button" onClick={handleSubmit}>
-              SELL
+              TRADE
             </button>
           </div>
         </div>
@@ -159,4 +136,4 @@ const BuyBookModal = () => {
   );
 };
 
-export default BuyBookModal;
+export default TradeBookModal;

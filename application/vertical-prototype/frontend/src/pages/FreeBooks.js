@@ -2,46 +2,30 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import './BuyBooks.css';
-
 import DialogBox from '../components/DialogBox';
+import SearchIcon from '@material-ui/icons/Search';
+import './FreeBooks.css';
+import FreeBookModal from './FreeBookModal';
 import { useDispatch } from 'react-redux';
-import BuyBookModal from './BuyBookModal';
-import BookGrid from './BookGrid';
-import ViewBook from './ViewBook';
-
 import { setSearchField } from '../redux/actions/userActions';
+import BookGrid from './BookGrid';
 
-const BuyBooks = () => {
+const FreeBooks = () => {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {};
-  const handleSearch = (e) => {};
-  const handleBookDetail = (
-    id,
-    title,
-    author,
-    department,
-    isbn,
-    condition,
-    price,
-    image
-  ) => {
-    return <ViewBook id={id} />;
-  };
+  const handleClick = (e) => {};
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   return (
-    <div className="buybooks">
+    <div className="freebooks">
       <Navigation />
-
-      <div className="buybooks__page">
-        <div className="buybooks__container">
+      <div className="freebooks__page">
+        <div className="freebooks__container">
           <div className="search__content">
             <input
               className="searchBar"
@@ -51,28 +35,28 @@ const BuyBooks = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => dispatch(setSearchField(e.target.value))}
             />
-            <button onClick={handleSearch} className="search__btn">
+            <button onClick={handleClick} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
           </div>
           <div className="post__book">
             <div className="post__book__container">
-              <p className="post__book__text">POST YOUR BOOK FOR SELL</p>
+              <p className="post__book__text">POST YOUR BOOK FOR FREE</p>
               <Button className="post__book__button" onClick={handleClickOpen}>
                 POST
               </Button>
               <DialogBox
                 open={open}
                 setOpen={setOpen}
-                title="SELL YOUR BOOK"
+                title="POST A BOOK FOR FREE"
                 button="DONE"
               >
-                <BuyBookModal />
+                <FreeBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">BOOKS TO BUY</h2>
+            <h2 className="post__book__title">BOOKS FOR FREE</h2>
           </div>
         </div>
         <div className="post__book__grid">
@@ -83,9 +67,8 @@ const BuyBooks = () => {
             department="English"
             isbn={837748374}
             condition="Used"
-            price={27.01}
+            price={0}
             image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
           />
 
           <BookGrid
@@ -95,9 +78,8 @@ const BuyBooks = () => {
             department="Computer Science"
             isbn={123567894}
             condition="Used"
-            price={120.67}
+            price={0}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
-            onClick={handleBookDetail()}
           />
           <BookGrid
             id="7315352"
@@ -106,51 +88,19 @@ const BuyBooks = () => {
             department="Literature"
             isbn={123535464}
             condition="New"
-            price={30.99}
+            price={0}
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
           />
         </div>
 
         {/* <div className="post__book__grid">
-          {itemsArray.map((item) => (
-            <div className="post__book__details">
-              <img
-                style={{ height: 200, width: 200 }}
-                src={item.image}
-                alt="book_image"
-                className="post__book__image"
-              />
-              <Button
-                className="buy__book__button"
-                onClick={handleAddCart(
-                  item.id,
-                  item.title,
-                  item.author,
-                  item.department,
-                  item.isbn,
-                  item.price,
-                  item.image
-                )}
-              >
-                Add to cart
-              </Button>
-
-              <p className="post__book__price">{item.price}</p>
-            </div>
-          ))}
-        </div> */}
-
-        {/* <div className="post__book__grid">
           <div className="post__book__details">
             <img
               src="https://via.placeholder.com/150"
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -158,9 +108,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -168,9 +116,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -178,9 +124,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -188,9 +132,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -198,9 +140,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -208,9 +148,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
           <div className="post__book__details">
             <img
@@ -218,9 +156,7 @@ const BuyBooks = () => {
               alt="book_image"
               className="post__book__image"
             />
-            <Button className="buy__book__button">Add to cart</Button>
-
-            <p className="post__book__price">$12</p>
+            <Button className="free__book__button">Add to cart</Button>
           </div>
         </div> */}
       </div>
@@ -230,4 +166,4 @@ const BuyBooks = () => {
   );
 };
 
-export default BuyBooks;
+export default FreeBooks;

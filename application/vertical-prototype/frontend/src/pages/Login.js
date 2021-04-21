@@ -10,12 +10,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setEmail,
   setPassword,
   setIsLoggedIn,
+  setUserId,
+  setUsername,
 } from '../redux/actions/userActions';
+
 import Axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
@@ -95,7 +98,7 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post('http://'+window.location.hostname+':3001/login', loginUser).then((response) => {
+    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
       console.log(response.data);
       if (response.data.auth) {
         store.addNotification({
@@ -111,7 +114,9 @@ export default function SignIn() {
         });
         localStorage.setItem('token', response.data.token);
         dispatch(setIsLoggedIn(response.data.auth));
-        history.push('/buyService');
+        dispatch(setUsername(response.data.username));
+        dispatch(setUserId(response.data.id));
+        history.push('/buybooks');
       } else {
         store.addNotification({
           title: '',
@@ -184,6 +189,7 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                     className="signinButton"
+                    // onClick={handleSubmit}
                   >
                     Sign In
                   </Button>

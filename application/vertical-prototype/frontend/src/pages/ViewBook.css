@@ -1,0 +1,50 @@
+.viewbook {
+  padding: 20px;
+  height: 100vh;
+
+  min-height: 100vh;
+}
+
+.viewbook_box {
+  background-color: #eceff3;
+  display: flex;
+  justify-content: center;
+  height: 95%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.viewbook_left {
+  width: 40%;
+  margin-top: 40px;
+}
+
+img {
+  height: 90px;
+  width: 56px;
+  border: 5px black;
+}
+
+.viewbook_information {
+  width: 50%;
+  /* margin-left: -500px; */
+  padding: 30px;
+}
+
+.viewbook_price {
+  color: #1e504c;
+  border: 1px solid #1e504c;
+  border-radius: 5px;
+  width: 70px;
+}
+
+button {
+  background-color: #1c504c !important;
+  color: white !important;
+  font-size: 17px !important;
+}
+
+button:hover {
+  background-color: #29918a !important;
+  color: white !important;
+}

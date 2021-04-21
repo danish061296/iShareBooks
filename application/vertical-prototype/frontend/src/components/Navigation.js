@@ -1,20 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { Link as LinkR } from 'react-router-dom';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
+import axios from 'axios';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setIsLoggedIn,
+  setEmail,
+  setUsername,
+  setPassword,
+} from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tippy from '@tippyjs/react';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const Navigation = () => {
   const [logo, setLogo] = useState(false);
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.userReducer.cart);
+  const userId = useSelector((state) => state.userReducer.userid);
+  console.log(userId);
+
+  const history = useHistory();
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
+
+  const handleSelect = (e) => {
+    console.log(`The selected is ${e}`);
+
+    if (e == 'profile') {
+      axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
+        dispatch(setEmail(response.data[0].email));
+        dispatch(setUsername(response.data[0].name));
+        console.log(response.data[0].name);
+
+        console.log(response.data[0].name);
+      });
+      history.push(`/profile/${userId}`);
+    } else if (e == 'logout') {
+      if (isLoggedIn) {
+        dispatch(setIsLoggedIn(false));
+        dispatch(setUsername(''));
+        dispatch(setEmail(''));
+        dispatch(setPassword(''));
+      }
+      store.addNotification({
+        title: '',
+        message: 'You have succussfully logged out!',
+        type: 'success',
+        insert: 'top',
+        container: 'top-center',
+        dismiss: {
+          duration: 2000,
+          showIcon: true,
+        },
+      });
+
+      history.push('/login');
+    }
+    console.log(e);
+    // dispatch(setSearchType(e));
+  };
 
   const showLogo = () => {
     if (window.scrollY >= 70) {
@@ -27,8 +82,8 @@ const Navigation = () => {
   window.addEventListener('scroll', showLogo);
 
   return (
-    <>
-      {!logo && (
+    <div>
+      {isLoggedIn && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           {/* <Button
             // className="sign__btn"
@@ -51,8 +106,21 @@ const Navigation = () => {
               iShareBooks
             </LinkR>
           </NavbarBrand>
+          <div className="account__btn">
+            <DropdownButton
+              // className="dropdown__btn"
+              variant="primary dropaccount__btn"
+              alignRight
+              title="Account"
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+              <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+            </DropdownButton>
+          </div>
 
-          <Nav className="ml-auto ">
+          {/* <Nav className="ml-auto ">
             <LinkR
               className="nav__link"
               style={{
@@ -65,9 +133,9 @@ const Navigation = () => {
             >
               Log In
             </LinkR>
-          </Nav>
+          </Nav> */}
 
-          <LinkR
+          {/* <LinkR
             style={{
               color: 'white',
               textDecoration: 'none',
@@ -77,10 +145,10 @@ const Navigation = () => {
             to="/registration"
           >
             <Button variant="outline-success signup__btn">Sign Up</Button>
-          </LinkR>
+          </LinkR> */}
         </Navbar>
       )}
-      {logo && (
+      {!isLoggedIn && (
         <div>
           <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
             <NavbarBrand className="navbar__title">
@@ -172,20 +240,40 @@ const Navigation = () => {
         </div>
       )}
       <div className="navbar__second">
-        <h1 className="navbar__logo" href="/home">
-          <LinkR className="navbar__logoLink" to="/">
-            iShareBooks
-          </LinkR>
-        </h1>
-        <div className="navbar__icons">
-          <Tippy content="Will be implemented in the future" placement="bottom">
-            <ShoppingCartIcon className="cart" />
-          </Tippy>
+        <ReactNotification />
 
-          <p>0</p>
+        {/* <h1 className="navbar__logo" href="/home"> */}
+        <div className="navbar__logo">
+          <LinkR className="navbar__logoLink" to="/">
+            <h1 className="logo__heading">iShareBooks</h1>
+          </LinkR>
+        </div>
+
+        {/* </h1> */}
+
+        <div className="navbar__icons">
+          <LinkR className="cart__link" to="/viewlistings">
+            <ShoppingCartIcon className="cart" />
+            <span className="cart__total">{cart?.length}</span>
+          </LinkR>
+          {/* {isLoggedIn && (
+            <div className="account__btn">
+              <DropdownButton
+                // className="dropdown__btn"
+                variant=" dropdown__btn"
+                alignRight
+                title="Account"
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+              </DropdownButton>
+            </div>
+          )} */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,17 +1,3 @@
-.login__Container {
-  height: 70vh;
-}
-
-.signinButton {
-  background-color: #18504c !important;
-}
-
-.signinButton:hover {
-  background-color: #28918a !important;
-  color: white !important;
-  border: 1px solid #18504c !important;
-}
-
 .MuiFormHelperText-root {
   color: red !important;
 }
@@ -25,41 +11,59 @@
 }
 
 .profile__Container {
-  background-color: white !important;
-  border: 1px solid #18504c !important;
+  /* border: 1px solid #18504c !important; */
   width: 85%;
-  height: 1100px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-radius: 20px;
   margin-left: 7.5%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 3px 5px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .top {
   background-color: #20736dc9 !important;
-  height: 200px;
+  /* height: 200px; */
+  border-radius: 20px 20px 0px 0px;
+  height: 20%;
+  display: flex;
+  justify-content: center;
 }
 
 .image_circle {
-  width: 270px;
-  height: 270px;
+  /* width: 270px;
+  height: 270px; */
+  width: 170px;
+  height: 170px;
   top: 75px;
   position: relative;
   background-color: #d5e8d4d7;
   border: 1px solid black;
-  border-radius: 250px;
+  /* border-radius: 250px; */
+  border-radius: 50%;
   display: block;
-  margin: auto;
   text-align: center;
 }
 
 .user_information {
-  height: 350px;
+  /* height: 350px; */
+  height: 45%;
   position: relative;
-  top: 150px;
+  top: 100px;
   text-align: center;
-  margin: auto;
+  /* margin: auto; */
+}
+
+.user_profile_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .username {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -68,7 +72,7 @@
 }
 
 .rating_num {
-  font-size: 65px;
+  font-size: 40px;
 }
 
 .rating_vis {
@@ -83,53 +87,51 @@
 }
 
 .user_books_container {
-  position: relative;
-  height: 400px;
+  height: 35%;
   width: 100%;
-  bottom: -145px;
+  border-radius: 0px 0px 20px 20px;
+
   background-color: #e6e6e6;
 }
 
 .user_books_container h2 {
-  position: relative;
+  /* position: relative; */
   padding: 10px;
-  right: 90px;
+  font-size: 25px;
+
+  /* right: 90px; */
 }
 
 .button_container {
-  position: relative;
+  /* position: relative; */
   float: right;
   right: 30px;
-  top: 65px;
-}
-
-.num_books {
-  position: relative;
-  float: left !important;
-  top: 75px;
-  padding: 10px;
-  padding-left: 20px !important;
-  left: 30px;
-  font-size: 25px;
-  text-decoration: underline;
+  top: 30px;
 }
 
 .delete_button {
   border: 1px solid #1a504c !important;
-  font-size: 20px !important;
-  border-radius: 10px;
-  width: 175px;
+  font-size: 15px !important;
+  border-radius: 5px;
+  right: 10px;
+
+  /* width: 175px; */
+  width: 100px;
 }
 
 .save_button {
   background-color: #1a504c !important;
-  font-size: 20px !important;
-  border-radius: 10px;
-  width: 175px;
+  font-size: 15px !important;
+  border-radius: 5px;
+  width: 100px;
   color: white !important;
-  right: 10px;
+  right: 20px;
 }
 
 .save_button:hover {
-  background-color: #223f3d !important;
+  background-color: #31837d !important;
+}
+.delete_button:hover {
+  background-color: #1a504c !important;
+  color: white !important;
 }
