@@ -35,6 +35,7 @@ const ViewBook = () => {
           {/* <div className="viewbook_details">  */}
           <div className="viewbook_left">
             <img
+              className="viewbook_image"
               style={{ height: 400, width: 300 }}
               src={viewBooks[viewBooks.length - 1].image}
               // src={viewBooks[0].image}
@@ -72,7 +73,7 @@ const ViewBook = () => {
               {viewBooks[viewBooks.length - 1].condition}
             </p>
             <p className="viewbook_isbn">
-              <strong>ISBN:</strong>
+              <strong>ISBN: </strong>
               {viewBooks[0].isbn}
             </p>
             <p className="viewbook_price">
