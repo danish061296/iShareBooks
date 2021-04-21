@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,7 +15,7 @@ import CardPayment from './CardPayment';
 import OrderReview from './OrderReview';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
 const muiTheme = createMuiTheme({
   overrides: {
@@ -35,9 +35,9 @@ const muiTheme = createMuiTheme({
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         iShareBooks
       </Link>{' '}
       {new Date().getFullYear()}
@@ -110,7 +110,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="checkout__Container">
+    <div className='checkout__Container'>
       <Navigation />
       <React.Fragment>
         <CssBaseline />
@@ -123,7 +123,7 @@ export default function Checkout() {
         </AppBar> */}
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
+            <Typography component='h1' variant='h4' align='center'>
               Checkout
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -136,10 +136,10 @@ export default function Checkout() {
             <React.Fragment>
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
+                  <Typography variant='h5' gutterBottom>
                     Thank you for your order.
                   </Typography>
-                  <Typography variant="subtitle1">
+                  <Typography variant='subtitle1'>
                     Your order number is #2001539. We have emailed your order
                     confirmation, and will send you an update when your order
                     has shipped.
@@ -155,8 +155,8 @@ export default function Checkout() {
                       </Button>
                     )}
                     <Button
-                      variant="contained"
-                      color="primary"
+                      variant='contained'
+                      color='primary'
                       onClick={handleNext}
                       className={classes.button}
                     >

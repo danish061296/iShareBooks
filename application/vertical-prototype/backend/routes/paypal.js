@@ -18,11 +18,14 @@ paypal.configure({
 router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
-
-  console.log('before', arrayOfBooks);
-
-  //get the total total price of the books
   let booksPrice = 0.35;
+  arrayOfBooks.forEach((array) => {
+    console.log(array.type);
+    if (array.type === 'paid') {
+      booksPrice = 0;
+    }
+  });
+  //get the total total price of the books
   // adding the total price into the books
 
   for (let i = 0; i < arrayOfBooks.length; i++) {
@@ -31,6 +34,7 @@ router.post('/pay', (req, res) => {
     arrayOfBooks[i].sku = 'item';
     arrayOfBooks[i].currency = 'USD';
   }
+
   //copying arrayOfBooks to a new array
   let paymentData = JSON.parse(JSON.stringify(arrayOfBooks));
 
@@ -43,8 +47,10 @@ router.post('/pay', (req, res) => {
     delete d.title;
     delete d.department;
     delete d.image;
+    delete d.type;
   });
 
+  console.log(paymentData);
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',

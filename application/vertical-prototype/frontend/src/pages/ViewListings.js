@@ -4,23 +4,23 @@ import ListingItem from '../components/ListingItem';
 import TotalAmount from '../components/TotalAmount';
 import Navigation from '../components/Navigation';
 
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Footer from '../components/Footer';
-import { ContactSupportOutlined } from '@material-ui/icons';
+import {ContactSupportOutlined} from '@material-ui/icons';
 
 const ViewListings = () => {
   const cart = useSelector((state) => state.userReducer.cart);
 
   console.log(cart);
   return (
-    <div className="viewlistings__container">
+    <div className='viewlistings__container'>
       <Navigation />
-      <div className="viewlisting">
-        <div className="viewlisting__left">
+      <div className='viewlisting'>
+        <div className='viewlisting__left'>
           {cart?.length === 0 ? (
-            <div className="viewlisting__noitems">
-              <h2 className="viewlisting__empty__cart">
+            <div className='viewlisting__noitems'>
+              <h2 className='viewlisting__empty__cart'>
                 Your shopping cart is empty.
               </h2>
               <p>
@@ -31,8 +31,8 @@ const ViewListings = () => {
             </div>
           ) : (
             <div>
-              <div className="cart__number">
-                <h4 className="viewlisting__message">
+              <div className='cart__number'>
+                <h4 className='viewlisting__message'>
                   Your Cart ({cart?.length})
                 </h4>
               </div>
@@ -48,13 +48,14 @@ const ViewListings = () => {
                     condition={item.condition}
                     price={item.price}
                     image={item.image}
+                    type={item.type}
                   />
                 );
               })}
             </div>
           )}
         </div>
-        <div className="viewlisting__right">
+        <div className='viewlisting__right'>
           {cart.length > 0 && <TotalAmount cart={cart} />}
         </div>
       </div>

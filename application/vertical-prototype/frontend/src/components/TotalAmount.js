@@ -3,8 +3,8 @@ import CurrencyFormat from 'react-currency-format';
 import axios from 'axios';
 import './TotalAmount.css';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
-import { getCartTotal } from '../redux/reducers/userReducer';
+import {useSelector} from 'react-redux';
+import {getCartTotal} from '../redux/reducers/userReducer';
 
 const TotalAmount = () => {
   // const arrayOfBooks = [
@@ -23,14 +23,14 @@ const TotalAmount = () => {
   // arrayOfBooks.push();
 
   return (
-    <div className="total__amount">
-      <div className="total__amount__top">
-        <div className="total__amount__summary">
-          <p className="summary">SUMMARY</p>
+    <div className='total__amount'>
+      <div className='total__amount__top'>
+        <div className='total__amount__summary'>
+          <p className='summary'>SUMMARY</p>
         </div>
-        <div className="subtotal__info">
-          <p className="subtotal">SUBTOTAL</p>
-          <p className="subtotal__cost">${getCartTotal(cart)}</p>
+        <div className='subtotal__info'>
+          <p className='subtotal'>SUBTOTAL</p>
+          <p className='subtotal__cost'>${getCartTotal(cart)}</p>
           {/* <CurrencyFormat
             renderText={(value) => (
               <>
@@ -48,20 +48,20 @@ const TotalAmount = () => {
             prefix={'$'}
           /> */}
         </div>
-        <div className="shipping__info">
-          <p className="shipping">Estimated shipping & handling</p>
-          <p className="shipping__cost">$0.00</p>
+        <div className='shipping__info'>
+          <p className='shipping'>Estimated shipping & handling</p>
+          <p className='shipping__cost'>$0.00</p>
         </div>
-        <p className="shipping__standard">Standard: FREE</p>
+        <p className='shipping__standard'>Standard: FREE</p>
       </div>
-      <div className="total__amount__bottom">
-        <div className="tax__info">
-          <p className="tax">TAX</p>
-          <p className="tax__cost">$0.00</p>
+      <div className='total__amount__bottom'>
+        <div className='tax__info'>
+          <p className='tax'>TAX</p>
+          <p className='tax__cost'>$0.00</p>
         </div>
-        <div className="total__info">
-          <p className="total">TOTAL:</p>
-          <p className="total__cost">${getCartTotal(cart)}</p>
+        <div className='total__info'>
+          <p className='total'>TOTAL:</p>
+          <p className='total__cost'>${getCartTotal(cart)}</p>
         </div>
         {/* <Link
           style={{
@@ -74,7 +74,7 @@ const TotalAmount = () => {
          
         > */}
 
-        <button className="checkout__button" onClick={handleCheckout}>
+        <button className='checkout__button' onClick={handleCheckout}>
           {' '}
           CHECKOUT
         </button>
