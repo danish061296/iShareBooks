@@ -71,6 +71,11 @@
   z-index: 99;
 }
 
+.explore__link {
+  color: white;
+  text-decoration: none;
+}
+
 .about input {
   color: black;
 }

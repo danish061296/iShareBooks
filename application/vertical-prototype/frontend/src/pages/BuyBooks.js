@@ -87,7 +87,6 @@ const BuyBooks = () => {
             type="paid"
             price={27.01}
             image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
           />
 
           <BookGrid
@@ -100,7 +99,6 @@ const BuyBooks = () => {
             type="paid"
             price={120.67}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
-            onClick={handleBookDetail()}
           />
           <BookGrid
             id="7315352"
@@ -112,7 +110,6 @@ const BuyBooks = () => {
             type="paid"
             price={30.99}
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
           />
         </div>
 

@@ -17,43 +17,43 @@ import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import ViewBook from './pages/ViewBook';
 import TermsOfUse from './pages/TermsOfUse';
+import Explore from './pages/ExploreNow';
 
-import {useSelector} from 'react-redux';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import SuccessfulPayment from './pages/SuccessfulPayment';
+import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
   return (
-    <div className='app'>
+    <div className="app">
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/registration' component={Registration} />
-          <Route path='/checkout' component={Checkout} />
-          <Route path='/profile' component={Profile} />
-          <Route path='/rating' component={RatingMessage} />
-          <Route path='/viewlistings' component={ViewListings} />
-          <Route path='/buybooks' component={BuyBooks} />
-          <Route path='/tradebooks' component={TradeBooks} />
-          <Route path='/freebooks' component={FreeBooks} />
-          <Route path='/privacy' component={Privacy} />
-          <Route path='/viewbook' component={ViewBook} />
-          <Route path='/profile' component={Profile} />
-          <Route path='/aboutus' component={AboutUs} />
-          <Route path='/contact' component={Contact} />
-          <Route path='/termsofuse' component={TermsOfUse} />
-          <Route path='/successfulPayment' component={SuccessfulPayment} />
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/registration" component={Registration} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/rating" component={RatingMessage} />
+          <Route path="/viewlistings" component={ViewListings} />
+          <Route path="/buybooks" component={BuyBooks} />
+          <Route path="/tradebooks" component={TradeBooks} />
+          <Route path="/freebooks" component={FreeBooks} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/viewbook" component={ViewBook} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/aboutus" component={AboutUs} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/termsofuse" component={TermsOfUse} />
+          <Route path="/explore" component={Explore} />
 
           <ProtectedRoute
-            path='/buyService'
+            path="/buyService"
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />
           <ProtectedRoute
-            path='/buyService'
+            path="/buyService"
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />

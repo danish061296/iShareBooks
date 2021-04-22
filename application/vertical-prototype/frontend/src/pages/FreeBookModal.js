@@ -112,7 +112,7 @@ const FreeBookModal = () => {
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
             ></input>
-            <p>Upload file</p>
+            <p>Upload Image</p>
             <input
               id="input-image"
               type="file"

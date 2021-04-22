@@ -50,7 +50,7 @@ router.post('/pay', (req, res) => {
     delete d.type;
   });
 
-  console.log(paymentData);
+  console.log(`the payment data is ${paymentData}`);
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',
@@ -58,7 +58,7 @@ router.post('/pay', (req, res) => {
       payment_method: 'paypal',
     },
     redirect_urls: {
-      return_url: 'http://localhost:3000/successfulPayment',
+      return_url: 'http://localhost:3000/rating',
       cancel_url: 'http://localhost:3000/cancelPayment',
     },
     transactions: [

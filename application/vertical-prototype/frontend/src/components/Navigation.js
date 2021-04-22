@@ -85,7 +85,7 @@ const Navigation = () => {
   // window.addEventListener('scroll', showLogo);
 
   return (
-    <div>
+    <div className="navbar__div">
       {isLoggedIn && (
         <Navbar bg="" variant="dark" className="navbar__first" sticky="top">
           <NavbarBrand className="navbar__title">
