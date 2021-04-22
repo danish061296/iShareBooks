@@ -1,11 +1,11 @@
 # Credentials
 
-1. Server URL: http://13.58.93.59/ Webpage: http://13.58.93.59:3000
+1. Server URL: http://35.215.84.127 Webpage: http://35.215.84.127:3000
 2. SSH username: ubuntu
 3. SSH key - download sec4team4.pem file
-4. Database URL: "book.c4ounpymqddx.us-east-1.rds.amazonaws.com" port: 3306
+4. Database URL: "team4books.c8c9xdcpvbxl.us-east-1.rds.amazonaws.com" port: 3306
 5. Database username: root
-6. Database password: Zaedzaed12
+6. Database password: team4SWE!
 7. Database name: book
 
 ## How to Log In to AWS EC2 SSH
@@ -14,12 +14,19 @@
 3. Type the following: ssh -i "sec4team4.pem" ubuntu@ec2-13-58-93-59.us-east-2.compute.amazonaws.com
 3.1 Replace dir with the location of the downloaded file.
 4. Press enter and you will now have access to the server terminal.
+ * If getting a permission denied error, try running command: "sudo chmod 400 sec4team3.pem"
 
 ## How to Log In to AWS RDS
-1. Set the endpoint to the Database URL.
-2. Set the port to 3306.
-3. Enter the database name in the connection name field.
-4. Enter the database username and password.
+1. Use software such as MySQL Workbench or connect directly using script. For scripts, refer to the API for MySQL for that framework. If using Workbench, continue to step 2.
+2. Open MySQL Workbench
+3. In the "MySQL Connections" header, click on the (+) symbol to add a new connection. 
+4. In the popout window titled "Setup New Connection," enter a connection name of your choice.
+5. Ensure that the connection method is "Standard (TCP/IP)."
+6. Under parameters, enter the endpoint (team4books.c8c9xdcpvbxl.us-east-1.rds.amazonaws.com) in the hostname field. Enter 3306 for the port field.
+9. In the username field, enter "root."
+10. In the password, click "Store in Keychain..." In the popout, type "team4SWE!" and click "OK."
+11. Finally, click "Test Connection." This step may take a while but should return a "Successful Connection" message.
+12. Upon successful access, you may now access the database.
 
 
-(up-to-date as of 1 April 2021)
+(up-to-date as of 22 April 2021)
