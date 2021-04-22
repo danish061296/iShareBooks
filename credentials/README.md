@@ -8,10 +8,10 @@
 6. Database password: team4SWE!
 7. Database name: book
 
-## How to Log In to AWS EC2 SSH
-1. Download sec4team3.pem file and store it in a secure directory.
+## How to Log In to gcloud Compute SSH
+1. Download team4SWE file and store it in a secure directory. Preferabble, in ~/.ssh directory
 2. Open your terminal or command line.
-3. Type the following: ssh -i "sec4team4.pem" ubuntu@ec2-13-58-93-59.us-east-2.compute.amazonaws.com
+3. Type the following: ssh -i "dir" ubuntu@ec2-13-58-93-59.us-east-2.compute.amazonaws.com
 3.1 Replace dir with the location of the downloaded file.
 4. Press enter and you will now have access to the server terminal.
  * If getting a permission denied error, try running command: "sudo chmod 400 sec4team3.pem"
