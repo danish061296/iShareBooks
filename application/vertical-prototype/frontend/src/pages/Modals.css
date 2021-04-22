@@ -36,14 +36,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* text-emphasis-position: center; */
   color: white;
   left: 20%;
 }
 
 .head-left {
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
 }
 .head-right {
   text-align: center;

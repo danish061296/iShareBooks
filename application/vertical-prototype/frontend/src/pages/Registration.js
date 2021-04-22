@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-import { useHistory } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Modals.css';
-import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 
@@ -27,8 +26,6 @@ const BuyBookModal = () => {
       condition: condition,
       image: image.name,
     };
-
-    console.log(paidBook);
 
     store.addNotification({
       title: '',
@@ -79,7 +76,7 @@ const BuyBookModal = () => {
           </h2>
           <img
             src="https://via.placeholder.com/150"
-            alt="some-image"
+            alt="some-default"
             className="bookpic"
           />
         </div>
@@ -140,15 +137,12 @@ const BuyBookModal = () => {
               type="file"
               name="image"
               accept=".jpg, .png, .jpeg"
-              // value={image}
               className="form-control"
               ref={imageRef}
               onChange={(e) => setImage(e.target.files[0])}
               single="true"
             />
-            {/* <button className="buttn" type="button">
-              Upload Image
-            </button> */}
+
             <button className="buttn" type="button" onClick={handleSubmit}>
               SELL
             </button>

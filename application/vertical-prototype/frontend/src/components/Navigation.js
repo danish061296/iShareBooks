@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link as LinkR, useHistory } from 'react-router-dom';
 import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
@@ -11,9 +11,10 @@ import {
   setEmail,
   setUsername,
   setPassword,
+  setCartItem,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Tippy from '@tippyjs/react';
+
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import 'tippy.js/dist/tippy.css';
@@ -21,7 +22,6 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const Navigation = () => {
-  const [logo, setLogo] = useState(false);
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
@@ -38,7 +38,7 @@ const Navigation = () => {
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
 
-    if (e == 'profile') {
+    if (e === 'profile') {
       axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
         dispatch(setEmail(response.data[0].email));
         dispatch(setUsername(response.data[0].name));
@@ -47,7 +47,7 @@ const Navigation = () => {
         console.log(response.data[0].name);
       });
       history.push(`/profile/${userId}`);
-    } else if (e == 'logout') {
+    } else if (e === 'logout') {
       if (isLoggedIn) {
         dispatch(setIsLoggedIn(false));
         dispatch(setUsername(''));
@@ -67,22 +67,11 @@ const Navigation = () => {
       });
 
       history.push('/login');
-    } else if (e == 'home') {
+    } else if (e === 'home') {
       history.push('/');
     }
     console.log(e);
-    // dispatch(setSearchType(e));
   };
-
-  const showLogo = () => {
-    if (window.scrollY >= 70) {
-      setLogo(true);
-    } else {
-      setLogo(false);
-    }
-  };
-
-  // window.addEventListener('scroll', showLogo);
 
   return (
     <div className="navbar__div">
@@ -142,7 +131,7 @@ const Navigation = () => {
               </LinkR>
             </NavbarBrand>
             <Nav className="ml-auto ">
-              {window.location.href.slice(-1) == '/' && (
+              {window.location.href.slice(-1) === '/' && (
                 <div>
                   <Link
                     className="nav__link"
@@ -232,7 +221,12 @@ const Navigation = () => {
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
             <ShoppingCartIcon className="cart" />
-            <span className="cart__total">{cart?.length}</span>
+
+            {isLoggedIn ? (
+              <span className="cart__total">{cart?.length}</span>
+            ) : (
+              <span className="cart__total">0</span>
+            )}
           </LinkR>
         </div>
       </div>

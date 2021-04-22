@@ -60,9 +60,9 @@ const FreeBookModal = () => {
       <ReactNotification />
       <div className="body">
         <div className="left-side">
-          <h2 className="head-left">
+          <p className="head-left">
             Donate Your Book To Help Your Friends For Easy Access
-          </h2>
+          </p>
           <img
             src="https://via.placeholder.com/150"
             alt="some-image"

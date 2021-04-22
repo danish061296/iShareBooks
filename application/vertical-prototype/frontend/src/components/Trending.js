@@ -78,19 +78,19 @@ const Trending = () => {
               style={{ width: 300, height: 350 }}
               className="default__img"
               src={defaultImage}
-              alt="default_image"
+              alt="default"
             />
             <img
               style={{ width: 300, height: 350 }}
               src={defaultImage}
               className="default__img"
-              alt="default image"
+              alt="default"
             />
             <img
               style={{ width: 300, height: 350 }}
               src={defaultImage}
               className="default__img"
-              alt="default image"
+              alt="default"
             />
           </div>
         </div>
