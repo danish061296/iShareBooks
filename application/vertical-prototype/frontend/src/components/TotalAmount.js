@@ -27,7 +27,7 @@ const TotalAmount = () => {
         </div>
         <div className="subtotal__info">
           <p className="subtotal">SUBTOTAL</p>
-          <p className="subtotal__cost">${getCartTotal(cart)}</p>
+          <p className="subtotal__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
         <div className="shipping__info">
           <p className="shipping">Estimated shipping & handling</p>
@@ -42,7 +42,7 @@ const TotalAmount = () => {
         </div>
         <div className="total__info">
           <p className="total">TOTAL:</p>
-          <p className="total__cost">${getCartTotal(cart)}</p>
+          <p className="total__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
 
         <button className="checkout__button" onClick={handleCheckout}>

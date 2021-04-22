@@ -5,14 +5,18 @@ const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.get('/search', (req, res) => {
+router.post('/search', (req, res) => {
   //freebooks
   //tradebooks
   //paidbooks
-  const { searchField, searchType } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+  const { searchField, munitem, message } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   let query;
-  
-  searchTable = "paidbooks";
+  console.log(searchField);
+  const searchType = 'any';
+  searchTable = 'paidbooks';
+  if (searchField === 'default') {
+    suggestions();
+  }
 
   //searchField = "Co";
   if (searchType == 'any')
@@ -63,9 +67,9 @@ router.get('/search', (req, res) => {
         }
       });
 
-      console.log(results.length);
+      // console.log(results.length);
       if (results.length > 0) {
-        console.log(results);
+        // console.log(results);
         res.send(results);
       } else {
         suggestions();
@@ -73,5 +77,32 @@ router.get('/search', (req, res) => {
     } //else
   }); //dbque ry
 }); //routerPost
+
+router.get('/fire', (req, res) => {
+  var searchTable = 'paidbooks';
+
+  var query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  db.query(query, (err, results) => {
+    // let suggest = JSON.stringify(results);
+    //console.log(JSON.parse(suggest))
+    // console.log('Printig Results: ' + suggest)
+
+    // let obj = JSON.parse(suggest);
+    if (err) {
+      console.log(err);
+    }
+
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+
+    return res.send({
+      results,
+    });
+  });
+});
 
 module.exports = router;

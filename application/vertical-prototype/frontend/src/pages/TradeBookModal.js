@@ -35,23 +35,25 @@ const TradeBookModal = () => {
     setCondition('');
     setImage('');
 
-    axios.post('http://localhost:3001/posts', tradeBook).then((response) => {
-      if (!response.data.bookPosted) {
-        alert(response.data.msg);
-      } else {
-        store.addNotification({
-          title: '',
-          message: response.data.msg,
-          type: 'success',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-      }
-    });
+    axios
+      .post('http://' + window.location.hostname + ':3001/posts', tradeBook)
+      .then((response) => {
+        if (!response.data.bookPosted) {
+          alert(response.data.msg);
+        } else {
+          store.addNotification({
+            title: '',
+            message: response.data.msg,
+            type: 'success',
+            insert: 'top',
+            container: 'top-center',
+            dismiss: {
+              duration: 2000,
+              showIcon: true,
+            },
+          });
+        }
+      });
   };
 
   return (

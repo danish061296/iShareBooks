@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import { Link as LinkR } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -106,36 +107,37 @@ const Registration = () => {
     };
 
     console.log(registerUser.username);
-    Axios.post('http://localhost:3001/register', registerUser).then(
-      (response) => {
-        console.log(response.data);
-        if (!response.data.registered) {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'danger',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        } else {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'success',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        }
+    Axios.post(
+      'http://' + window.location.hostname + ':3001/register',
+      registerUser
+    ).then((response) => {
+      console.log(response.data);
+      if (!response.data.registered) {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
       }
-    );
+    });
 
     dispatch(setUsername(payload.username));
     dispatch(setEmail(payload.email));
@@ -217,10 +219,15 @@ const Registration = () => {
                       }
                       // label="I want to receive fun updates about books via email."
                       label={
-                        <Typography variant="body2" color="textSecondary">
-                          By clicking sign up, you agree to our Terms and
-                          Privacy Policy.
-                        </Typography>
+                        <>
+                          <p className="terms__checkbox">
+                            By clicking sign up, you agree to our Terms and
+                            Privacy Policy.
+                            <LinkR className="terms__link" to="/termsofuse">
+                              Terms of Use
+                            </LinkR>
+                          </p>
+                        </>
                       }
                     />
                   </Grid>

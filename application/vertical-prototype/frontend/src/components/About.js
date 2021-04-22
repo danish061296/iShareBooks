@@ -17,6 +17,7 @@ import {
 
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import axios from 'axios';
 
 const About = () => {
   useEffect(() => {
@@ -25,13 +26,14 @@ const About = () => {
 
   //sending data to redux
   const dispatch = useDispatch();
+  const posts = useSelector((state) => state.userReducer.posts);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const searchType = useSelector((state) => state.userReducer.searchType);
 
   // useEffect(() => {
   //   const search = {
-  //     searchField: searchField,
+  //     searchField: 'default',
   //   };
   //   Axios.post('http://localhost:3001/search', search)
   //     .then((response) => {
@@ -42,9 +44,9 @@ const About = () => {
   //           // dispatch(setrandomMsg(response.data));
   //           dispatch(setPosts(response.data));
   //         } else {
-  //           console.log('Data coming from search click');
+  //           console.log('Data coming from default');
   //           dispatch(setPosts(response.data));
-  //           dispatch((setrandomMsg = ''));
+  //           dispatch(setrandomMsg(''));
   //         }
   //       } else {
   //         dispatch(setPosts([]));
@@ -56,13 +58,14 @@ const About = () => {
   // }, []);
 
   const handleKeyDown = (e) => {
-    const search = {
-      searchField: searchField,
-      searchType: searchType,
-    };
-
     if (e.key === 'Enter') {
-      Axios.get('http://localhost:3001/search', search)
+      const search = {
+        searchField: searchField,
+        searchType: searchType,
+      };
+
+      console.log(searchField);
+      Axios.post('http://localhost:3001/search', search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -95,6 +98,13 @@ const About = () => {
 
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
+
+    const object = {
+      menuitem: e,
+      message: 'exlpore',
+    };
+
+    axios.post('', object);
     dispatch(setSearchType(e));
   };
 
@@ -104,7 +114,9 @@ const About = () => {
       searchType: searchType,
     };
 
-    Axios.get('http://localhost:3001/search', search)
+    console.log(searchField);
+
+    Axios.post('http://localhost:3001/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);

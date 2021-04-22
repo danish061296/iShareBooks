@@ -8,6 +8,8 @@ import { setCartItem } from '../redux/actions/userActions';
 
 const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
+  const randomMsg = useSelector((state) => state.userReducer.randomMsg);
+
   const dispatch = useDispatch();
 
   // add to cart
@@ -27,21 +29,30 @@ const ViewBook = () => {
     );
   };
 
+  const base64Image = `data:image/jpg;base64,${
+    viewBooks[viewBooks.length - 1].image
+  }`;
+
   return (
     <div className="viewbook_container">
       <Navigation />
       <div className="viewbook">
         <div className="viewbook_box">
           {/* <div className="viewbook_details">  */}
+
           <div className="viewbook_left">
             <img
               className="viewbook_image"
               style={{ height: 400, width: 300 }}
-              src={viewBooks[viewBooks.length - 1].image}
+              // src={`data:image/jpeg;base64,${
+              //   viewBooks[viewBooks.length - 1].image
+              // }`}
+              src={base64Image}
               // src={viewBooks[0].image}
 
               alt="book"
             />
+
             {/* <p className="viewbook_description">Summary/Description of Book</p> */}
           </div>
           <div className="viewbook_information" id="info">
