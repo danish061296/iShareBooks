@@ -11,10 +11,10 @@
 ## How to Log In to gcloud Compute SSH
 1. Download team4SWE file and store it in a secure directory. Preferabble, in ~/.ssh directory
 2. Open your terminal or command line.
-3. Type the following: ssh -i "dir" ubuntu@ec2-13-58-93-59.us-east-2.compute.amazonaws.com
+3. Type the following: ssh -i "dir/team4SWE" team4swe@35.215.84.127
 3.1 Replace dir with the location of the downloaded file.
 4. Press enter and you will now have access to the server terminal.
- * If getting a permission denied error, try running command: "sudo chmod 400 sec4team3.pem"
+ * If getting a permission denied error, try running command: "sudo chmod 400 dir/team4SWE"
 
 ## How to Log In to AWS RDS
 1. Use software such as MySQL Workbench or connect directly using script. For scripts, refer to the API for MySQL for that framework. If using Workbench, continue to step 2.
