@@ -53,6 +53,7 @@ const Navigation = () => {
         dispatch(setUsername(''));
         dispatch(setEmail(''));
         dispatch(setPassword(''));
+        dispatch(setCartItem([]));
       }
       store.addNotification({
         title: '',
@@ -222,11 +223,7 @@ const Navigation = () => {
           <LinkR className="cart__link" to="/viewlistings">
             <ShoppingCartIcon className="cart" />
 
-            {isLoggedIn ? (
-              <span className="cart__total">{cart?.length}</span>
-            ) : (
-              <span className="cart__total">0</span>
-            )}
+            <span className="cart__total">{cart?.length}</span>
           </LinkR>
         </div>
       </div>
