@@ -16,7 +16,7 @@ const ServiceBuy = () => {
 
   return (
     <div>
-      This is buy, you are authenticate
+      This is buy, you are good
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
