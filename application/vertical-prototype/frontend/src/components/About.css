@@ -51,7 +51,7 @@
 }
 
 .about__title {
-  color: white;
+  color: white !important;
   margin-top: 70px;
   font-size: 60px;
   font-weight: 700;
@@ -60,6 +60,7 @@
 
 .about__services {
   display: flex;
+  margin-top: 20px;
 }
 
 .services__link {
@@ -68,6 +69,11 @@
   border-bottom: 1px solid white;
   cursor: pointer;
   z-index: 99;
+}
+
+.explore__link {
+  color: white;
+  text-decoration: none;
 }
 
 .about input {
@@ -138,9 +144,15 @@
   font-size: 50px !important;
 }
 
+.links {
+  text-decoration: none;
+  z-index: 99;
+  color: white;
+}
+
 .filter__btn {
   z-index: 99;
-  width: 30%;
+  width: 32%;
   margin: 6px;
   align-self: flex-end;
 }
@@ -156,11 +168,12 @@
   .about__title {
     font-size: 30px;
   }
-  .about__content {
-    font-size: 10px;
+  .about__content p {
+    font-size: 13px;
   }
   .searchBar {
-    font-size: 15px;
+    font-size: 14px;
+    height: 40px;
   }
   .explore__btn {
     font-size: 10px !important;
@@ -172,11 +185,12 @@
     width: 60%;
   }
   .search__btn {
-    font-size: 40px !important;
+    font-size: 20px !important;
     width: 15% !important;
+    height: 40px;
   }
   .search__icon {
-    font-size: 30px !important;
+    font-size: 10px !important;
   }
   .dropdown__btn {
     font-size: 10px !important;

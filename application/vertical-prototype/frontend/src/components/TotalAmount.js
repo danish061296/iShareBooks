@@ -1,11 +1,24 @@
 import React from 'react';
-import CurrencyFormat from 'react-currency-format';
+import axios from 'axios';
 import './TotalAmount.css';
-import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
+import { getCartTotal } from '../redux/reducers/userReducer';
 
-import { Link } from 'react-router-dom';
+const TotalAmount = () => {
+  const cart = useSelector((state) => state.userReducer.cart);
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
-const TotalAmount = ({ cart }) => {
+  const handleCheckout = async () => {
+    console.log('clicked');
+
+    if (!isLoggedIn) {
+      alert('You need to log in first to checkout your books!');
+    } else {
+      const res = await axios.post('http://localhost:3001/pay', cart);
+      window.open(res.data);
+    }
+  };
+
   return (
     <div className="total__amount">
       <div className="total__amount__top">
@@ -14,23 +27,7 @@ const TotalAmount = ({ cart }) => {
         </div>
         <div className="subtotal__info">
           <p className="subtotal">SUBTOTAL</p>
-          <p className="subtotal__cost">$56.82</p>
-          {/* <CurrencyFormat
-            renderText={(value) => (
-              <>
-                <p className="subtotal">
-                  SUBTOTAL ({cart.length} items):
-                  <strong className="total__price">{`${value}`}</strong>
-                </p>
-              </>
-            )}
-            //   value={getCartTotal(cart)}
-            value={13.56}
-            displayType={'text'}
-            decimaleScale={2}
-            thousandSeparator={true}
-            prefix={'$'}
-          /> */}
+          <p className="subtotal__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
         <div className="shipping__info">
           <p className="shipping">Estimated shipping & handling</p>
@@ -45,20 +42,13 @@ const TotalAmount = ({ cart }) => {
         </div>
         <div className="total__info">
           <p className="total">TOTAL:</p>
-          <p className="total__cost">$56.82</p>
+          <p className="total__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
-        <Link
-          style={{
-            color: 'white',
-            textDecoration: 'none',
 
-            cursor: 'pointer',
-          }}
-          className="checkout__link"
-          to="/checkout"
-        >
-          <Button className="checkout__button">CHECKOUT</Button>
-        </Link>
+        <button className="checkout__button" onClick={handleCheckout}>
+          {' '}
+          CHECKOUT
+        </button>
       </div>
     </div>
   );

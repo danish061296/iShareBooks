@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import {
@@ -24,10 +25,19 @@ const Footer = () => {
         <div className="Fcontent">
           <div className="fcontent">
             <section className="left">
-              About
-              <section>Privacy</section>
-              <section>FAQ</section>
-              <section>Contact:</section>
+              <Link className="footer__link" to="/aboutus">
+                About
+              </Link>
+              <section>
+                <Link className="footer__link" to="/privacy">
+                  Privacy
+                </Link>
+              </section>
+              <section>
+                <Link className="footer__link" to="/contact">
+                  Contact Us
+                </Link>
+              </section>
             </section>
             <section className="center">
               Social
@@ -42,10 +52,17 @@ const Footer = () => {
           </div>
 
           <div className="copyright">
-            <h7>Terms of Sale</h7>
-            <h7>Terms of Use</h7>
+            <Link className="footer__link">
+              <span>Terms of Sale</span>
+            </Link>
 
-            <p>© 2021 Copyright iSHARE INC</p>
+            <Link className="footer__link" to="/termsofuse">
+              <span>Terms of Use</span>
+            </Link>
+
+            <Link className="footer__link">
+              <span>© 2021 Copyright iSHARE INC</span>
+            </Link>
           </div>
         </div>
         <Button

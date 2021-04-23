@@ -6,18 +6,41 @@ const { query } = require('../dataBase.js');
 const router = express.Router();
 
 router.post('/search', (req, res) => {
-  const { searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
-
+  //freebooks
+  //tradebooks
+  //paidbooks
+  const { searchField, munitem, message } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   let query;
+  console.log(searchField);
+  const searchType = 'any';
+  searchTable = 'paidbooks';
+  if (searchField === 'default') {
+    suggestions();
+  }
+
+  //searchField = "Co";
+  if (searchType == 'any')
+    query =
+      `SELECT * FROM ${searchTable} WHERE title LIKE ` +
+      db.escape('%' + searchField + '%') +
+      ' OR author LIKE ' +
+      db.escape('%' + searchField + '%') +
+      ' OR department LIKE ' +
+      db.escape('%' + searchField + '%');
+  else if (searchField == '') {
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  } else if (searchType != 'any') {
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  }
 
   function suggestions() {
-    query = 'SELECT * FROM Book ORDER BY title ASC LIMIT 8';
+    query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
     db.query(query, (err, results) => {
-      // let suggest = JSON.stringify(results);
+      let suggest = JSON.stringify(results);
       //console.log(JSON.parse(suggest))
       // console.log('Printig Results: ' + suggest)
 
-      // let obj = JSON.parse(suggest);
+      let obj = JSON.parse(suggest);
 
       results.forEach(function (book, index) {
         if (book.image) {
@@ -33,24 +56,6 @@ router.post('/search', (req, res) => {
     });
   }
 
-  let searchType = 'any';
-
-  //searchField = "Co";
-  if (searchType == 'any')
-    query =
-      'SELECT * FROM Book WHERE title LIKE ' +
-      db.escape('%' + searchField + '%') +
-      ' OR author LIKE ' +
-      db.escape('%' + searchField + '%') +
-      ' OR department LIKE ' +
-      db.escape('%' + searchField + '%');
-  else if (searchField == '') {
-    suggestions();
-    //  query = "SELECT * FROM BOOK ORDER BY title ASC LIMIT 8";
-  } else if (searchType != 'any') {
-    query = 'SELECT * FROM BOOK ORDER BY title ASC LIMIT 8';
-  }
-
   db.query(query, (err, results) => {
     if (err) {
       res.status(500).send('error getting the data', err);
@@ -62,14 +67,41 @@ router.post('/search', (req, res) => {
         }
       });
 
-      console.log(results.length);
+      // console.log(results.length);
       if (results.length > 0) {
-        console.log(results);
+        // console.log(results);
         res.send(results);
       } else {
         suggestions();
-      }
+      } //else
+    } //else
+  }); //dbque ry
+}); //routerPost
+
+router.get('/fire', (req, res) => {
+  var searchTable = 'paidbooks';
+
+  var query = `SELECT * FROM ${searchTable} ORDER BY title ASC LIMIT 8`;
+  db.query(query, (err, results) => {
+    // let suggest = JSON.stringify(results);
+    //console.log(JSON.parse(suggest))
+    // console.log('Printig Results: ' + suggest)
+
+    // let obj = JSON.parse(suggest);
+    if (err) {
+      console.log(err);
     }
+
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+
+    return res.send({
+      results,
+    });
   });
 });
 

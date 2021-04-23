@@ -2,6 +2,8 @@ import React from 'react';
 import { Star } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
+import { removeFromCart } from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const ListingItem = ({
   id,
@@ -13,8 +15,12 @@ const ListingItem = ({
   price,
   image,
 }) => {
+  const dispatch = useDispatch();
+
   // remove item from the cart
-  const removeFromCart = () => {};
+  const handleRemove = () => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <div className="listingitem__item">
@@ -41,14 +47,15 @@ const ListingItem = ({
           <strong>ISBN: </strong>
           {isbn}
         </p>
+        <div className="listingitem__bottom">
+          <p className="listingitem__item__price">${price}</p>
+          <Button onClick={handleRemove} className="listingitem__item__button">
+            REMOVE FROM CART
+          </Button>
+        </div>
+      </div>
 
-        <p className="listingitem__item__price">
-          ${price}
-          {/* <small>$</small>
-          <strong>{price}</strong> */}
-        </p>
-
-        {/* <div className="listingitem__item__rating">
+      {/* <div className="listingitem__item__rating">
           {Array(rating)
             .fill()
             .map((_, i) => (
@@ -57,10 +64,6 @@ const ListingItem = ({
               </p>
             ))}
         </div> */}
-        <Button onClick={removeFromCart} className="listingitem__item__button">
-          REMOVE FROM CART
-        </Button>
-      </div>
     </div>
   );
 };

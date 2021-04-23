@@ -7,6 +7,10 @@ export const setPassword = (password) => ({
   type: 'SET_PASSWORD',
   password,
 });
+export const setUserId = (userid) => ({
+  type: 'SET_USERID',
+  userid,
+});
 
 export const setEmail = (email) => ({
   type: 'SET_EMAIL',
@@ -42,6 +46,16 @@ export const setrandomMsg = (randomMsg) => ({
 });
 
 export const setCartItem = (item) => ({
-  type: 'SET_CART',
+  type: 'ADD_TO_CART',
   item,
+});
+
+export const removeFromCart = (id) => ({
+  type: 'REMOVE_FROM_CART',
+  id,
+});
+
+export const setViewBook = (book) => ({
+  type: 'SET_VIEW_BOOK',
+  book,
 });
