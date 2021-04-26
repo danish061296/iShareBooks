@@ -20,33 +20,34 @@ router.get('/', (req, res) => {
 router.post('/register', (req, res) => {
   const { username, email, password } = req.body;
   const values = [email];
-  var sql = `SELECT email from users where email=?`;
-  db.query(sql, [values], (err, results) => {
+  var hash = bcrypt.hashSync(password, 8);
+  const user = [username, email, hash];
+
+  var insertSQL = `INSERT INTO users (name,email,password) VALUES (?)`;
+  db.query(insertSQL, [user], (err, results) => {
+
     if (err) {
+      if (err.sqlMessage.includes('name')) {
+        return res.send({
+          registered: false,
+          message: 'Username is already in use!',
+        });
+      }
+      else if (err.sqlMessage.includes('email')) {
+        return res.send({
+          registered: false,
+          message: 'Email is already in use!',
+        });
+      }
+
       return res.status(401).send(err);
-    } else if (results.length > 0) {
-      return res.send({
-        registered: false,
-        message: 'Email is already in use!',
-      });
+
     } else {
-      var hash = bcrypt.hashSync(password, 8);
-      const user = [username, email, hash];
-      var inserSql = `INSERT INTO users (name, email,password) VALUES (?)`;
-      db.query(inserSql, [user], function (err, data) {
-        console.log(user);
         if (err) throw err;
         res.status(200).send({
           registered: true,
           message: 'The user is registered successfully!',
         });
-
-        // res.json({
-        //   status: 200,
-        //   // data: data,
-        //   registered: true,
-        //   message: 'The user is registered successfully!',
-        // });
 
         const payload = {
           user: {
@@ -68,8 +69,9 @@ router.post('/register', (req, res) => {
             }
           }
         );
-      });
     }
+  
+
   });
 });
 
