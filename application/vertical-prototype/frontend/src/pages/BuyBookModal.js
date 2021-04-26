@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Modals.css';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import axios from 'axios';
 
 const BuyBookModal = () => {
   const [title, setTitle] = useState('');
@@ -47,23 +48,23 @@ const BuyBookModal = () => {
     setCondition('');
     setImage('');
 
-    // axios.post('http://localhost:3001/posts', paidBook).then((response) => {
-    //   if (!response.data.bookPosted) {
-    //     alert(response.data.msg);
-    //   } else {
-    //     store.addNotification({
-    //       title: '',
-    //       message: response.data.msg,
-    //       type: 'success',
-    //       insert: 'top',
-    //       container: 'top-center',
-    //       dismiss: {
-    //         duration: 2000,
-    //         showIcon: true,
-    //       },
-    //     });
-    //   }
-    // });
+    axios.post('http://localhost:3001/posts', paidBook).then((response) => {
+      if (!response.data.bookPosted) {
+        alert(response.data.msg);
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      }
+    });
   };
   return (
     <div>
