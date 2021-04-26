@@ -7,14 +7,18 @@ const Card = ({ key, number, image, defaultImage }) => {
       {image && (
         <div className="card">
           <img
-            src={`data:image/jpeg;base64,${image}`}
+            src={`data:image/*;base64,${image}`}
             alt="card_image"
             className="card__image"
             style={{ height: '300px', width: '100%' }}
           />
         </div>
       )}
+      <div className="testCard">
+        TEST
+      </div>
     </div>
+    
   );
 };
 

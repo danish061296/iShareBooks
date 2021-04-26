@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 import BookGrid from './BookGrid';
 import userReducer from '../redux/reducers/userReducer';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const ViewBook = () => {
   // add to cart
@@ -24,18 +26,31 @@ const ViewBook = () => {
   };
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
 
-  //console.log(viewBooks);
+  const history = useHistory();
+
+  const goBack = () => {
+    history.goBack();
+  };
 
   return (
     <div className="viewbook_container">
       <Navigation />
       <div className="viewbook">
+      <div >
+              <Button className="back_button" onClick={goBack}>
+                Go Back
+              </Button>
+          
+            </div>
+        
         <div className="viewbook_box">
+
+          
           {/* <div className="viewbook_details">  */}
           <div className="viewbook_left">
             <img
               style={{ height: 400, width: 300 }}
-              src={viewBooks[viewBooks.length-1].image}
+              src={`data:image/png;base64,${viewBooks[viewBooks.length-1].image}`}
               alt="book"
             />
             {/* <p className="viewbook_description">Summary/Description of Book</p> */}
@@ -53,7 +68,7 @@ const ViewBook = () => {
               <strong>ISBN:</strong>
               {viewBooks[0].isbn}
             </p>
-            <p className="viewbook_price">${viewBooks[viewBooks.length-1].price}</p>
+            <p className="viewbook_price">${viewBooks[viewBooks.length-1].cost}</p>
             <Button onClick={addToCart} className="viewbook__button">
               Add to cart
             </Button>

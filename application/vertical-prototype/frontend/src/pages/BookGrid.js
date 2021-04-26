@@ -6,7 +6,7 @@ import './BuyBooks.css';
 
 import { setCartItem, setViewBook } from '../redux/actions/userActions';
 
-const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
+const BookGrid = ({ id, title, author, department, isbn, price, image, condition }) => {
   const dispatch = useDispatch();
 
   const bookClick = () => {
@@ -20,6 +20,7 @@ const BookGrid = ({ id, title, author, department, isbn, price, image }) => {
         title,
         author,
         department,
+        condition,
         isbn,
         image,
         price,

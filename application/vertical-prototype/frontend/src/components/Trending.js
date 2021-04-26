@@ -16,8 +16,6 @@ const Trending = () => {
   const posts = useSelector((state) => state.userReducer.posts);
   const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
-  console.log(randomMsg);
-
   const breakPoints = [
     { width: 500, itemsTo0how: 1 },
     { width: 768, itemsToShow: 2 },

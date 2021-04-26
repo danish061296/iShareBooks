@@ -12,6 +12,7 @@ import ViewListings from './pages/ViewListings';
 import BuyBooks from './pages/BuyBooks';
 import TradeBooks from './pages/TradeBooks';
 import FreeBooks from './pages/FreeBooks';
+import DisplayBooks from './components/DisplayBooks';
 import Privacy from './pages/Privacy';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contact" component={Contact} />
           <Route path="/termsofuse" component={TermsOfUse} />
+          <Route path="/dispbooks" component={DisplayBooks} />
 
           <ProtectedRoute
             path="/buyService"

@@ -12,6 +12,13 @@ import BookGrid from './BookGrid';
 import ViewBook from './ViewBook';
 
 import { setSearchField } from '../redux/actions/userActions';
+import DisplayBooks from '../components/DisplayBooks';
+
+import axios from 'axios';
+import {
+  setPosts,
+  setPosts2,
+} from '../redux/actions/userActions';
 
 const BuyBooks = () => {
   const [open, setOpen] = React.useState(false);
@@ -35,6 +42,25 @@ const BuyBooks = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+ 
+  var timer_counter = 0;
+  var intervalId = window.setInterval(function(){ // Temporary way -- constantly update the store -- prevents Data loading infintely
+    if (timer_counter == 5) {
+      window.clearInterval(intervalId);
+    }
+    timer_counter++;
+
+    console.log("ABC!!" + timer_counter);
+    const tableName = {
+      table: 'paidbooks',
+    };
+    axios.post("http://localhost:3001/getbooklist", tableName).then((response) => {
+        if (response.data.msg) {
+          dispatch(setPosts(response.data.results));
+      }
+    });
+  }, 1000);
 
   return (
     <div className="buybooks">
@@ -74,43 +100,20 @@ const BuyBooks = () => {
           <div className="post__book__content">
             <h2 className="post__book__title">BOOKS TO BUY</h2>
           </div>
-        </div>
-        <div className="post__book__grid">
-          <BookGrid
-            id="356234"
-            title="English Book"
-            author="Bob Michaels"
-            department="English"
-            isbn={837748374}
-            condition="Used"
-            price={27.01}
-            image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
+
+          <DisplayBooks 
+            department="Literature"
+          />
+          <DisplayBooks 
+            department="Computer Science"
           />
 
-          <BookGrid
-            id="3578363"
-            title="Computer Book"
-            author="John Doe"
-            department="Computer Science"
-            isbn={123567894}
-            condition="Used"
-            price={120.67}
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
-            onClick={handleBookDetail()}
+          <DisplayBooks 
+            department="History"
           />
-          <BookGrid
-            id="7315352"
-            title="Literature Book"
-            author="Alice Jane"
-            department="Literature"
-            isbn={123535464}
-            condition="New"
-            price={30.99}
-            image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-            onClick={handleBookDetail()}
-          />
+
         </div>
+      
 
         {/* <div className="post__book__grid">
           {itemsArray.map((item) => (

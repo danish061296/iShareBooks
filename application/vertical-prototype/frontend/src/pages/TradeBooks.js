@@ -76,7 +76,7 @@ const TradeBooks = () => {
             title="Computer Book"
             author="John Doe"
             department="Computer Science"
-            isbn={123567894}
+            isbn={1235678424394}
             condition="Used"
             price={0}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"

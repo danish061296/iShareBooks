@@ -40,6 +40,17 @@ export const setPosts = (posts) => ({
   type: 'SET_POSTS',
   posts,
 });
+
+export const setPosts2 = (posts2) => ({
+  type: 'SET_POSTS2',
+  posts2,
+});
+
+export const setPosts3 = (posts3) => ({
+  type: 'SET_POSTS3',
+  posts3,
+});
+
 export const setrandomMsg = (randomMsg) => ({
   type: 'SET_RANDOM_MSG',
   randomMsg,

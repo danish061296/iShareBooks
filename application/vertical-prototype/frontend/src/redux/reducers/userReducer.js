@@ -8,6 +8,7 @@ const initState = () => ({
   searchType: '',
   imageBuffer: '',
   posts: [],
+  posts2: [],
   viewBooks: [],
   cart: [],
   randomMsg: '',
@@ -56,9 +57,16 @@ const userReducer = (state = initState(), action) => {
         imageBuffer: action.imageBuffer,
       };
     case 'SET_POSTS':
+      //console.log(action.posts);
       return {
         ...state,
         posts: action.posts,
+      };
+    case 'SET_POSTS2':
+      //console.log(action.posts);
+      return {
+        ...state,
+        posts2: action.posts2,
       };
     case 'SET_USERID':
       return {
@@ -72,13 +80,13 @@ const userReducer = (state = initState(), action) => {
         viewBooks: [...state.viewBooks, action.book],
       };
     case 'ADD_TO_CART':
-      console.log(state.cart);
+      //console.log(state.cart);
       return {
         ...state,
         cart: [...state.cart, action.item],
       };
     case 'REMOVE_FROM_CART':
-      console.log(action);
+      //console.log(action);
       // coping the previous items into new array
       let newCart = [...state.cart];
 
