@@ -33,7 +33,7 @@ router.post('/posts', (req, res) => {
         const data = [title, author, condition, image, department, isbn];
         console.log('free');
         let query =
-          'INSERT INTO freebooks (title, author, condition, image, department, isbn) VALUES (?)';
+          'INSERT INTO freebooks (title, author, freebooks.condition, image, department, isbn) VALUES (?)';
         db.query(query, [data], (err, result) => {
           if (err) console.log(err);
           else {
@@ -46,30 +46,30 @@ router.post('/posts', (req, res) => {
       } else if (type === 'trade') {
         console.log('trede');
         const data = [title, author, condition, image, isbn, department];
-        let inserSql = `INSERT INTO tradebooks (title, author, condition, image, isbn, department) VALUES (?)`;
+        let inserSql = `INSERT INTO tradebooks (title, author, tradebooks.condition, image, isbn, department) VALUES (?)`;
         db.query(inserSql, [data], (err, results) => {
           if (err) {
             console.log(err);
             return res.status(500).send(err);
           } else {
-            res.status(00).send({
+            res.send({
               bookPosted: true,
-              msg: 'The book was successfully posted for trade.',
+              msg: 'The free book was posted successfully!',
             });
           }
         });
       } else if (type === 'paid') {
         console.log('paid');
         const data = [isbn, title, author, condition, cost, department, image];
-        let inserSql = `INSERT INTO paidbooks (isbn, title, author, condition, cost, department, image) VALUES (?)`;
+        let inserSql = `INSERT INTO paidbooks (isbn, title, author, paidbooks.condition, cost, department, image) VALUES (?)`;
         db.query(inserSql, [data], (err, results) => {
           if (err) {
             console.log(err);
             return res.status(500).send(err);
           } else {
-            res.status(200).send({
+            res.send({
               bookPosted: true,
-              msg: 'The book was successfully posted for sell',
+              msg: 'The free book was posted successfully!',
             });
             console.log(results);
           }

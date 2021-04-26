@@ -16,6 +16,7 @@ const BuyBookModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(',')[1];
 
     const paidBook = {
       title: title,
@@ -25,7 +26,7 @@ const BuyBookModal = () => {
       isbn: isbn,
       type: 'paid',
       condition: condition,
-      image: image.name,
+      image: b64data,
     };
 
     store.addNotification({
@@ -39,14 +40,6 @@ const BuyBookModal = () => {
         showIcon: true,
       },
     });
-
-    setTitle('');
-    setAuthor('');
-    setCost('');
-    setDepartment('');
-    setIsbn('');
-    setCondition('');
-    setImage('');
 
     axios.post('http://localhost:3001/posts', paidBook).then((response) => {
       if (!response.data.bookPosted) {
@@ -75,11 +68,7 @@ const BuyBookModal = () => {
           <h2 className="head-left">
             Sell Your Book To Help Your Friends For Easy Access
           </h2>
-          <img
-            src="https://via.placeholder.com/150"
-            alt="some-default"
-            className="bookpic"
-          />
+          <img src={image} alt="some-default" className="bookpic" />
         </div>
         <div className="box">
           <h1 className="head-right">Sell A Book</h1>
@@ -140,7 +129,15 @@ const BuyBookModal = () => {
               accept=".jpg, .png, .jpeg"
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage(ev.target.result);
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
 

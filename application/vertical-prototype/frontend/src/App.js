@@ -44,6 +44,7 @@ const App = () => {
           <Route path="/contact" component={Contact} />
           <Route path="/termsofuse" component={TermsOfUse} />
           <Route path="/explore" component={Explore} />
+          <Route path="/explore" component={Explore} />
 
           <ProtectedRoute
             path="/buyService"

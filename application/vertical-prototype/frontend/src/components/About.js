@@ -8,13 +8,14 @@ import Video from './video.mp4';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import Tippy, { tippy } from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import {
   setSearchField,
   setPosts,
   setrandomMsg,
   setSearchType,
 } from '../redux/actions/userActions';
-
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import axios from 'axios';
@@ -65,7 +66,7 @@ const About = () => {
       };
 
       console.log(searchField);
-      Axios.post('http://localhost:3001/search', search)
+      Axios.post('http://' + window.location.hostname + ':3001/search', search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -116,7 +117,7 @@ const About = () => {
 
     console.log(searchField);
 
-    Axios.post('http://localhost:3001/search', search)
+    Axios.post('http://' + window.location.hostname + '/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);

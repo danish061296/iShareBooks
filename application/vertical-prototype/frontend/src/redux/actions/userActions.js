@@ -45,6 +45,11 @@ export const setrandomMsg = (randomMsg) => ({
   randomMsg,
 });
 
+export const setRating = (rating) => ({
+  type: 'SET_RATING',
+  rating,
+});
+
 export const setCartItem = (item) => ({
   type: 'ADD_TO_CART',
   item,

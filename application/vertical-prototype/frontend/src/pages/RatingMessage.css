@@ -23,12 +23,17 @@
 .main__container h1 {
   text-align: center;
   font-size: 30px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
-.main__container h2 {
+.confirmation__text {
   text-align: center;
-  font-size: 25px;
+  font-size: 15px;
+}
+
+.confirmation__text2 {
+  text-align: center;
+  font-size: 19px;
 }
 
 .rating_container {
@@ -40,10 +45,17 @@
 .stars_container {
   margin: 0 auto !important;
   display: table !important;
-  padding-left: 60px;
-  padding-right: 60px;
-  border: 1px solid black;
-  border-radius: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #f7f8fa;
+  border-radius: 5px;
+  margin-bottom: 20px !important;
+  box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+.username {
+  letter-spacing: 2px;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 768px) {

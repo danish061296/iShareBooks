@@ -19,19 +19,6 @@ const BuyBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {};
   const handleSearch = (e) => {};
-  const handleBookDetail = (
-    id,
-    title,
-    author,
-    department,
-    isbn,
-    condition,
-    price,
-    image,
-    type
-  ) => {
-    return <ViewBook id={id} />;
-  };
 
   const handleClickOpen = () => {
     setOpen(true);

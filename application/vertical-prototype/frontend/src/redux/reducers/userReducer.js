@@ -10,6 +10,12 @@ const initState = () => ({
   posts: [],
   viewBooks: [],
   cart: [],
+  ratings: [
+    { id: 123, username: 'John' },
+    { id: 234, username: 'Alice' },
+    { id: 546, username: 'Bob' },
+    { id: 112, username: 'Clark' },
+  ],
   randomMsg: '',
 });
 
@@ -70,6 +76,12 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         viewBooks: [...state.viewBooks, action.book],
+      };
+    case 'SET_RATING':
+      console.log(action);
+      return {
+        ...state,
+        ratings: [...state.ratings, action.rating],
       };
     case 'ADD_TO_CART':
       console.log(action);
