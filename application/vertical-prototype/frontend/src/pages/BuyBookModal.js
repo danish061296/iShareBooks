@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Modals.css';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import axios from 'axios';
 
 const BuyBookModal = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +16,8 @@ const BuyBookModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(",")[1];
+
 
     const paidBook = {
       title: title,
@@ -24,7 +27,7 @@ const BuyBookModal = () => {
       isbn: isbn,
       type: 'paid',
       condition: condition,
-      image: image.name,
+      image: b64data,
     };
 
     store.addNotification({
@@ -39,31 +42,24 @@ const BuyBookModal = () => {
       },
     });
 
-    setTitle('');
-    setAuthor('');
-    setCost('');
-    setDepartment('');
-    setIsbn('');
-    setCondition('');
-    setImage('');
 
-    // axios.post('http://localhost:3001/posts', paidBook).then((response) => {
-    //   if (!response.data.bookPosted) {
-    //     alert(response.data.msg);
-    //   } else {
-    //     store.addNotification({
-    //       title: '',
-    //       message: response.data.msg,
-    //       type: 'success',
-    //       insert: 'top',
-    //       container: 'top-center',
-    //       dismiss: {
-    //         duration: 2000,
-    //         showIcon: true,
-    //       },
-    //     });
-    //   }
-    // });
+    axios.post('http://localhost:3001/posts', paidBook).then((response) => {
+      if (!response.data.bookPosted) {
+        alert(response.data.msg);
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+         });
+       }
+     });
   };
   return (
     <div>
@@ -75,7 +71,7 @@ const BuyBookModal = () => {
             Sell Your Book To Help Your Friends For Easy Access
           </h2>
           <img
-            src="https://via.placeholder.com/150"
+            src={image}
             alt="some-default"
             className="bookpic"
           />
@@ -139,7 +135,15 @@ const BuyBookModal = () => {
               accept=".jpg, .png, .jpeg"
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange= {(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage( ev.target.result );
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
 

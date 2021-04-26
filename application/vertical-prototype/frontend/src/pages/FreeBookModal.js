@@ -15,6 +15,8 @@ const FreeBookModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(",")[1];
+
 
     const freeBook = {
       title: title,
@@ -23,7 +25,7 @@ const FreeBookModal = () => {
       isbn: isbn,
       type: 'free',
       condition: condition,
-      image: image.name,
+      image: b64data,
     };
 
     console.log(freeBook);
@@ -34,27 +36,25 @@ const FreeBookModal = () => {
     setDepartment('');
     setIsbn('');
     setCondition('');
-    setImage('');
+    //setImage('');
 
-    axios
-      .post('http://' + window.location.hostname + ':3001', freeBook)
-      .then((response) => {
-        if (!response.data.bookPosted) {
-          alert(response.data.msg);
-        } else {
-          store.addNotification({
-            title: '',
-            message: response.data.msg,
-            type: 'success',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        }
-      });
+    axios.post('http://localhost:3001/posts', freeBook).then((response) => {
+      if (!response.data.bookPosted) {
+        alert(response.data.msg);
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+         });
+       }
+     });
   };
 
   return (
@@ -66,7 +66,7 @@ const FreeBookModal = () => {
             Donate Your Book To Help Your Friends For Easy Access
           </p>
           <img
-            src="https://via.placeholder.com/150"
+            src={image}
             alt="some-image"
             className="bookpic"
           />
@@ -123,7 +123,15 @@ const FreeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange= {(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage( ev.target.result );
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
             {/* <button className="buttn" type="button">

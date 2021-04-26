@@ -15,6 +15,8 @@ const TradeBookModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(",")[1];
+
 
     const tradeBook = {
       title: title,
@@ -23,7 +25,7 @@ const TradeBookModal = () => {
       isbn: isbn,
       type: 'trade',
       condition: condition,
-      image: image.name,
+      image: b64data,
     };
 
     console.log(tradeBook);
@@ -33,27 +35,25 @@ const TradeBookModal = () => {
     setDepartment('');
     setIsbn('');
     setCondition('');
-    setImage('');
+    //setImage('');
 
-    axios
-      .post('http://' + window.location.hostname + ':3001/posts', tradeBook)
-      .then((response) => {
-        if (!response.data.bookPosted) {
-          alert(response.data.msg);
-        } else {
-          store.addNotification({
-            title: '',
-            message: response.data.msg,
-            type: 'success',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        }
-      });
+    axios.post('http://localhost:3001/posts', tradeBook).then((response) => {
+      if (!response.data.bookPosted) {
+        alert(response.data.msg);
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+         });
+       }
+     });
   };
 
   return (
@@ -65,7 +65,7 @@ const TradeBookModal = () => {
             Trade Your Book To Help Your Friends For Easy Access
           </h2>
           <img
-            src="https://via.placeholder.com/150"
+            src={image}
             alt="text-img"
             className="bookpic"
           />
@@ -122,7 +122,15 @@ const TradeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange= {(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage( ev.target.result );
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
             {/* <button className="buttn" type="button">
