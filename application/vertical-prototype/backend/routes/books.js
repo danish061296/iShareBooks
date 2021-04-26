@@ -4,6 +4,24 @@ const fs = require('fs');
 const { query } = require('../dataBase.js');
 const router = express.Router();
 
+router.post('/getbooklist', (req, res) => {
+
+  let query = 'SELECT * FROM ' + req.body.table + ' ORDER BY department';
+
+  db.query(query, (err, result) => {
+    result.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        result[index].image = bytes.toString();
+      }
+    });
+    res.send({
+      results: result,
+      msg: 'No Results Were Found: Similar Books Available!',
+    });
+  });
+});
+
 router.post('/search', (req, res) => {
   const { searchField } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
 
@@ -12,7 +30,7 @@ router.post('/search', (req, res) => {
 	
 
   function suggestions() {
-    query = 'SELECT * FROM paidbooks ORDER BY title ASC LIMIT 8';
+    query = 'SELECT * FROM paidbooks ORDERπ BY title ASC LIMIT 8';
     db.query(query, (err, results) => {
 
       results.forEach(function (book, index) {
