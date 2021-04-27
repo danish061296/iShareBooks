@@ -2,21 +2,24 @@ import React from 'react';
 import axios from 'axios';
 import './TotalAmount.css';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getCartTotal } from '../redux/reducers/userReducer';
 
 const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
-  const handleCheckout = async () => {
-    console.log('clicked');
+  const history = useHistory();
 
-    if (!isLoggedIn) {
-      alert('You need to log in first to checkout your books!');
-    } else {
-      const res = await axios.post('http://localhost:3001/pay', cart);
-      window.open(res.data);
-    }
+  const handleCheckout = async () => {
+    history.push('./rating');
+
+    // if (!isLoggedIn) {
+    //   alert('You need to log in first to checkout your books!');
+    // } else {
+    //   const res = await axios.post('http://localhost:3001/pay', cart);
+    //   window.open(res.data);
+    // }
   };
 
   return (

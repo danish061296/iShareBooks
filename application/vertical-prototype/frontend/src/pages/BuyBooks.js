@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import './BuyBooks.css';
-
+import axios from 'axios';
 import DialogBox from '../components/DialogBox';
 import { useDispatch } from 'react-redux';
 import BuyBookModal from './BuyBookModal';
 import BookGrid from './BookGrid';
-import ViewBook from './ViewBook';
 
 import { setSearchField } from '../redux/actions/userActions';
 
@@ -19,6 +18,17 @@ const BuyBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {};
   const handleSearch = (e) => {};
+
+  const [paidBooks, setPaidBooks] = useState([]);
+  React.useEffect(async () => {
+    // Aos.init({ duration: 1600 });
+
+    const res = await axios.get(
+      'http://' + window.location.hostname + ':3001/paidbooks'
+    );
+    console.log(res.data);
+    setPaidBooks(res.data.results);
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,7 +74,24 @@ const BuyBooks = () => {
           </div>
         </div>
         <div className="post__book__grid">
-          <BookGrid
+          {paidBooks.map((book, index) => {
+            return (
+              <BookGrid
+                key={index}
+                id={book.book_id}
+                title={book.title}
+                author={book.author}
+                department={book.department}
+                isbn={book.isbn}
+                condition={book.condition}
+                image={book.image}
+                price={book.cost}
+                username={book.name}
+                defaultImage="default"
+              />
+            );
+          })}
+          {/* <BookGrid
             id="356234"
             title="English Book"
             author="Bob Michaels"
@@ -97,7 +124,7 @@ const BuyBooks = () => {
             type="paid"
             price={30.99}
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-          />
+          /> */}
         </div>
       </div>
 

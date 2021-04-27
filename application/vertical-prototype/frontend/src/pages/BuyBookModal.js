@@ -3,6 +3,7 @@ import './Modals.css';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const BuyBookModal = () => {
   const [title, setTitle] = useState('');
@@ -13,6 +14,7 @@ const BuyBookModal = () => {
   const [cost, setCost] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
+  const userid = useSelector((state) => state.userReducer.userid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const BuyBookModal = () => {
       type: 'paid',
       condition: condition,
       image: b64data,
+      userid: userid,
     };
 
     store.addNotification({

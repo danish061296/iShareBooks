@@ -3,6 +3,7 @@ import './Modals.css';
 import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import { useSelector } from 'react-redux';
 
 const FreeBookModal = () => {
   const [title, setTitle] = useState('');
@@ -12,11 +13,11 @@ const FreeBookModal = () => {
   const [condition, setCondition] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
+  const userid = useSelector((state) => state.userReducer.userid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var b64data = image.split(",")[1];
-
+    var b64data = image.split(',')[1];
 
     const freeBook = {
       title: title,
@@ -26,6 +27,7 @@ const FreeBookModal = () => {
       type: 'free',
       condition: condition,
       image: b64data,
+      userid: userid,
     };
 
     console.log(freeBook);
@@ -52,9 +54,9 @@ const FreeBookModal = () => {
             duration: 2000,
             showIcon: true,
           },
-         });
-       }
-     });
+        });
+      }
+    });
   };
 
   return (
@@ -65,11 +67,7 @@ const FreeBookModal = () => {
           <p className="head-left">
             Donate Your Book To Help Your Friends For Easy Access
           </p>
-          <img
-            src={image}
-            alt="some-image"
-            className="bookpic"
-          />
+          <img src={image} alt="some-image" className="bookpic" />
         </div>
         <div className="box">
           <h1 className="head-right">Donate A Book</h1>
@@ -123,11 +121,11 @@ const FreeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange= {(e) => {
+              onChange={(e) => {
                 if (e.target.files && e.target.files[0]) {
                   let reader = new FileReader();
                   reader.onload = (ev) => {
-                    setImage( ev.target.result );
+                    setImage(ev.target.result);
                   };
                   reader.readAsDataURL(e.target.files[0]);
                 }

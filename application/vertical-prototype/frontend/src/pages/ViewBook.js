@@ -24,51 +24,35 @@ const ViewBook = () => {
         isbn: viewBooks[viewBooks.length - 1].isbn,
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
+        username: viewBooks[viewBooks.length - 1].username,
         type: '',
       })
     );
   };
 
-  const base64Image = `data:image/jpg;base64,${
-    viewBooks[viewBooks.length - 1].image
-  }`;
+  // make first letter of username to uppercase
+  const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
+  const username =
+    viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
 
   return (
     <div className="viewbook_container">
       <Navigation />
       <div className="viewbook">
         <div className="viewbook_box">
-          {/* <div className="viewbook_details">  */}
-
           <div className="viewbook_left">
             <img
               className="viewbook_image"
               style={{ height: 400, width: 300 }}
-              // src={`data:image/jpeg;base64,${
-              //   viewBooks[viewBooks.length - 1].image
-              // }`}
-              src={base64Image}
-              // src={viewBooks[0].image}
-
+              src={`data:image/jpeg;base64,${
+                viewBooks[viewBooks.length - 1].image
+              }`}
               alt="book"
             />
 
             {/* <p className="viewbook_description">Summary/Description of Book</p> */}
           </div>
           <div className="viewbook_information" id="info">
-            {/* <h1 className="viewbook_title">TITLE{viewBooks[0].title}</h1>
-            <p className="viewbook_author">by {viewBooks[0].author}</p>
-            <p className="viewbook_department">
-              <strong>Department:</strong> {viewBooks[0].department}
-            </p>
-            <p className="viewbook_condition">
-              <strong>Condition:</strong> {viewBooks[0].condition}
-            </p>
-            <p className="viewbook_isbn">
-              <strong>ISBN:</strong>
-              {viewBooks[0].isbn}
-            </p>
-            <p className="viewbook_price">${viewBooks[0].price}</p> */}
             <h1 className="viewbook_title">
               {viewBooks[viewBooks.length - 1].title}
             </h1>
@@ -87,15 +71,18 @@ const ViewBook = () => {
               <strong>ISBN: </strong>
               {viewBooks[0].isbn}
             </p>
+            <p className="viewbook_username">
+              Posted by <strong>{username}</strong>
+            </p>
             <p className="viewbook_price">
               ${viewBooks[viewBooks.length - 1].price}
             </p>
+
             <Button onClick={handleAddCart} className="viewbook__button">
               Add to cart
             </Button>
           </div>
         </div>
-        {/* </div> */}
       </div>
       <Footer />
     </div>

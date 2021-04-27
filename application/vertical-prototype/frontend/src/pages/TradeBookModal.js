@@ -3,6 +3,7 @@ import './Modals.css';
 import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import { useSelector } from 'react-redux';
 
 const TradeBookModal = () => {
   const [title, setTitle] = useState('');
@@ -12,11 +13,11 @@ const TradeBookModal = () => {
   const [condition, setCondition] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
+  const userid = useSelector((state) => state.userReducer.userid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var b64data = image.split(",")[1];
-
+    var b64data = image.split(',')[1];
 
     const tradeBook = {
       title: title,
@@ -26,6 +27,7 @@ const TradeBookModal = () => {
       type: 'trade',
       condition: condition,
       image: b64data,
+      userid: userid,
     };
 
     console.log(tradeBook);
@@ -51,9 +53,9 @@ const TradeBookModal = () => {
             duration: 2000,
             showIcon: true,
           },
-         });
-       }
-     });
+        });
+      }
+    });
   };
 
   return (
@@ -64,11 +66,7 @@ const TradeBookModal = () => {
           <h2 className="head-left">
             Trade Your Book To Help Your Friends For Easy Access
           </h2>
-          <img
-            src={image}
-            alt="text-img"
-            className="bookpic"
-          />
+          <img src={image} alt="text-img" className="bookpic" />
         </div>
         <div className="box">
           <h2 className="head-right">Trade A Book</h2>
@@ -122,11 +120,11 @@ const TradeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange= {(e) => {
+              onChange={(e) => {
                 if (e.target.files && e.target.files[0]) {
                   let reader = new FileReader();
                   reader.onload = (ev) => {
-                    setImage( ev.target.result );
+                    setImage(ev.target.result);
                   };
                   reader.readAsDataURL(e.target.files[0]);
                 }

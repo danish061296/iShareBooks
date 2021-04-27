@@ -13,33 +13,42 @@ export default function RatingMessage() {
   var confirmation_num = 12314322324;
   var name = 'Eden';
   const ratings = useSelector((state) => state.userReducer.ratings);
+  const cart = useSelector((state) => state.userReducer.cart);
 
   return (
-    <div>
+    <div className="ratingmessage">
       <Navigation />
       <div className="main__container">
-        <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
+        <div className="ratingmessage__top">
+          <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
 
-        <p className="confirmation__text">
-          Hi <strong>{name}</strong>, your confirmation number is #
-          {confirmation_num}. A confirmation has been sent to your email.
-        </p>
-        <p className="confirmation__text2">
-          Please rate one or more sellers if you liked their services.
-        </p>
+          <p className="confirmation__text">
+            Hi <strong>{name}</strong>, your confirmation number is #
+            {confirmation_num}. A confirmation has been sent to your email.
+          </p>
+          <p className="confirmation__text2">
+            Please rate one or more sellers if you liked their services.
+          </p>
+        </div>
 
-        {ratings &&
-          ratings.map((rating, i) => {
-            return (
-              <UserRating key={i} id={rating.id} username={rating.username} />
-            );
-          })}
+        {/* {cart &&
+          cart.map((item, i) => {
+            return <UserRating key={i} id={item.id} username={item.username} />;
+          })} */}
+        <div className="user__rating">
+          {ratings &&
+            ratings.map((rating, i) => {
+              return (
+                <UserRating key={i} id={rating.id} username={rating.username} />
+              );
+            })}
+        </div>
       </div>
 
       <div>
-        <Container component="main" maxWidth="xs">
+        {/* <Container component="main" maxWidth="xs">
           <CssBaseline />
-        </Container>
+        </Container> */}
 
         <Footer />
       </div>

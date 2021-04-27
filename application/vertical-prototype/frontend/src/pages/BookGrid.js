@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import './BuyBooks.css';
 
-import { setCartItem, setViewBook } from '../redux/actions/userActions';
+import {
+  setCartItem,
+  setViewBook,
+  setRating,
+} from '../redux/actions/userActions';
 
 const BookGrid = ({
   id,
@@ -12,9 +16,11 @@ const BookGrid = ({
   author,
   department,
   isbn,
-  price,
+  condition,
   image,
+  price,
   type,
+  username,
 }) => {
   const dispatch = useDispatch();
 
@@ -26,8 +32,10 @@ const BookGrid = ({
         author,
         department,
         isbn,
+        condition,
         image,
         price,
+        username,
       })
     );
 
@@ -46,9 +54,18 @@ const BookGrid = ({
         price,
         image,
         type,
+        username,
+      })
+    );
+    dispatch(
+      setRating({
+        id,
+        username,
       })
     );
   };
+
+  // const imagetest = Buffer.from(image.data, 'base64');
 
   return (
     <div>
@@ -57,7 +74,7 @@ const BookGrid = ({
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
               style={{ height: 200, width: 200 }}
-              src={image}
+              src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
               className="post__book__image"
             />

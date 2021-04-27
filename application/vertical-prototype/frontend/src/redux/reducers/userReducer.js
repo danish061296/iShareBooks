@@ -10,12 +10,13 @@ const initState = () => ({
   posts: [],
   viewBooks: [],
   cart: [],
-  ratings: [
-    { id: 123, username: 'John' },
-    { id: 234, username: 'Alice' },
-    { id: 546, username: 'Bob' },
-    { id: 112, username: 'Clark' },
-  ],
+  ratings: [],
+  // ratings: [
+  //   { id: 123, username: 'John' },
+  //   { id: 234, username: 'Alice' },
+  //   { id: 546, username: 'Bob' },
+  //   { id: 112, username: 'Clark' },
+  // ],
   randomMsg: '',
 });
 

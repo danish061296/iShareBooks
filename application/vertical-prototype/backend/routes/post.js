@@ -15,6 +15,7 @@ router.post('/posts', (req, res) => {
       isbn,
       type,
       image,
+      userid,
     } = req.body;
 
     if (
@@ -82,14 +83,26 @@ router.post('/posts', (req, res) => {
 });
 
 router.get('/paidbooks', (req, res) => {
-  let inserSql = `SELECT * FROM paidbooks`;
-  db.query(inserSql, (err, results) => {
+  // let inserSql = `SELECT * FROM paidbooks`;
+
+  var searchTable = 'paidbooks';
+
+  var insertSql = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id `;
+
+  db.query(insertSql, (err, results) => {
     if (err) {
       console.log(err);
       res
         .status(500)
         .send({ books: false, errorMsg: 'Error getting the data' });
     } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
+
       res.send({ books: true, results: results });
     }
   });
@@ -104,6 +117,12 @@ router.get('/tradebooks', (req, res) => {
         .status(500)
         .send({ books: false, errorMsg: 'Error getting the data' });
     } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
       res.send({ books: true, results: results });
     }
   });
@@ -118,6 +137,12 @@ router.get('/freebooks', (req, res) => {
         .status(500)
         .send({ books: false, errorMsg: 'Error getting the data' });
     } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
       res.send({ books: true, results: results });
     }
   });
