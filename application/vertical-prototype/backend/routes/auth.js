@@ -26,6 +26,8 @@ router.post('/register', (req, res) => {
   var insertSQL = `INSERT INTO users (name,email,password) VALUES (?)`;
   db.query(insertSQL, [user], (err, results) => {
 
+    console.log(results.insertId);
+
     if (err) {
       if (err.sqlMessage.includes('name')) {
         return res.send({
@@ -48,6 +50,14 @@ router.post('/register', (req, res) => {
           registered: true,
           message: 'The user is registered successfully!',
         });
+        
+        var ratingData = [results.insertId, 5, 1];
+        var insertRating = 'INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)';
+
+        db.query(insertRating, [ratingData], (err1, res1) => {
+          if (err)
+            console.log(err);
+        })
 
         const payload = {
           user: {
