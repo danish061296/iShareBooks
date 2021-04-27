@@ -30,7 +30,9 @@ export default function Profile() {
 
         <div className="user_information">
           <div className="user_profile_info">
-            <div className="username">{username}</div>
+            <div className="username">
+              {username.charAt(0).toUpperCase() + username.slice(1)}
+            </div>
 
             <div className="email">
               <a href="">{email}</a>

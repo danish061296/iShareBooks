@@ -3,6 +3,7 @@ import './Modals.css';
 import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import { useSelector } from 'react-redux';
 
 const TradeBookModal = () => {
   const [title, setTitle] = useState('');
@@ -12,9 +13,11 @@ const TradeBookModal = () => {
   const [condition, setCondition] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
+  const userid = useSelector((state) => state.userReducer.userid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(',')[1];
 
     const tradeBook = {
       title: title,
@@ -23,7 +26,8 @@ const TradeBookModal = () => {
       isbn: isbn,
       type: 'trade',
       condition: condition,
-      image: image.name,
+      image: b64data,
+      userid: userid,
     };
 
     console.log(tradeBook);
@@ -33,7 +37,7 @@ const TradeBookModal = () => {
     setDepartment('');
     setIsbn('');
     setCondition('');
-    setImage('');
+    //setImage('');
 
     axios.post('http://localhost:3001/posts', tradeBook).then((response) => {
       if (!response.data.bookPosted) {
@@ -62,11 +66,7 @@ const TradeBookModal = () => {
           <h2 className="head-left">
             Trade Your Book To Help Your Friends For Easy Access
           </h2>
-          <img
-            src="https://via.placeholder.com/150"
-            alt="text-img"
-            className="bookpic"
-          />
+          <img src={image} alt="text-img" className="bookpic" />
         </div>
         <div className="box">
           <h2 className="head-right">Trade A Book</h2>
@@ -111,7 +111,7 @@ const TradeBookModal = () => {
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
             ></input>
-            <p>Upload file</p>
+            <p>Upload Image</p>
             <input
               id="input-image"
               type="file"
@@ -120,7 +120,15 @@ const TradeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage(ev.target.result);
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
             {/* <button className="buttn" type="button">

@@ -3,6 +3,7 @@ import './Modals.css';
 import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
+import { useSelector } from 'react-redux';
 
 const FreeBookModal = () => {
   const [title, setTitle] = useState('');
@@ -12,9 +13,11 @@ const FreeBookModal = () => {
   const [condition, setCondition] = useState('');
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
+  const userid = useSelector((state) => state.userReducer.userid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var b64data = image.split(',')[1];
 
     const freeBook = {
       title: title,
@@ -23,7 +26,8 @@ const FreeBookModal = () => {
       isbn: isbn,
       type: 'free',
       condition: condition,
-      image: image.name,
+      image: b64data,
+      userid: userid,
     };
 
     console.log(freeBook);
@@ -34,7 +38,7 @@ const FreeBookModal = () => {
     setDepartment('');
     setIsbn('');
     setCondition('');
-    setImage('');
+    //setImage('');
 
     axios.post('http://localhost:3001/posts', freeBook).then((response) => {
       if (!response.data.bookPosted) {
@@ -60,14 +64,10 @@ const FreeBookModal = () => {
       <ReactNotification />
       <div className="body">
         <div className="left-side">
-          <h2 className="head-left">
+          <p className="head-left">
             Donate Your Book To Help Your Friends For Easy Access
-          </h2>
-          <img
-            src="https://via.placeholder.com/150"
-            alt="some-image"
-            className="bookpic"
-          />
+          </p>
+          <img src={image} alt="some-image" className="bookpic" />
         </div>
         <div className="box">
           <h1 className="head-right">Donate A Book</h1>
@@ -112,7 +112,7 @@ const FreeBookModal = () => {
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
             ></input>
-            <p>Upload file</p>
+            <p>Upload Image</p>
             <input
               id="input-image"
               type="file"
@@ -121,7 +121,15 @@ const FreeBookModal = () => {
               // value={image}
               className="form-control"
               ref={imageRef}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  let reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setImage(ev.target.result);
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }
+              }}
               single="true"
             />
             {/* <button className="buttn" type="button">

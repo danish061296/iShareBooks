@@ -15,6 +15,7 @@ router.post('/posts', (req, res) => {
       isbn,
       type,
       image,
+      userid,
     } = req.body;
 
     if (
@@ -33,7 +34,7 @@ router.post('/posts', (req, res) => {
         const data = [title, author, condition, image, department, isbn];
         console.log('free');
         let query =
-          'INSERT INTO freebooks (title, author, \`condition\`, image, department, isbn) VALUES (?)';
+          'INSERT INTO freebooks (title, author, freebooks.condition, image, department, isbn) VALUES (?)';
         db.query(query, [data], (err, result) => {
           if (err) console.log(err);
           else {
@@ -46,30 +47,30 @@ router.post('/posts', (req, res) => {
       } else if (type === 'trade') {
         console.log('trede');
         const data = [title, author, condition, image, isbn, department];
-        let inserSql = `INSERT INTO tradebooks (title, author, \`condition\`, image, isbn, department) VALUES (?)`;
+        let inserSql = `INSERT INTO tradebooks (title, author, tradebooks.condition, image, isbn, department) VALUES (?)`;
         db.query(inserSql, [data], (err, results) => {
           if (err) {
             console.log(err);
             return res.status(500).send(err);
           } else {
-            res.status(00).send({
+            res.send({
               bookPosted: true,
-              msg: 'The book was successfully posted for trade.',
+              msg: 'The free book was posted successfully!',
             });
           }
         });
       } else if (type === 'paid') {
         console.log('paid');
-        const data = [title, author, condition, image, isbn, department, cost];
-        let inserSql = `INSERT INTO paidbooks (title, author, \`condition\`, image, isbn, department, cost) VALUES (?)`;
+        const data = [isbn, title, author, condition, cost, department, image];
+        let inserSql = `INSERT INTO paidbooks (isbn, title, author, paidbooks.condition, cost, department, image) VALUES (?)`;
         db.query(inserSql, [data], (err, results) => {
           if (err) {
             console.log(err);
             return res.status(500).send(err);
           } else {
-            res.status(200).send({
+            res.send({
               bookPosted: true,
-              msg: 'The book was successfully posted for sell',
+              msg: 'The free book was posted successfully!',
             });
             console.log(results);
           }
@@ -79,6 +80,72 @@ router.post('/posts', (req, res) => {
   } catch (error) {
     res.status(400).send(err);
   }
+});
+
+router.get('/paidbooks', (req, res) => {
+  // let inserSql = `SELECT * FROM paidbooks`;
+
+  var searchTable = 'paidbooks';
+
+  var insertSql = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id `;
+
+  db.query(insertSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
+
+      res.send({ books: true, results: results });
+    }
+  });
+});
+
+router.get('/tradebooks', (req, res) => {
+  let inserSql = `SELECT * FROM tradebooks`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
+      res.send({ books: true, results: results });
+    }
+  });
+});
+
+router.get('/freebooks', (req, res) => {
+  let inserSql = `SELECT * FROM freebooks`;
+  db.query(inserSql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ books: false, errorMsg: 'Error getting the data' });
+    } else {
+      results.forEach(function (book, index) {
+        if (book.image) {
+          var bytes = Buffer.from(book.image, 'base64');
+          results[index].image = bytes.toString();
+        }
+      });
+      res.send({ books: true, results: results });
+    }
+  });
 });
 
 router.get('/post/:id', (req, res) => {

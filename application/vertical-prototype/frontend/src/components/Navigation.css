@@ -30,6 +30,7 @@
   /* flex: 0.8; */
   width: 48%;
   text-decoration: none !important;
+  letter-spacing: 2px;
   /* background-color: blue; */
   /* margin-left: 250px; */
   /* margin-left: 340px; */
@@ -50,6 +51,14 @@
   background-color: white !important;
 
   color: #18504c !important;
+}
+
+.navbar__left {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .navbar__icons {
@@ -74,6 +83,10 @@
   font-size: 20px;
 }
 
+.title__link {
+  letter-spacing: 1px;
+}
+
 .cart__link {
   /* display: flex !important; */
   text-decoration: none !important;
@@ -84,6 +97,11 @@
   text-decoration: none !important;
   color: black;
 }
+
+.nav__link {
+  letter-spacing: 1px;
+}
+
 .nav__link:hover {
   color: white !important;
   border-bottom: 1px solid white;
@@ -91,7 +109,7 @@
 
 .signup__btn {
   z-index: 99 !important;
-  background-color: #0d2c29 !important;
+  background-color: #1a504c !important;
   color: white !important;
   border: 1px solid white !important;
   border: none !important;

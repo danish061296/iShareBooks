@@ -4,13 +4,13 @@
   margin-top: 10px;
   margin-left: 10px;
   border-radius: 10px;
-  height: 330px;
+  height: 370px;
   /* z-index: 1; */
 }
 
 .listingitem__item__image {
   /* object-fit: contain; */
-  width: 180px;
+  width: 25%;
   height: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -18,9 +18,9 @@
 }
 
 .listingitem__item__details {
-  padding-left: 20px;
+  padding-left: 10px;
   margin-top: 10px;
-  width: 80%;
+  width: 70%;
 }
 
 .listingitem__item__title {
@@ -41,8 +41,19 @@
 .listingitem__item__author,
 .listingitem__item__department,
 .listingitem__item__isbn,
-.listingitem__item__condition {
+.listingitem__item__condition,
+.listingitem__item__username {
   font-size: 15px;
+  letter-spacing: 2px;
+}
+
+/* .listingitem__username,
+.listingitem__item__author {
+  letter-spacing: 2px;
+} */
+
+.listingitem__item__title {
+  letter-spacing: 3px;
 }
 
 .listingitem__bottom {

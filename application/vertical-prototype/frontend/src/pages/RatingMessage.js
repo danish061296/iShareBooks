@@ -1,62 +1,67 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ReactStars from 'react-rating-stars-component';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import { Link as LinkR } from 'react-router-dom';
 import Navigation from '../components/Navigation';
-import Axios from 'axios';
-import ReactNotification from 'react-notifications-component';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import './RatingMessage.css';
 import Footer from '../components/Footer';
+import UserRating from './UserRating';
 
 export default function RatingMessage() {
   var confirmation_num = 12314322324;
   var name = 'Eden';
-  var seller_name = 'Abraham';
+  const ratings = useSelector((state) => state.userReducer.ratings);
+  const cart = useSelector((state) => state.userReducer.cart);
+
+  var filtered = [];
+
+  var filtered_ratings = ratings.filter(function(e, i) {
+    if (filtered.includes(ratings[i].username)) {
+    } else {
+      filtered.push(ratings[i].username);
+      return ratings[i];
+    }
+  });
+
+
 
   return (
-    <div>
+    <div className="ratingmessage">
       <Navigation />
       <div className="main__container">
-        <h1 className="thankyou__text">Thank You for Placing your Order</h1>
-        <Box mt={10}></Box>
-        <h2 className="confirmation__text">
-          Hi <strong>{name}</strong>, your confirmation number is <br></br>#
-          {confirmation_num}. A confirmation <br></br>
-          has been sent to your email
-        </h2>
-        {/* <Box mt={10}></Box> */}
-        {/* <hr
-          style={{
-            color: 'red',
-            backgroundColor: 'black',
-            margin: 'auto',
-            height: 2,
-            width: '45%',
-          }}
-        /> */}
-        <Box mt={10}></Box>
-        <h2>Rate your transaction with {seller_name}?</h2>
-        <Box mt={10}></Box>
-        <div className="rating_container">
-          <div className="stars_container">
-            <ReactStars
-              size={70}
-              value={5}
-              isHalf={true}
-              edit={true}
-              numberOfStars={5}
-              name="rating"
-            />
-          </div>
+        <div className="ratingmessage__top">
+          <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
+
+          <p className="confirmation__text">
+            Hi <strong>{name}</strong>, your confirmation number is #
+            {confirmation_num}. A confirmation has been sent to your email.
+          </p>
+          <p className="confirmation__text2">
+            Please rate one or more sellers if you liked their services.
+          </p>
+        </div>
+
+        {/* {cart &&
+          cart.map((item, i) => {
+            return <UserRating key={i} id={item.id} username={item.username} />;
+          })} */}
+        <div className="user__rating">
+          {ratings &&
+            filtered_ratings.map((rating, i) => {
+              return (
+                <UserRating key={i} id={rating.id} username={rating.username} />
+              );
+
+            })}
         </div>
       </div>
+
       <div>
-        <Container component="main" maxWidth="xs">
+        {/* <Container component="main" maxWidth="xs">
           <CssBaseline />
-        </Container>
+        </Container> */}
 
         <Footer />
       </div>

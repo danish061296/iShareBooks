@@ -36,8 +36,3 @@
 .default__img {
   margin-right: 40px;
 }
-
-.trending__books {
-  display: flex;
-  flex-direction: column;
-}

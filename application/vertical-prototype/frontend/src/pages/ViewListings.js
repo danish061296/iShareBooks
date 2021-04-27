@@ -4,15 +4,13 @@ import ListingItem from '../components/ListingItem';
 import TotalAmount from '../components/TotalAmount';
 import Navigation from '../components/Navigation';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Footer from '../components/Footer';
-import { ContactSupportOutlined } from '@material-ui/icons';
 
 const ViewListings = () => {
   const cart = useSelector((state) => state.userReducer.cart);
 
-  console.log(cart);
   return (
     <div className="viewlistings__container">
       <Navigation />
@@ -48,6 +46,8 @@ const ViewListings = () => {
                     condition={item.condition}
                     price={item.price}
                     image={item.image}
+                    type={item.type}
+                    username={item.username}
                   />
                 );
               })}
