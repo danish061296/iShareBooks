@@ -4,11 +4,6 @@ import { Button } from "react-bootstrap";
 import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import {
-  TiSocialTwitter,
-  TiSocialLinkedin,
-  TiSocialFacebook,
-} from "react-icons/ti";
 import "./Footer.css";
 
 const Footer = () => {
@@ -31,7 +26,7 @@ const Footer = () => {
             <section className="center">
               Social
               <section>
-                <a href="https://www.facebook.com/"> 
+                <a href="https://www.facebook.com/">
                   <FaFacebook />
                 </a>
                 <a href="https://www.instagram.com/">
