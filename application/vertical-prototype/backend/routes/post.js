@@ -4,6 +4,7 @@ const router = express.Router();
 // const auth = require("../middleware/auth");
 
 router.post('/posts', (req, res) => {
+  console.log(req.body);
   //get data from the frontend
   try {
     const {
@@ -27,7 +28,7 @@ router.post('/posts', (req, res) => {
       isbn === '' ||
       image === ''
     ) {
-      res.send({ bookPosted: false, msg: 'Enter all fields..' });
+      res.send({bookPosted: false, msg: 'Enter all fields..'});
     } else {
       console.log(req.body);
       if (type === 'free') {
@@ -84,17 +85,14 @@ router.post('/posts', (req, res) => {
 
 router.get('/paidbooks', (req, res) => {
   // let inserSql = `SELECT * FROM paidbooks`;
+  // let searchTable = 'paidbooks';
+  // let insertSql = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id `;
 
-  var searchTable = 'paidbooks';
-
-  var insertSql = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id `;
-
+  let insertSql = `SELECT * FROM paidbooks`;
   db.query(insertSql, (err, results) => {
     if (err) {
       console.log(err);
-      res
-        .status(500)
-        .send({ books: false, errorMsg: 'Error getting the data' });
+      res.status(500).send({books: false, errorMsg: 'Error getting the data'});
     } else {
       results.forEach(function (book, index) {
         if (book.image) {
@@ -103,7 +101,7 @@ router.get('/paidbooks', (req, res) => {
         }
       });
 
-      res.send({ books: true, results: results });
+      res.send({books: true, results: results});
     }
   });
 });
@@ -113,9 +111,7 @@ router.get('/tradebooks', (req, res) => {
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
-      res
-        .status(500)
-        .send({ books: false, errorMsg: 'Error getting the data' });
+      res.status(500).send({books: false, errorMsg: 'Error getting the data'});
     } else {
       results.forEach(function (book, index) {
         if (book.image) {
@@ -123,7 +119,7 @@ router.get('/tradebooks', (req, res) => {
           results[index].image = bytes.toString();
         }
       });
-      res.send({ books: true, results: results });
+      res.send({books: true, results: results});
     }
   });
 });
@@ -133,9 +129,7 @@ router.get('/freebooks', (req, res) => {
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
-      res
-        .status(500)
-        .send({ books: false, errorMsg: 'Error getting the data' });
+      res.status(500).send({books: false, errorMsg: 'Error getting the data'});
     } else {
       results.forEach(function (book, index) {
         if (book.image) {
@@ -143,7 +137,7 @@ router.get('/freebooks', (req, res) => {
           results[index].image = bytes.toString();
         }
       });
-      res.send({ books: true, results: results });
+      res.send({books: true, results: results});
     }
   });
 });
