@@ -19,7 +19,7 @@ const FreeBooks = () => {
 
   useEffect(async () => {
     const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/freebooks'
+      `http://${window.location.hostname}:3001/freebooks`
     );
     console.log(res.data);
     setFreeBooks(res.data.results);

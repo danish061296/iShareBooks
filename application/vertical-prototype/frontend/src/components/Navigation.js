@@ -39,7 +39,7 @@ const Navigation = () => {
     console.log(`The selected is ${e}`);
 
     if (e === 'profile') {
-      axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
+      axios.get(`http://${window.location.hostname}:3001/profile/${userId}`).then((response) => {
         dispatch(setEmail(response.data[0].email));
         dispatch(setUsername(response.data[0].name));
         console.log(response.data[0].name);

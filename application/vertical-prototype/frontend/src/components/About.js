@@ -66,7 +66,7 @@ const About = () => {
       };
 
       console.log(searchField);
-      Axios.post('http://' + window.location.hostname + ':3001/search', search)
+      Axios.post(`http://${window.location.hostname}:3001/search`, search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);

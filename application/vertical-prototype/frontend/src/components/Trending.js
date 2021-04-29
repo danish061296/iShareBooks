@@ -14,7 +14,7 @@ const Trending = () => {
     Aos.init({ duration: 1600 });
 
     const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/fire',
+      `http://${window.location.hostname}:3001/fire`,
       {
         // searchField: '',
         // searchType: 'any',
@@ -64,7 +64,7 @@ const Trending = () => {
             <h3 className="trending"> Showing Results for {searchField}</h3>
           </div>
 
-          <Carousel breakPoints={breakPoints}>
+          <Carousel breakPoints={breakPoints} className="car">
             {posts.map((post, index) => {
               return (
                 <Card
@@ -97,7 +97,8 @@ const Trending = () => {
                   isbn={post.isbn}
                   condition={post.condition}
                   image={post.image}
-                  price={34.33}
+                  name={post.name}
+                  price={post.cost}
                   defaultImage="default"
                 />
               );

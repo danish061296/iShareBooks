@@ -17,7 +17,7 @@ const TradeBooks = () => {
 
   useEffect(async () => {
     const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/tradebooks'
+      `http://${window.location.hostname}:3001/tradebooks`
     );
     setTradeBooks(res.data.results);
   }, []);

@@ -15,6 +15,7 @@ const Card = ({
   isbn,
   price,
   image,
+  name,
   defaultImage,
 }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Card = ({
         condition,
         isbn,
         image,
+        name,
         price,
       })
     );

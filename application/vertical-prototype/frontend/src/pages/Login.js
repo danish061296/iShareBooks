@@ -99,7 +99,7 @@ export default function SignIn() {
       password: payload.password,
     };
     Axios.post(
-      'http://' + window.location.hostname + ':3001/login',
+      `http://${window.location.hostname}:3001/login`,
       loginUser
     ).then((response) => {
       console.log(response.data);

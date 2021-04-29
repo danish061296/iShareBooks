@@ -20,7 +20,7 @@ const TotalAmount = () => {
     if (!isLoggedIn) {
       alert('You need to log in first to checkout your books!');
     } else {
-      const res = await axios.post('http://localhost:3001/pay', cart);
+      const res = await axios.post(`http://${window.location.hostname}:3001/pay`, cart);
       window.open(res.data);
     }
   };

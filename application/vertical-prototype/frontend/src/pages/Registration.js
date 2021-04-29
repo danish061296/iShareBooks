@@ -108,7 +108,7 @@ const Registration = () => {
 
     console.log(registerUser.username);
     Axios.post(
-      'http://' + window.location.hostname + ':3001/register',
+      `http://'${window.location.hostname}:3001/register`,
       registerUser
     ).then((response) => {
       console.log(response.data);
