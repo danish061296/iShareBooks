@@ -18,7 +18,7 @@ paypal.configure({
 router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
-  let booksPrice = 0.35;
+  let booksPrice = 0.0; // Have to remove service fee -- paypal complaining that total amount does not add up
   arrayOfBooks.forEach((array) => {
     console.log(array.type);
     if (array.type === 'paid') {
@@ -30,6 +30,7 @@ router.post('/pay', (req, res) => {
 
   for (let i = 0; i < arrayOfBooks.length; i++) {
     booksPrice += arrayOfBooks[i].price;
+    //arrayOfBooks[i].price += booksPrice;
     arrayOfBooks[i].quantity = 1;
     arrayOfBooks[i].sku = 'item';
     arrayOfBooks[i].currency = 'USD';
@@ -40,6 +41,7 @@ router.post('/pay', (req, res) => {
 
   //filtering data from the paymentData to make it work for paypal
   paymentData.forEach((d) => {
+    
     d.name = d.title;
     delete d.id;
     delete d.author;
@@ -50,7 +52,7 @@ router.post('/pay', (req, res) => {
     delete d.type;
   });
 
-  console.log(`the payment data is ${paymentData}`);
+  console.log(paymentData);
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',
@@ -75,10 +77,12 @@ router.post('/pay', (req, res) => {
     ],
   };
 
+  console.log(create_payment_json.transactions[0]);
+
   paypal.payment.create(create_payment_json, function (error, payment) {
     console.log('payment', payment);
     if (error) {
-      console.log(error);
+      console.log(error.response.details);
       // return res.send(error);
       // throw error;
     } else {

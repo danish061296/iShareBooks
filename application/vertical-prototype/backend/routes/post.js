@@ -128,8 +128,8 @@ router.get('/tradebooks', (req, res) => {
 });
 
 router.get('/freebooks', (req, res) => {
-  let inserSql = `SELECT * FROM freebooks`;
-  // let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id `;
+  //let inserSql = `SELECT * FROM freebooks`;
+  let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id `;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);

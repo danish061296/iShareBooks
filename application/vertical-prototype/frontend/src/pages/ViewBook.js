@@ -24,7 +24,7 @@ const ViewBook = () => {
         isbn: viewBooks[viewBooks.length - 1].isbn,
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
-        username: viewBooks[viewBooks.length - 1].username,
+        name: viewBooks[viewBooks.length - 1].username,
         type: '',
       })
     );
@@ -32,8 +32,7 @@ const ViewBook = () => {
 
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
-  const username =
-    viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
+ console.log(viewBooks);
 
   return (
     <div className="viewbook_container">
@@ -72,7 +71,7 @@ const ViewBook = () => {
               {viewBooks[0].isbn}
             </p>
             <p className="viewbook_username">
-              Posted by <strong>{username}</strong>
+              Posted by <strong>{viewBooksUsername}</strong>
             </p>
             <p className="viewbook_price">
               ${viewBooks[viewBooks.length - 1].price}

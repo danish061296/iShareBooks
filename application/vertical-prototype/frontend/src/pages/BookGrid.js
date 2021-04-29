@@ -20,7 +20,7 @@ const BookGrid = ({
   image,
   price,
   type,
-  username,
+  name,
 }) => {
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const BookGrid = ({
         condition,
         image,
         price,
-        username,
+        name,
       })
     );
 
@@ -54,13 +54,13 @@ const BookGrid = ({
         price,
         image,
         type,
-        username,
+        name,
       })
     );
     dispatch(
       setRating({
         id,
-        username,
+        name,
       })
     );
   };

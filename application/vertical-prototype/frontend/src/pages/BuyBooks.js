@@ -23,11 +23,9 @@ const BuyBooks = () => {
   React.useEffect(async () => {
     // Aos.init({ duration: 1600 });
 
-    const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/paidbooks'
-    );
-    console.log(res.data);
+    const res = await axios.get('http://' + window.location.hostname + ':3001/paidbooks')
     setPaidBooks(res.data.results);
+    console.log(paidBooks);
   }, []);
 
   const handleClickOpen = () => {
@@ -86,7 +84,7 @@ const BuyBooks = () => {
                 condition={book.condition}
                 image={book.image}
                 price={book.cost}
-                username={book.name}
+                name={book.name}
                 defaultImage='default'
               />
             );

@@ -16,16 +16,21 @@ export default function RatingMessage() {
   const cart = useSelector((state) => state.userReducer.cart);
 
   var filtered = [];
+  console.log("RATE");
+  console.log(cart);
 
   var filtered_ratings = ratings.filter(function(e, i) {
-    if (filtered.includes(ratings[i].username)) {
+    if (filtered.includes(ratings[i].name)) {
     } else {
-      filtered.push(ratings[i].username);
+      filtered.push(ratings[i].name);
       return ratings[i];
     }
+
   });
 
-
+  console.log("FIL");
+  console.log(filtered_ratings);
+  console.log(filtered)
 
   return (
     <div className="ratingmessage">
@@ -49,9 +54,9 @@ export default function RatingMessage() {
           })} */}
         <div className="user__rating">
           {ratings &&
-            filtered_ratings.map((rating, i) => {
+            ratings.map((rating, i) => {
               return (
-                <UserRating key={i} id={rating.id} username={rating.username} />
+                <UserRating key={i} id={rating.id} name={rating.name} />
               );
 
             })}

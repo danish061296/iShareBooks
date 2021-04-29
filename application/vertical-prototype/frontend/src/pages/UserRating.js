@@ -7,7 +7,7 @@ import { store } from 'react-notifications-component';
 import { useSelector } from 'react-redux';
 
 
-const UserRating = ( { id, username }) => {
+const UserRating = ( { id, name }) => {
   const ratings = useSelector((state) => state.userReducer.ratings);
 
   const [clickedStyle, setClickedStyle] = useState({});
@@ -63,7 +63,7 @@ const UserRating = ( { id, username }) => {
     <div className="stars_container" style={clickedStyle}>
       <ReactNotification  />
       <p className="stars__username">
-        {username.charAt(0).toUpperCase() + username.slice(1)}
+        {name.charAt(0).toUpperCase() + name.slice(1)}
       </p>
       <div className="stars__class" >
         <ReactStars
