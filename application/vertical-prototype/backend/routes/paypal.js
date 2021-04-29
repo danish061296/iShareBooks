@@ -18,6 +18,17 @@ paypal.configure({
 router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
+  arrayOfBooks.push({
+    title: "iShareBooks Service Fee",
+    price: 0.35,
+    name: "iShareBooks, LLC",
+    department: "",
+    author: "",
+    isbn: "",
+    image: "",
+    id: 0,
+  });
+  console.log(arrayOfBooks);
   let booksPrice = 0.0; // Have to remove service fee -- paypal complaining that total amount does not add up
   arrayOfBooks.forEach((array) => {
     console.log(array.type);
@@ -88,6 +99,7 @@ router.post('/pay', (req, res) => {
     } else {
       /*getting the link to direct to paypal after adding 
       the data to the soldBooks and deleting from the posts */
+    
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
           for (let i = 0; i < arrayOfBooks.length; i++) {
@@ -108,6 +120,8 @@ router.post('/pay', (req, res) => {
               bookImage,
               bookId,
             ];
+
+            data.pop();
 
             let sqlQuery = ` INSERT INTO soldBooks 
             (title, price, department,author,isbn,image,id)
