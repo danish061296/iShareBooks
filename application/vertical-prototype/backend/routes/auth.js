@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res) => {
-
-  //query db 
+  //query db
   // db.query('SELECT * FROM users', (err, rows, fields) => {
   //   if (!err) {
   //     console.log(rows);
@@ -25,17 +24,14 @@ router.post('/register', (req, res) => {
 
   var insertSQL = `INSERT INTO users (name,email,password) VALUES (?)`;
   db.query(insertSQL, [user], (err, results) => {
-
-    console.log(results.insertId);
-
     if (err) {
       if (err.sqlMessage.includes('name')) {
         return res.send({
           registered: false,
           message: 'Username is already in use!',
+
         });
-      }
-      else if (err.sqlMessage.includes('email')) {
+      } else if (err.sqlMessage.includes('email')) {
         return res.send({
           registered: false,
           message: 'Email is already in use!',
@@ -43,42 +39,33 @@ router.post('/register', (req, res) => {
       }
 
       return res.status(401).send(err);
-
     } else {
-        if (err) throw err;
-        res.status(200).send({
-          registered: true,
-          message: 'The user is registered successfully!',
-        });
-        
-        var ratingData = [results.insertId, 5, 1];
-        var insertRating = 'INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)';
+      if (err) throw err;
+      res.status(200).send({
+        registered: true,
+        message: 'The user is registered successfully!',
+      });
 
-        db.query(insertRating, [ratingData], (err1, res1) => {
-          if (err)
-            console.log(err);
-        })
+      const payload = {
+        user: {
+          id: email,
+        },
+      };
 
-        const payload = {
-          user: {
-            id: email,
-          },
-        };
-
-        jwt.sign(
-          payload,
-          'password',
-          {
-            expiresIn: 300000,
-          },
-          (err, token) => {
-            if (err) {
-              res.status(500).send('token error');
-            } else {
-              res.json({ token });
-            }
+      jwt.sign(
+        payload,
+        'password',
+        {
+          expiresIn: 300000,
+        },
+        (err, token) => {
+          if (err) {
+            res.status(500).send('token error');
+          } else {
+            res.json({ token });
           }
-        );
+        }
+      );
     }
   
 
@@ -97,8 +84,8 @@ router.post('/login', async (req, res) => {
       'SELECT * FROM users WHERE email = ?',
       [email],
       async (err, results) => {
-        if(err){ 
-          console.log("ERRRRR"+err);
+        if (err) {
+          console.log('ERRRRR' + err);
         }
         if (
           results[0] === undefined ||
@@ -127,7 +114,7 @@ router.post('/login', async (req, res) => {
           res.cookie('jwt', token, cookieOptions);
           res.status(200).send({
             auth: true,
-            id: results[0].id, 
+            id: results[0].id,
             userName: results[0].name,
             token: token,
             message: "You're successfully logged in.",

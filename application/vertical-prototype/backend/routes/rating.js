@@ -4,8 +4,11 @@ const router = express.Router();
 
 router.post('/update_rating/:id', (req, res) => {
   const id = req.params.id;
+
+  console.log(id);
   const newRating = req.body.newRating;
-  console.log(req.body);
+  console.log(newRating);
+
   let query =
     'UPDATE Ratings SET accumulated_stars=accumulated_stars+' +
     newRating +

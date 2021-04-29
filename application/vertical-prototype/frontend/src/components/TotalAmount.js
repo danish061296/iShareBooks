@@ -2,14 +2,20 @@ import React from 'react';
 import axios from 'axios';
 import './TotalAmount.css';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getCartTotal } from '../redux/reducers/userReducer';
 
 const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
+  const history = useHistory();
+
   const handleCheckout = async () => {
-    console.log('clicked');
+
+    console.log("CART");
+    console.log(cart);
+    history.push('./rating');
 
     if (!isLoggedIn) {
       alert('You need to log in first to checkout your books!');

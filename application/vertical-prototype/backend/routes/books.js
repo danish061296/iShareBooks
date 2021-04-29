@@ -1,17 +1,14 @@
 const express = require('express');
 const db = require('../dataBase.js');
 const fs = require('fs');
-const { query } = require('../dataBase.js');
+const {query} = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.post('/allbooks', (req, res) => {
-  
-});
+router.post('/allbooks', (req, res) => {});
 
 router.post('/search', (req, res) => {
-
-  console.log("SEARCH");
+  console.log('SEARCH');
   //freebooks
   //tradebooks
   //paidbooks
@@ -19,8 +16,7 @@ router.post('/search', (req, res) => {
   // QUERY for retrieving user's info from id
   // SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id;
 
-  const { searchField, munitem, message } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
-  let query;
+  const {searchField, munitem, message} = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   console.log(searchField);
   const searchType = 'any';
   searchTable = 'paidbooks';
@@ -37,13 +33,11 @@ router.post('/search', (req, res) => {
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
       db.escape('%' + searchField + '%');
-      
-  else if (searchField == '') 
-    query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
 
-   else if (searchType != 'any') 
+  else if (searchField == '')
     query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
-  
+  else if (searchType != 'any')
+    query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
 
   function suggestions() {
     query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;

@@ -30,6 +30,7 @@
   /* flex: 0.8; */
   width: 48%;
   text-decoration: none !important;
+  letter-spacing: 2px;
   /* background-color: blue; */
   /* margin-left: 250px; */
   /* margin-left: 340px; */
@@ -80,6 +81,25 @@
 
 .cart__total {
   font-size: 20px;
+}
+
+.title__link {
+  letter-spacing: 1px;
+}
+
+.cart__link {
+  /* display: flex !important; */
+  text-decoration: none !important;
+  color: black;
+}
+
+.profile__link {
+  text-decoration: none !important;
+  color: black;
+}
+
+.nav__link {
+  letter-spacing: 1px;
 }
 
 .cart__link {
