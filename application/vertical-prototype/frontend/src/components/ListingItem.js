@@ -13,9 +13,11 @@ const ListingItem = ({
   condition,
   price,
   image,
-  username,
+  name,
 }) => {
   const dispatch = useDispatch();
+
+  console.log(condition);
 
   // remove item from the cart
   const handleRemove = () => {
@@ -49,7 +51,7 @@ const ListingItem = ({
         </p>
         <p className="listingitem__item__username">
           posted by{' '}
-          <strong className="listingitem__username">{username}</strong>
+          <strong className="listingitem__username">{name}</strong>
         </p>
         <div className="listingitem__bottom">
           <p className="listingitem__item__price">${price}</p>

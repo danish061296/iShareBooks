@@ -73,6 +73,7 @@ const TradeBooks = () => {
         </div>
         <div className='post__book__grid'>
           {tradeBooks.map((book, index) => {
+            console.log(book.name);
             return (
               <BookGrid
                 key={index}

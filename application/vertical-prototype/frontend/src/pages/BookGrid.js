@@ -58,6 +58,7 @@ const BookGrid = ({
         title,
         author,
         department,
+        condition,
         isbn,
         image,
         price,

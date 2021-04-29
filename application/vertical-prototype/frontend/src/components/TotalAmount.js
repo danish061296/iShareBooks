@@ -36,19 +36,26 @@ const TotalAmount = () => {
           <p className="subtotal__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
         <div className="shipping__info">
+          <p className="shipping">Service Fee</p>
+          <p className="shipping__cost">$0.35</p>
+        </div>
+        <div className="shipping__info">
           <p className="shipping">Estimated shipping & handling</p>
           <p className="shipping__cost">$0.00</p>
         </div>
         <p className="shipping__standard">Standard: FREE</p>
+        
+
       </div>
       <div className="total__amount__bottom">
         <div className="tax__info">
           <p className="tax">TAX</p>
           <p className="tax__cost">$0.00</p>
+          
         </div>
         <div className="total__info">
           <p className="total">TOTAL:</p>
-          <p className="total__cost">${getCartTotal(cart).toFixed(2)}</p>
+          <p className="total__cost">${(getCartTotal(cart) + 0.35).toFixed(2)}</p>
         </div>
 
         <button className="checkout__button" onClick={handleCheckout}>

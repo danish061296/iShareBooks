@@ -112,8 +112,8 @@ router.get('/paidbooks', (req, res) => {
 
 
 router.get('/tradebooks', (req, res) => {
-  let inserSql = `SELECT * FROM tradebooks`;
-  // let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
+  //let inserSql = `SELECT * FROM tradebooks`;
+  let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);

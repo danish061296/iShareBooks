@@ -32,7 +32,6 @@ const ViewBook = () => {
 
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
- console.log(viewBooks);
 
   return (
     <div className="viewbook_container">

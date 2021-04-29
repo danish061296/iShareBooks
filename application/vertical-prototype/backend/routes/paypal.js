@@ -61,6 +61,7 @@ router.post('/pay', (req, res) => {
     delete d.department;
     delete d.image;
     delete d.type;
+    delete d.condition;
   });
 
 

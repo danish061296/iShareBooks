@@ -19,7 +19,7 @@ export default function RatingMessage() {
 
   var filtered = [];
   console.log("RATE");
-  console.log(cart);
+  console.log(ratings);
 
   var filtered_ratings = ratings.filter(function(e, i) {
     if (filtered.includes(ratings[i].name)) {
@@ -29,6 +29,9 @@ export default function RatingMessage() {
     }
 
   });
+
+  console.log("newRATE");
+  console.log(filtered_ratings);
 
 
   return (
@@ -53,7 +56,7 @@ export default function RatingMessage() {
           })} */}
         <div className="user__rating">
           {ratings &&
-            ratings.map((rating, i) => {
+            filtered_ratings.map((rating, i) => {
               return (
                 <UserRating key={i} id={rating.id} name={rating.name} />
               );

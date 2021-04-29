@@ -68,6 +68,7 @@ const FreeBooks = () => {
         </div>
         <div className='post__book__grid'>
           {freeBooks.map((book, index) => {
+            console.log(book.name);
             return (
               <BookGrid
                 key={index}
