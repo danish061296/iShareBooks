@@ -1,6 +1,8 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ReactStars from 'react-rating-stars-component';
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import Navigation from '../components/Navigation';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -28,9 +30,6 @@ export default function RatingMessage() {
 
   });
 
-  console.log("FIL");
-  console.log(filtered_ratings);
-  console.log(filtered)
 
   return (
     <div className="ratingmessage">

@@ -125,6 +125,7 @@ const BuyBooks = () => {
             image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
           /> */}
         </div>
+
       </div>
 
       <Footer />

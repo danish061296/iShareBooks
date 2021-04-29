@@ -77,6 +77,7 @@ const ViewBook = () => {
               ${viewBooks[viewBooks.length - 1].price}
             </p>
 
+
             <Button onClick={handleAddCart} className="viewbook__button">
               Add to cart
             </Button>

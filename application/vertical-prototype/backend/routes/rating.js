@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.post('/update_rating/:id', (req, res) => {
   const id = req.params.id;
+
   console.log(id);
   const newRating = req.body.newRating;
   console.log(newRating);

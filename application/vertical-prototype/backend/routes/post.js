@@ -4,7 +4,7 @@ const router = express.Router();
 // const auth = require("../middleware/auth");
 
 router.post('/posts', (req, res) => {
-  console.log(req.body);
+
   //get data from the frontend
   try {
     const {
@@ -17,6 +17,7 @@ router.post('/posts', (req, res) => {
       type,
       image,
       userid,
+
     } = req.body;
 
     if (
@@ -47,6 +48,7 @@ router.post('/posts', (req, res) => {
         });
       } else if (type === 'trade') {
         console.log('trede');
+
         const data = [title, author, condition, image, isbn, department, userid];
         let inserSql = `INSERT INTO tradebooks (title, author, tradebooks.condition, image, isbn, department, user_id) VALUES (?)`;
         db.query(inserSql, [data], (err, results) => {
@@ -108,6 +110,7 @@ router.get('/paidbooks', (req, res) => {
   });
 });
 
+
 router.get('/tradebooks', (req, res) => {
   let inserSql = `SELECT * FROM tradebooks`;
   // let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
@@ -126,6 +129,7 @@ router.get('/tradebooks', (req, res) => {
     }
   });
 });
+
 
 router.get('/freebooks', (req, res) => {
   //let inserSql = `SELECT * FROM freebooks`;
@@ -153,6 +157,7 @@ router.get('/post/:id', (req, res) => {
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
+
       res.status(500).send('error getting the data');
     } else {
       res.send(results);

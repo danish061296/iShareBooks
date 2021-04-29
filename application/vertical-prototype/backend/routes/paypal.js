@@ -52,7 +52,7 @@ router.post('/pay', (req, res) => {
 
   //filtering data from the paymentData to make it work for paypal
   paymentData.forEach((d) => {
-    
+
     d.name = d.title;
     delete d.id;
     delete d.author;
@@ -63,7 +63,7 @@ router.post('/pay', (req, res) => {
     delete d.type;
   });
 
-  console.log(paymentData);
+
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',
@@ -94,12 +94,13 @@ router.post('/pay', (req, res) => {
     console.log('payment', payment);
     if (error) {
       console.log(error.response.details);
+
       // return res.send(error);
       // throw error;
     } else {
       /*getting the link to direct to paypal after adding 
       the data to the soldBooks and deleting from the posts */
-    
+
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
           for (let i = 0; i < arrayOfBooks.length; i++) {
@@ -120,6 +121,7 @@ router.post('/pay', (req, res) => {
               bookImage,
               bookId,
             ];
+
 
             data.pop();
 
@@ -177,4 +179,6 @@ router.get('/cancel', (req, res) => {
   res.send('canceled');
 });
 
+
 module.exports = router;
+

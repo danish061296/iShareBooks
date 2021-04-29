@@ -33,6 +33,7 @@ router.post('/search', (req, res) => {
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
       db.escape('%' + searchField + '%');
+
   else if (searchField == '')
     query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
   else if (searchType != 'any')

@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 const ViewListings = () => {
   const cart = useSelector((state) => state.userReducer.cart);
 
+  console.log(cart);
   return (
     <div className="viewlistings__container">
       <Navigation />

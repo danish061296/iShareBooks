@@ -29,6 +29,7 @@ router.post('/register', (req, res) => {
         return res.send({
           registered: false,
           message: 'Username is already in use!',
+
         });
       } else if (err.sqlMessage.includes('email')) {
         return res.send({
@@ -66,6 +67,8 @@ router.post('/register', (req, res) => {
         }
       );
     }
+  
+
   });
 });
 
@@ -118,6 +121,7 @@ router.post('/login', async (req, res) => {
           });
         }
       }
+     
     );
   } catch (error) {
     res.status(500).send(error);
