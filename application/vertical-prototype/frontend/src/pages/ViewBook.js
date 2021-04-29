@@ -1,14 +1,18 @@
 import React from 'react';
 import './ViewBook.css';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Button from '@material-ui/core/Button';
 import Footer from '../components/Footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCartItem } from '../redux/actions/userActions';
+import {
+  setCartItem,
+  setSeller,
+  setSellerEmail,
+} from '../redux/actions/userActions';
 
 const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
-  const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
   const dispatch = useDispatch();
 
@@ -24,20 +28,34 @@ const ViewBook = () => {
         isbn: viewBooks[viewBooks.length - 1].isbn,
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
-        username: viewBooks[viewBooks.length - 1].username,
+        seller: viewBooks[viewBooks.length - 1].seller,
         type: '',
       })
     );
   };
 
+  // if (typeof viewBooks[viewBooks.length - 1].username === 'undefined') {
+  //   setNoSeller(true);
+  // } else {
+  //   setNoSeller(false);
+  //   // make first letter of username to uppercase
+  //   const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
+  //   setSeller(
+  //     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1)
+  //   );
+  // }
+
   // make first letter of username to uppercase
-  const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
-  const username =
+  const viewBooksUsername = viewBooks[viewBooks.length - 1].seller;
+  const seller =
     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
+  dispatch(setSeller(seller));
+  dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (
     <div className="viewbook_container">
       <Navigation />
+
       <div className="viewbook">
         <div className="viewbook_box">
           <div className="viewbook_left">
@@ -71,9 +89,14 @@ const ViewBook = () => {
               <strong>ISBN: </strong>
               {viewBooks[0].isbn}
             </p>
+
             <p className="viewbook_username">
-              Posted by <strong>{username}</strong>
+              Posted by
+              <Link to="./profile">
+                <strong> {seller}</strong>
+              </Link>
             </p>
+
             <p className="viewbook_price">
               ${viewBooks[viewBooks.length - 1].price}
             </p>
@@ -84,6 +107,13 @@ const ViewBook = () => {
           </div>
         </div>
       </div>
+
+      {/* {noseller && (
+        <div>
+          <h1 className="nousername__text">No Username</h1>
+        </div>
+      )} */}
+
       <Footer />
     </div>
   );

@@ -15,6 +15,16 @@ export default function RatingMessage() {
   const ratings = useSelector((state) => state.userReducer.ratings);
   const cart = useSelector((state) => state.userReducer.cart);
 
+  var filtered = [];
+
+  var filtered_ratings = ratings.filter(function (e, i) {
+    if (filtered.includes(ratings[i].username)) {
+    } else {
+      filtered.push(ratings[i].username);
+      return ratings[i];
+    }
+  });
+
   return (
     <div className="ratingmessage">
       <Navigation />
@@ -31,13 +41,9 @@ export default function RatingMessage() {
           </p>
         </div>
 
-        {/* {cart &&
-          cart.map((item, i) => {
-            return <UserRating key={i} id={item.id} username={item.username} />;
-          })} */}
         <div className="user__rating">
           {ratings &&
-            ratings.map((rating, i) => {
+            filtered_ratings.map((rating, i) => {
               return (
                 <UserRating key={i} id={rating.id} username={rating.username} />
               );
@@ -46,10 +52,6 @@ export default function RatingMessage() {
       </div>
 
       <div>
-        {/* <Container component="main" maxWidth="xs">
-          <CssBaseline />
-        </Container> */}
-
         <Footer />
       </div>
     </div>

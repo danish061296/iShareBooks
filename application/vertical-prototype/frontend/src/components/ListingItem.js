@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
-import { removeFromCart } from '../redux/actions/userActions';
+import { Link } from 'react-router-dom';
+import { removeFromCart, setSeller } from '../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 
 const ListingItem = ({
@@ -13,7 +14,7 @@ const ListingItem = ({
   condition,
   price,
   image,
-  username,
+  seller,
 }) => {
   const dispatch = useDispatch();
 
@@ -21,6 +22,8 @@ const ListingItem = ({
   const handleRemove = () => {
     dispatch(removeFromCart(id));
   };
+
+  dispatch(setSeller(seller.charAt(0).toUpperCase() + seller.slice(1)));
 
   return (
     <div className="listingitem__item">
@@ -49,7 +52,12 @@ const ListingItem = ({
         </p>
         <p className="listingitem__item__username">
           posted by{' '}
-          <strong className="listingitem__username">{username}</strong>
+          <Link to="./profile">
+            {' '}
+            <strong className="listingitem__username">
+              {seller.charAt(0).toUpperCase() + seller.slice(1)}
+            </strong>
+          </Link>
         </p>
         <div className="listingitem__bottom">
           <p className="listingitem__item__price">${price}</p>

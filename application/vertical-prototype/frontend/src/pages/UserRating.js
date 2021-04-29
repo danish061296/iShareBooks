@@ -1,29 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import './RatingMessage.css';
 import axios from 'axios';
-import ReactNotification from 'react-notifications-component';
-import { store } from 'react-notifications-component';
+
+import { useSelector } from 'react-redux';
 
 const UserRating = ({ id, username }) => {
+  const ratings = useSelector((state) => state.userReducer.ratings);
+
+  const [clickedStyle, setClickedStyle] = useState({});
+
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+    setClickedStyle({
+      'pointer-events': 'none',
+      opacity: '0.5',
+      'background-color': '#f0f0f0',
+      transition: '0.5s',
+    });
 
     const ratingObject = {
       newRating: newRating,
     };
-
-    store.addNotification({
-      title: '',
-      message: 'Thank you for rating the user.',
-      type: 'success',
-      insert: 'top',
-      container: 'top-center',
-      dismiss: {
-        duration: 2000,
-        showIcon: true,
-      },
-    });
 
     axios
       .post(
@@ -46,15 +43,15 @@ const UserRating = ({ id, username }) => {
 
   return (
     // <div className="rating_container">
-    <div className="stars_container">
-      <ReactNotification />
+
+    <div className="stars_container" style={clickedStyle}>
       <p className="stars__username">
         {username.charAt(0).toUpperCase() + username.slice(1)}
       </p>
       <div className="stars__class">
         <ReactStars
           size={40}
-          value={5}
+          value={0}
           isHalf={false}
           edit={true}
           onChange={ratingChanged}

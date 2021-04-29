@@ -76,7 +76,7 @@ router.post('/pay', (req, res) => {
   };
 
   paypal.payment.create(create_payment_json, function (error, payment) {
-    console.log('payment', payment);
+    console.log('payment is', payment);
     if (error) {
       console.log(error);
       // return res.send(error);

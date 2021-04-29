@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
+
 import { Link, Redirect } from 'react-router-dom';
 import './BuyBooks.css';
 
@@ -8,6 +9,7 @@ import {
   setCartItem,
   setViewBook,
   setRating,
+  setSellerEmail,
 } from '../redux/actions/userActions';
 
 const BookGrid = ({
@@ -20,7 +22,8 @@ const BookGrid = ({
   image,
   price,
   type,
-  username,
+  seller,
+  sellerEmail,
 }) => {
   const dispatch = useDispatch();
 
@@ -35,7 +38,8 @@ const BookGrid = ({
         condition,
         image,
         price,
-        username,
+        seller,
+        sellerEmail,
       })
     );
 
@@ -54,17 +58,18 @@ const BookGrid = ({
         price,
         image,
         type,
-        username,
+        seller,
       })
     );
     dispatch(
       setRating({
         id,
-        username,
+        seller,
       })
     );
   };
 
+  dispatch(setSellerEmail(sellerEmail));
   // const imagetest = Buffer.from(image.data, 'base64');
 
   return (

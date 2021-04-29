@@ -1,8 +1,10 @@
 .viewbook {
   padding: 20px;
-  height: 90vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .viewbook_box {
@@ -10,23 +12,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95%;
+  height: 98%;
   border-radius: 10px;
-  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+  width: 90%;
 }
 
 .viewbook_left {
   width: 30%;
   margin-top: 30px;
   background-color: #f7f8fa;
-  height: 75%;
+  height: 80%;
 }
 
 .viewbook_image {
-  height: 90px;
+  height: 170px;
   width: 56px;
   border: 5px black;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-top: 10%;
 }
 
@@ -36,7 +39,7 @@
   margin-top: 30px;
   padding: 30px;
   background-color: #f7f8fa;
-  height: 75%;
+  height: 80%;
 }
 
 .viewbook_title {
@@ -59,4 +62,7 @@ button {
 button:hover {
   background-color: #29918a !important;
   color: white !important;
+}
+
+.nousername__text {
 }

@@ -17,6 +17,16 @@ export const setEmail = (email) => ({
   email,
 });
 
+export const setSeller = (seller) => ({
+  type: 'SET_SELLER',
+  seller,
+});
+
+export const setSellerEmail = (sellerEmail) => ({
+  type: 'SET_SELLER_EMAIL',
+  sellerEmail,
+});
+
 export const setIsLoggedIn = (isLoggedIn) => ({
   type: 'SET_LOGGED_IN',
   isLoggedIn,

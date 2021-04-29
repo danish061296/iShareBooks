@@ -12,6 +12,7 @@ import {
   setUsername,
   setPassword,
   setCartItem,
+  setSeller,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
@@ -42,6 +43,7 @@ const Navigation = () => {
       axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
         dispatch(setEmail(response.data[0].email));
         dispatch(setUsername(response.data[0].name));
+        dispatch(setSeller(''));
         console.log(response.data[0].name);
 
         console.log(response.data[0].name);

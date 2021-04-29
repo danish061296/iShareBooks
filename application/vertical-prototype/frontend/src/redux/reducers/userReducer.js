@@ -3,6 +3,8 @@ const initState = () => ({
   password: '',
   userid: 0,
   email: '',
+  seller: '',
+  sellerEmail: '',
   isLoggedIn: false,
   searchField: '',
   searchType: '',
@@ -41,7 +43,16 @@ const userReducer = (state = initState(), action) => {
         ...state,
         password: action.password,
       };
-
+    case 'SET_SELLER':
+      return {
+        ...state,
+        seller: action.seller,
+      };
+    case 'SET_SELLER_EMAIL':
+      return {
+        ...state,
+        sellerEmail: action.sellerEmail,
+      };
     case 'SET_LOGGED_IN':
       return {
         ...state,
