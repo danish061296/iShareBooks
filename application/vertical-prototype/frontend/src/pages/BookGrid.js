@@ -77,7 +77,6 @@ const BookGrid = ({
 
   return (
     <div>
-      a
       {price !== 0 && (
         <div className="post__book__details">
           <Link to="/viewbook" onClick={handleBookDetail}>

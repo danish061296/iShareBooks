@@ -24,14 +24,14 @@ const ViewBook = () => {
         isbn: viewBooks[viewBooks.length - 1].isbn,
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
-        name: viewBooks[viewBooks.length - 1].username,
+        name: viewBooks[viewBooks.length - 1].name,
         type: '',
       })
     );
   };
 
   // make first letter of username to uppercase
-  const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
+  const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
  console.log(viewBooks);
 
   return (
