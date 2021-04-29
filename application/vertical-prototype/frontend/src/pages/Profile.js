@@ -17,14 +17,14 @@ export default function Profile() {
   const username = useSelector((state) => state.userReducer.username);
   const email = useSelector((state) => state.userReducer.email);
   const userid = useSelector((state) => state.userReducer.userid);
-  const seller = useSelector((state) => state.userReducer.seller);
+  const name = useSelector((state) => state.userReducer.name);
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
 
   return (
     <div>
       <Navigation />
 
-      {seller && (
+      {name && (
         <div className="profile__Container">
           <div className="top">
             <div className="image_container">
@@ -38,7 +38,8 @@ export default function Profile() {
           <div className="user_information">
             <div className="user_profile_info">
               <div className="username">
-                {seller.charAt(0).toUpperCase() + seller.slice(1)}
+                {name}
+                {/* {name.charAt(0).toUpperCase() + name.slice(1)} */}
               </div>
 
               <div className="email">

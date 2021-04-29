@@ -44,9 +44,7 @@ export default function RatingMessage() {
         <div className="user__rating">
           {ratings &&
             filtered_ratings.map((rating, i) => {
-              return (
-                <UserRating key={i} id={rating.id} username={rating.username} />
-              );
+              return <UserRating key={i} id={rating.id} name={rating.name} />;
             })}
         </div>
       </div>

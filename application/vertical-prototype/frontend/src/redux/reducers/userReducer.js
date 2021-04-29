@@ -3,7 +3,7 @@ const initState = () => ({
   password: '',
   userid: 0,
   email: '',
-  seller: '',
+  user: '',
   sellerEmail: '',
   isLoggedIn: false,
   searchField: '',
@@ -46,7 +46,7 @@ const userReducer = (state = initState(), action) => {
     case 'SET_SELLER':
       return {
         ...state,
-        seller: action.seller,
+        name: action.name,
       };
     case 'SET_SELLER_EMAIL':
       return {

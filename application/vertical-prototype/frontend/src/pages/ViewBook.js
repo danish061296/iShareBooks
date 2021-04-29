@@ -28,7 +28,7 @@ const ViewBook = () => {
         isbn: viewBooks[viewBooks.length - 1].isbn,
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
-        seller: viewBooks[viewBooks.length - 1].seller,
+        name: viewBooks[viewBooks.length - 1].name,
         type: '',
       })
     );
@@ -46,10 +46,10 @@ const ViewBook = () => {
   // }
 
   // make first letter of username to uppercase
-  const viewBooksUsername = viewBooks[viewBooks.length - 1].seller;
-  const seller =
+  const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
+  const name =
     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
-  dispatch(setSeller(seller));
+  dispatch(setSeller(name));
   dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (
@@ -93,7 +93,7 @@ const ViewBook = () => {
             <p className="viewbook_username">
               Posted by
               <Link to="./profile">
-                <strong> {seller}</strong>
+                <strong> {name}</strong>
               </Link>
             </p>
 

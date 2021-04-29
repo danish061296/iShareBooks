@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../dataBase.js');
 const fs = require('fs');
-const {query} = require('../dataBase.js');
+const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.post('/search', (req, res) => {
   // QUERY for retrieving user's info from id
   // SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id;
 
-  const {searchField, munitem, message} = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+  const { searchField, munitem, message } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   console.log(searchField);
   const searchType = 'any';
   searchTable = 'paidbooks';
@@ -104,7 +104,7 @@ router.get('/fire', (req, res) => {
       }
     });
 
-    console.log(results);
+    // console.log(results);
 
     return res.send({
       results,

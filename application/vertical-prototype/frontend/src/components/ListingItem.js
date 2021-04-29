@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import './ListingItem.css';
 import { Link } from 'react-router-dom';
 import { removeFromCart, setSeller } from '../redux/actions/userActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ListingItem = ({
   id,
@@ -14,17 +14,23 @@ const ListingItem = ({
   condition,
   price,
   image,
-  seller,
+  type,
+  name,
 }) => {
   const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.userReducer.cart);
 
   // remove item from the cart
   const handleRemove = () => {
     dispatch(removeFromCart(id));
   };
 
-  dispatch(setSeller(seller.charAt(0).toUpperCase() + seller.slice(1)));
+  const sellerName = cart[cart.length - 1].name;
+  const seller = sellerName.charAt(0).toUpperCase() + sellerName.slice(1);
 
+  dispatch(setSeller(name.charAt(0).toUpperCase() + name.slice(1)));
+  console.log(name.charAt(0).toUpperCase() + name.slice(1));
   return (
     <div className="listingitem__item">
       <img
@@ -55,7 +61,8 @@ const ListingItem = ({
           <Link to="./profile">
             {' '}
             <strong className="listingitem__username">
-              {seller.charAt(0).toUpperCase() + seller.slice(1)}
+              {/* {seller} */}
+              {name.charAt(0).toUpperCase() + name.slice(1)}
             </strong>
           </Link>
         </p>

@@ -86,7 +86,8 @@ const BuyBooks = () => {
                 condition={book.condition}
                 image={book.image}
                 price={book.cost}
-                seller={book.name}
+                type="paid"
+                name={book.name}
                 sellerEmail={book.email}
                 defaultImage="default"
               />

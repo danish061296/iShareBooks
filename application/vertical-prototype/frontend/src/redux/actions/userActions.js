@@ -17,9 +17,9 @@ export const setEmail = (email) => ({
   email,
 });
 
-export const setSeller = (seller) => ({
+export const setSeller = (name) => ({
   type: 'SET_SELLER',
-  seller,
+  name,
 });
 
 export const setSellerEmail = (sellerEmail) => ({

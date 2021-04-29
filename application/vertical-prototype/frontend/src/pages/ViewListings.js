@@ -47,7 +47,7 @@ const ViewListings = () => {
                     price={item.price}
                     image={item.image}
                     type={item.type}
-                    seller={item.seller}
+                    name={item.name}
                   />
                 );
               })}

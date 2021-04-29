@@ -16,6 +16,7 @@ paypal.configure({
 
 /* reciving a post request from the frontebd */
 router.post('/pay', (req, res) => {
+  console.log(req.body);
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
   let booksPrice = 0.35;
