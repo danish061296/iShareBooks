@@ -30,6 +30,9 @@ const TradeBooks = () => {
     setOpen(true);
   };
 
+
+  console.log(tradeBooks);
+
   return (
     <div className='tradebooks'>
       <Navigation />
@@ -80,8 +83,8 @@ const TradeBooks = () => {
                 isbn={book.isbn}
                 condition={book.condition}
                 image={book.image}
-                price={book.cost}
-                username={book.name}
+                price={0}
+                name={book.name}
                 defaultImage='default'
               />
             );

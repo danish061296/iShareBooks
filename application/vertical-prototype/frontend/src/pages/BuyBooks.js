@@ -72,6 +72,7 @@ const BuyBooks = () => {
           </div>
         </div>
         <div className='post__book__grid'>
+  
           {paidBooks.map((book, index) => {
             return (
               <BookGrid

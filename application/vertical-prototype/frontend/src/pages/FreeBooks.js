@@ -78,8 +78,8 @@ const FreeBooks = () => {
                 isbn={book.isbn}
                 condition={book.condition}
                 image={book.image}
-                price={book.cost}
-                username={book.name}
+                price={0}
+                name={book.name}
                 defaultImage='default'
               />
             );

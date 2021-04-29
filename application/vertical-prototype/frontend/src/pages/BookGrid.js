@@ -23,9 +23,9 @@ const BookGrid = ({
   name,
 }) => {
   var price_hold = price;
-  
+
   if (isNaN(price)) {
-    price = 0.0001;
+    price = 0.0;
   }
     
 
