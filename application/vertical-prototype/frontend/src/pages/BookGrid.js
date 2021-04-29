@@ -22,6 +22,14 @@ const BookGrid = ({
   type,
   name,
 }) => {
+  var price_hold = price;
+  
+  if (isNaN(price)) {
+    price = 0.0001;
+  }
+    
+
+
   const dispatch = useDispatch();
 
   const handleBookDetail = () => {
@@ -51,8 +59,8 @@ const BookGrid = ({
         author,
         department,
         isbn,
-        price,
         image,
+        price,
         type,
         name,
       })
@@ -69,6 +77,7 @@ const BookGrid = ({
 
   return (
     <div>
+      a
       {price !== 0 && (
         <div className="post__book__details">
           <Link to="/viewbook" onClick={handleBookDetail}>
@@ -91,7 +100,7 @@ const BookGrid = ({
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
               style={{ height: 200, width: 200 }}
-              src={image}
+              src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
               className="post__book__image"
             />
@@ -100,7 +109,7 @@ const BookGrid = ({
             Add to cart
           </Button>
 
-          <p className="post__book__price">$0.00</p>
+          <p className="post__book__price"></p>
         </div>
       )}
     </div>
