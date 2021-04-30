@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import { Link as LinkR } from 'react-router-dom';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +18,7 @@ import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+
 import {
   setUsername,
   setEmail,
@@ -64,6 +65,8 @@ const Registration = () => {
   const dispatch = useDispatch();
   const ref = useRef(null);
 
+  const history = useHistory();
+
   const initialValues = {
     username: '',
     email: '',
@@ -108,7 +111,7 @@ const Registration = () => {
 
     console.log(registerUser.username);
     Axios.post(
-      `http://'${window.location.hostname}:3001/register`,
+      `http://${window.location.hostname}:3001/register`,
       registerUser
     ).then((response) => {
       console.log(response.data);
@@ -137,6 +140,7 @@ const Registration = () => {
           },
         });
       }
+      // history.push('/login');
     });
 
     dispatch(setUsername(payload.username));

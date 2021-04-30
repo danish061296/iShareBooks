@@ -3,6 +3,13 @@ const db = require('../dataBase.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+router.use(cors());
 
 router.get('/', (req, res) => {
   //query db
@@ -18,7 +25,10 @@ router.get('/', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { username, email, password } = req.body;
-  const values = [email];
+  // const values = [email];
+
+  console.log(username);
+
   var hash = bcrypt.hashSync(password, 8);
   const user = [username, email, hash];
 
@@ -29,7 +39,6 @@ router.post('/register', (req, res) => {
         return res.send({
           registered: false,
           message: 'Username is already in use!',
-
         });
       } else if (err.sqlMessage.includes('email')) {
         return res.send({
@@ -67,8 +76,6 @@ router.post('/register', (req, res) => {
         }
       );
     }
-  
-
   });
 });
 
@@ -121,7 +128,6 @@ router.post('/login', async (req, res) => {
           });
         }
       }
-     
     );
   } catch (error) {
     res.status(500).send(error);

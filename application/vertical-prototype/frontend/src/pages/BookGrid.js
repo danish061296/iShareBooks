@@ -83,7 +83,7 @@ const BookGrid = ({
         <div className="post__book__details">
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
-              style={{ height: 200, width: 200 }}
+              style={{ height: 230, width: 170 }}
               src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
               className="post__book__image"
@@ -100,15 +100,15 @@ const BookGrid = ({
         <div className="post__book__details">
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
-              style={{ height: 200, width: 200 }}
+              style={{ height: 230, width: 170 }}
               src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
               className="post__book__image"
             />
           </Link>
-          <Button className="buy__book__button" onClick={handleAddCart}>
+          {/* <Button className="buy__book__button" onClick={handleAddCart}>
             Add to cart
-          </Button>
+          </Button> */}
 
           <p className="post__book__price"></p>
         </div>
