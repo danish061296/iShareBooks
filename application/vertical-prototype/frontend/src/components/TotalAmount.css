@@ -17,6 +17,7 @@
   height: 40%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .total__amount__summary {
@@ -36,6 +37,23 @@
   /* align-self: flex-start; */
   display: flex;
   justify-content: space-between;
+}
+
+.subtotal__info p {
+  font-size: 17px;
+}
+
+.shipping__info p {
+  font-size: 17px;
+}
+
+.tax,
+.tax__cost {
+  font-size: 15px;
+}
+
+.shipping__standard {
+  font-size: 17px;
 }
 
 .tax__info {
@@ -84,8 +102,12 @@
 .checkout__button {
   background-color: #ffffff !important;
   width: 90% !important;
-
+  font-size: 30x;
+  padding: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
   color: #1c504c !important;
+  border-radius: 5px;
 }
 
 .checkout__button:hover {

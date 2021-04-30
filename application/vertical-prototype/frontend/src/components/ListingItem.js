@@ -1,7 +1,8 @@
 import React from 'react';
-import { Star } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
+import { removeFromCart } from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const ListingItem = ({
   id,
@@ -12,15 +13,22 @@ const ListingItem = ({
   condition,
   price,
   image,
+  name,
 }) => {
+  const dispatch = useDispatch();
+
+  console.log(condition);
+
   // remove item from the cart
-  const removeFromCart = () => {};
+  const handleRemove = () => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <div className="listingitem__item">
       <img
         className="listingitem__item__image"
-        src={image}
+        src={`data:image/jpeg;base64,${image}`}
         alt="Image_loading"
       />
       <div className="listingitem__item__details">
@@ -41,14 +49,19 @@ const ListingItem = ({
           <strong>ISBN: </strong>
           {isbn}
         </p>
-
-        <p className="listingitem__item__price">
-          ${price}
-          {/* <small>$</small>
-          <strong>{price}</strong> */}
+        <p className="listingitem__item__username">
+          posted by{' '}
+          <strong className="listingitem__username">{name}</strong>
         </p>
+        <div className="listingitem__bottom">
+          <p className="listingitem__item__price">${price}</p>
+          <Button onClick={handleRemove} className="listingitem__item__button">
+            REMOVE FROM CART
+          </Button>
+        </div>
+      </div>
 
-        {/* <div className="listingitem__item__rating">
+      {/* <div className="listingitem__item__rating">
           {Array(rating)
             .fill()
             .map((_, i) => (
@@ -57,10 +70,6 @@ const ListingItem = ({
               </p>
             ))}
         </div> */}
-        <Button onClick={removeFromCart} className="listingitem__item__button">
-          REMOVE FROM CART
-        </Button>
-      </div>
     </div>
   );
 };

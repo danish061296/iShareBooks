@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Video from './video.mp4';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Tippy, { tippy } from '@tippyjs/react';
@@ -15,9 +16,9 @@ import {
   setrandomMsg,
   setSearchType,
 } from '../redux/actions/userActions';
-import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import axios from 'axios';
 
 const About = () => {
   useEffect(() => {
@@ -26,14 +27,14 @@ const About = () => {
 
   //sending data to redux
   const dispatch = useDispatch();
+  const posts = useSelector((state) => state.userReducer.posts);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const posts = useSelector((state) => state.userReducer.posts);
   const searchType = useSelector((state) => state.userReducer.searchType);
 
   // useEffect(() => {
   //   const search = {
-  //     searchField: searchField,
+  //     searchField: 'default',
   //   };
   //   Axios.post('http://localhost:3001/search', search)
   //     .then((response) => {
@@ -44,9 +45,9 @@ const About = () => {
   //           // dispatch(setrandomMsg(response.data));
   //           dispatch(setPosts(response.data));
   //         } else {
-  //           console.log('Data coming from search click');
+  //           console.log('Data coming from default');
   //           dispatch(setPosts(response.data));
-  //           dispatch((setrandomMsg = ''));
+  //           dispatch(setrandomMsg(''));
   //         }
   //       } else {
   //         dispatch(setPosts([]));
@@ -58,13 +59,14 @@ const About = () => {
   // }, []);
 
   const handleKeyDown = (e) => {
-    const search = {
-      searchField: searchField,
-      searchType: searchType,
-    };
-
     if (e.key === 'Enter') {
-      Axios.post('http://'+window.location.hostname+':3001/search', search)
+      const search = {
+        searchField: searchField,
+        searchType: searchType,
+      };
+
+      console.log(searchField);
+      Axios.post(`http://${window.location.hostname}:3001/search`, search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -97,6 +99,13 @@ const About = () => {
 
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
+
+    const object = {
+      menuitem: e,
+      message: 'exlpore',
+    };
+
+    axios.post('', object);
     dispatch(setSearchType(e));
   };
 
@@ -106,7 +115,9 @@ const About = () => {
       searchType: searchType,
     };
 
-    Axios.post('http://'+window.location.hostname+':3001/search', search)
+    console.log(searchField);
+
+    Axios.post('http://' + window.location.hostname + '/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);
@@ -151,9 +162,15 @@ const About = () => {
         />
       </div>
       <div className="about__services">
-        <p className="services__link">Buy</p>
-        <p className="services__link">Trade</p>
-        <p className="services__link">Free</p>
+        <Link className="links" to="/buybooks">
+          <span className="services__link">Buy</span>
+        </Link>
+        <Link className="links" to="/tradebooks">
+          <span className="services__link">Trade</span>
+        </Link>
+        <Link className="links" to="/freebooks">
+          <span className="services__link">Free</span>
+        </Link>
       </div>
       <div className="search__content">
         <input
@@ -192,18 +209,17 @@ const About = () => {
           </p>
         </div>
       </div>
-      <Tippy content="Will be implemented in the future" placement="bottom">
+      <Link className="explore__link" to="/explore">
         <Button variant="success explore__btn" data-aos="fade-up">
-          Explore Now!{' '}
+          Explore Now!
           <ArrowForwardIosIcon className="arrow__icon" fontSize="small" />
         </Button>
-      </Tippy>
+      </Link>
 
       <div class="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
-
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
