@@ -8,6 +8,7 @@ import {
   setCartItem,
   setViewBook,
   setRating,
+  setSellerEmail,
 } from '../redux/actions/userActions';
 
 const BookGrid = ({
@@ -21,14 +22,13 @@ const BookGrid = ({
   price,
   type,
   name,
+  sellerEmail,
 }) => {
   var price_hold = price;
 
   if (isNaN(price)) {
     price = 0.0;
   }
-    
-
 
   const dispatch = useDispatch();
 
@@ -44,6 +44,7 @@ const BookGrid = ({
         image,
         price,
         name,
+        sellerEmail,
       })
     );
 
@@ -58,8 +59,8 @@ const BookGrid = ({
         title,
         author,
         department,
-        condition,
         isbn,
+        condition,
         image,
         price,
         type,
@@ -74,7 +75,7 @@ const BookGrid = ({
     );
   };
 
-  // const imagetest = Buffer.from(image.data, 'base64');
+  dispatch(setSellerEmail(sellerEmail));
 
   return (
     <div>

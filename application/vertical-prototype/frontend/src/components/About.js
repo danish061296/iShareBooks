@@ -100,12 +100,12 @@ const About = () => {
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
 
-    const object = {
-      menuitem: e,
-      message: 'exlpore',
-    };
+    // const object = {
+    //   menuitem: e,
+    //   message: 'exlpore',
+    // };
 
-    axios.post('', object);
+    // axios.post('', object);
     dispatch(setSearchType(e));
   };
 
@@ -216,7 +216,7 @@ const About = () => {
         </Button>
       </Link>
 
-      <div class="custom-shape-divider-bottom-1616326519">
+      <div className="custom-shape-divider-bottom-1616326519">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"

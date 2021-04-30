@@ -3,6 +3,8 @@ const initState = () => ({
   password: '',
   userid: 0,
   email: '',
+  user: '',
+  sellerEmail: '',
   isLoggedIn: false,
   searchField: '',
   searchType: '',
@@ -11,12 +13,7 @@ const initState = () => ({
   viewBooks: [],
   cart: [],
   ratings: [],
-  // ratings: [
-  //   { id: 123, username: 'John' },
-  //   { id: 234, username: 'Alice' },
-  //   { id: 546, username: 'Bob' },
-  //   { id: 112, username: 'Clark' },
-  // ],
+  userrating: 0,
   randomMsg: '',
 });
 
@@ -27,11 +24,15 @@ export const getCartTotal = (cart) =>
 const userReducer = (state = initState(), action) => {
   switch (action.type) {
     case 'SET_USERNAME':
+      console.log(action);
+
       return {
         ...state,
         username: action.username,
       };
     case 'SET_EMAIL':
+      console.log(action);
+
       return {
         ...state,
         email: action.email,
@@ -42,6 +43,21 @@ const userReducer = (state = initState(), action) => {
         password: action.password,
       };
 
+    case 'SET_SELLER':
+      return {
+        ...state,
+        name: action.name,
+      };
+    case 'SET_SELLER_EMAIL':
+      return {
+        ...state,
+        sellerEmail: action.sellerEmail,
+      };
+    case 'SET_USER_RATING':
+      return {
+        ...state,
+        userrating: action.userrating,
+      };
     case 'SET_LOGGED_IN':
       return {
         ...state,
@@ -73,7 +89,6 @@ const userReducer = (state = initState(), action) => {
         userid: action.userid,
       };
     case 'SET_VIEW_BOOK':
-      console.log(action);
       return {
         ...state,
         viewBooks: [...state.viewBooks, action.book],
@@ -90,6 +105,15 @@ const userReducer = (state = initState(), action) => {
         ...state,
         cart: [...state.cart, action.item],
       };
+
+    case 'SET_DELETE_CART':
+      console.log(action);
+
+      return {
+        ...state,
+        cart: [],
+      };
+
     case 'REMOVE_FROM_CART':
       console.log(action);
       // coping the previous items into new array

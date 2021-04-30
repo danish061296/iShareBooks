@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
 
           <div className="copyright">
-            <Link className="footer__link">
+            <Link className="footer__link" to="/">
               <span>Terms of Sale</span>
             </Link>
 
@@ -60,7 +60,7 @@ const Footer = () => {
               <span>Terms of Use</span>
             </Link>
 
-            <Link className="footer__link">
+            <Link className="footer__link" to="/">
               <span>© 2021 Copyright iSHARE INC</span>
             </Link>
           </div>

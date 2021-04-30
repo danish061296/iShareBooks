@@ -10,19 +10,32 @@ import axios from 'axios';
 
 const Trending = () => {
   const [trendingBooks, setTrendingBooks] = useState([]);
-  React.useEffect(async () => {
-    Aos.init({ duration: 1600 });
 
-    const res = await axios.get(
-      `http://${window.location.hostname}:3001/fire`,
-      {
-        // searchField: '',
-        // searchType: 'any',
-      }
-    );
-    console.log(res.data);
-    setTrendingBooks(res.data.results);
+  React.useEffect(() => {
+    Aos.init({ duration: 1600 });
   }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/fire`
+      );
+      setTrendingBooks(res.data.results);
+    }
+    fetchData();
+  }, []);
+
+  // {
+  //   const res = await axios.get(
+  //     `http://${window.location.hostname}:3001/fire`,
+  //     {
+  //       // searchField: '',
+  //       // searchType: 'any',
+  //     }
+  //   );
+  //   console.log(res.data);
+  //   setTrendingBooks(res.data.results);
+  // }, []);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);

@@ -3,8 +3,13 @@ import './ViewBook.css';
 import Navigation from '../components/Navigation';
 import Button from '@material-ui/core/Button';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCartItem } from '../redux/actions/userActions';
+import {
+  setCartItem,
+  setSeller,
+  setSellerEmail,
+} from '../redux/actions/userActions';
 
 const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
@@ -32,6 +37,11 @@ const ViewBook = () => {
 
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
+
+  const name =
+    viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
+  dispatch(setSeller(name));
+  dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (
     <div className="viewbook_container">
@@ -69,13 +79,18 @@ const ViewBook = () => {
               <strong>ISBN: </strong>
               {viewBooks[0].isbn}
             </p>
+
             <p className="viewbook_username">
-              Posted by <strong>{viewBooksUsername}</strong>
+              Posted by
+              <Link to="./profile">
+                <strong> {name}</strong>
+              </Link>
+              {/* Posted by <strong>{viewBooksUsername}</strong> */}
             </p>
+
             <p className="viewbook_price">
               ${viewBooks[viewBooks.length - 1].price}
             </p>
-
 
             <Button onClick={handleAddCart} className="viewbook__button">
               Add to cart
