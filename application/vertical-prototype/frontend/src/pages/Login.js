@@ -107,6 +107,8 @@ export default function SignIn() {
           dispatch(setUsername(response.data.userName));
           dispatch(setUserId(response.data.id));
 
+          console.log(response.data);
+
           history.push('/buybooks');
         } else {
           store.addNotification({
@@ -122,7 +124,6 @@ export default function SignIn() {
           });
           dispatch(setIsLoggedIn(false));
           dispatch(setUsername(''));
-
           dispatch(setEmail(''));
         }
       }

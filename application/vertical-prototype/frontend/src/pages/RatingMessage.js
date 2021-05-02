@@ -57,8 +57,9 @@ export default function RatingMessage() {
         <div className="user__rating">
           {ratings &&
             filtered_ratings.map((rating, i) => {
+              console.log(rating);
               return (
-                <UserRating key={i} id={rating.id} name={rating.name} />
+                <UserRating key={i} id={rating.sellerID} name={rating.name} />
               );
 
             })}

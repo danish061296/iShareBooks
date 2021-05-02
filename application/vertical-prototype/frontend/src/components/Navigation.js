@@ -11,7 +11,7 @@ import {
   setEmail,
   setUsername,
   setPassword,
-  setCartItem,
+  setUserId,
   setSeller,
   setUserRating,
   setDeleteCart,
@@ -63,11 +63,12 @@ const Navigation = () => {
       axios
         .get(`http://${window.location.hostname}:3001/get_rating/${id}`)
         .then((response) => {
-          console.log(response.data.rating);
+          console.log(response.data);
+          console.log(id);
           dispatch(setUserRating(response.data.rating));
-          if (response.data.rating) {
+          //if (response.data.rating) {
             history.push(`/profile/${id}`);
-          }
+          //}
         })
         .catch((e) => console.log(e));
 

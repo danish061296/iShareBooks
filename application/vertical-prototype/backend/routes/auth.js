@@ -50,6 +50,14 @@ router.post('/register', (req, res) => {
       return res.status(401).send(err);
     } else {
       if (err) throw err;
+
+      // insert into ratings table
+      insertSQL = "INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)";
+      const data = [results.insertId, 5, 1];
+      db.query(insertSQL, [data], (err2, results2) => {
+        if (err2)
+          console.log(err2);
+      });
       res.status(200).send({
         registered: true,
         message: 'The user is registered successfully!',

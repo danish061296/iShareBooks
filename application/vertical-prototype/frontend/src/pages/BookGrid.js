@@ -8,6 +8,7 @@ import {
   setCartItem,
   setViewBook,
   setRating,
+  setSeller,
   setSellerEmail,
 } from '../redux/actions/userActions';
 
@@ -23,6 +24,7 @@ const BookGrid = ({
   type,
   name,
   sellerEmail,
+  sellerID,
 }) => {
   var price_hold = price;
 
@@ -45,6 +47,7 @@ const BookGrid = ({
         price,
         name,
         sellerEmail,
+        sellerID,
       })
     );
 
@@ -69,13 +72,15 @@ const BookGrid = ({
     );
     dispatch(
       setRating({
-        id,
+        sellerID,
         name,
       })
     );
+    console.log("SELL ID:" + sellerID);
   };
 
   dispatch(setSellerEmail(sellerEmail));
+
 
   return (
     <div>

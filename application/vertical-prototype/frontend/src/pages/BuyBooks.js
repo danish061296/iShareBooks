@@ -102,6 +102,7 @@ const BuyBooks = () => {
                 price={book.cost}
                 type="paid"
                 name={book.name}
+                sellerID={book.user_id}
                 sellerEmail={book.email}
               />
             );
