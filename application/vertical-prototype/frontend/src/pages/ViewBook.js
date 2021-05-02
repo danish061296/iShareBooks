@@ -9,6 +9,7 @@ import {
   setCartItem,
   setSeller,
   setSellerEmail,
+  setSellerId,
 } from '../redux/actions/userActions';
 
 const ViewBook = () => {
@@ -34,22 +35,13 @@ const ViewBook = () => {
     );
   };
 
-  // if (typeof viewBooks[viewBooks.length - 1].username === 'undefined') {
-  //   setNoSeller(true);
-  // } else {
-  //   setNoSeller(false);
-  //   // make first letter of username to uppercase
-  //   const viewBooksUsername = viewBooks[viewBooks.length - 1].username;
-  //   setSeller(
-  //     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1)
-  //   );
-  // }
-
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
+  const sellerid = viewBooks[viewBooks.length - 1].sellerid;
   const name =
     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
   dispatch(setSeller(name));
+  dispatch(setSellerId(sellerid));
   dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (
@@ -61,7 +53,7 @@ const ViewBook = () => {
           <div className="viewbook_left">
             <img
               className="viewbook_image"
-              style={{ height: 400, width: 300 }}
+              // style={{ height: 400, width: 300 }}
               src={`data:image/jpeg;base64,${
                 viewBooks[viewBooks.length - 1].image
               }`}
@@ -95,6 +87,7 @@ const ViewBook = () => {
               <Link to="./profile">
                 <strong> {name}</strong>
               </Link>
+              {/* Posted by <strong>{viewBooksUsername}</strong> */}
             </p>
 
             <p className="viewbook_price">

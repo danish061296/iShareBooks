@@ -102,6 +102,21 @@
   letter-spacing: 1px;
 }
 
+.cart__link {
+  /* display: flex !important; */
+  text-decoration: none !important;
+  color: black;
+}
+
+.profile__link {
+  text-decoration: none !important;
+  color: black;
+}
+
+.nav__link {
+  letter-spacing: 1px;
+}
+
 .nav__link:hover {
   color: white !important;
   border-bottom: 1px solid white;

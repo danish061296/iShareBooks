@@ -19,7 +19,18 @@ router.post('/pay', (req, res) => {
   console.log(req.body);
   //getting the array of data from the frontend
   let arrayOfBooks = req.body;
-  let booksPrice = 0.35;
+  arrayOfBooks.push({
+    title: "iShareBooks Service Fee",
+    price: 0.35,
+    name: "iShareBooks, LLC",
+    department: "",
+    author: "",
+    isbn: "",
+    image: "",
+    id: 0,
+  });
+  console.log(arrayOfBooks);
+  let booksPrice = 0.0; // Have to remove service fee -- paypal complaining that total amount does not add up
   arrayOfBooks.forEach((array) => {
     console.log(array.type);
     if (array.type === 'paid') {
@@ -31,6 +42,7 @@ router.post('/pay', (req, res) => {
 
   for (let i = 0; i < arrayOfBooks.length; i++) {
     booksPrice += arrayOfBooks[i].price;
+    //arrayOfBooks[i].price += booksPrice;
     arrayOfBooks[i].quantity = 1;
     arrayOfBooks[i].sku = 'item';
     arrayOfBooks[i].currency = 'USD';
@@ -41,6 +53,7 @@ router.post('/pay', (req, res) => {
 
   //filtering data from the paymentData to make it work for paypal
   paymentData.forEach((d) => {
+
     d.name = d.title;
     delete d.id;
     delete d.author;
@@ -49,9 +62,10 @@ router.post('/pay', (req, res) => {
     delete d.department;
     delete d.image;
     delete d.type;
+    delete d.condition;
   });
 
-  console.log(`the payment data is ${paymentData}`);
+
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
     intent: 'sale',
@@ -76,15 +90,19 @@ router.post('/pay', (req, res) => {
     ],
   };
 
+  console.log(create_payment_json.transactions[0]);
+
   paypal.payment.create(create_payment_json, function (error, payment) {
     console.log('payment is', payment);
     if (error) {
-      console.log(error);
+      console.log(error.response.details);
+
       // return res.send(error);
       // throw error;
     } else {
       /*getting the link to direct to paypal after adding 
       the data to the soldBooks and deleting from the posts */
+
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
           for (let i = 0; i < arrayOfBooks.length; i++) {
@@ -105,6 +123,9 @@ router.post('/pay', (req, res) => {
               bookImage,
               bookId,
             ];
+
+
+            data.pop();
 
             let sqlQuery = ` INSERT INTO soldBooks 
             (title, price, department,author,isbn,image,id)
@@ -160,4 +181,6 @@ router.get('/cancel', (req, res) => {
   res.send('canceled');
 });
 
+
 module.exports = router;
+

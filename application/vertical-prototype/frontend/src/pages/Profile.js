@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
 
 export default function Profile() {
-  var rating = 3.7;
+  // var rating = 3.7;
 
   const [booksArray, setbooksArray] = React.useState([]);
 
@@ -19,7 +19,9 @@ export default function Profile() {
   const userid = useSelector((state) => state.userReducer.userid);
   const name = useSelector((state) => state.userReducer.name);
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
+  const userrating = useSelector((state) => state.userReducer.userrating);
 
+  console.log(userrating);
   return (
     <div>
       <Navigation />
@@ -46,14 +48,14 @@ export default function Profile() {
                 <a href="">{sellerEmail}</a>
               </div>
 
-              <div className="rating_num">{rating}</div>
+              <div className="rating_num">{userrating}</div>
 
               <div className="rating_vis">
                 <div className="stars">
                   <ReactStars
                     size={40}
-                    value={rating}
-                    isHalf={true}
+                    value={userrating}
+                    isHalf={false}
                     edit={false}
                     numberOfStars={5}
                     name="rating"
@@ -115,14 +117,14 @@ export default function Profile() {
                 <a href="">{email}</a>
               </div>
 
-              <div className="rating_num">{rating}</div>
+              <div className="rating_num">{userrating}</div>
 
               <div className="rating_vis">
                 <div className="stars">
                   <ReactStars
                     size={40}
-                    value={rating}
-                    isHalf={true}
+                    value={userrating}
+                    isHalf={false}
                     edit={false}
                     numberOfStars={5}
                     name="rating"
@@ -170,14 +172,7 @@ export default function Profile() {
         </div>
       )}
 
-      <div>
-        {/* <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box mt={10}></Box>
-        </Container> */}
-
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

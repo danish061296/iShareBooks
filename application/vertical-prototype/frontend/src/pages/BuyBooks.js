@@ -20,15 +20,29 @@ const BuyBooks = () => {
   const handleSearch = (e) => {};
 
   const [paidBooks, setPaidBooks] = useState([]);
-  React.useEffect(async () => {
-    // Aos.init({ duration: 1600 });
 
-    const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/paidbooks'
-    );
-    console.log(res.data);
-    setPaidBooks(res.data.results);
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/paidbooks`
+      );
+      console.log(res.data.results);
+      setPaidBooks(res.data.results);
+    }
+    fetchData();
   }, []);
+
+  // React.useEffect(async () => {
+  //   let isMounted = true;
+  //   const res = await axios.get(
+  //     `http://${window.location.hostname}:3001/paidbooks`
+  //   );
+
+  //   setPaidBooks(res.data.results);
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, []);
 
   const handleClickOpen = () => {
     setOpen(true);

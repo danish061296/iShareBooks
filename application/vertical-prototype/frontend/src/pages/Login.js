@@ -98,44 +98,35 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post(
-      'http://' + window.location.hostname + ':3001/login',
-      loginUser
-    ).then((response) => {
-      console.log(response.data);
-      if (response.data.auth) {
-        store.addNotification({
-          title: '',
-          message: response.data.message,
-          type: 'success',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-        localStorage.setItem('token', response.data.token);
-        dispatch(setIsLoggedIn(response.data.auth));
-        dispatch(setUsername(response.data.userName));
-        dispatch(setUserId(response.data.id));
-        history.push('/buybooks');
-      } else {
-        store.addNotification({
-          title: '',
-          message: response.data.message,
-          type: 'danger',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-        dispatch(setIsLoggedIn(false));
-        dispatch(setEmail(''));
+    Axios.post(`http://${window.location.hostname}:3001/login`, loginUser).then(
+      (response) => {
+        console.log(response.data);
+        if (response.data.auth) {
+          localStorage.setItem('token', response.data.token);
+          dispatch(setIsLoggedIn(response.data.auth));
+          dispatch(setUsername(response.data.userName));
+          dispatch(setUserId(response.data.id));
+
+          history.push('/buybooks');
+        } else {
+          store.addNotification({
+            title: '',
+            message: response.data.message,
+            type: 'danger',
+            insert: 'top',
+            container: 'top-center',
+            dismiss: {
+              duration: 2000,
+              showIcon: true,
+            },
+          });
+          dispatch(setIsLoggedIn(false));
+          dispatch(setUsername(''));
+
+          dispatch(setEmail(''));
+        }
       }
-    });
+    );
   };
 
   return (
@@ -166,7 +157,6 @@ export default function SignIn() {
                     name="email"
                     id="email"
                     label="Email Address"
-                    name="email"
                     autoComplete="email"
                     autoFocus
                     helperText={<ErrorMessage name="email" />}

@@ -1,7 +1,6 @@
 const express = require('express');
 const db = require('../dataBase.js');
 const fs = require('fs');
-const { query } = require('../dataBase.js');
 //var FileReader = require('filereader');
 const router = express.Router();
 
@@ -19,6 +18,7 @@ router.post('/search', (req, res) => {
   const { searchField, munitem, message } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   console.log(searchField);
   const searchType = 'any';
+  var query;
   searchTable = 'paidbooks';
   if (searchField === 'default') {
     suggestions();

@@ -10,19 +10,32 @@ import axios from 'axios';
 
 const Trending = () => {
   const [trendingBooks, setTrendingBooks] = useState([]);
-  React.useEffect(async () => {
-    Aos.init({ duration: 1600 });
 
-    const res = await axios.get(
-      'http://' + window.location.hostname + ':3001/fire',
-      {
-        // searchField: '',
-        // searchType: 'any',
-      }
-    );
-    console.log(res.data);
-    setTrendingBooks(res.data.results);
+  React.useEffect(() => {
+    Aos.init({ duration: 1600 });
   }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/fire`
+      );
+      setTrendingBooks(res.data.results);
+    }
+    fetchData();
+  }, []);
+
+  // {
+  //   const res = await axios.get(
+  //     `http://${window.location.hostname}:3001/fire`,
+  //     {
+  //       // searchField: '',
+  //       // searchType: 'any',
+  //     }
+  //   );
+  //   console.log(res.data);
+  //   setTrendingBooks(res.data.results);
+  // }, []);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
@@ -64,7 +77,7 @@ const Trending = () => {
             <h3 className="trending"> Showing Results for {searchField}</h3>
           </div>
 
-          <Carousel breakPoints={breakPoints}>
+          <Carousel breakPoints={breakPoints} className="car">
             {posts.map((post, index) => {
               return (
                 <Card
@@ -97,7 +110,8 @@ const Trending = () => {
                   isbn={post.isbn}
                   condition={post.condition}
                   image={post.image}
-                  price={34.33}
+                  name={post.name}
+                  price={post.cost}
                   defaultImage="default"
                 />
               );

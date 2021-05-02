@@ -40,7 +40,7 @@ const FreeBookModal = () => {
     setCondition('');
     //setImage('');
 
-    axios.post('http://localhost:3001/posts', freeBook).then((response) => {
+    axios.post(`http://${window.location.hostname}:3001/posts`, freeBook).then((response) => {
       if (!response.data.bookPosted) {
         alert(response.data.msg);
       } else {

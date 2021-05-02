@@ -13,6 +13,8 @@ import {
   setPassword,
   setCartItem,
   setSeller,
+  setUserRating,
+  setDeleteCart,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
@@ -26,7 +28,7 @@ const Navigation = () => {
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userReducer.cart);
-  const userId = useSelector((state) => state.userReducer.userid);
+  const id = useSelector((state) => state.userReducer.userid);
   const username = useSelector((state) => state.userReducer.username);
 
   const history = useHistory();
@@ -39,41 +41,63 @@ const Navigation = () => {
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
 
+    console.log(id);
     if (e === 'profile') {
-      axios.get(`http://localhost:3001/profile/${userId}`).then((response) => {
-        dispatch(setEmail(response.data[0].email));
-        dispatch(setUsername(response.data[0].name));
-        dispatch(setSeller(''));
-        console.log(response.data[0].name);
+      axios
+        .get(`http://${window.location.hostname}:3001/profile/${id}`)
+        .then((response) => {
+          dispatch(setEmail(response.data[0].email));
+          dispatch(setUsername(response.data[0].name));
+          dispatch(setSeller(''));
+        })
+        .catch((e) => console.log(e));
+      // history.push(`/profile/${id}`);
 
-        console.log(response.data[0].name);
-      });
-      history.push(`/profile/${userId}`);
+      // useEffect(async () => {
+      //   const res = await axios.get(
+      //     `http://${window.location.hostname}:3001/get_rating/${id}`
+      //   );
+      //   dispatch(setUserRating(response.data.rating));
+      // }, []);
+
+      axios
+        .get(`http://${window.location.hostname}:3001/get_rating/${id}`)
+        .then((response) => {
+          console.log(response.data.rating);
+          dispatch(setUserRating(response.data.rating));
+          if (response.data.rating) {
+            history.push(`/profile/${id}`);
+          }
+        })
+        .catch((e) => console.log(e));
+
+      // history.push(`/profile/${userId}`);
     } else if (e === 'logout') {
       if (isLoggedIn) {
         dispatch(setIsLoggedIn(false));
         dispatch(setUsername(''));
         dispatch(setEmail(''));
         dispatch(setPassword(''));
-        dispatch(setCartItem([]));
+        dispatch(setDeleteCart());
       }
-      store.addNotification({
-        title: '',
-        message: 'You have succussfully logged out!',
-        type: 'success',
-        insert: 'top',
-        container: 'top-center',
-        dismiss: {
-          duration: 2000,
-          showIcon: true,
-        },
-      });
 
+      console.log(username);
       history.push('/login');
+
+      // store.addNotification({
+      //   title: '',
+      //   message: 'You have succussfully logged out!',
+      //   type: 'success',
+      //   insert: 'top',
+      //   container: 'top-center',
+      //   dismiss: {
+      //     duration: 2000,
+      //     showIcon: true,
+      //   },
+      // });
     } else if (e === 'home') {
       history.push('/');
     }
-    console.log(e);
   };
 
   return (
@@ -213,7 +237,7 @@ const Navigation = () => {
         </div>
       )}
       <div className="navbar__second">
-        <ReactNotification />
+        {/* <ReactNotification /> */}
 
         <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">

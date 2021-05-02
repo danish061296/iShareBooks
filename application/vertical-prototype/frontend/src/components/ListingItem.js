@@ -57,14 +57,7 @@ const ListingItem = ({
           {isbn}
         </p>
         <p className="listingitem__item__username">
-          posted by{' '}
-          <Link to="./profile">
-            {' '}
-            <strong className="listingitem__username">
-              {/* {seller} */}
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </strong>
-          </Link>
+          posted by <strong className="listingitem__username">{name}</strong>
         </p>
         <div className="listingitem__bottom">
           <p className="listingitem__item__price">${price}</p>

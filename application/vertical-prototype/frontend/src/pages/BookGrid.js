@@ -22,10 +22,29 @@ const BookGrid = ({
   image,
   price,
   type,
+  sellerid,
   name,
   sellerEmail,
 }) => {
+  var price_hold = price;
+
+  if (isNaN(price)) {
+    price = 0.0;
+  }
+
   const dispatch = useDispatch();
+  const [mouseEnter, setMouseEnter] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    if (!window.matchMedia('screen and (max-width: 768px)').matches) {
+      setMouseEnter(true);
+    }
+  };
+  const handleMouseLeave = () => {
+    if (!window.matchMedia('screen and (max-width: 768px)').matches) {
+      setMouseEnter(false);
+    }
+  };
 
   const handleBookDetail = () => {
     dispatch(
@@ -39,6 +58,7 @@ const BookGrid = ({
         image,
         price,
         name,
+        sellerid,
         sellerEmail,
       })
     );
@@ -55,8 +75,9 @@ const BookGrid = ({
         author,
         department,
         isbn,
-        price,
+        condition,
         image,
+        price,
         type,
         name,
       })
@@ -75,37 +96,61 @@ const BookGrid = ({
   return (
     <div>
       {price !== 0 && (
-        <div className="post__book__details">
+        <div
+          className="post__book__details"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
-              style={{ height: 200, width: 200 }}
+              style={{ height: 230, width: 170 }}
               src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
-              className="post__book__image"
+              className={
+                mouseEnter ? 'post__book__image__hover' : 'post__book__image'
+              }
             />
           </Link>
-          <Button className="buy__book__button" onClick={handleAddCart}>
-            Add to cart
-          </Button>
+          {mouseEnter && (
+            <Button className="buy__book__button" onClick={handleAddCart}>
+              Add to cart
+            </Button>
+          )}
+          {/* {screenWidth && (
+            <Button
+              className="buy__book__button__screen"
+              onClick={handleAddCart}
+            >
+              Add to cart
+            </Button>
+          )} */}
 
           <p className="post__book__price">${price}</p>
         </div>
       )}
       {price === 0 && (
-        <div className="post__book__details">
+        <div
+          className="post__book__details"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <Link to="/viewbook" onClick={handleBookDetail}>
             <img
-              style={{ height: 200, width: 200 }}
-              src={image}
+              style={{ height: 230, width: 170 }}
+              src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
-              className="post__book__image"
+              className={
+                mouseEnter ? 'post__book__image__hover' : 'post__book__image'
+              }
             />
           </Link>
-          <Button className="buy__book__button" onClick={handleAddCart}>
-            Add to cart
-          </Button>
+          {mouseEnter && (
+            <Button className="buy__book__button" onClick={handleAddCart}>
+              Add to cart
+            </Button>
+          )}
 
-          <p className="post__book__price">$0.00</p>
+          <p className="post__book__price">$0</p>
         </div>
       )}
     </div>

@@ -12,6 +12,11 @@ export const setUserId = (userid) => ({
   userid,
 });
 
+export const setSellerId = (sellerid) => ({
+  type: 'SET_SELLERID',
+  sellerid,
+});
+
 export const setEmail = (email) => ({
   type: 'SET_EMAIL',
   email,
@@ -25,6 +30,11 @@ export const setSeller = (name) => ({
 export const setSellerEmail = (sellerEmail) => ({
   type: 'SET_SELLER_EMAIL',
   sellerEmail,
+});
+
+export const setUserRating = (userrating) => ({
+  type: 'SET_USER_RATING',
+  userrating,
 });
 
 export const setIsLoggedIn = (isLoggedIn) => ({
@@ -63,6 +73,10 @@ export const setRating = (rating) => ({
 export const setCartItem = (item) => ({
   type: 'ADD_TO_CART',
   item,
+});
+
+export const setDeleteCart = () => ({
+  type: 'SET_DELETE_CART',
 });
 
 export const removeFromCart = (id) => ({

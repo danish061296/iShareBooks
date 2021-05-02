@@ -9,24 +9,20 @@ const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
-  console.log(cart);
   const history = useHistory();
 
   const handleCheckout = async () => {
     if (!isLoggedIn) {
       alert('You need to log in first to checkout your books!');
     } else {
-      // history.push('./rating');
-      // const newCart ={
-      //   arrayOfBooks: cart,
-      //   transactionFees: 0.35
-      // }
-      console.log(cart);
       const res = await axios.post(
-        'http://' + window.location.hostname + ':3001/pay',
+        `http://${window.location.hostname}:3001/pay`,
         cart
       );
       window.open(res.data);
+      if (res.data) {
+        history.push('./rating');
+      }
     }
   };
 
@@ -41,6 +37,10 @@ const TotalAmount = () => {
           <p className="subtotal__cost">${getCartTotal(cart).toFixed(2)}</p>
         </div>
         <div className="shipping__info">
+          <p className="shipping">Service Fee</p>
+          <p className="shipping__cost">$0.35</p>
+        </div>
+        <div className="shipping__info">
           <p className="shipping">Estimated shipping & handling</p>
           <p className="shipping__cost">$0.00</p>
         </div>
@@ -53,7 +53,9 @@ const TotalAmount = () => {
         </div>
         <div className="total__info">
           <p className="total">TOTAL:</p>
-          <p className="total__cost">${getCartTotal(cart).toFixed(2)}</p>
+          <p className="total__cost">
+            ${(getCartTotal(cart) + 0.35).toFixed(2)}
+          </p>
         </div>
 
         <button className="checkout__button" onClick={handleCheckout}>

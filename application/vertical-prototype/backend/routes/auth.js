@@ -3,6 +3,13 @@ const db = require('../dataBase.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+router.use(cors());
 
 router.get('/', (req, res) => {
   //query db

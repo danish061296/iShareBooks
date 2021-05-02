@@ -135,8 +135,8 @@ router.get('/paidbooks', (req, res) => {
 });
 
 router.get('/tradebooks', (req, res) => {
-  let inserSql = `SELECT * FROM tradebooks`;
-  // let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
+  //let inserSql = `SELECT * FROM tradebooks`;
+  let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -156,8 +156,8 @@ router.get('/tradebooks', (req, res) => {
 });
 
 router.get('/freebooks', (req, res) => {
-  let inserSql = `SELECT * FROM freebooks`;
-  // let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id `;
+  //let inserSql = `SELECT * FROM freebooks`;
+  let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id `;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -183,6 +183,7 @@ router.get('/post/:id', (req, res) => {
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
+
       res.status(500).send('error getting the data');
     } else {
       res.send(results);
