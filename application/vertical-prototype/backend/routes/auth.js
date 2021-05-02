@@ -25,14 +25,15 @@ router.get('/', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { username, email, password } = req.body;
-  const values = [email];
+  // const values = [email];
+
+  console.log(username);
+
   var hash = bcrypt.hashSync(password, 8);
   const user = [username, email, hash];
 
   var insertSQL = `INSERT INTO users (name,email,password) VALUES (?)`;
   db.query(insertSQL, [user], (err, results) => {
-    console.log(results.insertId);
-
     if (err) {
       if (err.sqlMessage.includes('name')) {
         return res.send({
@@ -49,17 +50,17 @@ router.post('/register', (req, res) => {
       return res.status(401).send(err);
     } else {
       if (err) throw err;
+
+      // insert into ratings table
+      insertSQL =
+        'INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)';
+      const data = [results.insertId, 5, 1];
+      db.query(insertSQL, [data], (err2, results2) => {
+        if (err2) console.log(err2);
+      });
       res.status(200).send({
         registered: true,
         message: 'The user is registered successfully!',
-      });
-
-      var ratingData = [results.insertId, 5, 1];
-      var insertRating =
-        'INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)';
-
-      db.query(insertRating, [ratingData], (err1, res1) => {
-        if (err) console.log(err);
       });
 
       const payload = {

@@ -96,10 +96,8 @@ const Registration = () => {
     };
     setTimeout(() => {
       props.resetForm();
-      // alert(JSON.stringify(payload, null, 2));
-
       props.setSubmitting(false);
-    }, 2000);
+    }, 1000);
 
     console.log(payload.username);
 
@@ -110,6 +108,7 @@ const Registration = () => {
     };
 
     console.log(registerUser.username);
+
     Axios.post(
       `http://${window.location.hostname}:3001/register`,
       registerUser
@@ -140,7 +139,9 @@ const Registration = () => {
           },
         });
       }
-      // history.push('/login');
+      setTimeout(() => {
+        history.push('/login');
+      }, 2000);
     });
 
     dispatch(setUsername(payload.username));
