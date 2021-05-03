@@ -2,9 +2,14 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import { InputAdornment } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -62,7 +67,8 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   const initialValues = {
     email: '',
     password: '',
@@ -170,10 +176,34 @@ export default function SignIn() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          onClick={handleClickShowPassword}
+                        >
+                          {showPassword ? (
+                            <Tippy
+                              content="hide password"
+                              placement="bottom-start"
+                            >
+                              <Visibility className="eye__icon" />
+                            </Tippy>
+                          ) : (
+                            <Tippy
+                              content="show password"
+                              placement="bottom-start"
+                            >
+                              <VisibilityOff className="eye__icon" />
+                            </Tippy>
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
                   />
 
                   <Button

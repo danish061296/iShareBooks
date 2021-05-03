@@ -11,16 +11,13 @@ import {
   setEmail,
   setUsername,
   setPassword,
-  setCartItem,
   setSeller,
-  setUserRating,
   setDeleteCart,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
-import ReactNotification from 'react-notifications-component';
-import { store } from 'react-notifications-component';
+import Tippy from '@tippy.js/react';
 import 'tippy.js/dist/tippy.css';
+
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -63,18 +60,6 @@ const Navigation = () => {
 
       console.log(username);
       history.push('/login');
-
-      // store.addNotification({
-      //   title: '',
-      //   message: 'You have succussfully logged out!',
-      //   type: 'success',
-      //   insert: 'top',
-      //   container: 'top-center',
-      //   dismiss: {
-      //     duration: 2000,
-      //     showIcon: true,
-      //   },
-      // });
     } else if (e === 'home') {
       history.push('/');
     }
@@ -227,7 +212,9 @@ const Navigation = () => {
 
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
-            <ShoppingCartIcon className="cart" />
+            <Tippy content="shopping cart" placement="bottom">
+              <ShoppingCartIcon className="cart" />
+            </Tippy>
 
             <span className="cart__total">{cart?.length}</span>
           </LinkR>
