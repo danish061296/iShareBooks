@@ -51,27 +51,7 @@ const Navigation = () => {
           dispatch(setSeller(''));
         })
         .catch((e) => console.log(e));
-      // history.push(`/profile/${id}`);
-
-      // useEffect(async () => {
-      //   const res = await axios.get(
-      //     `http://${window.location.hostname}:3001/get_rating/${id}`
-      //   );
-      //   dispatch(setUserRating(response.data.rating));
-      // }, []);
-
-      axios
-        .get(`http://${window.location.hostname}:3001/get_rating/${id}`)
-        .then((response) => {
-          console.log(response.data.rating);
-          dispatch(setUserRating(response.data.rating));
-          if (response.data.rating) {
-            history.push(`/profile/${id}`);
-          }
-        })
-        .catch((e) => console.log(e));
-
-      // history.push(`/profile/${userId}`);
+      history.push(`/profile/${id}`);
     } else if (e === 'logout') {
       if (isLoggedIn) {
         dispatch(setIsLoggedIn(false));

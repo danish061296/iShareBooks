@@ -53,11 +53,7 @@ const userReducer = (state = initState(), action) => {
         ...state,
         sellerEmail: action.sellerEmail,
       };
-    case 'SET_USER_RATING':
-      return {
-        ...state,
-        userrating: action.userrating,
-      };
+
     case 'SET_LOGGED_IN':
       return {
         ...state,

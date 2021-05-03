@@ -32,11 +32,6 @@ export const setSellerEmail = (sellerEmail) => ({
   sellerEmail,
 });
 
-export const setUserRating = (userrating) => ({
-  type: 'SET_USER_RATING',
-  userrating,
-});
-
 export const setIsLoggedIn = (isLoggedIn) => ({
   type: 'SET_LOGGED_IN',
   isLoggedIn,

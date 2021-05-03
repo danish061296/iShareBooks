@@ -32,18 +32,6 @@ const BuyBooks = () => {
     fetchData();
   }, []);
 
-  // React.useEffect(async () => {
-  //   let isMounted = true;
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/paidbooks`
-  //   );
-
-  //   setPaidBooks(res.data.results);
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, []);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -102,6 +90,7 @@ const BuyBooks = () => {
                 price={book.cost}
                 type="paid"
                 name={book.name}
+                sellerid={book.user_id}
                 sellerEmail={book.email}
                 defaultImage="default"
               />

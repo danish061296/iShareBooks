@@ -29,10 +29,8 @@ const UserRating = ({ id, name }) => {
       )
       .then((response) => {
         if (response.data.succeed) {
-          console.log(response.data);
           console.log(response.data.message);
         } else {
-          console.log(response.data);
           console.log(response.data.message);
         }
       })
@@ -42,8 +40,6 @@ const UserRating = ({ id, name }) => {
   };
 
   return (
-    // <div className="rating_container">
-
     <div className="stars_container" style={clickedStyle}>
       <p className="stars__username">
         {name.charAt(0).toUpperCase() + name.slice(1)}
@@ -60,7 +56,6 @@ const UserRating = ({ id, name }) => {
         />
       </div>
     </div>
-    // </div>
   );
 };
 
