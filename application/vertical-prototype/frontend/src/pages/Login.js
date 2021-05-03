@@ -2,6 +2,9 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import { InputAdornment } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -62,7 +65,8 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   const initialValues = {
     email: '',
     password: '',
@@ -171,10 +175,24 @@ export default function SignIn() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          onClick={handleClickShowPassword}
+                        >
+                          {showPassword ? (
+                            <Visibility className="eye__icon" />
+                          ) : (
+                            <VisibilityOff className="eye__icon" />
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
                   />
 
                   <Button

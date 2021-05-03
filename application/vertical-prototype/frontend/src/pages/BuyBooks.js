@@ -32,18 +32,6 @@ const BuyBooks = () => {
     fetchData();
   }, []);
 
-  // React.useEffect(async () => {
-  //   let isMounted = true;
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/paidbooks`
-  //   );
-
-  //   setPaidBooks(res.data.results);
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, []);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -102,45 +90,12 @@ const BuyBooks = () => {
                 price={book.cost}
                 type="paid"
                 name={book.name}
-                sellerID={book.user_id}
+                sellerid={book.user_id}
                 sellerEmail={book.email}
+                defaultImage="default"
               />
             );
           })}
-          {/* <BookGrid
-            id="356234"
-            title="English Book"
-            author="Bob Michaels"
-            department="English"
-            isbn={837748374}
-            condition="Used"
-            type="paid"
-            price={27.01}
-            image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
-          />
-
-          <BookGrid
-            id="3578363"
-            title="Computer Book"
-            author="John Doe"
-            department="Computer Science"
-            isbn={123567894}
-            condition="Used"
-            type="paid"
-            price={120.67}
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
-          />
-          <BookGrid
-            id="7315352"
-            title="Literature Book"
-            author="Alice Jane"
-            department="Literature"
-            isbn={123535464}
-            condition="New"
-            type="paid"
-            price={30.99}
-            image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-          /> */}
         </div>
       </div>
 

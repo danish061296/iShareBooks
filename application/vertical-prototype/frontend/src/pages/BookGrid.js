@@ -24,7 +24,7 @@ const BookGrid = ({
   type,
   name,
   sellerEmail,
-  sellerID,
+  sellerid,
 }) => {
   var price_hold = price;
 
@@ -47,7 +47,7 @@ const BookGrid = ({
         price,
         name,
         sellerEmail,
-        sellerID,
+        sellerid,
       })
     );
 
@@ -72,15 +72,14 @@ const BookGrid = ({
     );
     dispatch(
       setRating({
-        sellerID,
+        sellerid,
         name,
       })
     );
-    console.log("SELL ID:" + sellerID);
+    console.log('SELL ID:' + sellerid);
   };
 
   dispatch(setSellerEmail(sellerEmail));
-
 
   return (
     <div>

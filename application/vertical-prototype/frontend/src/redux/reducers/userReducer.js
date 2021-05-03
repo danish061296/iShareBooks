@@ -2,6 +2,7 @@ const initState = () => ({
   username: '',
   password: '',
   userid: 0,
+  sellerid: 0,
   email: '',
   user: '',
   sellerEmail: '',
@@ -13,7 +14,6 @@ const initState = () => ({
   viewBooks: [],
   cart: [],
   ratings: [],
-  userrating: 0,
   randomMsg: '',
 });
 
@@ -53,11 +53,7 @@ const userReducer = (state = initState(), action) => {
         ...state,
         sellerEmail: action.sellerEmail,
       };
-    case 'SET_USER_RATING':
-      return {
-        ...state,
-        userrating: action.userrating,
-      };
+
     case 'SET_LOGGED_IN':
       return {
         ...state,
@@ -87,6 +83,11 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         userid: action.userid,
+      };
+    case 'SET_SELLERID':
+      return {
+        ...state,
+        sellerid: action.sellerid,
       };
     case 'SET_VIEW_BOOK':
       return {
