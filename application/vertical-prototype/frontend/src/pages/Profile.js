@@ -8,7 +8,6 @@ import axios from 'axios';
 import './Profile.css';
 import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
-import UserRating from './UserRating';
 
 export default function Profile() {
   const [sellerRating, setSellerRating] = React.useState(0);
@@ -25,7 +24,7 @@ export default function Profile() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${sellerid}`
       );
-      console.log(res.data);
+
       setSellerRating(res.data.rating);
     }
 
@@ -37,7 +36,6 @@ export default function Profile() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
-      console.log(res.data);
       setUserRating(res.data.rating);
     }
 
@@ -108,7 +106,8 @@ export default function Profile() {
           </div>
         </div>
       )}
-      {username && (
+
+      {!name && (
         <div className="profile__Container">
           <div className="top">
             <div className="image_container">
@@ -141,6 +140,18 @@ export default function Profile() {
                     <ReactStars
                       size={40}
                       value={userRating}
+                      isHalf={false}
+                      edit={false}
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                  </div>
+                )}
+                {!userRating && (
+                  <div className="stars">
+                    <ReactStars
+                      size={40}
+                      value={5}
                       isHalf={false}
                       edit={false}
                       numberOfStars={5}
