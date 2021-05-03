@@ -107,7 +107,7 @@ export default function Profile() {
           </div>
         </div>
       )}
-      {username && (
+      {!name && (
         <div className="profile__Container">
           <div className="top">
             <div className="image_container">
@@ -140,6 +140,19 @@ export default function Profile() {
                     <ReactStars
                       size={40}
                       value={userRating}
+                      isHalf={false}
+                      edit={false}
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                  </div>
+                )}
+
+                {!userRating && (
+                  <div className="stars">
+                    <ReactStars
+                      size={40}
+                      value={5}
                       isHalf={false}
                       edit={false}
                       numberOfStars={5}

@@ -4,6 +4,7 @@ import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
 import axios from 'axios';
+import Tippy from '@tippyjs/react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,9 +12,7 @@ import {
   setEmail,
   setUsername,
   setPassword,
-  setUserId,
   setSeller,
-  setUserRating,
   setDeleteCart,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -215,7 +214,9 @@ const Navigation = () => {
 
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
-            <ShoppingCartIcon className="cart" />
+            <Tippy content="shopping cart" placement="bottom">
+              <ShoppingCartIcon className="cart" />
+            </Tippy>
 
             <span className="cart__total">{cart?.length}</span>
           </LinkR>

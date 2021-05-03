@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
 import { useHistory } from 'react-router-dom';
+import Tippy from '@tippyjs/react';
 import { useDispatch } from 'react-redux';
 import {
   setEmail,
@@ -90,11 +91,6 @@ export default function SignIn() {
     const payload = {
       ...values,
     };
-
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 1000);
 
     console.log(payload.email);
 
