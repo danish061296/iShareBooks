@@ -99,7 +99,7 @@ const Registration = () => {
       // alert(JSON.stringify(payload, null, 2));
 
       props.setSubmitting(false);
-    }, 2000);
+    }, 1000);
 
     console.log(payload.username);
 
@@ -140,7 +140,9 @@ const Registration = () => {
           },
         });
       }
-      // history.push('/login');
+      setTimeout(() => {
+        history.push('/login');
+      }, 2000);
     });
 
     dispatch(setUsername(payload.username));

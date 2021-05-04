@@ -6,18 +6,54 @@ import SearchIcon from '@material-ui/icons/Search';
 import './BuyBooks.css';
 import axios from 'axios';
 import DialogBox from '../components/DialogBox';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BuyBookModal from './BuyBookModal';
 import BookGrid from './BookGrid';
 
-import { setSearchField } from '../redux/actions/userActions';
+import {setSearchField } from '../redux/actions/userActions';
+import {DropdownButton, Dropdown} from 'react-bootstrap'
 
 const BuyBooks = () => {
   const [open, setOpen] = React.useState(false);
+  const [hasOpened, setHasOpened] = React.useState(false);
+
+  const [filterBy, setFilterBy] = React.useState('Filter');
+  const [searchMessage, setSearchMessage] = React.useState("Books to Buy");
+  const search = useSelector((state) => state.userReducer.searchField);
+  
+
+  const searchData = {
+    searchTable: 'paidbooks',
+    searchType: filterBy,
+    searchField: search,
+  };
+
+  const handleFilterChange = (e) => {
+    setFilterBy(e.target.innerText);
+
+  }
+
 
   const dispatch = useDispatch();
-  const handleKeyDown = (e) => {};
-  const handleSearch = (e) => {};
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      console.log(searchData);
+      axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        console.log(response);
+        if (!response.data.msg) {
+          setPaidBooks(response.data);
+          setSearchMessage(`Showing results for ${search}`);
+        }
+        else {
+          setPaidBooks(response.data.results);
+          setSearchMessage(`Sorry, no results were found. Suggestions: `);
+        }
+      });
+    }
+  };
+  const handleSearch = (e) => {
+    console.log(search);
+  };
 
   const [paidBooks, setPaidBooks] = useState([]);
 
@@ -32,21 +68,23 @@ const BuyBooks = () => {
     fetchData();
   }, []);
 
-  // React.useEffect(async () => {
-  //   let isMounted = true;
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/paidbooks`
-  //   );
-
-  //   setPaidBooks(res.data.results);
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, []);
-
   const handleClickOpen = () => {
     setOpen(true);
+    setHasOpened(true);
   };
+
+  const click1 = () => {
+    console.log("!");
+  }
+
+  if (!open && hasOpened) {
+    console.log("...d");
+    setHasOpened(false);
+    axios.get(`http://${window.location.hostname}:3001/paidbooks`).then((res) => {
+      console.log(res.data.results);
+      setPaidBooks(res.data.results);
+    });
+  }
 
   return (
     <div className="buybooks">
@@ -54,7 +92,19 @@ const BuyBooks = () => {
 
       <div className="buybooks__page">
         <div className="buybooks__container">
+        <DropdownButton className="dropdown" title={filterBy}  size="lg">
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>All</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Title</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Author</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Department</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>ISBN</Dropdown.Item>
+            </DropdownButton>
           <div className="search__content">
+            
             <input
               className="searchBar"
               type="text"
@@ -63,10 +113,17 @@ const BuyBooks = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => dispatch(setSearchField(e.target.value))}
             />
+          
             <button onClick={handleSearch} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
-          </div>
+            
+            
+          
+          
+            </div>
+
+            
           <div className="post__book">
             <div className="post__book__container">
               <p className="post__book__text">POST YOUR BOOK FOR SELL</p>
@@ -78,13 +135,14 @@ const BuyBooks = () => {
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
                 button="DONE"
+                onClick={click1}
               >
                 <BuyBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">BOOKS TO BUY</h2>
+            <h2 className="post__book__title">{searchMessage}</h2>
           </div>
         </div>
         <div className="post__book__grid">
@@ -102,45 +160,12 @@ const BuyBooks = () => {
                 price={book.cost}
                 type="paid"
                 name={book.name}
-                sellerID={book.user_id}
+                sellerid={book.user_id}
                 sellerEmail={book.email}
+                defaultImage="default"
               />
             );
           })}
-          {/* <BookGrid
-            id="356234"
-            title="English Book"
-            author="Bob Michaels"
-            department="English"
-            isbn={837748374}
-            condition="Used"
-            type="paid"
-            price={27.01}
-            image="https://m.media-amazon.com/images/I/8110CWXpN5L._AC_UL640_FMwebp_QL65_.jpg"
-          />
-
-          <BookGrid
-            id="3578363"
-            title="Computer Book"
-            author="John Doe"
-            department="Computer Science"
-            isbn={123567894}
-            condition="Used"
-            type="paid"
-            price={120.67}
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFav9oFDbnaFFCMj-4ZalqZ7sAk0bCuwN-MIaO3_7Vlf3CgWccM0YGtJYiDRZM8Imx_FfB9gs&usqp=CAc"
-          />
-          <BookGrid
-            id="7315352"
-            title="Literature Book"
-            author="Alice Jane"
-            department="Literature"
-            isbn={123535464}
-            condition="New"
-            type="paid"
-            price={30.99}
-            image="https://m.media-amazon.com/images/I/81xCpb+RC1L._AC_UL640_FMwebp_QL65_.jpg"
-          /> */}
         </div>
       </div>
 

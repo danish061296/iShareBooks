@@ -1,50 +1,109 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Button from '@material-ui/core/Button';
-import DialogBox from '../components/DialogBox';
 import SearchIcon from '@material-ui/icons/Search';
-import './FreeBooks.css';
-import FreeBookModal from './FreeBookModal';
-import { useDispatch } from 'react-redux';
-import { setSearchField } from '../redux/actions/userActions';
-import BookGrid from './BookGrid';
+import './BuyBooks.css';
 import axios from 'axios';
-const FreeBooks = () => {
-  const [open, setOpen] = useState(false);
-  const [freeBooks, setFreeBooks] = useState([]);
-  const dispatch = useDispatch();
-  const handleKeyDown = (e) => {};
-  const handleClick = (e) => {};
+import DialogBox from '../components/DialogBox';
+import { useDispatch, useSelector } from 'react-redux';
+import FreeBookModal from './FreeBookModal';
+import BookGrid from './BookGrid';
 
-  useEffect(() => {
+import {setSearchField } from '../redux/actions/userActions';
+import {DropdownButton, Dropdown} from 'react-bootstrap'
+
+const FreeBooks = () => {
+  const [open, setOpen] = React.useState(false);
+  const [hasOpened, setHasOpened] = React.useState(false);
+
+  const [filterBy, setFilterBy] = React.useState('Filter');
+  const [searchMessage, setSearchMessage] = React.useState("Books for Free");
+  const search = useSelector((state) => state.userReducer.searchField);
+  
+
+  const searchData = {
+    searchTable: 'freebooks',
+    searchType: filterBy,
+    searchField: search,
+  };
+
+  const handleFilterChange = (e) => {
+    setFilterBy(e.target.innerText);
+
+  }
+
+  const dispatch = useDispatch();
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      console.log(searchData);
+      axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        console.log(response);
+        if (!response.data.msg) {
+          setPaidBooks(response.data);
+          setSearchMessage(`Showing results for ${search}`);
+        }
+        else {
+          setPaidBooks(response.data.results);
+          setSearchMessage(`Sorry, no results were found. Suggestions: `);
+        }
+      });
+    }
+  };
+  const handleSearch = (e) => {
+    console.log(search);
+  };
+
+  const [paidBooks, setPaidBooks] = useState([]);
+
+  React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/freebooks`
       );
-      setFreeBooks(res.data.results);
+      console.log(res.data.results);
+      setPaidBooks(res.data.results);
     }
     fetchData();
   }, []);
 
-  // useEffect(async () => {
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/freebooks`
-  //   );
-  //   console.log(res.data);
-  //   setFreeBooks(res.data.results);
-  // }, []);
-
   const handleClickOpen = () => {
     setOpen(true);
+    setHasOpened(true);
   };
 
+  const click1 = () => {
+    console.log("!");
+  }
+
+  if (!open && hasOpened) {
+    console.log("...d");
+    setHasOpened(false);
+    axios.get(`http://${window.location.hostname}:3001/freebooks`).then((res) => {
+      console.log(res.data.results);
+      setPaidBooks(res.data.results);
+    });
+  }
+
   return (
-    <div className="freebooks">
+    <div className="buybooks">
       <Navigation />
-      <div className="freebooks__page">
-        <div className="freebooks__container">
+
+      <div className="buybooks__page">
+        <div className="buybooks__container">
+        <DropdownButton className="dropdown" title={filterBy}  size="lg">
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>All</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Title</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Author</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Department</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>ISBN</Dropdown.Item>
+            </DropdownButton>
           <div className="search__content">
+            
             <input
               className="searchBar"
               type="text"
@@ -53,10 +112,17 @@ const FreeBooks = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => dispatch(setSearchField(e.target.value))}
             />
-            <button onClick={handleClick} className="search__btn">
+          
+            <button onClick={handleSearch} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
-          </div>
+            
+            
+          
+          
+            </div>
+
+            
           <div className="post__book">
             <div className="post__book__container">
               <p className="post__book__text">POST YOUR BOOK FOR FREE</p>
@@ -66,20 +132,20 @@ const FreeBooks = () => {
               <DialogBox
                 open={open}
                 setOpen={setOpen}
-                title="POST A BOOK FOR FREE"
+                title="SELL YOUR BOOK"
                 button="DONE"
+                onClick={click1}
               >
                 <FreeBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">BOOKS FOR FREE</h2>
+            <h2 className="post__book__title">{searchMessage}</h2>
           </div>
         </div>
         <div className="post__book__grid">
-          {freeBooks.map((book, index) => {
-            console.log(book.name);
+          {paidBooks.map((book, index) => {
             return (
               <BookGrid
                 key={index}
@@ -90,8 +156,11 @@ const FreeBooks = () => {
                 isbn={book.isbn}
                 condition={book.condition}
                 image={book.image}
-                price={0}
+                price={book.cost}
+                type="paid"
                 name={book.name}
+                sellerid={book.user_id}
+                sellerEmail={book.email}
                 defaultImage="default"
               />
             );

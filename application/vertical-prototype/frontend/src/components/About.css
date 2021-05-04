@@ -153,10 +153,13 @@
 }
 
 .filter__btn {
-  z-index: 99;
+  z-index: 1009;
   width: 32%;
   margin: 6px;
-  align-self: flex-end;
+  align-self:flex-end;
+  position: relative !important;
+  top: -60px !important;
+  right: 200px;
 }
 
 .dropdown__btn {

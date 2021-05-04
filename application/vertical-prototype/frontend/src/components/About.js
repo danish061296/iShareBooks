@@ -62,7 +62,8 @@ const About = () => {
     if (e.key === 'Enter') {
       const search = {
         searchField: searchField,
-        searchType: searchType,
+        searchType: 'All',
+        searchTable: 'paidbooks',
       };
 
       console.log(searchField);
@@ -112,15 +113,14 @@ const About = () => {
   const handleClick = () => {
     const search = {
       searchField: searchField,
-      searchType: searchType,
+      searchType: 'All',
+      searchTable: 'paidbooks',
     };
 
-    console.log(searchField);
 
     Axios.post('http://' + window.location.hostname + '/search', search)
       .then((response) => {
         if (response.data) {
-          console.log(response.data);
           if (response.data.msg) {
             //sending data to redux
             dispatch(setrandomMsg(response.data.msg));

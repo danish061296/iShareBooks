@@ -43,10 +43,10 @@ const Trending = () => {
 
   // console.log(trendingBooks);
   const breakPoints = [
-    { width: 500, itemsTo0how: 1 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1200, itemsToShow: 4 },
-    { width: 1500, itemsToShow: 4 },
+    { width: 500, itemsTo0how: 3 },
+    { width: 768, itemsToShow: 5 },
+    { width: 1200, itemsToShow: 6 },
+    { width: 1500, itemsToShow: 6 },
   ];
 
   return (

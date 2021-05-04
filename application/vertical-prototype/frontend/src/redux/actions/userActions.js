@@ -11,6 +11,10 @@ export const setUserId = (userid) => ({
   type: 'SET_USERID',
   userid,
 });
+export const setSellerId = (sellerid) => ({
+  type: 'SET_SELLERID',
+  sellerid,
+});
 
 export const setEmail = (email) => ({
   type: 'SET_EMAIL',
@@ -25,11 +29,6 @@ export const setSeller = (name) => ({
 export const setSellerEmail = (sellerEmail) => ({
   type: 'SET_SELLER_EMAIL',
   sellerEmail,
-});
-
-export const setUserRating = (userrating) => ({
-  type: 'SET_USER_RATING',
-  userrating,
 });
 
 export const setIsLoggedIn = (isLoggedIn) => ({

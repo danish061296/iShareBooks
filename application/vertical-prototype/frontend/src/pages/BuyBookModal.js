@@ -3,7 +3,8 @@ import './Modals.css';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const BuyBookModal = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +16,18 @@ const BuyBookModal = () => {
   const [image, setImage] = useState('');
   const imageRef = React.useRef();
   const userid = useSelector((state) => state.userReducer.userid);
+  const search = useSelector((state) => state.userReducer.searchField);
+  const [paidBooks, setPaidBooks] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  async function fetchData() {
+    const res = await axios.get(
+      `http://${window.location.hostname}:3001/paidbooks`
+    );
+    console.log(res.data.results);
+    setPaidBooks(res.data.results);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +58,7 @@ const BuyBookModal = () => {
     });
 
     axios.post(`http://${window.location.hostname}:3001/posts`, paidBook).then((response) => {
+      
       if (!response.data.bookPosted) {
         alert(response.data.msg);
       } else {
@@ -58,9 +72,13 @@ const BuyBookModal = () => {
             duration: 2000,
             showIcon: true,
           },
-        });
+        }
+        );
+        fetchData();
       }
     });
+
+
   };
   return (
     <div>

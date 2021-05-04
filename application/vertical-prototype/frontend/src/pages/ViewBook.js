@@ -9,11 +9,11 @@ import {
   setCartItem,
   setSeller,
   setSellerEmail,
+  setSellerId,
 } from '../redux/actions/userActions';
 
 const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
-  const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
   const dispatch = useDispatch();
 
@@ -37,10 +37,11 @@ const ViewBook = () => {
 
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
-
+  const sellerid = viewBooks[viewBooks.length - 1].sellerid;
   const name =
     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
   dispatch(setSeller(name));
+  dispatch(setSellerId(sellerid));
   dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (

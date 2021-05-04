@@ -4,6 +4,7 @@ import { Navbar, Nav, Button, NavbarBrand } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import './Navigation.css';
 import axios from 'axios';
+import Tippy from '@tippyjs/react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,9 +12,7 @@ import {
   setEmail,
   setUsername,
   setPassword,
-  setUserId,
   setSeller,
-  setUserRating,
   setDeleteCart,
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -51,28 +50,7 @@ const Navigation = () => {
           dispatch(setSeller(''));
         })
         .catch((e) => console.log(e));
-      // history.push(`/profile/${id}`);
-
-      // useEffect(async () => {
-      //   const res = await axios.get(
-      //     `http://${window.location.hostname}:3001/get_rating/${id}`
-      //   );
-      //   dispatch(setUserRating(response.data.rating));
-      // }, []);
-
-      axios
-        .get(`http://${window.location.hostname}:3001/get_rating/${id}`)
-        .then((response) => {
-          console.log(response.data);
-          console.log(id);
-          dispatch(setUserRating(response.data.rating));
-          //if (response.data.rating) {
-            history.push(`/profile/${id}`);
-          //}
-        })
-        .catch((e) => console.log(e));
-
-      // history.push(`/profile/${userId}`);
+      history.push(`/profile/${id}`);
     } else if (e === 'logout') {
       if (isLoggedIn) {
         dispatch(setIsLoggedIn(false));
@@ -84,18 +62,6 @@ const Navigation = () => {
 
       console.log(username);
       history.push('/login');
-
-      // store.addNotification({
-      //   title: '',
-      //   message: 'You have succussfully logged out!',
-      //   type: 'success',
-      //   insert: 'top',
-      //   container: 'top-center',
-      //   dismiss: {
-      //     duration: 2000,
-      //     showIcon: true,
-      //   },
-      // });
     } else if (e === 'home') {
       history.push('/');
     }
@@ -248,7 +214,9 @@ const Navigation = () => {
 
         <div className="navbar__icons">
           <LinkR className="cart__link" to="/viewlistings">
-            <ShoppingCartIcon className="cart" />
+            <Tippy content="shopping cart" placement="bottom">
+              <ShoppingCartIcon className="cart" />
+            </Tippy>
 
             <span className="cart__total">{cart?.length}</span>
           </LinkR>
