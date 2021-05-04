@@ -32,31 +32,32 @@ const FreeBookModal = () => {
 
     console.log(freeBook);
 
+    axios
+      .post(`http://${window.location.hostname}:3001/posts`, freeBook)
+      .then((response) => {
+        if (!response.data.bookPosted) {
+          alert(response.data.msg);
+        } else {
+          store.addNotification({
+            title: '',
+            message: response.data.msg,
+            type: 'success',
+            insert: 'top',
+            container: 'top-center',
+            dismiss: {
+              duration: 2000,
+              showIcon: true,
+            },
+          });
+        }
+      });
+
     setTitle('');
     setAuthor('');
-
     setDepartment('');
     setIsbn('');
     setCondition('');
-    //setImage('');
-
-    axios.post(`http://${window.location.hostname}:3001/posts`, freeBook).then((response) => {
-      if (!response.data.bookPosted) {
-        alert(response.data.msg);
-      } else {
-        store.addNotification({
-          title: '',
-          message: response.data.msg,
-          type: 'success',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-      }
-    });
+    setImage('');
   };
 
   return (
