@@ -101,12 +101,6 @@ const ViewBook = () => {
         </div>
       </div>
 
-      {/* {noseller && (
-        <div>
-          <h1 className="nousername__text">No Username</h1>
-        </div>
-      )} */}
-
       <Footer />
     </div>
   );

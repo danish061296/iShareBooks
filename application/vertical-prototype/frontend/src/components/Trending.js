@@ -25,29 +25,25 @@ const Trending = () => {
     fetchData();
   }, []);
 
-  // {
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/fire`,
-  //     {
-  //       // searchField: '',
-  //       // searchType: 'any',
-  //     }
-  //   );
-  //   console.log(res.data);
-  //   setTrendingBooks(res.data.results);
-  // }, []);
-
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
   const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
   // console.log(trendingBooks);
+
   const breakPoints = [
-    { width: 500, itemsTo0how: 1 },
-    { width: 768, itemsToShow: 2 },
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
-    { width: 1500, itemsToShow: 4 },
   ];
+
+  // const breakPoints = [
+  //   { width: 500, itemsTo0how: 1 },
+  //   { width: 768, itemsToShow: 4 },
+  //   { width: 1200, itemsToShow: 4 },
+  //   { width: 1500, itemsToShow: 4 },
+  // ];
 
   return (
     <div className="trending__container" data-aos="fade-right" id="trending">

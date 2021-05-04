@@ -8,9 +8,6 @@ router.post('/allbooks', (req, res) => {});
 
 router.post('/search', (req, res) => {
   console.log('SEARCH');
-  //freebooks
-  //tradebooks
-  //paidbooks
 
   // QUERY for retrieving user's info from id
   // SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id;

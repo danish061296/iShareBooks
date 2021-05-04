@@ -6,18 +6,43 @@ import Navigation from '../components/Navigation';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './Profile.css';
+import Card from '../components/Card';
 import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
+// import '~slick-carousel/slick/slick.css';
+// import '~slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
 
 export default function Profile() {
   const [sellerRating, setSellerRating] = React.useState(0);
   const [userRating, setUserRating] = React.useState(0);
+  const [userPosts, setUserPosts] = React.useState([]);
+  const [sellerPosts, setSellerPosts] = React.useState([]);
+
   const username = useSelector((state) => state.userReducer.username);
   const email = useSelector((state) => state.userReducer.email);
   const sellerid = useSelector((state) => state.userReducer.sellerid);
   const name = useSelector((state) => state.userReducer.name);
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
   const userid = useSelector((state) => state.userReducer.userid);
+
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 },
+  ];
+
+  const settings = {
+    dots: true,
+    infinite: false,
+
+    fade: true,
+    arrows: true,
+    className: 'slides',
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   React.useEffect(() => {
     async function fetchData() {
@@ -34,9 +59,35 @@ export default function Profile() {
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
+        `http://${window.location.hostname}:3001/userposts/${sellerid}`
+      );
+
+      console.log(res.data);
+      setSellerPosts(res.data);
+    }
+
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
       setUserRating(res.data.rating);
+    }
+
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/userposts/${userid}`
+      );
+
+      console.log(res.data);
+      setUserPosts(res.data);
     }
 
     fetchData();
@@ -62,7 +113,7 @@ export default function Profile() {
               <div className="username">{name}</div>
 
               <div className="email">
-                <a href="">{sellerEmail}</a>
+                <a href="#">{sellerEmail}</a>
               </div>
 
               {sellerRating ? (
@@ -102,7 +153,17 @@ export default function Profile() {
           </div>
 
           <div className="user_books_container">
-            <h2 className="books__posted">Books Posted (10)</h2>
+            <h2 className="books__posted">{`Books Posted (${sellerPosts?.length})`}</h2>
+
+            <Slider {...settings}>
+              {sellerPosts.map((post, index) => {
+                return <Card key={index} number={index} image={post.image} />;
+              })}
+            </Slider>
+
+            {/* {sellerPosts.map((post, index) => {
+                return <Card key={index} number={index} image={post.image} />
+              })} */}
           </div>
         </div>
       )}
@@ -196,7 +257,12 @@ export default function Profile() {
           </div>
 
           <div className="user_books_container">
-            <h2 className="books__posted">Books Posted (10)</h2>
+            <h2 className="books__posted">{`Books Posted (${userPosts?.length})`}</h2>
+            {/* <Carousel>
+              {userPosts.map((post, index) => {
+                return <Card key={index} number={index} image={post.image} />;
+              })}
+            </Carousel> */}
           </div>
         </div>
       )}

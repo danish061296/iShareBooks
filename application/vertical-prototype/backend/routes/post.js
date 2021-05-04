@@ -191,4 +191,23 @@ router.get('/post/:id', (req, res) => {
   });
 });
 
+router.get('/userposts/:userId', (req, res) => {
+  var userId = req.params.userId;
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks WHERE user_id = ${userId}
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks WHERE user_id = ${userId}) 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks WHERE user_id = ${userId});`;
+
+  db.query(query, (err, results) => {
+    if (err) return res.send(err);
+
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+    res.send(results);
+  });
+});
+
 module.exports = router;

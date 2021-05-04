@@ -38,7 +38,6 @@ const Navigation = () => {
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
 
-    console.log(id);
     if (e === 'profile') {
       axios
         .get(`http://${window.location.hostname}:3001/profile/${id}`)
