@@ -13,7 +13,7 @@ import {
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-const About = () => {
+const Search = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
@@ -32,7 +32,7 @@ const About = () => {
     };
 
     if (e.key === 'Enter') {
-      Axios.get(`http://${window.location.hostname}:3001/search`, search)
+      Axios.post(`http://${window.location.hostname}:3001/search`, search)
         .then((response) => {
           if (response.data) {
             console.log(response.data);
@@ -74,7 +74,7 @@ const About = () => {
       searchType: searchType,
     };
 
-    Axios.get('http://localhost:3001/search', search)
+    Axios.post('http://localhost:3001/search', search)
       .then((response) => {
         if (response.data) {
           console.log(response.data);
@@ -138,4 +138,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Search;

@@ -9,9 +9,6 @@ import Profile from './pages/Profile';
 import RatingMessage from './pages/RatingMessage';
 import ViewListings from './pages/ViewListings';
 import BuyBooks from './pages/BuyBooks';
-<<<<<<< HEAD
-import ViewBook from './pages/ViewBook';
-=======
 import TradeBooks from './pages/TradeBooks';
 import FreeBooks from './pages/FreeBooks';
 import Privacy from './pages/Privacy';
@@ -20,7 +17,6 @@ import Contact from './pages/Contact';
 import ViewBook from './pages/ViewBook';
 import TermsOfUse from './pages/TermsOfUse';
 import Explore from './pages/ExploreNow';
->>>>>>> origin/horizontal-prototype
 
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -39,9 +35,6 @@ const App = () => {
           <Route path="/rating" component={RatingMessage} />
           <Route path="/viewlistings" component={ViewListings} />
           <Route path="/buybooks" component={BuyBooks} />
-<<<<<<< HEAD
-          <Route path="/viewbook" component={ViewBook} />
-=======
           <Route path="/tradebooks" component={TradeBooks} />
           <Route path="/freebooks" component={FreeBooks} />
           <Route path="/privacy" component={Privacy} />
@@ -53,7 +46,6 @@ const App = () => {
           <Route path="/explore" component={Explore} />
           <Route path="/explore" component={Explore} />
 
->>>>>>> origin/horizontal-prototype
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}
