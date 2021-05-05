@@ -28,6 +28,8 @@ const About = () => {
   //sending data to redux
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.userReducer.posts);
+  const [filterBy, setFilterBy] = React.useState('Filter');
+
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const searchType = useSelector((state) => state.userReducer.searchType);
@@ -62,7 +64,7 @@ const About = () => {
     if (e.key === 'Enter') {
       const search = {
         searchField: searchField,
-        searchType: 'All',
+        searchType: filterBy,
         searchTable: 'paidbooks',
       };
 
@@ -110,10 +112,14 @@ const About = () => {
     dispatch(setSearchType(e));
   };
 
+  const handleFilterChange = (e) => {
+    setFilterBy(e.target.innerText);
+  }
+
   const handleClick = () => {
     const search = {
       searchField: searchField,
-      searchType: 'All',
+      searchType: filterBy,
       searchTable: 'paidbooks',
     };
 
@@ -186,17 +192,17 @@ const About = () => {
         </button>
       </div>
       <div className="filter__btn">
-        <DropdownButton
-          // className="dropdown__btn"
-          variant=" dropdown__btn"
-          alignRight
-          title="Filter By"
-          id="dropdown-menu-align-right"
-          onSelect={handleSelect}
-        >
-          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
-          <Dropdown.Item eventKey="department">Department</Dropdown.Item>
-        </DropdownButton>
+            <DropdownButton className="dropdown" title={filterBy}  size="lg">
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>All</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Title</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Author</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Department</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>ISBN</Dropdown.Item>
+            </DropdownButton>
       </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">
