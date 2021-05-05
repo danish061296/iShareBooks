@@ -104,7 +104,8 @@
   color: black;
 }
 
-.nav__link {
+.nav__link,
+.nav__loglink {
   letter-spacing: 1px;
 }
 
@@ -159,6 +160,10 @@
   .logo__heading {
     font-size: 30px;
   }
+
+  .nav__link {
+    visibility: hidden;
+  }
 }
 
 .navbar__logoLink {
@@ -171,8 +176,7 @@
   font-size: 25px;
 }
 
-/* @media screen and (max-width: 768px) {
-  .navbar__title {
-    font-size: 20px !important;
-  }
-} */
+.avatar {
+  background-color: rgb(92, 95, 92) !important;
+  text-transform: uppercase;
+}

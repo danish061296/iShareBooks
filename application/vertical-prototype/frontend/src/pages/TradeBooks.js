@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import TradeBookModal from './TradeBookModal';
 import BookGrid from './BookGrid';
 
-import {setSearchField } from '../redux/actions/userActions';
-import {DropdownButton, Dropdown} from 'react-bootstrap'
+import { setSearchField } from '../redux/actions/userActions';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { Box } from '@material-ui/core';
 
 const TradeBooks = () => {
@@ -20,9 +20,8 @@ const TradeBooks = () => {
   const [hasLoaded, setHasLoaded] = React.useState(false);
 
   const [filterBy, setFilterBy] = React.useState('Filter');
-  const [searchMessage, setSearchMessage] = React.useState("Books to Buy");
+  const [searchMessage, setSearchMessage] = React.useState('BOOKS FOR TRADE');
   const search = useSelector((state) => state.userReducer.searchField);
-  
 
   const searchData = {
     searchTable: 'tradebooks',
@@ -32,38 +31,38 @@ const TradeBooks = () => {
 
   const handleFilterChange = (e) => {
     setFilterBy(e.target.innerText);
-
-  }
-
+  };
 
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       setHasLoaded(false);
-      axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
-        setHasLoaded(true);
-        console.log(response);
-        if (!response.data.msg) {
-          setPaidBooks(response.data);
-          setSearchMessage(`Showing results for ${search}`);
-        }
-        else {
-          setPaidBooks(response.data.results);
-          setSearchMessage(`Sorry, no results were found. Suggestions: `);
-        }
-      });
+      axios
+        .post(`http://${window.location.hostname}:3001/search`, searchData)
+        .then((response) => {
+          setHasLoaded(true);
+          console.log(response);
+          if (!response.data.msg) {
+            setPaidBooks(response.data);
+            setSearchMessage(`Showing results for ${search}`);
+          } else {
+            setPaidBooks(response.data.results);
+            setSearchMessage(`Sorry, no results were found. Suggestions: `);
+          }
+        });
     }
   };
   const handleSearch = (e) => {
     setHasLoaded(false);
-    axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+    axios
+      .post(`http://${window.location.hostname}:3001/search`, searchData)
+      .then((response) => {
         setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
           setPaidBooks(response.data);
           setSearchMessage(`Showing results for ${search}`);
-        }
-        else {
+        } else {
           setPaidBooks(response.data.results);
           setSearchMessage(`Sorry, no results were found. Suggestions: `);
         }
@@ -90,14 +89,15 @@ const TradeBooks = () => {
     setHasOpened(true);
   };
 
-
   if (!open && hasOpened) {
-    console.log("...d");
+    console.log('...d');
     setHasOpened(false);
-    axios.get(`http://${window.location.hostname}:3001/paidbooks`).then((res) => {
-      console.log(res.data.results);
-      setPaidBooks(res.data.results);
-    });
+    axios
+      .get(`http://${window.location.hostname}:3001/paidbooks`)
+      .then((res) => {
+        console.log(res.data.results);
+        setPaidBooks(res.data.results);
+      });
   }
 
   return (
@@ -106,19 +106,48 @@ const TradeBooks = () => {
 
       <div className="buybooks__page">
         <div className="buybooks__container">
-        <DropdownButton className="dropdown" title={filterBy}  size="lg">
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>All</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Title</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Author</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Department</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>ISBN</Dropdown.Item>
-            </DropdownButton>
+          <DropdownButton className="dropdown" title={filterBy} size="lg">
+            <Dropdown.Item
+              className="opt"
+              as="button"
+              onClick={handleFilterChange}
+            >
+              All
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              className="opt"
+              as="button"
+              onClick={handleFilterChange}
+            >
+              Title
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              className="opt"
+              as="button"
+              onClick={handleFilterChange}
+            >
+              Author
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              className="opt"
+              as="button"
+              onClick={handleFilterChange}
+            >
+              Department
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              className="opt"
+              as="button"
+              onClick={handleFilterChange}
+            >
+              ISBN
+            </Dropdown.Item>
+          </DropdownButton>
           <div className="search__content">
-            
             <input
               className="searchBar"
               type="text"
@@ -127,17 +156,12 @@ const TradeBooks = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => dispatch(setSearchField(e.target.value))}
             />
-          
+
             <button onClick={handleSearch} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
-            
-            
-          
-          
-            </div>
+          </div>
 
-            
           <div className="post__book">
             <div className="post__book__container">
               <p className="post__book__text">POST YOUR BOOK FOR TRADE</p>
@@ -148,16 +172,29 @@ const TradeBooks = () => {
                 open={open}
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
-                button="DONE">
+                button="DONE"
+              >
                 <TradeBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-          <h2 className="post__book__title">{
-              hasLoaded ? searchMessage : 
-                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="70px"></img><Box mt={15}></Box></div> // loading.io free license https://i.imgur.com/O2PReTM.gif
-              }</h2>
+            <h2 className="post__book__title">
+              {
+                hasLoaded ? (
+                  searchMessage
+                ) : (
+                  <div>
+                    <Box mt={15}></Box>
+                    <img
+                      src="https://i.imgur.com/2i0S9vt.gif"
+                      width="70px"
+                    ></img>
+                    <Box mt={15}></Box>
+                  </div>
+                ) // loading.io free license https://i.imgur.com/O2PReTM.gif
+              }
+            </h2>
           </div>
         </div>
         <div className="post__book__grid">
@@ -181,7 +218,7 @@ const TradeBooks = () => {
                   defaultImage="default"
                 />
               );
-            })}
+          })}
         </div>
       </div>
 
