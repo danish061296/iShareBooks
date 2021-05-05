@@ -37,7 +37,6 @@ const TradeBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      console.log(searchData);
       axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
         console.log(response);
         if (!response.data.msg) {
@@ -52,7 +51,17 @@ const TradeBooks = () => {
     }
   };
   const handleSearch = (e) => {
-    console.log(search);
+    axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        console.log(response);
+        if (!response.data.msg) {
+          setPaidBooks(response.data);
+          setSearchMessage(`Showing results for ${search}`);
+        }
+        else {
+          setPaidBooks(response.data.results);
+          setSearchMessage(`Sorry, no results were found. Suggestions: `);
+        }
+      });
   };
 
   const [paidBooks, setPaidBooks] = useState([]);

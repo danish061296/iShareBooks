@@ -12,10 +12,12 @@ import BookGrid from './BookGrid';
 
 import {setSearchField } from '../redux/actions/userActions';
 import {DropdownButton, Dropdown} from 'react-bootstrap'
+import { Box } from '@material-ui/core';
 
 const BuyBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
+  const [hasLoaded, setHasLoaded] = React.useState(false);
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState("Books to Buy");
@@ -37,8 +39,9 @@ const BuyBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      console.log(searchData);
+      setHasLoaded(false);
       axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
           setPaidBooks(response.data);
@@ -52,18 +55,32 @@ const BuyBooks = () => {
     }
   };
   const handleSearch = (e) => {
-    console.log(search);
+    setHasLoaded(false);
+      axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        setHasLoaded(true);
+        console.log(response);
+        if (!response.data.msg) {
+          setPaidBooks(response.data);
+          setSearchMessage(`Showing results for ${search}`);
+        }
+        else {
+          setPaidBooks(response.data.results);
+          setSearchMessage(`Sorry, no results were found. Suggestions: `);
+        }
+      });
   };
 
   const [paidBooks, setPaidBooks] = useState([]);
 
   React.useEffect(() => {
+    setHasLoaded(false);
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/paidbooks`
       );
       console.log(res.data.results);
       setPaidBooks(res.data.results);
+      setHasLoaded(true);
     }
     fetchData();
   }, []);
@@ -73,9 +90,6 @@ const BuyBooks = () => {
     setHasOpened(true);
   };
 
-  const click1 = () => {
-    console.log("!");
-  }
 
   if (!open && hasOpened) {
     console.log("...d");
@@ -117,10 +131,6 @@ const BuyBooks = () => {
             <button onClick={handleSearch} className="search__btn">
               <SearchIcon className="search__icon" />
             </button>
-            
-            
-          
-          
             </div>
 
             
@@ -135,37 +145,44 @@ const BuyBooks = () => {
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
                 button="DONE"
-                onClick={click1}
               >
                 <BuyBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">{searchMessage}</h2>
+            <h2 className="post__book__title">{
+              hasLoaded ? searchMessage : 
+                <div><img src="https://i.imgur.com/2i0S9vt.gif" width="100px"></img></div>
+              }</h2>
           </div>
         </div>
         <div className="post__book__grid">
           {paidBooks.map((book, index) => {
-            return (
-              <BookGrid
-                key={index}
-                id={book.book_id}
-                title={book.title}
-                author={book.author}
-                department={book.department}
-                isbn={book.isbn}
-                condition={book.condition}
-                image={book.image}
-                price={book.cost}
-                type="paid"
-                name={book.name}
-                sellerid={book.user_id}
-                sellerEmail={book.email}
-                defaultImage="default"
-              />
-            );
-          })}
+            if (hasLoaded)
+              return (
+                <BookGrid
+                  key={index}
+                  id={book.book_id}
+                  title={book.title}
+                  author={book.author}
+                  department={book.department}
+                  isbn={book.isbn}
+                  condition={book.condition}
+                  image={book.image}
+                  price={book.cost}
+                  type="paid"
+                  name={book.name}
+                  sellerid={book.user_id}
+                  sellerEmail={book.email}
+                  defaultImage="default"
+                />
+              );
+            else 
+                return (
+                  <Box mt={30}> </Box>
+                );
+            })}
         </div>
       </div>
 
