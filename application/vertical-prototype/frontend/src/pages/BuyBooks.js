@@ -153,7 +153,7 @@ const BuyBooks = () => {
           <div className="post__book__content">
             <h2 className="post__book__title">{
               hasLoaded ? searchMessage : 
-                <div><img src="https://i.imgur.com/2i0S9vt.gif" width="100px"></img></div>
+                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="100px"></img><Box mt={15}></Box></div>
               }</h2>
           </div>
         </div>
