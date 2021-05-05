@@ -197,6 +197,10 @@
   color: black !important;
 }
 
+.loading {
+  background-color: red;
+}
+
 
 @media screen and (max-width: 1920px) {
   .post__book__grid {
