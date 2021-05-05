@@ -154,11 +154,10 @@
 
 .filter__btn {
   z-index: 1009;
-  width: 32%;
   margin: 6px;
   align-self:flex-end;
   position: relative !important;
-  right: 0px;
+  right: 200px !important;
   top: -18% !important;
 
 }
@@ -166,21 +165,21 @@
 @media screen and (max-width: 1920px) {
   .filter__btn {
     position: relative !important;
-    left: 0% !important;
+    left: -12% !important;
     top: -140px !important;
   }
 }
 @media screen and (max-width: 1080px) {
   .filter__btn {
     position: relative !important;
-    left: 0% !important;
+    left: -10% !important;
     top: -140px !important;
   }
 }
 @media screen and (max-width: 768px) {
   .filter__btn {
     position: relative !important;
-    left: 0% !important;
+    left: -30% !important;
     top: -130px !important;
   }
   .about__title {
