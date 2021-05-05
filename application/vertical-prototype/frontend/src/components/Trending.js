@@ -61,10 +61,18 @@ const Trending = () => {
             {posts.map((post, index) => {
               return (
                 <Card
-                  key={index}
-                  number={index}
-                  image={post.image}
-                  defaultImage={defaultImage}
+                key={index}
+                // number={index}
+                id={post.id}
+                title={post.title}
+                author={post.author}
+                department={post.department}
+                isbn={post.isbn}
+                condition={post.condition}
+                image={post.image}
+                name={post.name}
+                price={post.cost}
+                defaultImage="default"
                 />
               );
             })}
@@ -86,10 +94,18 @@ const Trending = () => {
             {posts.map((post, index) => {
               return (
                 <Card
-                  key={index}
-                  number={index}
-                  image={post.image}
-                  defaultImage={defaultImage}
+                key={index}
+                // number={index}
+                id={post.id}
+                title={post.title}
+                author={post.author}
+                department={post.department}
+                isbn={post.isbn}
+                condition={post.condition}
+                image={post.image}
+                name={post.name}
+                price={post.cost}
+                defaultImage="default"
                 />
               );
             })}
