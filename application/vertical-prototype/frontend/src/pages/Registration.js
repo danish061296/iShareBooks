@@ -94,12 +94,13 @@ const Registration = () => {
     const payload = {
       ...values,
     };
-    setTimeout(() => {
-      props.resetForm();
-      // alert(JSON.stringify(payload, null, 2));
 
-      props.setSubmitting(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   // alert(JSON.stringify(payload, null, 2));
+
+    //   props.setSubmitting(false);
+    // }, 1000);
 
     console.log(payload.username);
 
@@ -139,10 +140,10 @@ const Registration = () => {
             showIcon: true,
           },
         });
+        setTimeout(() => {
+          history.push('/login');
+        }, 2000);
       }
-      setTimeout(() => {
-        history.push('/login');
-      }, 2000);
     });
 
     dispatch(setUsername(payload.username));
@@ -219,6 +220,7 @@ const Registration = () => {
                       name="remember"
                       control={
                         <Checkbox
+                          required
                           value="allowExtraEmails"
                           color="color: #28918a"
                         />
