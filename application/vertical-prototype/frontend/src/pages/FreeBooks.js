@@ -12,10 +12,12 @@ import BookGrid from './BookGrid';
 
 import {setSearchField } from '../redux/actions/userActions';
 import {DropdownButton, Dropdown} from 'react-bootstrap'
+import { Box } from '@material-ui/core';
 
 const FreeBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
+  const [hasLoaded, setHasLoaded] = React.useState(false);
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState("Books for Free");
@@ -36,8 +38,10 @@ const FreeBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      setHasLoaded(false);
       axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
         console.log(response);
+        setHasLoaded(true);
         if (!response.data.msg) {
           setPaidBooks(response.data);
           setSearchMessage(`Showing results for ${search}`);
@@ -50,7 +54,9 @@ const FreeBooks = () => {
     }
   };
   const handleSearch = (e) => {
+    setHasLoaded(false);
     axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+      setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
           setPaidBooks(response.data);
@@ -66,12 +72,14 @@ const FreeBooks = () => {
   const [paidBooks, setPaidBooks] = useState([]);
 
   React.useEffect(() => {
+    setHasLoaded(false);
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/freebooks`
       );
       console.log(res.data.results);
       setPaidBooks(res.data.results);
+      setHasLoaded(true);
     }
     fetchData();
   }, []);
@@ -81,9 +89,6 @@ const FreeBooks = () => {
     setHasOpened(true);
   };
 
-  const click1 = () => {
-    console.log("!");
-  }
 
   if (!open && hasOpened) {
     console.log("...d");
@@ -142,15 +147,16 @@ const FreeBooks = () => {
                 open={open}
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
-                button="DONE"
-                onClick={click1}
-              >
+                button="DONE">
                 <FreeBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">{searchMessage}</h2>
+          <h2 className="post__book__title">{
+              hasLoaded ? searchMessage : 
+                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="100px"></img><Box mt={15}></Box></div> // loading.io free license https://i.imgur.com/O2PReTM.gif
+              }</h2>
           </div>
         </div>
         <div className="post__book__grid">

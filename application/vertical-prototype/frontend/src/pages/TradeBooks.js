@@ -12,10 +12,12 @@ import BookGrid from './BookGrid';
 
 import {setSearchField } from '../redux/actions/userActions';
 import {DropdownButton, Dropdown} from 'react-bootstrap'
+import { Box } from '@material-ui/core';
 
 const TradeBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
+  const [hasLoaded, setHasLoaded] = React.useState(false);
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState("Books to Buy");
@@ -37,7 +39,9 @@ const TradeBooks = () => {
   const dispatch = useDispatch();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      setHasLoaded(false);
       axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
           setPaidBooks(response.data);
@@ -51,7 +55,9 @@ const TradeBooks = () => {
     }
   };
   const handleSearch = (e) => {
+    setHasLoaded(false);
     axios.post(`http://${window.location.hostname}:3001/search`, searchData).then((response) => {
+        setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
           setPaidBooks(response.data);
@@ -67,12 +73,14 @@ const TradeBooks = () => {
   const [paidBooks, setPaidBooks] = useState([]);
 
   React.useEffect(() => {
+    setHasLoaded(false);
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/tradebooks`
       );
       console.log(res.data.results);
       setPaidBooks(res.data.results);
+      setHasLoaded(true);
     }
     fetchData();
   }, []);
@@ -82,9 +90,6 @@ const TradeBooks = () => {
     setHasOpened(true);
   };
 
-  const click1 = () => {
-    console.log("!");
-  }
 
   if (!open && hasOpened) {
     console.log("...d");
@@ -143,38 +148,40 @@ const TradeBooks = () => {
                 open={open}
                 setOpen={setOpen}
                 title="SELL YOUR BOOK"
-                button="DONE"
-                onClick={click1}
-              >
+                button="DONE">
                 <TradeBookModal />
               </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
-            <h2 className="post__book__title">{searchMessage}</h2>
+          <h2 className="post__book__title">{
+              hasLoaded ? searchMessage : 
+                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="100px"></img><Box mt={15}></Box></div> // loading.io free license https://i.imgur.com/O2PReTM.gif
+              }</h2>
           </div>
         </div>
         <div className="post__book__grid">
           {paidBooks.map((book, index) => {
-            return (
-              <BookGrid
-                key={index}
-                id={book.book_id}
-                title={book.title}
-                author={book.author}
-                department={book.department}
-                isbn={book.isbn}
-                condition={book.condition}
-                image={book.image}
-                price={book.cost}
-                type="paid"
-                name={book.name}
-                sellerid={book.user_id}
-                sellerEmail={book.email}
-                defaultImage="default"
-              />
-            );
-          })}
+            if (hasLoaded)
+              return (
+                <BookGrid
+                  key={index}
+                  id={book.book_id}
+                  title={book.title}
+                  author={book.author}
+                  department={book.department}
+                  isbn={book.isbn}
+                  condition={book.condition}
+                  image={book.image}
+                  price={book.cost}
+                  type="paid"
+                  name={book.name}
+                  sellerid={book.user_id}
+                  sellerEmail={book.email}
+                  defaultImage="default"
+                />
+              );
+            })}
         </div>
       </div>
 
