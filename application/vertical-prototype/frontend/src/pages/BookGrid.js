@@ -26,8 +26,6 @@ const BookGrid = ({
   name,
   sellerEmail,
 }) => {
-  var price_hold = price;
-
   if (isNaN(price)) {
     price = 0.0;
   }
@@ -109,18 +107,9 @@ const BookGrid = ({
               className="post__book__image"
             />
           </Link>
-            <div className="button__buy" onClick={handleAddCart}> 
-              <span className="button__text">ADD TO CART</span>
-            </div>
-          
-          {/* {screenWidth && (
-            <Button
-              className="buy__book__button__screen"
-              onClick={handleAddCart}
-            >
-              Add to cart
-            </Button>
-          )} */}
+          <div className="button__buy" onClick={handleAddCart}>
+            <span className="button__text">ADD TO CART</span>
+          </div>
 
           <p className="post__book__price">${price}</p>
         </div>
@@ -141,9 +130,9 @@ const BookGrid = ({
               }
             />
           </Link>
-          <div className="button__buy" onClick={handleAddCart}> 
-              <span className="button__text">ADD TO CART</span>
-            </div>
+          <div className="button__buy" onClick={handleAddCart}>
+            <span className="button__text">ADD TO CART</span>
+          </div>
 
           <p className="post__book__price">$0</p>
         </div>

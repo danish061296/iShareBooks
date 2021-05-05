@@ -193,14 +193,12 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/userposts/:userId', (req, res) => {
   var userId = req.params.userId;
-  var query =  
-  `SELECT book_id, title, author, \`condition\`, isbn, department, cost, "paid" as type FROM paidbooks WHERE user_id = ${userId}
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, NULL, "trade" FROM tradebooks WHERE user_id = ${userId}) 
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, NULL, "free" FROM freebooks WHERE user_id = ${userId});`;
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks WHERE user_id = ${userId}
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks WHERE user_id = ${userId}) 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks WHERE user_id = ${userId});`;
 
   db.query(query, (err, results) => {
-    if (err)
-      return res.send(err);
+    if (err) return res.send(err);
 
     results.forEach(function (book, index) {
       if (book.image) {
@@ -209,7 +207,7 @@ router.get('/userposts/:userId', (req, res) => {
       }
     });
     res.send(results);
-  })
+  });
 });
 
 module.exports = router;

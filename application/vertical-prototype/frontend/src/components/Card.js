@@ -2,7 +2,7 @@ import React from 'react';
 import './Trending.css';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setViewBook, setrandomMsg } from '../redux/actions/userActions';
+import { setViewBook, setSellerEmail } from '../redux/actions/userActions';
 
 const Card = ({
   key,
@@ -11,12 +11,13 @@ const Card = ({
   title,
   author,
   department,
-  condition,
   isbn,
-  price,
+  condition,
   image,
+  price,
   name,
-  defaultImage,
+  sellerid,
+  sellerEmail,
 }) => {
   const dispatch = useDispatch();
 
@@ -27,18 +28,21 @@ const Card = ({
         title,
         author,
         department,
-        condition,
         isbn,
+        condition,
         image,
-        name,
         price,
+        name,
+        sellerid,
+        sellerEmail,
       })
     );
 
-    // dispatch(setrandomMsg('landing'));
-
     return <Redirect to="/viewbook" />;
   };
+
+  // dispatch(setSellerEmail(sellerEmail));
+
   return (
     <div>
       {image && (

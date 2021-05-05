@@ -10,9 +10,9 @@ import axios from 'axios';
 
 const Trending = () => {
   const [trendingBooks, setTrendingBooks] = useState([]);
-  const [carStyle, setCarStyle] = useState( {
+  const [carStyle, setCarStyle] = useState({
     width: '99.9%',
-  } );
+  });
 
   React.useEffect(() => {
     Aos.init({ duration: 1600 });
@@ -24,31 +24,18 @@ const Trending = () => {
         `http://${window.location.hostname}:3001/fire`
       );
       console.log(res.data);
-      setTrendingBooks(res.data);
+      setTrendingBooks(res.data.results);
     }
     fetchData();
   }, []);
 
   React.useEffect(() => {
-    setTimeout(()=>{
+    setTimeout(() => {
       setCarStyle({
         width: '100%',
       });
-     }, 1000)
+    }, 1000);
   }, []);
-
-
-  // {
-  //   const res = await axios.get(
-  //     `http://${window.location.hostname}:3001/fire`,
-  //     {
-  //       // searchField: '',
-  //       // searchType: 'any',
-  //     }
-  //   );
-  //   console.log(res.data);
-  //   setTrendingBooks(res.data.results);
-  // }, []);
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
@@ -90,7 +77,12 @@ const Trending = () => {
             <h3 className="trending"> Showing Results for {searchField}</h3>
           </div>
 
-          <Carousel className="caro" style={carStyle} breakPoints={breakPoints} className="car">
+          <Carousel
+            className="caro"
+            style={carStyle}
+            breakPoints={breakPoints}
+            className="car"
+          >
             {posts.map((post, index) => {
               return (
                 <Card

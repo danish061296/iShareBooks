@@ -15,11 +15,10 @@ router.post('/search', (req, res) => {
   // QUERY for retrieving user's info from id
   // SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id;
 
-  var {searchField, searchType, searchTable} = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
+  var { searchField, searchType, searchTable } = req.body; // searchType can be: 'any', 'department', 'title', 'author'. Prof wants a pulldown menu with 3 categ for search.
   console.log(req.body);
-  console.log("@@" + searchType);
-  if (searchType == 'All' || searchType == 'Filter')
-    searchType = 'any';
+  console.log('@@' + searchType);
+  if (searchType == 'All' || searchType == 'Filter') searchType = 'any';
 
   var query;
 
@@ -35,15 +34,16 @@ router.post('/search', (req, res) => {
       ' OR author LIKE ' +
       db.escape('%' + searchField + '%') +
       ' OR department LIKE ' +
-      db.escape('%' + searchField + '%') + `ORDER BY post_time DESC`;
-  
+      db.escape('%' + searchField + '%') +
+      `ORDER BY post_time DESC`;
   else if (searchType != 'any')
-    query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE
-    ${searchType} LIKE` + db.escape('%' + searchField + '%') + `ORDER BY post_time DESC LIMIT 8`;
-
+    query =
+      `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE
+    ${searchType} LIKE` +
+      db.escape('%' + searchField + '%') +
+      `ORDER BY post_time DESC LIMIT 8`;
   else if (searchField == '')
     query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER post_time DESC`;
-
 
   function suggestions() {
     query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY post_time DESC LIMIT 8`;
@@ -95,11 +95,6 @@ router.get('/fire', (req, res) => {
 
   var query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
   db.query(query, (err, results) => {
-    // let suggest = JSON.stringify(results);
-    //console.log(JSON.parse(suggest))
-    // console.log('Printig Results: ' + suggest)
-
-    // let obj = JSON.parse(suggest);
     if (err) {
       console.log(err);
     }
@@ -110,8 +105,6 @@ router.get('/fire', (req, res) => {
         results[index].image = bytes.toString();
       }
     });
-
-    //console.log(results);
 
     return res.send({
       results,

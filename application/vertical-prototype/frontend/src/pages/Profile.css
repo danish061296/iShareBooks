@@ -15,7 +15,7 @@
   width: 85%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 130vh;
   border-radius: 20px;
   margin-left: 7.5%;
   margin-top: 20px;
@@ -49,7 +49,7 @@
 
 .user_information {
   /* height: 350px; */
-  height: 45%;
+  height: 38%;
   position: relative;
   top: 100px;
   text-align: center;
@@ -87,7 +87,7 @@
 }
 
 .user_books_container {
-  height: 35%;
+  height: 42%;
   width: 100%;
   border-radius: 0px 0px 20px 20px;
 
@@ -98,12 +98,9 @@
   /* position: relative; */
   padding: 10px;
   font-size: 25px;
-
-  /* right: 90px; */
 }
 
 .button_container {
-  /* position: relative; */
   float: right;
   right: 30px;
   top: 30px;

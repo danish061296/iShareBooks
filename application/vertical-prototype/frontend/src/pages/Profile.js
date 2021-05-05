@@ -5,13 +5,22 @@ import { Link as LinkR } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Carousel from 'react-elastic-carousel';
+import Card from '../components/Card';
 import './Profile.css';
 import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
+import BookGrid from './BookGrid';
 
 export default function Profile() {
   const [sellerRating, setSellerRating] = React.useState(0);
   const [userRating, setUserRating] = React.useState(0);
+  const [userPosts, setUserPosts] = React.useState([]);
+  const [sellerPosts, setSellerPosts] = React.useState([]);
+  const [carStyle, setCarStyle] = React.useState({
+    width: '99.9%',
+  });
+
   const username = useSelector((state) => state.userReducer.username);
   const email = useSelector((state) => state.userReducer.email);
   const sellerid = useSelector((state) => state.userReducer.sellerid);
@@ -19,13 +28,33 @@ export default function Profile() {
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
   const userid = useSelector((state) => state.userReducer.userid);
 
+  console.log(sellerid);
+
+  const breakPoints = [
+    { width: 500, itemsTo0how: 3 },
+    { width: 768, itemsToShow: 5 },
+    { width: 1200, itemsToShow: 6 },
+    { width: 1500, itemsToShow: 6 },
+  ];
+
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${sellerid}`
       );
-      console.log(res.data);
       setSellerRating(res.data.rating);
+    }
+
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/userposts/${sellerid}`
+      );
+
+      setSellerPosts(res.data);
     }
 
     fetchData();
@@ -36,11 +65,30 @@ export default function Profile() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
-      console.log(res.data);
       setUserRating(res.data.rating);
     }
 
     fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://${window.location.hostname}:3001/userposts/${userid}`
+      );
+
+      setUserPosts(res.data);
+    }
+
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setCarStyle({
+        width: '100%',
+      });
+    }, 1000);
   }, []);
 
   return (
@@ -73,7 +121,7 @@ export default function Profile() {
               )}
 
               <div className="rating_vis">
-                {sellerRating && (
+                {sellerRating ? (
                   <div className="stars">
                     <ReactStars
                       size={40}
@@ -84,9 +132,7 @@ export default function Profile() {
                       name="rating"
                     />
                   </div>
-                )}
-
-                {!sellerRating && (
+                ) : (
                   <div className="stars">
                     <ReactStars
                       size={40}
@@ -103,7 +149,35 @@ export default function Profile() {
           </div>
 
           <div className="user_books_container">
-            <h2 className="books__posted">Books Posted (10)</h2>
+            <h2 className="books__posted">{`Posted Books (${sellerPosts?.length})`}</h2>
+
+            {sellerPosts.length > 0 ? (
+              <Carousel breakPoints={breakPoints}>
+                {sellerPosts.map((post, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      number={index}
+                      id={post.book_id}
+                      title={post.title}
+                      author={post.author}
+                      department={post.department}
+                      isbn={post.isbn}
+                      condition={post.condition}
+                      name={name}
+                      sellerid={sellerid}
+                      sellerEmail={sellerEmail}
+                      price={post.cost ? post.cost : 0}
+                      image={post.image}
+                    />
+                  );
+                })}
+              </Carousel>
+            ) : (
+              <p style={{ textAlign: 'center', color: 'grey' }}>
+                You have not posted any books yet...
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -135,7 +209,7 @@ export default function Profile() {
               )}
 
               <div className="rating_vis">
-                {userRating && (
+                {userRating ? (
                   <div className="stars">
                     <ReactStars
                       size={40}
@@ -146,9 +220,7 @@ export default function Profile() {
                       name="rating"
                     />
                   </div>
-                )}
-
-                {!userRating && (
+                ) : (
                   <div className="stars">
                     <ReactStars
                       size={40}
@@ -197,7 +269,34 @@ export default function Profile() {
           </div>
 
           <div className="user_books_container">
-            <h2 className="books__posted">Books Posted (10)</h2>
+            <h2 className="books__posted">{`Posted Books (${userPosts?.length})`}</h2>
+            {userPosts.length > 0 ? (
+              <Carousel style={carStyle} breakPoints={breakPoints}>
+                {userPosts.map((post, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      number={index}
+                      id={post.book_id}
+                      title={post.title}
+                      author={post.author}
+                      department={post.department}
+                      isbn={post.isbn}
+                      name={username}
+                      sellerid={userid}
+                      seller={email}
+                      condition={post.condition}
+                      price={post.cost ? post.cost : 0}
+                      image={post.image}
+                    />
+                  );
+                })}
+              </Carousel>
+            ) : (
+              <p style={{ textAlign: 'center', color: 'grey' }}>
+                You have not posted any books yet.
+              </p>
+            )}
           </div>
         </div>
       )}
