@@ -106,7 +106,8 @@ const BuyBooks = () => {
 
       <div className="buybooks__page">
         <div className="buybooks__container">
-          <DropdownButton className="dropdown" title={filterBy} size="lg">
+          <DropdownButton className="dropdown" title={filterBy} size="lg" width="300px">
+            
             <Dropdown.Item
               className="opt"
               as="button"
