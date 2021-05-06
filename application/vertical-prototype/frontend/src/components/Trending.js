@@ -73,6 +73,7 @@ const Trending = () => {
                 name={post.name}
                 price={post.cost}
                 defaultImage="default"
+                sellerid={post.user_id}
                 />
               );
             })}
@@ -105,6 +106,7 @@ const Trending = () => {
                 image={post.image}
                 name={post.name}
                 price={post.cost}
+                sellerid={post.user_id}
                 defaultImage="default"
                 />
               );
@@ -132,6 +134,7 @@ const Trending = () => {
                   image={post.image}
                   name={post.name}
                   price={post.cost}
+                  sellerid={post.user_id}
                   defaultImage="default"
                 />
               );
