@@ -19,13 +19,12 @@ export default function RatingMessage() {
 
   var filtered = [];
   console.log("RATE");
-  console.log(ratings);
 
-  var filtered_ratings = ratings.filter(function(e, i) {
-    if (filtered.includes(ratings[i].name)) {
+  var filtered_ratings = cart.filter(function(e, i) {
+    if (filtered.includes(cart[i].name)) {
     } else {
-      filtered.push(ratings[i].name);
-      return ratings[i];
+      filtered.push(cart[i].name);
+      return cart[i];
     }
 
   });
@@ -59,7 +58,7 @@ export default function RatingMessage() {
             filtered_ratings.map((rating, i) => {
               console.log(rating);
               return (
-                <UserRating key={i} id={rating.sellerID} name={rating.name} />
+                <UserRating key={i} id={rating.id} name={rating.name} />
               );
 
             })}

@@ -152,7 +152,7 @@ const BuyBooks = () => {
           <div className="post__book__content">
             <h2 className="post__book__title">{
               hasLoaded ? searchMessage : 
-                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="70px"></img><Box mt={15}></Box></div> // loading.io free license https://i.imgur.com/O2PReTM.gif
+                <div><Box mt={15}></Box><img src="https://i.imgur.com/2i0S9vt.gif" width="70px"></img><Box mt={20}></Box></div> // loading.io free license https://i.imgur.com/O2PReTM.gif
               }</h2>
           </div>
         </div>
