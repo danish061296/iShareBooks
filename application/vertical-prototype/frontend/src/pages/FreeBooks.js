@@ -201,24 +201,25 @@ const FreeBooks = () => {
         </div>
         <div className="post__book__grid">
           {paidBooks.map((book, index) => {
-            return (
-              <BookGrid
-                key={index}
-                id={book.book_id}
-                title={book.title}
-                author={book.author}
-                department={book.department}
-                isbn={book.isbn}
-                condition={book.condition}
-                image={book.image}
-                price={book.cost}
-                type="paid"
-                name={book.name}
-                sellerid={book.user_id}
-                sellerEmail={book.email}
-                defaultImage="default"
-              />
-            );
+            if (hasLoaded)
+              return (
+                <BookGrid
+                  key={index}
+                  id={book.book_id}
+                  title={book.title}
+                  author={book.author}
+                  department={book.department}
+                  isbn={book.isbn}
+                  condition={book.condition}
+                  image={book.image}
+                  price={book.cost}
+                  type="paid"
+                  name={book.name}
+                  sellerid={book.user_id}
+                  sellerEmail={book.email}
+                  defaultImage="default"
+                />
+              );
           })}
         </div>
       </div>
