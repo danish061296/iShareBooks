@@ -134,7 +134,7 @@ const BookGrid = ({
             <span className="button__text">ADD TO CART</span>
           </div>
 
-          <p className="post__book__price">$0</p>
+          <p className="post__book__price">$0.00</p>
         </div>
       )}
     </div>

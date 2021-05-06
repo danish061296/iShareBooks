@@ -5,6 +5,7 @@ import { Link } from 'react-scroll';
 import './Navigation.css';
 import axios from 'axios';
 import Tippy from '@tippyjs/react';
+import Avatar from '@material-ui/core/Avatar';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -17,8 +18,6 @@ import {
 } from '../redux/actions/userActions';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import ReactNotification from 'react-notifications-component';
-import { store } from 'react-notifications-component';
 import 'tippy.js/dist/tippy.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -86,8 +85,14 @@ const Navigation = () => {
             </LinkR>
           </NavbarBrand>
           <div className="navbar__left">
+            <Avatar
+              className="avatar"
+              alt={username}
+              src="/static/images/avatar/1.jpg"
+            />
+
             <p style={{ marginTop: 25, marginRight: 10, color: 'white' }}>
-              Hi! {username.charAt(0).toUpperCase() + username.slice(1)}
+              Hi, {username.charAt(0).toUpperCase() + username.slice(1)}
             </p>
             <div className="account__btn">
               <DropdownButton
@@ -176,7 +181,7 @@ const Navigation = () => {
               )}
 
               <LinkR
-                className="nav__link"
+                className="nav__loglink"
                 style={{
                   color: '#D3D3D3',
                   textDecoration: 'none',
@@ -204,8 +209,6 @@ const Navigation = () => {
         </div>
       )}
       <div className="navbar__second">
-        {/* <ReactNotification /> */}
-
         <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">
             <h1 className="logo__heading">iShareBooks</h1>
