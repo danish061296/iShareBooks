@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Books from '../pages/Books';
 import axios from 'axios';
+import {
+  setPosts
+} from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 
 function TabPanel(props) {
@@ -68,46 +72,65 @@ export default function VerticalTabs() {
   const [hasOpened, setHasOpened] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
   const [paidBooks, setPaidBooks] = React.useState([]);
- 
 
-  const handleChange =async(e,value)=>{ 
+  const dispatch = useDispatch();
+
+
+  const handleChange = (e,value)=>{ 
      console.log('This is coming From Explore ' + value);
-    //  var searchName ='';
-    
-     if(value==0){ 
-        // searchName='Computer'
-        setmenuName('Computer')
-     }
 
-     console.log('Menu Name Set to: '+ menuName)
-    //  const searchData = {
-    //   searchField: menuName,
-    // };
-     
 
     const searchData = {
-      searchField: menuName,
-      searchType: 'Department',
+      searchField: e.target.innerText,
+      searchType: 'department',
       searchTable: 'paidbooks',
     };
-  
-      
-     const response = await   axios.post(`http://${window.location.hostname}:3001/search`, searchData)
-        console.log(response);
+    console.log(searchData)
+    if (searchData.searchField === 'ALL BOOKS') {
+      axios.get(`http://${window.location.hostname}:3001/allbooks`).then((response) => {
+      console.log(response);
       
         if (!response.data.msg) {
-          setPaidBooks(response.data);
-          
-         
+          dispatch(setPosts(response.data))   
         }
         else {
-          setPaidBooks(response.data.results);
+          dispatch(setPosts(response.data.results));
           console.log(response.data.results); 
-          
         }
+    })
+      return;
+    }
+    console.log(searchData)
+
+     axios.get(`http://${window.location.hostname}:3001/allbooksbydept/${searchData.searchField}`, searchData).then((response) => {
+      console.log(response);
+      
+        if (!response.data.msg) {
+          dispatch(setPosts(response.data))   
+        }
+        else {
+          dispatch(setPosts(response.data.results));
+          console.log(response.data.results); 
+        }
+     });
+        
      
     
   }
+
+  React.useEffect(() => {
+    axios.get(`http://${window.location.hostname}:3001/allbooks`).then((response) => {
+      console.log(response);
+      
+        if (!response.data.msg) {
+          dispatch(setPosts(response.data))   
+        }
+        else {
+          dispatch(setPosts(response.data.results));
+          console.log(response.data.results); 
+        }
+     })
+  });
 
 
 

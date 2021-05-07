@@ -4,8 +4,6 @@ const fs = require('fs');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.post('/allbooks', (req, res) => {});
-
 router.post('/search', (req, res) => {
   console.log('SEARCH');
   //freebooks

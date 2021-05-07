@@ -58,7 +58,7 @@ const Trending = () => {
           </div>
 
           <Carousel style={carStyle} breakPoints={breakPoints}>
-            {posts.map((post, index) => {
+            {trendingBooks.map((post, index) => {
               return (
                 <Card
                 key={index}
@@ -91,7 +91,7 @@ const Trending = () => {
             breakPoints={breakPoints}
             className="car"
           >
-            {posts.map((post, index) => {
+            {trendingBooks.map((post, index) => {
               return (
                 <Card
                 key={index}

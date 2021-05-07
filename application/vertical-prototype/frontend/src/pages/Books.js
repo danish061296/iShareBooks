@@ -4,6 +4,10 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import BookGrid from './BookGrid';
 import { Box } from '@material-ui/core';
+import {
+  setPosts,
+} from '../redux/actions/userActions';
+
 
 const FreeBooks = ({paidBooks}) => {
 
@@ -14,6 +18,7 @@ const FreeBooks = ({paidBooks}) => {
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState("Books You May Like");
   const search = useSelector((state) => state.userReducer.searchField);
+  const posts = useSelector((state) => state.userReducer.posts);
   
 
  
@@ -107,7 +112,9 @@ const FreeBooks = ({paidBooks}) => {
           </div>
         </div>
         <div className="post__book__grid">
-          {paidBooks.map((book, index) => {
+          {posts.map((book, index) => {
+            if (book.cost == null) book.cost = 0.00;
+            console.log(book.cost);
             return (
               <BookGrid
                 key={index}

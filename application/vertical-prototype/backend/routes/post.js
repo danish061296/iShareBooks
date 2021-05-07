@@ -210,4 +210,46 @@ router.get('/userposts/:userId', (req, res) => {
   });
 });
 
+router.get('/allbooks', (req, res) => {
+
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks) 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks);`;
+
+  db.query(query, (err, results) => {
+    if (err) return res.send(err);
+    
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+    res.send(results);
+  })  
+  
+});
+
+router.get('/allbooksbydept/:department', (req, res) => {
+
+  const dept = req.params.department;
+
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks WHERE department LIKE `+db.escape('%' + dept + '%') +`  
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks WHERE department LIKE `+db.escape('%' + dept + '%') +`)
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks WHERE department LIKE `+db.escape('%' + dept + '%') +`);`;
+
+  db.query(query, (err, results) => {
+    if (err) return res.send(err);
+    
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+    res.send(results);
+  })  
+  
+});
+
 module.exports = router;
