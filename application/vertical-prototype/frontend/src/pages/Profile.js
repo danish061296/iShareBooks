@@ -116,9 +116,9 @@ export default function Profile() {
 
           <div className="user_information">
             <div className="user_profile_info">
-              <div className="username">{name}</div>
+              <div className="profile_username">{name}</div>
 
-              <div className="email">
+              <div className="profile_email">
                 <a href="">{sellerEmail}</a>
               </div>
 
@@ -132,7 +132,7 @@ export default function Profile() {
                 {sellerRating ? (
                   <div className="stars">
                     <ReactStars
-                      size={40}
+                      size={60}
                       value={sellerRating}
                       isHalf={false}
                       edit={false}
@@ -143,7 +143,7 @@ export default function Profile() {
                 ) : (
                   <div className="stars">
                     <ReactStars
-                      size={40}
+                      size={60}
                       value={5}
                       isHalf={false}
                       edit={false}
@@ -202,12 +202,12 @@ export default function Profile() {
 
           <div className="user_information">
             <div className="user_profile_info">
-              <div className="username">
+              <div className="profile_username">
                 {username.charAt(0).toUpperCase() + username.slice(1)}
               </div>
 
-              <div className="email">
-                <a href="./profile">{email}</a>
+              <div className="profile_email">
+                <a href="#">{email}</a>
               </div>
 
               {userRating ? (
@@ -220,7 +220,7 @@ export default function Profile() {
                 {userRating ? (
                   <div className="stars">
                     <ReactStars
-                      size={40}
+                      size={60}
                       value={userRating}
                       isHalf={false}
                       edit={false}
@@ -231,7 +231,7 @@ export default function Profile() {
                 ) : (
                   <div className="stars">
                     <ReactStars
-                      size={40}
+                      size={60}
                       value={5}
                       isHalf={false}
                       edit={false}

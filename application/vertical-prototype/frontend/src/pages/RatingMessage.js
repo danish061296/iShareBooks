@@ -20,12 +20,14 @@ export default function RatingMessage() {
   // creating array to store distinct seller names
   var filtered = [];
 
+
+
   // filter duplilcate sellers
   var filtered_ratings = ratings.filter(function (e, i) {
     if (filtered.includes(ratings[i].name)) {
     } else {
-      filtered.push(cart[i].name);
-      return cart[i];
+      filtered.push(ratings[i].name);
+      return ratings[i];
     }
   });
 

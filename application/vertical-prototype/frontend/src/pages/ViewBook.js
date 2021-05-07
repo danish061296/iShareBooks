@@ -30,6 +30,7 @@ const ViewBook = () => {
         price: viewBooks[viewBooks.length - 1].price,
         image: viewBooks[viewBooks.length - 1].image,
         name: viewBooks[viewBooks.length - 1].name,
+        condition: viewBooks[viewBooks.length - 1].condition,
         type: '',
       })
     );

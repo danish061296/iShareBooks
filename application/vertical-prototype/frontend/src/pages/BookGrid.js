@@ -83,6 +83,14 @@ const BookGrid = ({
     dispatch(
       setRating({
         id,
+        title,
+        author,
+        department,
+        isbn,
+        condition,
+        image,
+        price,
+        type,
         name,
       })
     );

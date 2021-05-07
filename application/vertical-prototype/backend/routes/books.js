@@ -99,6 +99,8 @@ router.get('/fire', (req, res) => {
       console.log(err);
     }
 
+    console.log(res);
+
     results.forEach(function (book, index) {
       if (book.image) {
         var bytes = Buffer.from(book.image, 'base64');
