@@ -3,8 +3,6 @@ import ReactStars from 'react-rating-stars-component';
 import './RatingMessage.css';
 import axios from 'axios';
 
-import { useSelector } from 'react-redux';
-
 const UserRating = ({ id, name }) => {
   const [clickedStyle, setClickedStyle] = useState({});
 

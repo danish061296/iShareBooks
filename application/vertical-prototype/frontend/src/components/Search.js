@@ -22,7 +22,6 @@ const About = () => {
   const dispatch = useDispatch();
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const posts = useSelector((state) => state.userReducer.posts);
   const searchType = useSelector((state) => state.userReducer.searchType);
 
   const handleKeyDown = (e) => {

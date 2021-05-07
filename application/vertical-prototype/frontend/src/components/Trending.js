@@ -3,7 +3,6 @@ import './Trending.css';
 import Carousel from 'react-elastic-carousel';
 import Card from './Card';
 import { useSelector } from 'react-redux';
-import defaultImage from './book1.jpg';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import axios from 'axios';
@@ -61,20 +60,20 @@ const Trending = () => {
             {posts.map((post, index) => {
               return (
                 <Card
-                key={index}
-                // number={index}
-                id={post.id}
-                title={post.title}
-                author={post.author}
-                department={post.department}
-                isbn={post.isbn}
-                condition={post.condition}
-                image={post.image}
-                name={post.name}
-                price={post.cost}
-                defaultImage="default"
-                sellerid={post.user_id}
-                sellerEmail={post.email}
+                  key={index}
+                  // number={index}
+                  id={post.id}
+                  title={post.title}
+                  author={post.author}
+                  department={post.department}
+                  isbn={post.isbn}
+                  condition={post.condition}
+                  image={post.image}
+                  name={post.name}
+                  price={post.cost}
+                  defaultImage="default"
+                  sellerid={post.user_id}
+                  sellerEmail={post.email}
                 />
               );
             })}
@@ -87,29 +86,23 @@ const Trending = () => {
             <h3 className="trending"> Showing Results for {searchField}</h3>
           </div>
 
-          <Carousel
-            className="caro"
-            style={carStyle}
-            breakPoints={breakPoints}
-            className="car"
-          >
+          <Carousel className="caro" style={carStyle} breakPoints={breakPoints}>
             {posts.map((post, index) => {
               return (
                 <Card
-                key={index}
-                // number={index}
-                id={post.id}
-                title={post.title}
-                author={post.author}
-                department={post.department}
-                isbn={post.isbn}
-                condition={post.condition}
-                image={post.image}
-                name={post.name}
-                price={post.cost}
-                sellerid={post.user_id}
-                sellerEmail={post.email}
-                defaultImage="default"
+                  key={index}
+                  id={post.id}
+                  title={post.title}
+                  author={post.author}
+                  department={post.department}
+                  isbn={post.isbn}
+                  condition={post.condition}
+                  image={post.image}
+                  name={post.name}
+                  price={post.cost}
+                  sellerid={post.user_id}
+                  sellerEmail={post.email}
+                  defaultImage="default"
                 />
               );
             })}

@@ -10,7 +10,6 @@ import Card from '../components/Card';
 import './Profile.css';
 import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
-import BookGrid from './BookGrid';
 
 export default function Profile() {
   // using useState hook to define local state variables

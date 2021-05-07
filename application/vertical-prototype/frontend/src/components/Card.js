@@ -2,7 +2,7 @@ import React from 'react';
 import './Trending.css';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setViewBook, setSellerEmail } from '../redux/actions/userActions';
+import { setViewBook } from '../redux/actions/userActions';
 
 const Card = ({
   key,

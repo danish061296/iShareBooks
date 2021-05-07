@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 
 import { Link, Redirect } from 'react-router-dom';

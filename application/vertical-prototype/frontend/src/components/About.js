@@ -13,7 +13,6 @@ import {
   setSearchField,
   setPosts,
   setrandomMsg,
-  setSearchType,
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -28,7 +27,6 @@ const About = () => {
   const [filterBy, setFilterBy] = React.useState('Filter');
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const searchType = useSelector((state) => state.userReducer.searchType);
 
   // function to search input when enter key pressed
   const handleKeyDown = (e) => {

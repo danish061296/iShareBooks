@@ -15,12 +15,9 @@ export default function RatingMessage() {
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
   const username = useSelector((state) => state.userReducer.username);
-  const cart = useSelector((state) => state.userReducer.cart);
 
   // creating array to store distinct seller names
   var filtered = [];
-
-
 
   // filter duplilcate sellers
   var filtered_ratings = ratings.filter(function (e, i) {
