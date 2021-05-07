@@ -27,6 +27,7 @@ const About = () => {
 
   const handleKeyDown = (e) => {
     const search = {
+      searchTable:'paidbooks',
       searchField: searchField,
       searchType: searchType,
     };

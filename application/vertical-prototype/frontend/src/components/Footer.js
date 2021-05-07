@@ -42,7 +42,8 @@ const Footer = () => {
             <section className="center">
               Social
               <section>
-                <TiSocialTwitter circle="true" />
+                
+                <TiSocialTwitter />
 
                 <TiSocialLinkedin />
 
