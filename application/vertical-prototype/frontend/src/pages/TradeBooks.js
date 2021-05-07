@@ -93,7 +93,7 @@ const TradeBooks = () => {
     console.log('...d');
     setHasOpened(false);
     axios
-      .get(`http://${window.location.hostname}:3001/paidbooks`)
+      .get(`http://${window.location.hostname}:3001/tradebooks`)
       .then((res) => {
         console.log(res.data.results);
         setPaidBooks(res.data.results);
@@ -179,6 +179,7 @@ const TradeBooks = () => {
             </div>
           </div>
           <div className="post__book__content">
+
             <h2 className="post__book__title">
               {
                 hasLoaded ? (

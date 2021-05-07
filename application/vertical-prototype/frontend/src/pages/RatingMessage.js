@@ -15,6 +15,7 @@ export default function RatingMessage() {
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
   const username = useSelector((state) => state.userReducer.username);
+  const cart = useSelector((state) => state.userReducer.cart);
 
   // creating array to store distinct seller names
   var filtered = [];
@@ -23,8 +24,8 @@ export default function RatingMessage() {
   var filtered_ratings = ratings.filter(function (e, i) {
     if (filtered.includes(ratings[i].name)) {
     } else {
-      filtered.push(ratings[i].name);
-      return ratings[i];
+      filtered.push(cart[i].name);
+      return cart[i];
     }
   });
 
@@ -47,9 +48,7 @@ export default function RatingMessage() {
           {ratings &&
             filtered_ratings.map((rating, i) => {
               console.log(rating);
-              return (
-                <UserRating key={i} id={rating.sellerID} name={rating.name} />
-              );
+              return <UserRating key={i} id={rating.id} name={rating.name} />;
             })}
         </div>
       </div>

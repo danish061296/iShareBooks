@@ -47,6 +47,8 @@ router.post('/pay', (req, res) => {
     arrayOfBooks[i].currency = 'USD';
   }
 
+  booksPrice = Number.parseFloat(booksPrice).toFixed(2);
+
   //copying arrayOfBooks to a new array
   let paymentData = JSON.parse(JSON.stringify(arrayOfBooks));
 

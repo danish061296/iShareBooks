@@ -58,25 +58,22 @@ const Trending = () => {
           </div>
 
           <Carousel style={carStyle} breakPoints={breakPoints}>
-            {posts.map((book, index) => {
+            {posts.map((post, index) => {
               return (
                 <Card
                 key={index}
                 // number={index}
-                key={index}
-                  id={book.book_id}
-                  title={book.title}
-                  author={book.author}
-                  department={book.department}
-                  isbn={book.isbn}
-                  condition={book.condition}
-                  image={book.image}
-                  price={book.cost}
-                  type="paid"
-                  name={book.name}
-                  sellerid={book.user_id}
-                  sellerEmail={book.email}
-                  defaultImage="default"
+                id={post.id}
+                title={post.title}
+                author={post.author}
+                department={post.department}
+                isbn={post.isbn}
+                condition={post.condition}
+                image={post.image}
+                name={post.name}
+                price={post.cost}
+                defaultImage="default"
+                sellerid={post.user_id}
                 />
               );
             })}
@@ -95,23 +92,22 @@ const Trending = () => {
             breakPoints={breakPoints}
             className="car"
           >
-            {posts.map((book, index) => {
+            {posts.map((post, index) => {
               return (
                 <Card
                 key={index}
-                  id={book.book_id}
-                  title={book.title}
-                  author={book.author}
-                  department={book.department}
-                  isbn={book.isbn}
-                  condition={book.condition}
-                  image={book.image}
-                  price={book.cost}
-                  type="paid"
-                  name={book.name}
-                  sellerid={book.user_id}
-                  sellerEmail={book.email}
-                  defaultImage="default"
+                // number={index}
+                id={post.id}
+                title={post.title}
+                author={post.author}
+                department={post.department}
+                isbn={post.isbn}
+                condition={post.condition}
+                image={post.image}
+                name={post.name}
+                price={post.cost}
+                sellerid={post.user_id}
+                defaultImage="default"
                 />
               );
             })}
@@ -125,22 +121,20 @@ const Trending = () => {
             <h3 className="trending">Trending Books!</h3>
           </div>
           <Carousel className="caro" style={carStyle} breakPoints={breakPoints}>
-            {trendingBooks.map((book, index) => {
+            {trendingBooks.map((post, index) => {
               return (
                 <Card
                   key={index}
-                  id={book.book_id}
-                  title={book.title}
-                  author={book.author}
-                  department={book.department}
-                  isbn={book.isbn}
-                  condition={book.condition}
-                  image={book.image}
-                  price={book.cost}
-                  type="paid"
-                  name={book.name}
-                  sellerid={book.user_id}
-                  sellerEmail={book.email}
+                  id={post.id}
+                  title={post.title}
+                  author={post.author}
+                  department={post.department}
+                  isbn={post.isbn}
+                  condition={post.condition}
+                  image={post.image}
+                  name={post.name}
+                  price={post.cost}
+                  sellerid={post.user_id}
                   defaultImage="default"
                 />
               );
