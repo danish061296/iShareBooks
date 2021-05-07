@@ -8,8 +8,7 @@ import Video from './video.mp4';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import Tippy, { tippy } from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+
 import {
   setSearchField,
   setPosts,
@@ -18,7 +17,6 @@ import {
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import axios from 'axios';
 
 const About = () => {
   useEffect(() => {
@@ -27,39 +25,12 @@ const About = () => {
 
   //sending data to redux
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.userReducer.posts);
   const [filterBy, setFilterBy] = React.useState('Filter');
-
 
   const searchField = useSelector((state) => state.userReducer.searchField);
   const searchType = useSelector((state) => state.userReducer.searchType);
 
-  // useEffect(() => {
-  //   const search = {
-  //     searchField: 'default',
-  //   };
-  //   Axios.post('http://localhost:3001/search', search)
-  //     .then((response) => {
-  //       if (response.data) {
-  //         console.log(response.data);
-  //         if (posts.length === 0) {
-  //           //sending data to redux
-  //           // dispatch(setrandomMsg(response.data));
-  //           dispatch(setPosts(response.data));
-  //         } else {
-  //           console.log('Data coming from default');
-  //           dispatch(setPosts(response.data));
-  //           dispatch(setrandomMsg(''));
-  //         }
-  //       } else {
-  //         dispatch(setPosts([]));
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
+  // function to search input when enter key pressed
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       const search = {
@@ -100,22 +71,11 @@ const About = () => {
     }
   };
 
-  const handleSelect = (e) => {
-    console.log(`The selected is ${e}`);
-
-    // const object = {
-    //   menuitem: e,
-    //   message: 'exlpore',
-    // };
-
-    // axios.post('', object);
-    dispatch(setSearchType(e));
-  };
-
   const handleFilterChange = (e) => {
     setFilterBy(e.target.innerText);
-  }
+  };
 
+  // function to search input on click
   const handleClick = () => {
     const search = {
       searchField: searchField,
@@ -123,10 +83,11 @@ const About = () => {
       searchTable: 'paidbooks',
     };
 
-
+    // send search input to backend
     Axios.post('http://' + window.location.hostname + '/search', search)
       .then((response) => {
         if (response.data) {
+          // if search was successful , update posts
           if (response.data.msg) {
             //sending data to redux
             dispatch(setrandomMsg(response.data.msg));
@@ -136,7 +97,7 @@ const About = () => {
               behavior: 'smooth',
             });
           } else {
-            console.log('Data coming from search click');
+            //if search was unsuccessful , update posts with random result
             dispatch(setPosts(response.data));
             dispatch((setrandomMsg = ''));
             window.scrollBy({
@@ -151,8 +112,6 @@ const About = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    console.log('Search clicked');
   };
 
   return (
@@ -192,17 +151,47 @@ const About = () => {
         </button>
       </div>
       <div className="filter__btn">
-            <DropdownButton className="dropdown" title={filterBy}  size="lg">
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>All</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Title</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Author</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>Department</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item className="opt" as="button" onClick={handleFilterChange}>ISBN</Dropdown.Item>
-            </DropdownButton>
+        <DropdownButton className="dropdown" title={filterBy} size="lg">
+          <Dropdown.Item
+            className="opt"
+            as="button"
+            onClick={handleFilterChange}
+          >
+            All
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="opt"
+            as="button"
+            onClick={handleFilterChange}
+          >
+            Title
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="opt"
+            as="button"
+            onClick={handleFilterChange}
+          >
+            Author
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="opt"
+            as="button"
+            onClick={handleFilterChange}
+          >
+            Department
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="opt"
+            as="button"
+            onClick={handleFilterChange}
+          >
+            ISBN
+          </Dropdown.Item>
+        </DropdownButton>
       </div>
       <div className="about__message">
         <div className="about__title" id="about" data-aos="fade-up">

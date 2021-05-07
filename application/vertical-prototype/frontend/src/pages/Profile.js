@@ -13,6 +13,7 @@ import Tippy from '@tippyjs/react';
 import BookGrid from './BookGrid';
 
 export default function Profile() {
+  // using useState hook to define local state variables
   const [sellerRating, setSellerRating] = React.useState(0);
   const [userRating, setUserRating] = React.useState(0);
   const [userPosts, setUserPosts] = React.useState([]);
@@ -21,6 +22,7 @@ export default function Profile() {
     width: '99.9%',
   });
 
+  // getting objects from redux
   const username = useSelector((state) => state.userReducer.username);
   const email = useSelector((state) => state.userReducer.email);
   const sellerid = useSelector((state) => state.userReducer.sellerid);
@@ -28,8 +30,7 @@ export default function Profile() {
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
   const userid = useSelector((state) => state.userReducer.userid);
 
-  console.log(sellerid);
-
+  // defining breakpoints for multiple screen sizes
   const breakPoints = [
     { width: 500, itemsTo0how: 3 },
     { width: 768, itemsToShow: 5 },
@@ -37,52 +38,59 @@ export default function Profile() {
     { width: 1500, itemsToShow: 6 },
   ];
 
+  // get and display rating on seller's profile
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${sellerid}`
       );
+      // update seller ratings
       setSellerRating(res.data.rating);
     }
 
     fetchData();
   }, []);
 
+  // get and display posts on seller's profile
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/userposts/${sellerid}`
       );
-
+      // update seller posts
       setSellerPosts(res.data);
     }
 
     fetchData();
   }, []);
 
+  // get and display rating on user's profile
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
+      // update user ratings
       setUserRating(res.data.rating);
     }
 
     fetchData();
   }, []);
 
+  // get and display posts on user's profile
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/userposts/${userid}`
       );
-
+      // update user posts
       setUserPosts(res.data);
     }
 
     fetchData();
   }, []);
 
+  // delay for responsive carousel
   React.useEffect(() => {
     setTimeout(() => {
       setCarStyle({

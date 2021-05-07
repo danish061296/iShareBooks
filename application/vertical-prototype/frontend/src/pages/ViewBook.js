@@ -74,7 +74,10 @@ const ViewBook = () => {
             </p>
             <p className="viewbook_condition">
               <strong>Condition:</strong>{' '}
-              {viewBooks[viewBooks.length - 1].condition}
+              {viewBooks[viewBooks.length - 1].condition
+                .charAt(0)
+                .toUpperCase() +
+                viewBooks[viewBooks.length - 1].condition.slice(1)}
             </p>
             <p className="viewbook_isbn">
               <strong>ISBN: </strong>

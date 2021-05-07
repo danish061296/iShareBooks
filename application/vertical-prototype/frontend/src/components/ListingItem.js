@@ -17,8 +17,6 @@ const ListingItem = ({
 }) => {
   const dispatch = useDispatch();
 
-  console.log(condition);
-
   // remove item from the cart
   const handleRemove = () => {
     dispatch(removeFromCart(id));
@@ -43,15 +41,14 @@ const ListingItem = ({
         </p>
         <p className="listingitem__item__condition">
           <strong>Condition: </strong>
-          {condition}
+          {condition.charAt(0).toUpperCase() + condition.slice(1)}
         </p>
         <p className="listingitem__item__isbn">
           <strong>ISBN: </strong>
           {isbn}
         </p>
         <p className="listingitem__item__username">
-          posted by{' '}
-          <strong className="listingitem__username">{name}</strong>
+          posted by <strong className="listingitem__username">{name}</strong>
         </p>
         <div className="listingitem__bottom">
           <p className="listingitem__item__price">${price}</p>
@@ -60,16 +57,6 @@ const ListingItem = ({
           </Button>
         </div>
       </div>
-
-      {/* <div className="listingitem__item__rating">
-          {Array(rating)
-            .fill()
-            .map((_, i) => (
-              <p>
-                <Star className="rating__star" />
-              </p>
-            ))}
-        </div> */}
     </div>
   );
 };
