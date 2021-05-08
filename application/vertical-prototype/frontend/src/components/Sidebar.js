@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 2,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 350,
+    height: 450,
     position:"absolute",
     margin:5,
     
@@ -107,6 +107,7 @@ export default function VerticalTabs() {
       
         if (!response.data.msg) {
           dispatch(setPosts(response.data))   
+          console.log(response.data); 
         }
         else {
           dispatch(setPosts(response.data.results));
@@ -149,6 +150,7 @@ export default function VerticalTabs() {
         <Tab label="Biology" {...a11yProps(4)} />
         <Tab label="Physics" {...a11yProps(5)} />
         <Tab label="History" {...a11yProps(6)} />
+        <Tab label="Astronomy" {...a11yProps(7)} />
       </Tabs>
        <TabPanel value={value} index={0}>
       <Books paidBooks={paidBooks}/>
@@ -169,6 +171,9 @@ export default function VerticalTabs() {
       <Books/>
       </TabPanel>
       <TabPanel value={value} index={6}>
+      <Books/>
+      </TabPanel>
+      <TabPanel value={value} index={7}>
       <Books/>
       </TabPanel>
     </div>
