@@ -5,19 +5,23 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import './BuyBooks.css';
 import axios from 'axios';
-import DialogBox from '../components/DialogBox';
 import { useDispatch, useSelector } from 'react-redux';
-import TradeBookModal from './TradeBookModal';
 import BookGrid from './BookGrid';
 
 import { setSearchField } from '../redux/actions/userActions';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { Box } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
 const TradeBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
+  const [paidBooks, setPaidBooks] = useState([]);
+
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+  var history = useHistory();
+
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState('BOOKS FOR TRADE');
@@ -69,7 +73,6 @@ const TradeBooks = () => {
       });
   };
 
-  const [paidBooks, setPaidBooks] = useState([]);
 
   React.useEffect(() => {
     setHasLoaded(false);
@@ -77,7 +80,6 @@ const TradeBooks = () => {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/tradebooks`
       );
-      console.log(res.data.results);
       setPaidBooks(res.data.results);
       setHasLoaded(true);
     }
@@ -85,12 +87,16 @@ const TradeBooks = () => {
   }, []);
 
   const handleClickOpen = () => {
-    setOpen(true);
-    setHasOpened(true);
+    if (isLoggedIn) {
+      history.push('/postbook/trade');
+      setOpen(true);
+      setHasOpened(true);
+    } else {
+      alert("You must be logged in to post a book!");
+    }
   };
 
   if (!open && hasOpened) {
-    console.log('...d');
     setHasOpened(false);
     axios
       .get(`http://${window.location.hostname}:3001/tradebooks`)
@@ -168,14 +174,7 @@ const TradeBooks = () => {
               <Button className="post__book__button" onClick={handleClickOpen}>
                 POST
               </Button>
-              <DialogBox
-                open={open}
-                setOpen={setOpen}
-                title="SELL YOUR BOOK"
-                button="DONE"
-              >
-                <TradeBookModal />
-              </DialogBox>
+
             </div>
           </div>
           <div className="post__book__content">
