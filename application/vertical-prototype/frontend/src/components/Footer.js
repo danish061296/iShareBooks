@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import {
@@ -11,7 +12,6 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import './Footer.css';
-import  {Link}  from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -23,35 +23,46 @@ const Footer = () => {
         style={{ height: '300px', background: '#18504c' }}
       >
         <div className="Fcontent">
-         <div className="fcontent">
-            
-           <section className="left" type = "button">
-              
-              <Link to="/about" >About</Link>
-              <section><a  href="/privacy">Privacy</a></section>
-              
-              <section><Link to="/faq">FAQ</Link>
-         
+          <div className="fcontent">
+            <section className="left">
+              <Link className="footer__link" to="/aboutus">
+                About
+              </Link>
+              <section>
+                <Link className="footer__link" to="/privacy">
+                  Privacy
+                </Link>
               </section>
-              <section>Contact:</section>
+              <section>
+                <Link className="footer__link" to="/contact">
+                  Contact Us
+                </Link>
+              </section>
             </section>
             <section className="center">
               Social
               <section>
-               <a  href="https://twitter.com/home"> <TiSocialTwitter circle="true"  /></a>
+                <TiSocialTwitter circle="true" />
 
-               <a href="https://LinkedIn.com"> <TiSocialLinkedin /> </a>
+                <TiSocialLinkedin />
 
-               <a href="https://facebook.com"> <TiSocialFacebook /> </a>
+                <TiSocialFacebook />
               </section>
             </section>
           </div>
 
           <div className="copyright">
-            <h7>Terms of Sale</h7>
-            <h7>Terms of Use</h7>
+            <Link className="footer__link" to="/">
+              <span>Terms of Sale</span>
+            </Link>
 
-            <p>© 2021 Copyright iSHARE INC</p>
+            <Link className="footer__link" to="/termsofuse">
+              <span>Terms of Use</span>
+            </Link>
+
+            <Link className="footer__link" to="/">
+              <span>© 2021 Copyright iSHARE INC</span>
+            </Link>
           </div>
         </div>
         <Button

@@ -18,8 +18,20 @@
 
 .input__field {
   margin-bottom: 20px !important;
+  font-size: 50px !important;
 }
-/* .signup__container {
-    height: 80vh;
-    background: #1a1f1e !important;
-  } */
+.signup__link {
+  margin-top: 15px;
+}
+
+.terms__link {
+  text-decoration: none;
+  color: #5d6bc1;
+  font-size: 13px;
+  margin-left: 20px;
+}
+
+.terms__checkbox {
+  font-size: 15px;
+  font-weight: 100;
+}

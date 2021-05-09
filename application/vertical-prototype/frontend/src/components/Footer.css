@@ -1,5 +1,6 @@
 .footer__container {
-  height: 200px;
+  height: 300px;
+  bottom: 0;
 }
 
 .upward__btn {
@@ -30,18 +31,38 @@
 
 .copyright {
   display: flex;
-  justify-content: space-around;
-  margin-left: 70%;
-  margin-right: 10%;
-  position: absolute;
-  font-size: x-small;
-  text-align: right;
-  width: 25%;
+  justify-content: flex-end;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.copyright span {
+  /* display: flex;
+  justify-content: space-around; */
+  /* display: flex; */
+  /* margin-left: 70%;
+  margin-right: 10%; */
+  /* padding-top: 7em; */
+  /* position: absolute; */
+  /* font-size: x-small; */
+  margin-left: 10px;
+  font-size: 10px;
+  /* width: 25%; */
+}
+
+.footer__link {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.footer__link:hover {
+  color: rgb(212, 209, 209) !important;
 }
 
 @media screen and (max-width: 768px) {
   .copyright {
-    font-size: 10px;
+    font-size: 8px;
     /* margin-top: 30px; */
   }
 }
@@ -52,13 +73,11 @@
 }
 
 .fcontent {
-  padding-bottom: 100px;
-  margin-top: 20px;
+  padding-bottom: 80px;
+  margin-top: 10px;
   position: inherit;
-  font-size: 25px;
-  color: white;
 }
 
 .center {
-  size: 300px;
+  size: 100px;
 }

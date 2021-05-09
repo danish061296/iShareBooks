@@ -1,23 +1,39 @@
 const initState = () => ({
   username: '',
   password: '',
+  userid: 0,
   email: '',
+  name: '',
+  sellerid: 0,
+  sellerEmail: '',
   isLoggedIn: false,
   searchField: '',
   searchType: '',
   imageBuffer: '',
   posts: [],
-  randomMsg:''
+  viewBooks: [],
+  cart: [],
+  ratings: [],
+  userrating: 0,
+  randomMsg: '',
 });
+
+export const getCartTotal = (cart) =>
+  cart?.reduce((amount, item) => item.price + amount, 0);
+
 //Side Note: Type has to match the case
 const userReducer = (state = initState(), action) => {
   switch (action.type) {
     case 'SET_USERNAME':
+      console.log(action);
+
       return {
         ...state,
         username: action.username,
       };
     case 'SET_EMAIL':
+      console.log(action);
+
       return {
         ...state,
         email: action.email,
@@ -26,6 +42,16 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         password: action.password,
+      };
+    case 'SET_SELLER':
+      return {
+        ...state,
+        name: action.name,
+      };
+    case 'SET_SELLER_EMAIL':
+      return {
+        ...state,
+        sellerEmail: action.sellerEmail,
       };
 
     case 'SET_LOGGED_IN':
@@ -53,6 +79,61 @@ const userReducer = (state = initState(), action) => {
         ...state,
         posts: action.posts,
       };
+    case 'SET_USERID':
+      return {
+        ...state,
+        userid: action.userid,
+      };
+    case 'SET_SELLERID':
+      return {
+        ...state,
+        sellerid: action.sellerid,
+      };
+    case 'SET_VIEW_BOOK':
+      return {
+        ...state,
+        viewBooks: [...state.viewBooks, action.book],
+      };
+    case 'SET_RATING':
+      console.log(action);
+      return {
+        ...state,
+        ratings: [...state.ratings, action.rating],
+      };
+    case 'ADD_TO_CART':
+      console.log(action);
+      return {
+        ...state,
+        cart: [...state.cart, action.item],
+      };
+
+    case 'SET_DELETE_CART':
+      console.log(action);
+
+      return {
+        ...state,
+        cart: [],
+      };
+
+    case 'REMOVE_FROM_CART':
+      console.log(action);
+      // coping the previous items into new array
+      let newCart = [...state.cart];
+
+      // check if the id is there
+      const index = state.cart.findIndex(
+        (cartItem) => cartItem.id === action.id
+      );
+
+      if (index < 0) {
+        console.warn(`Cant remove the product with id: ${action.id} `);
+        // if item exists, remove it from the cart
+        newCart.splice(index, 1);
+      } else {
+        // if item exists, remove it from the cart
+        newCart.splice(index, 1);
+      }
+      return { ...state, cart: newCart };
     case 'SET_RANDOM_MSG':
       return {
         ...state,

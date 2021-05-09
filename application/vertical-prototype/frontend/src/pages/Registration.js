@@ -6,18 +6,19 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-import { useHistory } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+
 import {
   setUsername,
   setEmail,
@@ -64,6 +65,8 @@ const Registration = () => {
   const dispatch = useDispatch();
   const ref = useRef(null);
 
+  const history = useHistory();
+
   const initialValues = {
     username: '',
     email: '',
@@ -93,10 +96,8 @@ const Registration = () => {
     };
     setTimeout(() => {
       props.resetForm();
-      // alert(JSON.stringify(payload, null, 2));
-
       props.setSubmitting(false);
-    }, 2000);
+    }, 1000);
 
     console.log(payload.username);
 
@@ -107,36 +108,41 @@ const Registration = () => {
     };
 
     console.log(registerUser.username);
-    Axios.post('http://localhost:3001/register', registerUser).then(
-      (response) => {
-        console.log(response.data);
-        if (!response.data.registered) {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'danger',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        } else {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'success',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        }
+
+    Axios.post(
+      `http://${window.location.hostname}:3001/register`,
+      registerUser
+    ).then((response) => {
+      console.log(response.data);
+      if (!response.data.registered) {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      } else {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
       }
-    );
+      setTimeout(() => {
+        history.push('/login');
+      }, 2000);
+    });
 
     dispatch(setUsername(payload.username));
     dispatch(setEmail(payload.email));
@@ -218,10 +224,15 @@ const Registration = () => {
                       }
                       // label="I want to receive fun updates about books via email."
                       label={
-                        <Typography variant="body2" color="textSecondary">
-                          By clicking sign up, you agree to our Terms and
-                          Privacy Policy.
-                        </Typography>
+                        <>
+                          <p className="terms__checkbox">
+                            By clicking sign up, you agree to our Terms and
+                            Privacy Policy.
+                            <LinkR className="terms__link" to="/termsofuse">
+                              Terms of Use
+                            </LinkR>
+                          </p>
+                        </>
                       }
                     />
                   </Grid>
@@ -237,7 +248,7 @@ const Registration = () => {
                   Sign Up
                 </Button>
 
-                <Grid container justify="flex-end">
+                <Grid container justify="flex-end" className="signup__link">
                   <Grid item>
                     <Link href="/login" variant="body2">
                       Already have an account? Log in

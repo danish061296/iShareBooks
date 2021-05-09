@@ -2,22 +2,28 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import { InputAdornment } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setEmail,
   setPassword,
   setIsLoggedIn,
+  setUserId,
+  setUsername,
 } from '../redux/actions/userActions';
+
 import Axios from 'axios';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
@@ -61,7 +67,8 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   const initialValues = {
     email: '',
     password: '',
@@ -97,39 +104,35 @@ export default function SignIn() {
       email: payload.email,
       password: payload.password,
     };
-    Axios.post('http://localhost:3001/login', loginUser).then((response) => {
-      console.log(response.data);
-      if (response.data.auth) {
-        store.addNotification({
-          title: '',
-          message: response.data.message,
-          type: 'success',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-        localStorage.setItem('token', response.data.token);
-        dispatch(setIsLoggedIn(response.data.auth));
-        history.push('/buyService');
-      } else {
-        store.addNotification({
-          title: '',
-          message: response.data.message,
-          type: 'danger',
-          insert: 'top',
-          container: 'top-center',
-          dismiss: {
-            duration: 2000,
-            showIcon: true,
-          },
-        });
-        dispatch(setIsLoggedIn(false));
-        dispatch(setEmail(''));
+    Axios.post(`http://${window.location.hostname}:3001/login`, loginUser).then(
+      (response) => {
+        console.log(response.data);
+        if (response.data.auth) {
+          localStorage.setItem('token', response.data.token);
+          dispatch(setIsLoggedIn(response.data.auth));
+          dispatch(setUsername(response.data.userName));
+          dispatch(setUserId(response.data.id));
+
+          history.push('/buybooks');
+        } else {
+          store.addNotification({
+            title: '',
+            message: response.data.message,
+            type: 'danger',
+            insert: 'top',
+            container: 'top-center',
+            dismiss: {
+              duration: 2000,
+              showIcon: true,
+            },
+          });
+          dispatch(setIsLoggedIn(false));
+          dispatch(setUsername(''));
+
+          dispatch(setEmail(''));
+        }
       }
-    });
+    );
   };
 
   return (
@@ -143,7 +146,6 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" style={{ fontWeight: 700 }}>
               Login
             </Typography>
-            {/* <form className={classes.form} noValidate> */}
             <Formik
               initialValues={initialValues}
               onSubmit={onSubmit}
@@ -161,7 +163,6 @@ export default function SignIn() {
                     name="email"
                     id="email"
                     label="Email Address"
-                    name="email"
                     autoComplete="email"
                     autoFocus
                     helperText={<ErrorMessage name="email" />}
@@ -175,10 +176,34 @@ export default function SignIn() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     autoComplete="current-password"
                     helperText={<ErrorMessage name="password" />}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          onClick={handleClickShowPassword}
+                        >
+                          {showPassword ? (
+                            <Tippy
+                              content="hide password"
+                              placement="bottom-start"
+                            >
+                              <Visibility className="eye__icon" />
+                            </Tippy>
+                          ) : (
+                            <Tippy
+                              content="show password"
+                              placement="bottom-start"
+                            >
+                              <VisibilityOff className="eye__icon" />
+                            </Tippy>
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
                   />
 
                   <Button
@@ -194,7 +219,7 @@ export default function SignIn() {
                 </Form>
               )}
             </Formik>
-            <Grid container>
+            <Grid container className="signin__link">
               <Grid item>
                 <Link href="/registration" variant="body2">
                   {"Don't have an account? Sign Up"}
