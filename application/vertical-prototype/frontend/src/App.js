@@ -19,10 +19,29 @@ import TermsOfUse from './pages/TermsOfUse';
 import Explore from './pages/ExploreNow';
 import BookModalPro1 from './pages/BookModal';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  setIsLoggedIn,
+  setUsername,
+  setEmail,
+  setUserId,
+  setUserRating,
+  setUserPosts,
+} from './redux/actions/userActions';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  if (localStorage.getItem('token')) {
+    dispatch(setIsLoggedIn(localStorage.getItem('isloggedin')));
+    dispatch(setUsername(localStorage.getItem('username')));
+    dispatch(setUserId(localStorage.getItem('userid')));
+    dispatch(setEmail(localStorage.getItem('email')));
+    dispatch(setUserRating(localStorage.getItem('userrating')));
+    dispatch(setUserPosts(localStorage.getItem('userposts')));
+  }
+
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
   return (
