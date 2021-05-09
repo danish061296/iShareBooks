@@ -51,16 +51,26 @@ const Navigation = () => {
         .catch((e) => console.log(e));
       history.push(`/profile/${id}`);
     } else if (e === 'logout') {
-      if (isLoggedIn) {
+      console.log('token destroyed  ' + localStorage.getItem('token'));
+
+      if (localStorage.getItem('token')) {
         dispatch(setIsLoggedIn(false));
         dispatch(setUsername(''));
         dispatch(setEmail(''));
         dispatch(setPassword(''));
         dispatch(setDeleteCart());
+        localStorage.removeItem('userid');
+        localStorage.removeItem('email');
+        localStorage.removeItem('userrating');
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('isloggedin');
+        localStorage.removeItem('userposts');
+
+        history.push('/login');
       }
 
-      console.log(username);
-      history.push('/login');
+      console.log(isLoggedIn);
     } else if (e === 'home') {
       history.push('/');
     }
@@ -211,7 +221,7 @@ const Navigation = () => {
       <div className="navbar__second">
         <div className="navbar__logo">
           <LinkR className="navbar__logoLink" to="/">
-            <h1 className="logo__heading">iShareBooks</h1>
+            <p className="logo__heading">iShareBooks</p>
           </LinkR>
         </div>
 

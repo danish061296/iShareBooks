@@ -80,6 +80,7 @@ const BuyBooks = () => {
       console.log(res.data.results);
       setPaidBooks(res.data.results);
       setHasLoaded(true);
+      localStorage.setItem('paidbooks', res.data.results);
     }
     fetchData();
   }, []);
@@ -90,7 +91,6 @@ const BuyBooks = () => {
   };
 
   if (!open && hasOpened) {
-    console.log('...d');
     setHasOpened(false);
     axios
       .get(`http://${window.location.hostname}:3001/paidbooks`)
@@ -106,8 +106,12 @@ const BuyBooks = () => {
 
       <div className="buybooks__page">
         <div className="buybooks__container">
-          <DropdownButton className="dropdown" title={filterBy} size="lg" width="300px">
-            
+          <DropdownButton
+            className="dropdown"
+            title={filterBy}
+            size="lg"
+            width="300px"
+          >
             <Dropdown.Item
               className="opt"
               as="button"
@@ -180,7 +184,6 @@ const BuyBooks = () => {
             </div>
           </div>
           <div className="post__book__content">
-
             <h2 className="post__book__title">
               {
                 hasLoaded ? (

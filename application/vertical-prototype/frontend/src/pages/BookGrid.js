@@ -79,6 +79,7 @@ const BookGrid = ({
         name,
       })
     );
+
     dispatch(
       setRating({
         id,

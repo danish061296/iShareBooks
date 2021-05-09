@@ -6,11 +6,13 @@ const initState = () => ({
   email: '',
   user: '',
   sellerEmail: '',
-  isLoggedIn: false,
+  isLoggedIn: null,
   searchField: '',
   searchType: '',
   imageBuffer: '',
   posts: [],
+  userRating: 0,
+  userPosts: [],
   viewBooks: [],
   cart: [],
   ratings: [],
@@ -79,10 +81,23 @@ const userReducer = (state = initState(), action) => {
         ...state,
         posts: action.posts,
       };
+
+    case 'SET_USER_POSTS':
+      console.log(action);
+
+      return {
+        ...state,
+        userPosts: action.userPosts,
+      };
     case 'SET_USERID':
       return {
         ...state,
         userid: action.userid,
+      };
+    case 'SET_USER_RATING':
+      return {
+        ...state,
+        userRating: action.userRating,
       };
     case 'SET_SELLERID':
       return {

@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import ReactStars from 'react-rating-stars-component';
 import { Link as LinkR } from 'react-router-dom';
 import Navigation from '../components/Navigation';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserRating, setUserPosts } from '../redux/actions/userActions';
 import axios from 'axios';
 import Carousel from 'react-elastic-carousel';
 import Card from '../components/Card';
@@ -14,12 +15,13 @@ import Tippy from '@tippyjs/react';
 export default function Profile() {
   // using useState hook to define local state variables
   const [sellerRating, setSellerRating] = React.useState(0);
-  const [userRating, setUserRating] = React.useState(0);
   const [userPosts, setUserPosts] = React.useState([]);
   const [sellerPosts, setSellerPosts] = React.useState([]);
   const [carStyle, setCarStyle] = React.useState({
     width: '99.9%',
   });
+
+  const dispatch = useDispatch();
 
   // getting objects from redux
   const username = useSelector((state) => state.userReducer.username);
@@ -28,6 +30,10 @@ export default function Profile() {
   const name = useSelector((state) => state.userReducer.name);
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
   const userid = useSelector((state) => state.userReducer.userid);
+  const userRating = useSelector((state) => state.userReducer.userRating);
+  // const userPosts = useSelector((state) => state.userReducer.userPosts);
+
+  console.log(userRating);
 
   // defining breakpoints for multiple screen sizes
   const breakPoints = [
@@ -44,7 +50,9 @@ export default function Profile() {
         `http://${window.location.hostname}:3001/get_rating/${sellerid}`
       );
       // update seller ratings
-      setSellerRating(res.data.rating);
+      setInterval(() => {
+        setSellerRating(res.data.rating);
+      }, 1000);
     }
 
     fetchData();
@@ -70,9 +78,12 @@ export default function Profile() {
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
       // update user ratings
-      setUserRating(res.data.rating);
+      console.log(res.data.rating);
+      localStorage.setItem('userrating', res.data.rating);
+      setInterval(() => {
+        dispatch(setUserRating(res.data.rating));
+      }, 300);
     }
-
     fetchData();
   }, []);
 
@@ -83,6 +94,8 @@ export default function Profile() {
         `http://${window.location.hostname}:3001/userposts/${userid}`
       );
       // update user posts
+      console.log(res.data);
+      localStorage.setItem('userposts', res.data);
       setUserPosts(res.data);
     }
 
@@ -158,7 +171,7 @@ export default function Profile() {
           <div className="user_books_container">
             <h2 className="books__posted">{`Posted Books (${sellerPosts?.length})`}</h2>
 
-            {sellerPosts.length > 0 ? (
+            {sellerPosts.length ? (
               <Carousel breakPoints={breakPoints}>
                 {sellerPosts.map((post, index) => {
                   return (
@@ -209,7 +222,7 @@ export default function Profile() {
                 <a href="#">{email}</a>
               </div>
 
-              {userRating ? (
+              {userRating > 0 ? (
                 <div className="rating_num">{userRating}</div>
               ) : (
                 <div className="rating_num">{5}</div>
@@ -254,21 +267,6 @@ export default function Profile() {
                   content="Will be implemented in future"
                   placement="bottom"
                 >
-                  <Button className="save_button">Save</Button>
-                </Tippy>
-              </LinkR>
-              <LinkR
-                style={{
-                  color: 'white',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-                to="/profile"
-              >
-                <Tippy
-                  content="Will be implemented in future"
-                  placement="bottom"
-                >
                   <Button className="delete_button">Delete</Button>
                 </Tippy>
               </LinkR>
@@ -276,7 +274,7 @@ export default function Profile() {
           </div>
 
           <div className="user_books_container">
-            <h2 className="books__posted">{`Posted Books (${userPosts?.length})`}</h2>
+            <h2 className="books__posted">{`Posted Books (${userPosts.length})`}</h2>
             {userPosts.length > 0 ? (
               <Carousel style={carStyle} breakPoints={breakPoints}>
                 {userPosts.map((post, index) => {
@@ -301,7 +299,7 @@ export default function Profile() {
               </Carousel>
             ) : (
               <p style={{ textAlign: 'center', color: 'grey' }}>
-                You have not posted any books yet.
+                You have not posted any books yet...
               </p>
             )}
           </div>

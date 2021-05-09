@@ -41,18 +41,6 @@ const BuyBookModal = () => {
       userid: userid,
     };
 
-    store.addNotification({
-      title: '',
-      message: 'good job herre yoo',
-      type: 'success',
-      insert: 'top',
-      container: 'top-center',
-      dismiss: {
-        duration: 2000,
-        showIcon: true,
-      },
-    });
-
     axios
       .post(`http://${window.location.hostname}:3001/posts`, paidBook)
       .then((response) => {

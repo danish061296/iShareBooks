@@ -101,10 +101,19 @@ export default function SignIn() {
       (response) => {
         console.log(response.data);
         if (response.data.auth) {
+          localStorage.setItem('userid', response.data.id);
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('username', response.data.userName);
+          localStorage.setItem('email', response.data.email);
+          localStorage.setItem('isloggedin', response.data.auth);
+
+          // if (localStorage.getItem('token')) {
           dispatch(setIsLoggedIn(response.data.auth));
           dispatch(setUsername(response.data.userName));
+          dispatch(setEmail(response.data.email));
+
           dispatch(setUserId(response.data.id));
+          // }
 
           console.log(response.data);
 
