@@ -204,7 +204,7 @@ export default function Profile() {
       {!name && (
         <div className="profile__Container">
           <div className="top">
-            <div className="image_container">
+            <div className="">
               <img
                 className="image_circle"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96cmVJnAqOtv-ps5qnH-62RLVBh_ULqMD4PmBh1J6n7FTxlc7o4ZowyZT3C5v8Np_DKU&usqp=CAU"
