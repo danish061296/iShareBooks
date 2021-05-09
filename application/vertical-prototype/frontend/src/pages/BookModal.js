@@ -107,7 +107,7 @@ const BookModalPro1 = () => {
   React.useEffect(() => {
     var urlpath = window.location.toString();
 
-    if (urlpath.includes('paid')) {
+    if (urlpath.includes('paid')) {   //  i.e. /postbook/paid
       setServiceType('paid');
       setImagePlaceholderMessage('Sell Your Book To Help Your Friends For Easy Access!');
       setPostHeader('Sell your Book!');
@@ -128,15 +128,27 @@ const BookModalPro1 = () => {
       setButtonMessage('Donate');
     }
 
-    else {
-      setImagePlaceholderMessage('Ensure that BookModal has correct serviceType (i.e. \'trade\', \'free\', \'paid\'');
+    else {    //  i.e. /postbook/pewr31f
+      setServiceType('unknown'); 
+      setImagePlaceholderMessage('Ensure that BookModal has correct serviceType (i.e. trade, free, paid)');
       setPostHeader('Invalid Service Type.');
-      setButtonMessage('Unknown Service, Cannot Post');
     }
 
   });
 
-  if (isLoggedIn)
+  if (serviceType === 'unknown')
+    return (
+      <div>
+        <Navigation/>
+        <Box mt={20}></Box>
+        <div className="error_login"> <h1>{postHeader}</h1><br/><h3>{imagePlaceholderMessage}</h3></div>
+
+        <Box mt={80}></Box>
+        <Footer/>
+      </div>
+    );
+
+  else if (isLoggedIn)
     return (
       <div>
         <ReactNotification/>
@@ -242,6 +254,7 @@ const BookModalPro1 = () => {
         <Footer/>
       </div>
     );
+  
   else
     return (
       <div>
