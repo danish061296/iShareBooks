@@ -16,8 +16,31 @@ import { TiCode } from 'react-icons/ti';
 
 const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
+  const [comment, setComment] = React.useState('');
+  const [comments, setComments] = React.useState([]);
 
   const dispatch = useDispatch();
+
+  // auto scroll down whenever a new comment is added
+  const ScrollMessages = ({ messages }) => {
+    const lastMessageRef = React.useRef(null);
+    const scrolltoBottom = () => {
+      lastMessageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+        duration: 1000,
+      });
+    };
+    React.useEffect(scrolltoBottom, [messages]);
+    return <div ref={lastMessageRef} />;
+  };
+
+  const handleComment = () => {
+    console.log(comment);
+    setComments([...comments, comment]);
+    setComment('');
+  };
 
   // add to cart
   const handleAddCart = () => {
@@ -99,47 +122,52 @@ const ViewBook = () => {
             <Button onClick={handleAddCart} className="viewbook__button">
               Add to cart
             </Button>
-            <div className = "comment-box">
-              <h3>Leave a Comment</h3>
-              <form>
-                <textarea id = "comment" placeholder = "Add a comment here"></textarea>
-                <div classname = "commentbox-buttons">
-                <Button id = "addcomment" classname = "comment-button"> comment</Button>
-                </div>
-            </form>
+
+            <div className="comment-box" id="comment_box">
+              <h4 className="leave__comment">Leave a Comment</h4>
+              <div
+                id="comments-box"
+                className="each__comment__div"
+                style={{ overflowY: 'scroll' }}
+              >
+                {comments.map((message) => {
+                  return (
+                    <div>
+                      <span className="each__comment">{message}</span>
+                      <ScrollMessages messages={message} />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <input
+                id="comment"
+                placeholder="Add a comment here"
+                type="text"
+                value={comment}
+                name="comment"
+                className="comment__box"
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <div classname="commentbox-buttons">
+                <Button
+                  onClick={handleComment}
+                  id="addcomment"
+                  classname="comment-button"
+                >
+                  {' '}
+                  send
+                </Button>
+              </div>
+              {/* </form> */}
             </div>
-            
-            
-            
           </div>
         </div>
-        
       </div>
-      <div className = "comments">
-        <span>Abishek Neralla</span>
-        <p>This is a book, this book is amazing and i love using it</p>
-      </div>
-     
-      
-
-      {/* {noseller && (
-        <div>
-          <h1 className="nousername__text">No Username</h1>
-        </div>
-      )} */}
 
       <Footer />
-      
     </div>
-
-    
   );
 };
-
-
-
-
-
-
 
 export default ViewBook;

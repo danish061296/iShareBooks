@@ -58,14 +58,12 @@ button {
   color: white !important;
   font-size: 17px !important;
   border-radius: 20px;
-  
 }
 
 button:hover {
   background-color: #29918a !important;
   color: white !important;
 }
-
 
 @media screen and (max-width: 768px) {
   .viewbook_box {
@@ -132,22 +130,23 @@ button:hover {
     margin-top: 10%;
   }
 }
-.comment-box{
+.comment-box {
   background-color: #eceff3;
-  width: 75vh;
+  /* width: 75vh; */
+  height: 35%;
   border: 2px solid black;
   padding: 2vh;
-  margin-top: 5vh;
+  margin-top: 20px;
   margin-bottom: 5vh;
-  position: relative;
+  /* scroll-behavior: smooth; */
+  /* position: relative; */
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
-  
 }
-.comment-box h3{
+.comment-box h3 {
   text-align: center;
   margin-top: 15px;
 }
-textarea{
+textarea {
   border: none;
   border-bottom: 3px solid black;
   background-color: transparent;
@@ -157,7 +156,7 @@ textarea{
   color: black;
   font-size: 16px;
 }
-.comments{
+.comments {
   padding: 1%;
   width: 96%;
   border: 1px solid #000;
@@ -167,4 +166,28 @@ textarea{
   margin-bottom: 10px;
 }
 
+.comment__box {
+  background-color: rgb(221, 220, 220);
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
+.leave__comment {
+  margin-top: 0px;
+}
+
+.each__comment__div {
+  height: 40%;
+}
+
+.each__comment {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  border-radius: 3px;
+  background-color: rgb(197, 216, 208);
+}
