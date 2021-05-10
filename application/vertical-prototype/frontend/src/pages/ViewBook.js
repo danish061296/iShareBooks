@@ -26,6 +26,8 @@ const ViewBook = () => {
   // to dispatch value to redux store
   const dispatch = useDispatch();
 
+  console.log(viewBooks[viewBooks.length - 1].type, " !")
+
   // auto scroll down whenever a new comment is added
   const ScrollMessages = ({ messages }) => {
     const lastMessageRef = React.useRef(null);
@@ -131,6 +133,10 @@ const ViewBook = () => {
               Add to cart
             </Button>
 
+            {
+              viewBooks[viewBooks.length - 1].type === 'tradebooks' ?
+              
+
             <div className="comment-box" id="comment_box">
               <h4 className="leave__comment">Leave a Comment</h4>
               <div
@@ -168,7 +174,10 @@ const ViewBook = () => {
                 </Button>
               </div>
               {/* </form> */}
-            </div>
+            </div> : ""
+            }
+
+
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@ router.get('/paidbooks', (req, res) => {
   console.log(req.body);
   // let inserSql = `SELECT * FROM paidbooks`;
 
-  let insertSql = `SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id ORDER BY post_time DESC`;
+  let insertSql = `SELECT paidbooks.*, users.name, users.email, "paidbooks" as type FROM paidbooks JOIN users ON paidbooks.user_id = users.id ORDER BY post_time DESC`;
 
   //let insertSql = `SELECT * FROM paidbooks`;
   db.query(insertSql, (err, results) => {
@@ -142,7 +142,7 @@ router.get('/paidbooks', (req, res) => {
 
 router.get('/tradebooks', (req, res) => {
   //let inserSql = `SELECT * FROM tradebooks`;
-  let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id ORDER BY post_time DESC`;
+  let inserSql = `SELECT tradebooks.*, users.name, users.email, "tradebooks" as type FROM tradebooks JOIN users ON tradebooks.user_id = users.id ORDER BY post_time DESC`;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -163,7 +163,7 @@ router.get('/tradebooks', (req, res) => {
 
 router.get('/freebooks', (req, res) => {
   //let inserSql = `SELECT * FROM freebooks`;
-  let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id ORDER BY post_time DESC`;
+  let inserSql = `SELECT freebooks.*, users.name, users.email, "freebooks" as type FROM freebooks JOIN users ON freebooks.user_id = users.id ORDER BY post_time DESC`;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -199,9 +199,9 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/userposts/:userId', (req, res) => {
   var userId = req.params.userId;
-  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks WHERE user_id = ${userId}
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks WHERE user_id = ${userId}) 
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks WHERE user_id = ${userId});`;
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paidbooks" as type FROM paidbooks WHERE user_id = ${userId}
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "tradebooks" FROM tradebooks WHERE user_id = ${userId}) 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "freebooks" FROM freebooks WHERE user_id = ${userId});`;
 
   db.query(query, (err, results) => {
     if (err) return res.send(err);

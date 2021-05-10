@@ -29,7 +29,7 @@ router.post('/search', (req, res) => {
   //searchField = "Co";
   if (searchType == 'any')
     query =
-      `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE title LIKE ` +
+      `SELECT ${searchTable}.*, users.name, users.email, \"${searchTable}\" as type FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE title LIKE ` +
       db.escape('%' + searchField + '%') +
       ' OR author LIKE ' +
       db.escape('%' + searchField + '%') +
@@ -38,15 +38,15 @@ router.post('/search', (req, res) => {
       `ORDER BY post_time DESC`;
   else if (searchType != 'any')
     query =
-      `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE
+      `SELECT ${searchTable}.*, users.name, users.email,  \"${searchTable}\" as type FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id WHERE
     ${searchType} LIKE` +
       db.escape('%' + searchField + '%') +
       `ORDER BY post_time DESC LIMIT 8`;
   else if (searchField == '')
-    query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER post_time DESC`;
+    query = `SELECT ${searchTable}.*, users.name, users.email,  \"${searchTable}\" as type FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER post_time DESC`;
 
   function suggestions() {
-    query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY post_time DESC LIMIT 8`;
+    query = `SELECT ${searchTable}.*, users.name, users.email,  \"${searchTable}\" as type FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY post_time DESC LIMIT 8`;
     db.query(query, (err, results) => {
       let suggest = JSON.stringify(results);
       //console.log(JSON.parse(suggest))
@@ -93,7 +93,7 @@ router.post('/search', (req, res) => {
 router.get('/fire', (req, res) => {
   var searchTable = 'paidbooks';
 
-  var query = `SELECT ${searchTable}.*, users.name, users.email FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
+  var query = `SELECT ${searchTable}.*, users.name, users.email, \"${searchTable}\" as type FROM ${searchTable} JOIN users ON ${searchTable}.user_id = users.id ORDER BY title ASC LIMIT 8`;
   db.query(query, (err, results) => {
     if (err) {
       console.log(err);

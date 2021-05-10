@@ -208,7 +208,7 @@ const TradeBooks = () => {
                   condition={book.condition}
                   image={book.image}
                   price={book.cost}
-                  type="paid"
+                  type={book.type}
                   name={book.name}
                   sellerid={book.user_id}
                   sellerEmail={book.email}

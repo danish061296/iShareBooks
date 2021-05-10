@@ -67,6 +67,7 @@ const BookGrid = ({
         condition,
         image,
         price,
+        type,
         name,
         sellerid,
         sellerEmail,
