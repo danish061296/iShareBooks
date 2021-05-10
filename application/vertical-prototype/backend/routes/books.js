@@ -114,4 +114,13 @@ router.get('/fire', (req, res) => {
   });
 });
 
+router.get('/getdepartments', (req, res) => {
+  var query = `SELECT DISTINCT department FROM paidbooks`;
+
+  db.query(query, (err, results) => {
+    res.send(results);
+  });
+  
+});
+
 module.exports = router;

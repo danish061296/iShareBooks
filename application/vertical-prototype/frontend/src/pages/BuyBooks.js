@@ -5,23 +5,25 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import './BuyBooks.css';
 import axios from 'axios';
-import DialogBox from '../components/DialogBox';
 import { useDispatch, useSelector } from 'react-redux';
-import BuyBookModal from './BuyBookModal';
 import BookGrid from './BookGrid';
 
 import { setSearchField } from '../redux/actions/userActions';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { Box } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
 const BuyBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState('BOOKS FOR SELL');
   const search = useSelector((state) => state.userReducer.searchField);
+  var history = useHistory();
 
   const searchData = {
     searchTable: 'paidbooks',
@@ -86,8 +88,13 @@ const BuyBooks = () => {
   }, []);
 
   const handleClickOpen = () => {
-    setOpen(true);
-    setHasOpened(true);
+    if (isLoggedIn) {
+      history.push('/postbook/paid');
+      setOpen(true);
+      setHasOpened(true);
+    } else {
+      alert("You must be logged in to post a book!");
+    }
   };
 
   if (!open && hasOpened) {
@@ -173,14 +180,6 @@ const BuyBooks = () => {
               <Button className="post__book__button" onClick={handleClickOpen}>
                 POST
               </Button>
-              <DialogBox
-                open={open}
-                setOpen={setOpen}
-                title="SELL YOUR BOOK"
-                button="DONE"
-              >
-                <BuyBookModal />
-              </DialogBox>
             </div>
           </div>
           <div className="post__book__content">
