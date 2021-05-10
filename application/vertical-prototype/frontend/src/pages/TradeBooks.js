@@ -17,11 +17,10 @@ const TradeBooks = () => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
-  const [paidBooks, setPaidBooks] = useState([]);
+  const [tradeBooks, setTradeBooks] = useState([]);
 
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   var history = useHistory();
-
 
   const [filterBy, setFilterBy] = React.useState('Filter');
   const [searchMessage, setSearchMessage] = React.useState('BOOKS FOR TRADE');
@@ -47,10 +46,10 @@ const TradeBooks = () => {
           setHasLoaded(true);
           console.log(response);
           if (!response.data.msg) {
-            setPaidBooks(response.data);
+            setTradeBooks(response.data);
             setSearchMessage(`Showing results for ${search}`);
           } else {
-            setPaidBooks(response.data.results);
+            setTradeBooks(response.data.results);
             setSearchMessage(`Sorry, no results were found. Suggestions: `);
           }
         });
@@ -64,15 +63,14 @@ const TradeBooks = () => {
         setHasLoaded(true);
         console.log(response);
         if (!response.data.msg) {
-          setPaidBooks(response.data);
+          setTradeBooks(response.data);
           setSearchMessage(`Showing results for ${search}`);
         } else {
-          setPaidBooks(response.data.results);
+          setTradeBooks(response.data.results);
           setSearchMessage(`Sorry, no results were found. Suggestions: `);
         }
       });
   };
-
 
   React.useEffect(() => {
     setHasLoaded(false);
@@ -80,7 +78,8 @@ const TradeBooks = () => {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/tradebooks`
       );
-      setPaidBooks(res.data.results);
+      console.log(res.data.results);
+      setTradeBooks(res.data.results);
       setHasLoaded(true);
     }
     fetchData();
@@ -92,7 +91,7 @@ const TradeBooks = () => {
       setOpen(true);
       setHasOpened(true);
     } else {
-      alert("You must be logged in to post a book!");
+      alert('You must be logged in to post a book!');
     }
   };
 
@@ -102,7 +101,7 @@ const TradeBooks = () => {
       .get(`http://${window.location.hostname}:3001/tradebooks`)
       .then((res) => {
         console.log(res.data.results);
-        setPaidBooks(res.data.results);
+        setTradeBooks(res.data.results);
       });
   }
 
@@ -174,11 +173,9 @@ const TradeBooks = () => {
               <Button className="post__book__button" onClick={handleClickOpen}>
                 POST
               </Button>
-
             </div>
           </div>
           <div className="post__book__content">
-
             <h2 className="post__book__title">
               {
                 hasLoaded ? (
@@ -198,7 +195,7 @@ const TradeBooks = () => {
           </div>
         </div>
         <div className="post__book__grid">
-          {paidBooks.map((book, index) => {
+          {tradeBooks.map((book, index) => {
             if (hasLoaded)
               return (
                 <BookGrid

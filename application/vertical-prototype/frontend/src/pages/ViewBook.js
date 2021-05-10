@@ -21,8 +21,31 @@ import {
 const ViewBook = () => {
   // get array object from redux store
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
+  const [comment, setComment] = React.useState('');
+  const [comments, setComments] = React.useState([]);
   // to dispatch value to redux store
   const dispatch = useDispatch();
+
+  // auto scroll down whenever a new comment is added
+  const ScrollMessages = ({ messages }) => {
+    const lastMessageRef = React.useRef(null);
+    const scrolltoBottom = () => {
+      lastMessageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+        duration: 1000,
+      });
+    };
+    React.useEffect(scrolltoBottom, [messages]);
+    return <div ref={lastMessageRef} />;
+  };
+
+  const handleComment = () => {
+    console.log(comment);
+    setComments([...comments, comment]);
+    setComment('');
+  };
 
   // Function to add books posts to cart
   const handleAddCart = () => {
@@ -107,9 +130,49 @@ const ViewBook = () => {
             <Button onClick={handleAddCart} className="viewbook__button">
               Add to cart
             </Button>
+
+            <div className="comment-box" id="comment_box">
+              <h4 className="leave__comment">Leave a Comment</h4>
+              <div
+                id="comments-box"
+                className="each__comment__div"
+                style={{ overflowY: 'scroll' }}
+              >
+                {comments.map((message) => {
+                  return (
+                    <div>
+                      <span className="each__comment">{message}</span>
+                      <ScrollMessages messages={message} />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <input
+                id="comment"
+                placeholder="Add a comment here"
+                type="text"
+                value={comment}
+                name="comment"
+                className="comment__box"
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <div classname="commentbox-buttons">
+                <Button
+                  onClick={handleComment}
+                  id="addcomment"
+                  classname="comment-button"
+                >
+                  {' '}
+                  send
+                </Button>
+              </div>
+              {/* </form> */}
+            </div>
           </div>
         </div>
       </div>
+
       {/** Footer */}
       <Footer />
     </div>

@@ -1,8 +1,10 @@
 .viewbook {
   padding: 20px;
-  height: 90vh;
+  height: 140vh;
+  display: flex;
+  justify-content: center;
 
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .viewbook_box {
@@ -10,23 +12,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95%;
+  height: 98%;
   border-radius: 10px;
-  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+  width: 90%;
 }
 
 .viewbook_left {
   width: 30%;
   margin-top: 30px;
   background-color: #f7f8fa;
-  height: 83%;
+  height: 80%;
 }
 
 .viewbook_image {
-  height: 90px;
-  width: 56px;
+  height: 400px;
+  width: 300px;
   border: 5px black;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-top: 10%;
 }
 
@@ -36,7 +39,7 @@
   margin-top: 30px;
   padding: 30px;
   background-color: #f7f8fa;
-  height: 83%;
+  height: 80%;
 }
 
 .viewbook_title {
@@ -54,9 +57,137 @@ button {
   background-color: #1c504c !important;
   color: white !important;
   font-size: 17px !important;
+  border-radius: 20px;
 }
 
 button:hover {
   background-color: #29918a !important;
   color: white !important;
+}
+
+@media screen and (max-width: 768px) {
+  .viewbook_box {
+    background-color: #eceff3;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+    width: 90%;
+  }
+
+  .viewbook_left {
+    width: 80%;
+    margin-top: 10px;
+    background-color: #f7f8fa;
+    height: 35%;
+  }
+
+  .viewbook_information {
+    width: 80%;
+    margin-left: 10px;
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #f7f8fa;
+    height: 55%;
+  }
+
+  .viewbook_image {
+    height: 200px;
+    width: 100px;
+    /* border: 5px black; */
+    /* position: relative; */
+    margin-left: 10%;
+  }
+  .viewbook_title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .viewbook_author,
+  .viewbook_department,
+  .viewbook_condition,
+  .viewbook_isbn,
+  .viewbook_username,
+  .viewbook_price {
+    font-size: 13px;
+  }
+
+  .viewbook__button {
+    font-size: 10px !important;
+  }
+
+  .viewbook_isbn {
+    word-wrap: break-word;
+  }
+
+  .viewbook_image {
+    height: 300px;
+    width: 140px;
+    border: 5px black;
+    margin-left: 10%;
+    margin-top: 10%;
+  }
+}
+.comment-box {
+  background-color: #eceff3;
+  /* width: 75vh; */
+  height: 35%;
+  border: 2px solid black;
+  padding: 2vh;
+  margin-top: 20px;
+  margin-bottom: 5vh;
+  /* scroll-behavior: smooth; */
+  /* position: relative; */
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+}
+.comment-box h3 {
+  text-align: center;
+  margin-top: 15px;
+}
+textarea {
+  border: none;
+  border-bottom: 3px solid black;
+  background-color: transparent;
+  outline: none;
+  height: 40px;
+  width: 100%;
+  color: black;
+  font-size: 16px;
+}
+.comments {
+  padding: 1%;
+  width: 96%;
+  border: 1px solid #000;
+  background-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.comment__box {
+  background-color: rgb(221, 220, 220);
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.leave__comment {
+  margin-top: 0px;
+}
+
+.each__comment__div {
+  height: 40%;
+}
+
+.each__comment {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  border-radius: 3px;
+  background-color: rgb(197, 216, 208);
 }
