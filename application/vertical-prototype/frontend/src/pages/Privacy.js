@@ -1,3 +1,7 @@
+/** Filename: Pirvacy.js
+ * Description: The file contains the content about the privacy policies of the page.
+ */
+
 import React from 'react';
 import './Privacy.css';
 import Navigation from '../components/Navigation';
@@ -6,12 +10,13 @@ import Footer from '../components/Footer';
 const Privacy = () => {
   return (
     <div>
+      {/** Navgation bar */}
       <Navigation />
       <div>
+        {/** Privacy Policies Content */}
         <h1 className="heading">Privacy Policy</h1>
         <div className="container">
           <div>
-            {/* <h2 className="h2">Privacy Policy</h2> */}
             <p>
               At iShareBooks, accessible from iShareBooks.com, one of our main
               priorities is the privacy of our visitors. This Privacy Policy
@@ -62,6 +67,7 @@ const Privacy = () => {
         </div>
       </div>
       <div>
+        {/** Footer */}
         <Footer />
       </div>
     </div>

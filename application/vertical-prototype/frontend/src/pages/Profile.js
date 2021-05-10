@@ -1,10 +1,17 @@
+/**
+ * Filename: Profile.js
+ * Description: The file creates the UI of profile page of all type of users.
+ * The file renders the seller and buyers general info and displays the books
+ * that each user has posted on their profile.
+ */
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import ReactStars from 'react-rating-stars-component';
 import { Link as LinkR } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserRating, setUserPosts } from '../redux/actions/userActions';
+import { setUserRating } from '../redux/actions/userActions';
 import axios from 'axios';
 import Carousel from 'react-elastic-carousel';
 import Card from '../components/Card';
@@ -21,6 +28,7 @@ export default function Profile() {
     width: '99.9%',
   });
 
+  // to dispatch values to redux store
   const dispatch = useDispatch();
 
   // getting objects from redux
@@ -32,8 +40,6 @@ export default function Profile() {
   const userid = useSelector((state) => state.userReducer.userid);
   const userRating = useSelector((state) => state.userReducer.userRating);
   // const userPosts = useSelector((state) => state.userReducer.userPosts);
-
-  console.log(userRating);
 
   // defining breakpoints for multiple screen sizes
   const breakPoints = [
@@ -55,6 +61,7 @@ export default function Profile() {
       }, 1000);
     }
 
+    // clean up
     fetchData();
   }, []);
 
@@ -68,6 +75,7 @@ export default function Profile() {
       setSellerPosts(res.data);
     }
 
+    // clean up
     fetchData();
   }, []);
 
@@ -78,12 +86,12 @@ export default function Profile() {
         `http://${window.location.hostname}:3001/get_rating/${userid}`
       );
       // update user ratings
-      console.log(res.data.rating);
       localStorage.setItem('userrating', res.data.rating);
       setInterval(() => {
         dispatch(setUserRating(res.data.rating));
       }, 300);
     }
+    // clean up
     fetchData();
   }, []);
 
@@ -94,7 +102,6 @@ export default function Profile() {
         `http://${window.location.hostname}:3001/userposts/${userid}`
       );
       // update user posts
-      console.log(res.data);
       localStorage.setItem('userposts', res.data);
       setUserPosts(res.data);
     }
@@ -113,8 +120,9 @@ export default function Profile() {
 
   return (
     <div>
+      {/** Navigation bar */}
       <Navigation />
-
+      {/** display seller's profile */}
       {name && (
         <div className="profile__Container">
           <div className="top">
@@ -201,6 +209,7 @@ export default function Profile() {
           </div>
         </div>
       )}
+      {/** display logged in user's profile */}
       {!name && (
         <div className="profile__Container">
           <div className="top">
@@ -305,7 +314,7 @@ export default function Profile() {
           </div>
         </div>
       )}
-
+      {/** Footer */}
       <Footer />
     </div>
   );

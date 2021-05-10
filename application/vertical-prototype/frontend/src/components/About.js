@@ -1,3 +1,9 @@
+/**
+ * Filename: About.js
+ * Description: This file displays the search bar and the landing page'scover video.
+ * The search functionality is also implemented in this file to filter and display
+ * books according to search input.
+ */
 import React, { useEffect } from 'react';
 import './About.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -17,6 +23,7 @@ import {
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
+// animation on displayed books
 const About = () => {
   useEffect(() => {
     Aos.init({ duration: 1500 });
@@ -24,34 +31,35 @@ const About = () => {
 
   //sending data to redux
   const dispatch = useDispatch();
+  // needed for filter dropdown
   const [filterBy, setFilterBy] = React.useState('Filter');
-
+  // get search object from redux
   const searchField = useSelector((state) => state.userReducer.searchField);
-
-  // function to search input when enter key pressed
+  // function to search input when enter key is pressed
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      // search object to be sent to the backend
       const search = {
         searchField: searchField,
         searchType: filterBy,
         searchTable: 'paidbooks',
       };
 
-      console.log(searchField);
+      // send search input to backend
       Axios.post(`http://${window.location.hostname}:3001/search`, search)
         .then((response) => {
           if (response.data) {
-            console.log(response.data);
             if (response.data.msg) {
               //sending data to redux
               dispatch(setrandomMsg(response.data.msg));
               dispatch(setPosts(response.data.results));
+              // smooth scroll down to trending page
               window.scrollBy({
                 top: 500,
                 behavior: 'smooth',
               });
             } else {
-              console.log('Data coming from search click');
+              // sending random data to redux if not a successful search
               dispatch(setPosts(response.data));
               dispatch(setrandomMsg(''));
               window.scrollBy({
@@ -69,6 +77,7 @@ const About = () => {
     }
   };
 
+  // update filter value
   const handleFilterChange = (e) => {
     setFilterBy(e.target.innerText);
   };
@@ -114,6 +123,7 @@ const About = () => {
 
   return (
     <div className="about" style={{ position: 'relative' }}>
+      {/** About Section Content */}
       <div className="video__bg">
         <video
           className="video__cover"

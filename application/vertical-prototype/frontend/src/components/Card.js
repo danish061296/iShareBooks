@@ -1,9 +1,16 @@
+/**
+ * Filename: Card.js
+ * Description: This file displays a book in a form of card
+ * with book details and can be slided with a carousel.
+ */
+
 import React from 'react';
 import './Trending.css';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setViewBook } from '../redux/actions/userActions';
 
+// import each books details
 const Card = ({
   key,
   number,
@@ -19,8 +26,10 @@ const Card = ({
   sellerid,
   sellerEmail,
 }) => {
+  // to dispatch values to redux
   const dispatch = useDispatch();
 
+  // function that adds book to viewbooks to see its detail
   const handleBookDetail = () => {
     dispatch(
       setViewBook({
@@ -41,10 +50,9 @@ const Card = ({
     return <Redirect to="/viewbook" />;
   };
 
-  // dispatch(setSellerEmail(sellerEmail));
-
   return (
     <div>
+      {/** display card when there is a image */}
       {image && (
         <div className="card">
           <Link to="/viewbook" onClick={handleBookDetail}>

@@ -1,11 +1,19 @@
+/**
+ *  Filename: UserRating.js
+ *  Description: The file is used to create each rating box that shows
+ *  a seller name and their rating that is to be edited by the buyer.
+ */
+
 import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import './RatingMessage.css';
 import axios from 'axios';
 
 const UserRating = ({ id, name }) => {
+  // to change styling of rated boxes after they have been rated
   const [clickedStyle, setClickedStyle] = useState({});
 
+  // styles effected after a box is rated
   const ratingChanged = (newRating) => {
     setClickedStyle({
       'pointer-events': 'none',
@@ -14,10 +22,12 @@ const UserRating = ({ id, name }) => {
       transition: '0.5s',
     });
 
+    // stores rating of each user at a time
     const ratingObject = {
       newRating: newRating,
     };
 
+    // send seller rating to backend
     axios
       .post(
         `http://${window.location.hostname}:3001/update_rating/${id}`,
@@ -25,9 +35,7 @@ const UserRating = ({ id, name }) => {
       )
       .then((response) => {
         if (response.data.succeed) {
-          console.log(response.data.message);
         } else {
-          console.log(response.data.message);
         }
       })
       .catch((error) => {

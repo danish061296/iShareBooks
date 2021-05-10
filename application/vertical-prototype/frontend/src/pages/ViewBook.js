@@ -1,3 +1,9 @@
+/**
+ * Filename: ViewBook.js
+ * Description: This file displays the details of eacn book whenever it is
+ * click by the user.
+ */
+
 import React from 'react';
 import './ViewBook.css';
 import Navigation from '../components/Navigation';
@@ -13,11 +19,12 @@ import {
 } from '../redux/actions/userActions';
 
 const ViewBook = () => {
+  // get array object from redux store
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
-
+  // to dispatch value to redux store
   const dispatch = useDispatch();
 
-  // add to cart
+  // Function to add books posts to cart
   const handleAddCart = () => {
     // console.log(itemsArray.title);
     dispatch(
@@ -41,12 +48,14 @@ const ViewBook = () => {
   const sellerid = viewBooks[viewBooks.length - 1].sellerid;
   const name =
     viewBooksUsername.charAt(0).toUpperCase() + viewBooksUsername.slice(1);
+  // dispatch values to redux store
   dispatch(setSeller(name));
   dispatch(setSellerId(sellerid));
   dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
 
   return (
     <div className="viewbook_container">
+      {/** Navigation Bar */}
       <Navigation />
       <div className="viewbook">
         <div className="viewbook_box">
@@ -59,8 +68,6 @@ const ViewBook = () => {
               }`}
               alt="book"
             />
-
-            {/* <p className="viewbook_description">Summary/Description of Book</p> */}
           </div>
           <div className="viewbook_information" id="info">
             <h1 className="viewbook_title">
@@ -85,12 +92,12 @@ const ViewBook = () => {
               {viewBooks[0].isbn}
             </p>
 
+            {/** View seller's profile */}
             <p className="viewbook_username">
               Posted by
               <Link to="./profile">
                 <strong> {name}</strong>
               </Link>
-              {/* Posted by <strong>{viewBooksUsername}</strong> */}
             </p>
 
             <p className="viewbook_price">
@@ -103,6 +110,7 @@ const ViewBook = () => {
           </div>
         </div>
       </div>
+      {/** Footer */}
       <Footer />
     </div>
   );

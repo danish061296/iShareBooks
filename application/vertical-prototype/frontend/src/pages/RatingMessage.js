@@ -1,8 +1,14 @@
-import React from 'react';
+/**
+ * Filename: RatingMessage.js
+ *  Description: This file create a rating pages that shows rating
+ *  boxes of different seller whose books have been selected by the buyer.
+ *  All dulicated seller rating boxes are removed and only allow a seller
+ *  to be rated once.
+ */
 
+import React from 'react';
 import Navigation from '../components/Navigation';
 import { useSelector } from 'react-redux';
-
 import './RatingMessage.css';
 import Footer from '../components/Footer';
 import UserRating from './UserRating';
@@ -10,7 +16,6 @@ import UserRating from './UserRating';
 export default function RatingMessage() {
   // generating receipt id
   var confirmation_num = Math.floor(Math.random() * 1000000000000 + 1);
-  console.log(confirmation_num);
 
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
@@ -19,7 +24,7 @@ export default function RatingMessage() {
   // creating array to store distinct seller names
   var filtered = [];
 
-  // filter duplilcate sellers
+  // filter duplilcate sellers and add distinct seller to a new array
   var filtered_ratings = ratings.filter(function (e, i) {
     if (filtered.includes(ratings[i].name)) {
     } else {
@@ -46,7 +51,6 @@ export default function RatingMessage() {
         <div className="user__rating">
           {ratings &&
             filtered_ratings.map((rating, i) => {
-              console.log(rating);
               return <UserRating key={i} id={rating.id} name={rating.name} />;
             })}
         </div>

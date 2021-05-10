@@ -1,12 +1,17 @@
+/**
+ * Filename: TermsOfUse.js
+ * Description: This file displays content about the terms of use of the website.
+ */
+
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
-
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import './TermsOfUse.css';
 
+// website copyright
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -21,8 +26,10 @@ function Copyright() {
 const TermsOfUse = () => {
   return (
     <div>
+      {/** Navigation bar */}
       <Navigation />
       <div className="termsOfUse__Container">
+        {/** TermsOfUse Content */}
         <center>
           <h1 className="terms__title"> Terms of Use </h1>
         </center>
@@ -210,6 +217,7 @@ const TermsOfUse = () => {
         <Copyright />
       </Box>
       <div>
+        {/** Footer */}
         <Footer />
       </div>
     </div>

@@ -1,3 +1,9 @@
+/**
+ *  Filename: AboutUs.js
+ *  Description: The file contains the information about what the website is
+ * about and services it is providing to the intending users.
+ */
+
 import React from 'react';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
@@ -7,7 +13,10 @@ import { Box } from '@material-ui/core';
 export default function AboutUs() {
   return (
     <div>
+      {/** Navigation Bar */}
       <Navigation />
+
+      {/** About Us Page Content */}
       <div className="container">
         <h1 className="aboutus__title">ABOUT US</h1>
         <h1 className="main_header gray">
@@ -55,6 +64,7 @@ export default function AboutUs() {
           </p>
         </div>
 
+        {/** Website Contributers Introduction */}
         <div className="sub_container bold">
           <h2>Meet the Team</h2>
           <h3 className="bold">KC</h3>
@@ -90,6 +100,7 @@ export default function AboutUs() {
           <p className="gray">info</p>
         </div>
       </div>
+      {/** Footer */}
       <Footer />
     </div>
   );
