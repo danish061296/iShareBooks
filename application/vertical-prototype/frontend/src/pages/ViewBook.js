@@ -187,7 +187,7 @@ const ViewBook = () => {
                       </Button>
                     </div> 
                   </div> 
-                : 1 }
+                : "" }
          
             </div>
           </div>
