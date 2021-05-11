@@ -21,12 +21,13 @@ import {
 const ViewBook = () => {
   // get array object from redux store
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
+  const loggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+
   const [comment, setComment] = React.useState('');
   const [comments, setComments] = React.useState([]);
+  const [commentDivStyle, setCommentDivStyle] = React.useState({display: '',});
   // to dispatch value to redux store
   const dispatch = useDispatch();
-
-  console.log(viewBooks[viewBooks.length - 1].type, " !")
 
   // auto scroll down whenever a new comment is added
   const ScrollMessages = ({ messages }) => {
@@ -68,6 +69,7 @@ const ViewBook = () => {
     );
   };
 
+
   // make first letter of username to uppercase
   const viewBooksUsername = viewBooks[viewBooks.length - 1].name;
   const sellerid = viewBooks[viewBooks.length - 1].sellerid;
@@ -77,6 +79,15 @@ const ViewBook = () => {
   dispatch(setSeller(name));
   dispatch(setSellerId(sellerid));
   dispatch(setSellerEmail(viewBooks[viewBooks.length - 1].sellerEmail));
+
+
+
+  React.useEffect(() => {
+    if (viewBooks[viewBooks.length - 1].type != 'tradebooks') {
+      setCommentDivStyle({display: 'none'});
+    }
+  }, [viewBooks, 1]);
+    
 
   return (
     <div className="viewbook_container">
@@ -133,51 +144,52 @@ const ViewBook = () => {
               Add to cart
             </Button>
 
-            {
-              viewBooks[viewBooks.length - 1].type === 'tradebooks' ?
-              
 
-            <div className="comment-box" id="comment_box">
-              <h4 className="leave__comment">Leave a Comment</h4>
+
+
+            <div key="" className="comment-box" id="comment_box" style={commentDivStyle}> 
               <div
                 id="comments-box"
                 className="each__comment__div"
-                style={{ overflowY: 'scroll' }}
-              >
-                {comments.map((message) => {
-                  return (
-                    <div>
-                      <span className="each__comment">{message}</span>
-                      <ScrollMessages messages={message} />
-                    </div>
-                  );
-                })}
-              </div>
+                style={{ overflowY: 'scroll' }}>
 
-              <input
-                id="comment"
-                placeholder="Add a comment here"
-                type="text"
-                value={comment}
-                name="comment"
-                className="comment__box"
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <div classname="commentbox-buttons">
-                <Button
-                  onClick={handleComment}
-                  id="addcomment"
-                  classname="comment-button"
-                >
-                  {' '}
-                  send
-                </Button>
-              </div>
-              {/* </form> */}
-            </div> : ""
-            }
+                <h4 className="leave__comment">{loggedIn ? "Leave a Comment" : "Comments"}</h4>
+                    
+                  {comments.map((message) => {
+                      return (
+                        <div>
+                          <span className="each__comment">{message}</span>
+                          <ScrollMessages messages={message} />
+                        </div>
+                      );
+                    })}
+                </div>
 
-
+                {loggedIn ?
+                  <div>
+                    <input
+                      id="comment"
+                      placeholder="Add a comment here"
+                      type="text"
+                      value={comment}
+                      name="comment"
+                      className="comment__box"
+                      onChange={(e) => setComment(e.target.value)}
+                    />
+                    <div classname="commentbox-buttons">
+                      <Button
+                        onClick={handleComment}
+                        id="addcomment"
+                        classname="comment-button"
+                      >
+                        {' '}
+                        send
+                      </Button>
+                    </div> 
+                  </div> 
+                : 1 }
+         
+            </div>
           </div>
         </div>
       </div>
