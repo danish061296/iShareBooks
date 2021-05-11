@@ -133,8 +133,8 @@ button:hover {
 .comment-box {
   background-color: #eceff3;
   /* width: 75vh; */
-  height: 35%;
-  border: 2px solid black;
+  height: 37%;
+  /* border: 2px solid black; */
   padding: 2vh;
   margin-top: 20px;
   margin-bottom: 5vh;
@@ -142,9 +142,9 @@ button:hover {
   /* position: relative; */
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
 }
-.comment-box h3 {
+.comment-box h4 {
   text-align: center;
-  margin-top: 15px;
+  font-size: 20px;
 }
 textarea {
   border: none;
@@ -169,25 +169,61 @@ textarea {
 .comment__box {
   background-color: rgb(221, 220, 220);
   width: 100%;
+  height: 20%;
   border: none;
   outline: none;
+  border-radius: 20px;
+  font-size: 13px;
   padding: 10px;
   margin-bottom: 10px;
 }
 
+.comment__input {
+  display: flex;
+}
+
+#addcomment {
+  font-size: 13px !important;
+  position: absolute;
+  margin-left: -65px !important;
+  border-radius: 0px 20px 20px 0px;
+}
+
 .leave__comment {
-  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 .each__comment__div {
-  height: 40%;
+  height: 64%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  /* background-color: rgb(214, 213, 213); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .each__comment {
-  font-size: 18px;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
   border-radius: 3px;
-  background-color: rgb(197, 216, 208);
+  margin-left: 8px;
+}
+
+.comment__indiv {
+  width: 98%;
+  padding: 3px;
+  background-color: rgb(223, 219, 219);
+  margin-top: 8px;
+  margin-bottom: 5px;
+  border-radius: 15px;
+}
+
+.comment__username {
+  margin-left: 8px;
+  font-weight: 600;
 }
