@@ -68,6 +68,8 @@ const Registration = () => {
     username: '',
     email: '',
     password: '',
+    university: '',
+    major: '',
     remember: false,
   };
 
@@ -81,6 +83,10 @@ const Registration = () => {
     password: Yup.string()
       .min(8, 'Password must contain at least 8 characters!')
       .required('Password is required!'),
+    university: Yup.string()
+      .required('University is required'),
+    major: Yup.string()
+      .required('Major is required'),
     remember: Yup.boolean().oneOf(
       [true],
       'You must accept terms and conditions.'
@@ -205,6 +211,34 @@ const Registration = () => {
                       id="password"
                       autoComplete="current-password"
                       helperText={<ErrorMessage name="password" />}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Field
+                      as={TextField}
+                      className="input__field"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="university"
+                      label="University"
+                      name="university"
+                      autoComplete="university"
+                      helperText={<ErrorMessage name="university" />}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Field
+                      as={TextField}
+                      className="input__field"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="major"
+                      label="Major"
+                      name="major"
+                      autoComplete="major"
+                      helperText={<ErrorMessage name="major" />}
                     />
                   </Grid>
                   <Grid item xs={12}>
