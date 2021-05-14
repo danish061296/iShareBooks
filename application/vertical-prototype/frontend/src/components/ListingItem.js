@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';
-import { Link } from 'react-router-dom';
-import { removeFromCart, setSeller } from '../redux/actions/userActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const ListingItem = ({
   id,
@@ -14,23 +13,15 @@ const ListingItem = ({
   condition,
   price,
   image,
-  type,
   name,
 }) => {
   const dispatch = useDispatch();
-
-  const cart = useSelector((state) => state.userReducer.cart);
 
   // remove item from the cart
   const handleRemove = () => {
     dispatch(removeFromCart(id));
   };
 
-  const sellerName = cart[cart.length - 1].name;
-  const seller = sellerName.charAt(0).toUpperCase() + sellerName.slice(1);
-
-  dispatch(setSeller(name.charAt(0).toUpperCase() + name.slice(1)));
-  console.log(name.charAt(0).toUpperCase() + name.slice(1));
   return (
     <div className="listingitem__item">
       <img
@@ -50,7 +41,7 @@ const ListingItem = ({
         </p>
         <p className="listingitem__item__condition">
           <strong>Condition: </strong>
-          {condition}
+          {condition.charAt(0).toUpperCase() + condition.slice(1)}
         </p>
         <p className="listingitem__item__isbn">
           <strong>ISBN: </strong>
@@ -66,16 +57,6 @@ const ListingItem = ({
           </Button>
         </div>
       </div>
-
-      {/* <div className="listingitem__item__rating">
-          {Array(rating)
-            .fill()
-            .map((_, i) => (
-              <p>
-                <Star className="rating__star" />
-              </p>
-            ))}
-        </div> */}
     </div>
   );
 };

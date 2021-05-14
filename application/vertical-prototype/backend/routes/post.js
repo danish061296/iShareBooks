@@ -10,26 +10,32 @@ router.post('/posts', (req, res) => {
     const {
       title,
       author,
-      cost,
       department,
       condition,
       isbn,
+      cost,
       type,
       image,
       userid,
     } = req.body;
 
-    if (
-      title === '' ||
-      author === '' ||
-      (cost === '' && type == 'paid') ||
-      department === '' ||
-      condition === '' ||
-      isbn === '' ||
-      image === ''
-    ) {
-      res.send({ bookPosted: false, msg: 'Enter all fields..' });
-    } else {
+    if (title === '')
+      res.send({ bookPosted: false, msg: 'Title field is required.' });
+    else if (author === '')
+      res.send({ bookPosted: false, msg: 'Author field is required.' });
+    else if (department === '')
+      res.send({ bookPosted: false, msg: 'Department field is required.' });
+    else if (isbn === '')
+      res.send({ bookPosted: false, msg: 'ISBN field is required.' });
+    else if (condition === '' || condition === 'Condition')
+      res.send({ bookPosted: false, msg: 'Condition field is required.' });
+    else if (cost === '' && type == 'paid')
+      res.send({ bookPosted: false, msg: 'Cost field is required.' });
+    else if (image === '' || image === undefined)
+      res.send({ bookPosted: false, msg: 'Image field is required.' });
+    else if (isNaN(cost))
+      res.send({ bookPosted: false, msg: 'Cost must be an integer.' });
+    else {
       console.log(req.body);
       if (type === 'free') {
         const data = [
@@ -41,7 +47,6 @@ router.post('/posts', (req, res) => {
           isbn,
           userid,
         ];
-        console.log('free');
         let query =
           'INSERT INTO freebooks (title, author, freebooks.condition, image, department, isbn, user_id) VALUES (?)';
         db.query(query, [data], (err, result) => {
@@ -72,7 +77,7 @@ router.post('/posts', (req, res) => {
           } else {
             res.send({
               bookPosted: true,
-              msg: 'The free book was posted successfully!',
+              msg: 'The trade book was posted successfully!',
             });
           }
         });
@@ -104,7 +109,8 @@ router.post('/posts', (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send(err);
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
@@ -112,7 +118,7 @@ router.get('/paidbooks', (req, res) => {
   console.log(req.body);
   // let inserSql = `SELECT * FROM paidbooks`;
 
-  let insertSql = `SELECT paidbooks.*, users.name, users.email FROM paidbooks JOIN users ON paidbooks.user_id = users.id `;
+  let insertSql = `SELECT paidbooks.*, users.name, users.email, "paidbooks" as type FROM paidbooks JOIN users ON paidbooks.user_id = users.id ORDER BY post_time DESC`;
 
   //let insertSql = `SELECT * FROM paidbooks`;
   db.query(insertSql, (err, results) => {
@@ -136,7 +142,7 @@ router.get('/paidbooks', (req, res) => {
 
 router.get('/tradebooks', (req, res) => {
   //let inserSql = `SELECT * FROM tradebooks`;
-  let inserSql = `SELECT tradebooks.*, users.name, users.email FROM tradebooks JOIN users ON tradebooks.user_id = users.id `;
+  let inserSql = `SELECT tradebooks.*, users.name, users.email, "tradebooks" as type FROM tradebooks JOIN users ON tradebooks.user_id = users.id ORDER BY post_time DESC`;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -157,7 +163,7 @@ router.get('/tradebooks', (req, res) => {
 
 router.get('/freebooks', (req, res) => {
   //let inserSql = `SELECT * FROM freebooks`;
-  let inserSql = `SELECT freebooks.*, users.name, users.email FROM freebooks JOIN users ON freebooks.user_id = users.id `;
+  let inserSql = `SELECT freebooks.*, users.name, users.email, "freebooks" as type FROM freebooks JOIN users ON freebooks.user_id = users.id ORDER BY post_time DESC`;
   db.query(inserSql, (err, results) => {
     if (err) {
       console.log(err);
@@ -193,9 +199,9 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/userposts/:userId', (req, res) => {
   var userId = req.params.userId;
-  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type FROM paidbooks WHERE user_id = ${userId}
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade" FROM tradebooks WHERE user_id = ${userId}) 
-  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free" FROM freebooks WHERE user_id = ${userId});`;
+  var query = `SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paidbooks" as type FROM paidbooks WHERE user_id = ${userId}
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "tradebooks" FROM tradebooks WHERE user_id = ${userId}) 
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "freebooks" FROM freebooks WHERE user_id = ${userId});`;
 
   db.query(query, (err, results) => {
     if (err) return res.send(err);

@@ -111,8 +111,6 @@ router.post('/login', async (req, res) => {
             message: 'Password or email is incorrect!',
           });
         } else {
-          //  const id = results[0].email;
-
           const payload = {
             user: {
               id: results[0].email,
@@ -132,6 +130,7 @@ router.post('/login', async (req, res) => {
             id: results[0].id,
             userName: results[0].name,
             token: token,
+            email: results[0].email,
             message: "You're successfully logged in.",
           });
         }

@@ -1,3 +1,10 @@
+/**
+ * Filename: Login.js
+ * Description: This file is used to create a login form for the registered
+ * users to sign in to the website to use further services.
+ * This login form is also go through input validation in this file.
+ */
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,8 +15,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Tippy from '@tippy.js/react';
-import 'tippy.js/dist/tippy.css';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -31,6 +36,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './Login.css';
 
+// website copy right styling
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -43,6 +49,7 @@ function Copyright() {
   );
 }
 
+// styling to components of the login page
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -65,15 +72,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  // to dispatch input values to redux store
   const dispatch = useDispatch();
+  // to get the history of the browser and redirect to a page
   const history = useHistory();
+  // to toggle betwee text and password form of input
   const [showPassword, setShowPassword] = React.useState(false);
+  // function to toggle between text and password
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+  // initial values of email and passwords
   const initialValues = {
     email: '',
     password: '',
   };
 
+  // sign in form validation
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Please enter a valid email!')
@@ -83,38 +96,45 @@ export default function SignIn() {
       .required('Password is required!'),
   });
 
+  // function to submit valid login information to backend
   const onSubmit = (values, props) => {
-    // e.preventDefault();
-
+    // dispatch email and password to redux store
     dispatch(setEmail(values.email));
     dispatch(setPassword(values.password));
 
+    // payload coming from login form inputs
     const payload = {
       ...values,
     };
 
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 1000);
-
-    console.log(payload.email);
-
+    // object containing email and password to be sent to backend
     const loginUser = {
       email: payload.email,
       password: payload.password,
     };
+
+    // send login information to backend for validation
     Axios.post(`http://${window.location.hostname}:3001/login`, loginUser).then(
       (response) => {
-        console.log(response.data);
+        // if login is successful
         if (response.data.auth) {
+          // set values into local storage to make them persistent
+          localStorage.setItem('userid', response.data.id);
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('username', response.data.userName);
+          localStorage.setItem('email', response.data.email);
+          localStorage.setItem('isloggedin', response.data.auth);
+
+          // dispatch vaues to redux store
           dispatch(setIsLoggedIn(response.data.auth));
           dispatch(setUsername(response.data.userName));
+          dispatch(setEmail(response.data.email));
           dispatch(setUserId(response.data.id));
 
+          // redirect to buybooks page after login
           history.push('/buybooks');
         } else {
+          // if login is not successful show error message
           store.addNotification({
             title: '',
             message: response.data.message,
@@ -126,9 +146,9 @@ export default function SignIn() {
               showIcon: true,
             },
           });
+          // dispatch values to redux store
           dispatch(setIsLoggedIn(false));
           dispatch(setUsername(''));
-
           dispatch(setEmail(''));
         }
       }
@@ -137,9 +157,12 @@ export default function SignIn() {
 
   return (
     <div>
+      {/** Navgation */}
       <Navigation />
+      {/** Display error message upon unsuccessful login attempt */}
       <ReactNotification />
       <div className="login__Container">
+        {/** Login Form Content */}
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
@@ -187,19 +210,9 @@ export default function SignIn() {
                           onClick={handleClickShowPassword}
                         >
                           {showPassword ? (
-                            <Tippy
-                              content="hide password"
-                              placement="bottom-start"
-                            >
-                              <Visibility className="eye__icon" />
-                            </Tippy>
+                            <Visibility className="eye__icon" />
                           ) : (
-                            <Tippy
-                              content="show password"
-                              placement="bottom-start"
-                            >
-                              <VisibilityOff className="eye__icon" />
-                            </Tippy>
+                            <VisibilityOff className="eye__icon" />
                           )}
                         </InputAdornment>
                       ),

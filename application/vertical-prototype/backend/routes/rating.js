@@ -2,11 +2,10 @@ const express = require('express');
 const db = require('../dataBase.js');
 const router = express.Router();
 
+// route to post a seller rating
 router.post('/update_rating/:id', (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const newRating = req.body.newRating;
-  console.log(newRating);
 
   let query =
     'UPDATE Ratings SET accumulated_stars=accumulated_stars+' +
@@ -30,6 +29,7 @@ router.post('/update_rating/:id', (req, res) => {
   });
 });
 
+// route to get user and seller rating
 router.get('/get_rating/:id', (req, res) => {
   const id = req.params.id;
 
@@ -45,6 +45,7 @@ router.get('/get_rating/:id', (req, res) => {
         succeed: false,
       });
 
+    //calculate average rating value for each user
     var accum_ratings = result[0].accumulated_stars;
     var total_ratings = result[0].total_ratings;
 

@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import './TotalAmount.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getCartTotal } from '../redux/reducers/userReducer';
+import { setDeleteCart } from '../redux/actions/userActions'; 
 
 const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     if (!isLoggedIn) {
@@ -21,8 +23,10 @@ const TotalAmount = () => {
       );
       window.open(res.data);
       if (res.data) {
+        dispatch(setDeleteCart());
         history.push('./rating');
       }
+
     }
   };
 

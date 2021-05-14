@@ -37,7 +37,15 @@
 }
 
 .logo__heading {
-  margin-left: 30px !important;
+  margin-left: 40px !important;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+.account__btn {
+  position: relative !important;
+  top: -60px !important;
+  right: 40px;
 }
 
 .dropaccount__btn {
@@ -98,7 +106,8 @@
   color: black;
 }
 
-.nav__link {
+.nav__link,
+.nav__loglink {
   letter-spacing: 1px;
 }
 
@@ -158,6 +167,10 @@
   .logo__heading {
     font-size: 30px;
   }
+
+  .nav__link {
+    visibility: hidden;
+  }
 }
 
 .navbar__logoLink {
@@ -170,8 +183,7 @@
   font-size: 25px;
 }
 
-/* @media screen and (max-width: 768px) {
-  .navbar__title {
-    font-size: 20px !important;
-  }
-} */
+.avatar {
+  background-color: rgb(92, 95, 92) !important;
+  text-transform: uppercase;
+}

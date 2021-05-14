@@ -1,3 +1,8 @@
+/**
+ * Filename: ServiceBuy.js
+ * Description: The file creates the
+ */
+
 import React from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

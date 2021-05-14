@@ -1,7 +1,11 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+/**
+ *  Filename: BookGrid.js
+ *  Description: The file creates the UI of each book on all three services pages.
+ * The books are displayed as a grid that can adjust to the screen size.
+ */
 
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import './BuyBooks.css';
 
@@ -12,6 +16,7 @@ import {
   setSellerEmail,
 } from '../redux/actions/userActions';
 
+// import book post info for each book to be displayed
 const BookGrid = ({
   id,
   title,
@@ -26,26 +31,31 @@ const BookGrid = ({
   name,
   sellerEmail,
 }) => {
-  var price_hold = price;
-
+  // if price not a number, set price to a numeric value
   if (isNaN(price)) {
     price = 0.0;
   }
-
+  // to dispatch values to redux store
   const dispatch = useDispatch();
+  // to toggle with hover effect on each book
   const [mouseEnter, setMouseEnter] = React.useState(false);
 
+  // funtion to hover on specific screen size
   const handleMouseEnter = () => {
     if (!window.matchMedia('screen and (max-width: 768px)').matches) {
       setMouseEnter(true);
     }
   };
+
+  // function to not hover on specific screen size
   const handleMouseLeave = () => {
     if (!window.matchMedia('screen and (max-width: 768px)').matches) {
       setMouseEnter(false);
     }
   };
 
+  // dispatch book ost info to viewbooks to retrieve data to show detail
+  // of each book
   const handleBookDetail = () => {
     dispatch(
       setViewBook({
@@ -57,17 +67,19 @@ const BookGrid = ({
         condition,
         image,
         price,
+        type,
         name,
         sellerid,
         sellerEmail,
       })
     );
 
+    // redirect to viewbook page
     return <Redirect to="/viewbook" />;
   };
 
+  // store book post info into cart when a book is added to cart
   const handleAddCart = () => {
-    // console.log(itemsArray.title);
     dispatch(
       setCartItem({
         id,
@@ -82,19 +94,30 @@ const BookGrid = ({
         name,
       })
     );
+
+    // dispatch book post info into rating to retrieve data for seller review
     dispatch(
       setRating({
         id,
+        title,
+        author,
+        department,
+        isbn,
+        condition,
+        image,
+        price,
+        type,
         name,
       })
     );
   };
 
+  // update email that's associated to selected book whose details are to be displayed
   dispatch(setSellerEmail(sellerEmail));
-  // const imagetest = Buffer.from(image.data, 'base64');
 
   return (
     <div>
+      {/** Display book grid of paid books */}
       {price !== 0 && (
         <div
           className="post__book__details"
@@ -106,28 +129,18 @@ const BookGrid = ({
               style={{ height: 230, width: 170 }}
               src={`data:image/jpeg;base64,${image}`}
               alt="book_image"
-              className={
-                mouseEnter ? 'post__book__image__hover' : 'post__book__image'
-              }
+              className="post__book__image"
             />
           </Link>
-          {mouseEnter && (
-            <Button className="buy__book__button" onClick={handleAddCart}>
-              Add to cart
-            </Button>
-          )}
-          {/* {screenWidth && (
-            <Button
-              className="buy__book__button__screen"
-              onClick={handleAddCart}
-            >
-              Add to cart
-            </Button>
-          )} */}
+          <div className="button__buy" onClick={handleAddCart}>
+            <span className="button__text">ADD TO CART</span>
+          </div>
 
           <p className="post__book__price">${price}</p>
         </div>
       )}
+
+      {/** Dipslay book grid of trade and free books */}
       {price === 0 && (
         <div
           className="post__book__details"
@@ -144,13 +157,10 @@ const BookGrid = ({
               }
             />
           </Link>
-          {mouseEnter && (
-            <Button className="buy__book__button" onClick={handleAddCart}>
-              Add to cart
-            </Button>
-          )}
-
-          <p className="post__book__price">$0</p>
+          <div className="button__buy" onClick={handleAddCart}>
+            <span className="button__text">ADD TO CART</span>
+          </div>
+          <p className="post__book__price">$0.00</p>
         </div>
       )}
     </div>

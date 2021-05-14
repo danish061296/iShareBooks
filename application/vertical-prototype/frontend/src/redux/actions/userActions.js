@@ -11,6 +11,10 @@ export const setUserId = (userid) => ({
   type: 'SET_USERID',
   userid,
 });
+export const setUserRating = (userRating) => ({
+  type: 'SET_USER_RATING',
+  userRating,
+});
 
 export const setSellerId = (sellerid) => ({
   type: 'SET_SELLERID',
@@ -44,6 +48,10 @@ export const setSearchField = (searchField) => ({
 export const setSearchType = (searchType) => ({
   type: 'SET_SEARCH_TYPE',
   searchType,
+});
+export const setUserPosts = (userPosts) => ({
+  type: 'SET_USER_POSTS',
+  userPosts,
 });
 
 export const setImageBuffer = (imageBuffer) => ({

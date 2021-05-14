@@ -1,3 +1,10 @@
+/**
+ * Filename: Registration.js
+ * Description: The file creates a sign up form to let general users to
+ * create an account in order to use website services.
+ * The sign up form is also being valdiated before being sent to backend.
+ */
+
 import React, { useRef } from 'react';
 import './Registration.css';
 import Button from '@material-ui/core/Button';
@@ -28,6 +35,7 @@ import {
 import Axios from 'axios';
 import './Registration.css';
 
+// website copyright
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -40,6 +48,7 @@ function Copyright() {
   );
 }
 
+// to style registartion form components
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -62,11 +71,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Registration = () => {
   const classes = useStyles();
+  // to dispatch sign up values to redux store
   const dispatch = useDispatch();
+  // get reference of each tag
   const ref = useRef(null);
-
+  // to get the browser hsitory info
   const history = useHistory();
 
+  // initial values of sign up inputs
   const initialValues = {
     username: '',
     email: '',
@@ -74,6 +86,7 @@ const Registration = () => {
     remember: false,
   };
 
+  // function to validate sign up inputs
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, 'Username is too short!')
@@ -90,30 +103,25 @@ const Registration = () => {
     ),
   });
 
+  // send signup info to backend after valdiation
   const onSubmit = (values, props) => {
     const payload = {
       ...values,
     };
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 1000);
 
-    console.log(payload.username);
-
+    // object containing sign up info to be send to backend
     const registerUser = {
       username: payload.username,
       email: payload.email,
       password: payload.password,
     };
 
-    console.log(registerUser.username);
-
+    // send sign up info to backend
     Axios.post(
       `http://${window.location.hostname}:3001/register`,
       registerUser
     ).then((response) => {
-      console.log(response.data);
+      // if not registered , show error
       if (!response.data.registered) {
         store.addNotification({
           title: '',
@@ -127,6 +135,7 @@ const Registration = () => {
           },
         });
       } else {
+        // if registered successfully show success and redirect to login page
         store.addNotification({
           title: '',
           message: response.data.message,
@@ -138,12 +147,14 @@ const Registration = () => {
             showIcon: true,
           },
         });
+        // redirect to login page after 2 secs
+        setTimeout(() => {
+          history.push('/login');
+        }, 2000);
       }
-      setTimeout(() => {
-        history.push('/login');
-      }, 2000);
     });
 
+    // update values in redux store
     dispatch(setUsername(payload.username));
     dispatch(setEmail(payload.email));
     dispatch(setPassword(payload.password));
@@ -151,9 +162,12 @@ const Registration = () => {
 
   return (
     <div>
+      {/** Navigation bar */}
       <Navigation />
+      {/** Show success or error upon sign up */}
       <ReactNotification />
       <div className="signup__container">
+        {/** Sign up Page Content */}
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
@@ -218,6 +232,7 @@ const Registration = () => {
                       name="remember"
                       control={
                         <Checkbox
+                          required
                           value="allowExtraEmails"
                           color="color: #28918a"
                         />

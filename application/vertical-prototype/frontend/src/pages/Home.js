@@ -1,3 +1,9 @@
+/**
+ * Filename: Home.js
+ * Description: The file organizes the landing page of the website with
+ * top to bottom display of different components.
+ */
+
 import React from 'react';
 import Navigation from '../components/Navigation';
 import About from '../components/About';

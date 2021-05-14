@@ -1,3 +1,10 @@
+/**
+ * Filename: Contact.js
+ * The file contains content about website contributers information
+ * if anyone wants to each out them.
+ *
+ */
+
 import React from 'react';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
@@ -7,8 +14,10 @@ import { Box } from '@material-ui/core';
 export default function AboutUs() {
   return (
     <div>
+      {/** Navigation */}
       <Navigation />
       <div className="container">
+        {/** Contact Page Content */}
         <h1 className="main_header">Contact</h1>
         <Box mt={10} />
 
@@ -38,6 +47,7 @@ export default function AboutUs() {
           <p>backend@isharebooks.org - (415) 555-5002</p>
         </div>
       </div>
+      {/** Footer */}
       <Footer />
     </div>
   );

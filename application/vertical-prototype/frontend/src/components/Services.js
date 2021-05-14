@@ -7,15 +7,12 @@ import 'tachyons';
 const Services = () => {
   return (
     <div id="services">
-      {/* // <div className="rowC"> */}
       <div className="services__title">
-        <h1 className="service">Services</h1>
+        <h1 className="service">OUR SERVICES</h1>
       </div>
 
-      {/* <div className="f3 fw4 pa3 mv0 row"> */}
       <div className="services__pages">
         <div className="top__services">
-          {/* <div> */}
           <div className="bg-light-white dib br3 ma5 grow bw3 shadow-3 card__shrink">
             <img
               className="services__image"
@@ -29,11 +26,9 @@ const Services = () => {
                 Buy Here
               </button>
             </Link>
-            {/* </div> */}
           </div>
 
           <div className="bg-light-white dib br3 pa ma5 grow bw3 shadow-3 card__shrink">
-            {/* <div> */}
             <img
               className="services__image"
               alt="books"
@@ -46,11 +41,9 @@ const Services = () => {
                 Trade Here
               </button>
             </Link>
-            {/* </div> */}
           </div>
 
           <div className="bg-light-white dib br3 pa ma5 grow bw3 shadow-3 card__shrink ">
-            {/* <div> */}
             <img
               className="services__image"
               alt="books"
@@ -63,7 +56,6 @@ const Services = () => {
                 Free Books
               </button>
             </Link>
-            {/* </div> */}
           </div>
         </div>
       </div>

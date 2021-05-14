@@ -83,9 +83,13 @@
   color: white !important;
 }
 
+.post__book__content {
+  color: #1e504c;
+}
+
 .post__book__title {
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .post__book__grid {
