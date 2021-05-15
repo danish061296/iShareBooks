@@ -101,7 +101,10 @@ const Navigation = () => {
               src="/static/images/avatar/1.jpg"
             />
 
-            <p style={{ marginTop: 25, marginRight: 10, color: 'white' }}>
+            <p
+              className="welcome__name "
+              style={{ marginTop: 25, marginRight: 10, color: 'white' }}
+            >
               Hi, {username.charAt(0).toUpperCase() + username.slice(1)}
             </p>
             <div className="account__btn">

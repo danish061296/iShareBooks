@@ -127,19 +127,35 @@
 
 @media screen and (max-width: 768px) {
   .summary {
-    font-size: 20px;
+    font-size: 13px;
   }
+
+  .total__amount__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .total__amount__bottom {
+    display: flex;
+    text-align: center;
+  }
+
   .subtotal,
   .subtotal__cost,
   .shipping,
   .shipping__cost,
   .total,
   .total__cost,
+  .shipping__standard,
   .tax,
   .tax__cost {
-    font-size: 10px;
+    font-size: 8px !important;
   }
   .checkout__button {
-    font-size: 10px !important;
+    font-size: 8px !important;
+    width: 65px !important;
+    text-align: center !important;
   }
 }

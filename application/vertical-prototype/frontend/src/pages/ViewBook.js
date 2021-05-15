@@ -72,11 +72,9 @@ const ViewBook = () => {
       })
       .catch((e) => console.log(e));
 
-    // setComments([...comments, comment]);
-
     setComment('');
 
-    fetchComments();
+    // fetchComments();
   };
 
   let postID = viewBooks[viewBooks.length - 1].id;

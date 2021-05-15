@@ -155,13 +155,12 @@
 .filter__btn {
   z-index: 1009;
   margin: 6px;
-  align-self:flex-end;
+  align-self: flex-end;
   position: relative !important;
   right: 200px !important;
   top: -18% !important;
-
 }
-
+/* 
 @media screen and (max-width: 1920px) {
   .filter__btn {
     position: relative !important;
@@ -175,22 +174,29 @@
     left: -10% !important;
     top: -140px !important;
   }
-}
+} */
 @media screen and (max-width: 768px) {
   .filter__btn {
     position: relative !important;
-    left: -30% !important;
-    top: -130px !important;
+    left: -7% !important;
+    top: -160px !important;
+    font-size: 9px !important;
+    height: 0px !important;
+  }
+
+  .dropdown {
+    font-size: 8px !important;
   }
   .about__title {
     font-size: 30px;
+    margin-top: 50px;
   }
   .about__content p {
-    font-size: 13px;
+    font-size: 10px;
   }
   .searchBar {
-    font-size: 14px;
-    height: 40px;
+    font-size: 12px !important;
+    height: 30px;
   }
   .explore__btn {
     font-size: 10px !important;
@@ -199,7 +205,8 @@
     font-size: 10px !important;
   }
   .search__content {
-    width: 60%;
+    width: 50%;
+    font-size: 10px;
   }
   .search__btn {
     font-size: 20px !important;
@@ -217,14 +224,18 @@
     flex-direction: column;
     justify-self: center;
     align-items: center;
-    height: 65vh;
+    height: 60vh;
     background: black;
     position: relative;
     z-index: 1;
   }
+
+  .explore__link {
+    z-index: 99;
+  }
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .about {
     display: flex;
     flex-direction: column;
@@ -235,4 +246,4 @@
     position: relative;
     z-index: 1;
   }
-}
+} */

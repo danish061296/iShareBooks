@@ -30,7 +30,7 @@ const ViewListings = () => {
               <h2 className="viewlisting__empty__cart">
                 Your shopping cart is empty.
               </h2>
-              <p>
+              <p className="empty__cart__message">
                 You have no items in your cart. To buy one or more items, click
                 on "Add to cart" below the item.
               </p>
