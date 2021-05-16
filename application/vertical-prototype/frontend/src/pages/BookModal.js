@@ -1,3 +1,10 @@
+/*
+Filename: BookModal.js
+Description: This file is used to create UI for post book forms for all book services.
+Each form is generated depending on the service and the service page url.
+
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import ReactNotification from 'react-notifications-component';
@@ -10,10 +17,7 @@ import Footer from '../components/Footer';
 import { useHistory } from 'react-router';
 import { Box } from '@material-ui/core';
 
-
-
 const BookModalPro1 = () => {
-
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [department, setDepartment] = useState('');
@@ -35,18 +39,17 @@ const BookModalPro1 = () => {
   const history = useHistory();
 
   const handleConditionSelect = (e) => {
-    console.log(e.target.innerText)
+    console.log(e.target.innerText);
     setCondition(e.target.innerText);
   };
 
   const handleBackClick = (e) => {
     history.goBack();
-  }
+  };
 
   const handleSubmit = (e) => {
-
     if (!isLoggedIn) {
-      alert("You must be logged in to post a book!");
+      alert('You must be logged in to post a book!');
       return;
     }
 
@@ -65,41 +68,44 @@ const BookModalPro1 = () => {
       userid: userid,
     };
 
-
     axios
       .post(`http://${window.location.hostname}:3001/posts`, paidBook)
       .then((response) => {
         if (!response.data.bookPosted) {
           //alert(response.data.msg);
           store.addNotification({
-            title: "Book could not be posted.",
+            title: 'Book could not be posted.',
             message: response.data.msg,
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
+            type: 'danger',
+            insert: 'top',
+            container: 'top-center',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
             dismiss: {
               duration: 2000,
-            }
+            },
           });
         } else {
           store.addNotification({
-            title: "Book has been posted.",
-            message: `Redirecting to ${serviceType.substring(0,1).toUpperCase().concat( serviceType.substring(1, serviceType.length))} Books page...`,
-            type: "success",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
+            title: 'Book has been posted.',
+            message: `Redirecting to ${serviceType
+              .substring(0, 1)
+              .toUpperCase()
+              .concat(
+                serviceType.substring(1, serviceType.length)
+              )} Books page...`,
+            type: 'success',
+            insert: 'top',
+            container: 'top-center',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
             dismiss: {
               duration: 2000,
-            }
+            },
           });
           setTimeout(() => {
             history.goBack();
           }, 2000);
-          
         }
       });
   };
@@ -107,63 +113,71 @@ const BookModalPro1 = () => {
   React.useEffect(() => {
     var urlpath = window.location.toString();
 
-    if (urlpath.includes('paid')) {   //  i.e. /postbook/paid
+    if (urlpath.includes('paid')) {
+      //  i.e. /postbook/paid
       setServiceType('paid');
-      setImagePlaceholderMessage('Sell Your Book To Help Your Friends For Easy Access!');
+      setImagePlaceholderMessage(
+        'Sell Your Book To Help Your Friends For Easy Access!'
+      );
       setPostHeader('Sell your Book!');
       setButtonMessage('Sell');
-    }
-  
-    else if (urlpath.includes('trade')) {
+    } else if (urlpath.includes('trade')) {
       setServiceType('trade');
       setImagePlaceholderMessage('Trade Books with your Friends!');
       setPostHeader('Trade your Book!');
       setButtonMessage('Trade');
-    }
-
-    else if (urlpath.includes('free')) {
+    } else if (urlpath.includes('free')) {
       setServiceType('free');
       setImagePlaceholderMessage('Donate your Books to Students in Need.');
       setPostHeader('Donate your Book!');
       setButtonMessage('Donate');
-    }
-
-    else {    //  i.e. /postbook/pewr31f
-      setServiceType('unknown'); 
-      setImagePlaceholderMessage('Ensure that BookModal has correct serviceType (i.e. trade, free, paid)');
+    } else {
+      //  i.e. /postbook/pewr31f
+      setServiceType('unknown');
+      setImagePlaceholderMessage(
+        'Ensure that BookModal has correct serviceType (i.e. trade, free, paid)'
+      );
       setPostHeader('Invalid Service Type.');
     }
-
   });
 
   if (serviceType === 'unknown')
     return (
       <div>
-        <Navigation/>
+        <Navigation />
         <Box mt={20}></Box>
-        <div className="error_login"> <h1>{postHeader}</h1><br/><h3>{imagePlaceholderMessage}</h3></div>
+        <div className="error_login">
+          {' '}
+          <h1>{postHeader}</h1>
+          <br />
+          <h3>{imagePlaceholderMessage}</h3>
+        </div>
 
         <Box mt={80}></Box>
-        <Footer/>
+        <Footer />
       </div>
     );
-
   else if (isLoggedIn)
     return (
       <div>
-        <ReactNotification/>
-        <Navigation/>
-          <div className="wrapper">
-            <div className="back_bttn" onClick={handleBackClick}>BACK</div>
-            <div className="image_container">
-              {
-                image === '' ? <h1 className="no_img_message">{imagePlaceholderMessage}</h1> : <img src={image} width="100%"></img>
-              }
-    
+        <ReactNotification />
+        <Navigation />
+        <div className="wrapper">
+          <div className="back_bttn" onClick={handleBackClick}>
+            BACK
+          </div>
+          <div className="image_container">
+            {image === '' ? (
+              <h1 className="no_img_message">{imagePlaceholderMessage}</h1>
+            ) : (
+              <img src={image} width="100%"></img>
+            )}
+          </div>
+          <div className="detail_container">
+            <div className="header">
+              <h1>{postHeader}</h1>
             </div>
-            <div className="detail_container">
-              <div className="header"><h1>{postHeader}</h1></div>
-              <div className="form">
+            <div className="form">
               <p>Title</p>
               <input
                 type="text"
@@ -196,34 +210,41 @@ const BookModalPro1 = () => {
                 value={isbn}
                 onChange={(e) => setIsbn(e.target.value)}
               ></input>
-              
-              <div className="dropdown_">
-              <Box mt={1}></Box>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {condition}
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={handleConditionSelect}>Used</Dropdown.Item>
-                  <Dropdown.Divider></Dropdown.Divider>
-                  <Dropdown.Item onClick={handleConditionSelect}>New</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <div className="dropdown_">
+                <Box mt={1}></Box>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {condition}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={handleConditionSelect}>
+                      Used
+                    </Dropdown.Item>
+                    <Dropdown.Divider></Dropdown.Divider>
+                    <Dropdown.Item onClick={handleConditionSelect}>
+                      New
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
               <Box mt={4}></Box>
 
-              
-
-              {serviceType === 'paid' ? 
-               <div><p>Cost</p>
-               <input
-                 type="text"
-                 name="cost"
-                 placeholder="$"
-                 value={cost}
-                 onChange={(e) => setCost(e.target.value)}
-               ></input></div> : ""}
+              {serviceType === 'paid' ? (
+                <div>
+                  <p>Cost</p>
+                  <input
+                    type="text"
+                    name="cost"
+                    placeholder="$"
+                    value={cost}
+                    onChange={(e) => setCost(e.target.value)}
+                  ></input>
+                </div>
+              ) : (
+                ''
+              )}
 
               <p className="modal_file">Upload Image</p>
               <input
@@ -248,22 +269,24 @@ const BookModalPro1 = () => {
               <button className="buttn" type="button" onClick={handleSubmit}>
                 {buttonMessage}
               </button>
-              </div>
             </div>
           </div>
-        <Footer/>
+        </div>
+        <Footer />
       </div>
     );
-  
   else
     return (
       <div>
-        <Navigation/>
+        <Navigation />
         <Box mt={20}></Box>
-        <div className="error_login"> <h1>You must be logged in to post a book!</h1></div>
+        <div className="error_login">
+          {' '}
+          <h1>You must be logged in to post a book!</h1>
+        </div>
 
         <Box mt={80}></Box>
-        <Footer/>
+        <Footer />
       </div>
     );
 };
