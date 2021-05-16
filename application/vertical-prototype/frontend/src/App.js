@@ -18,6 +18,7 @@ import ViewBook from './pages/ViewBook';
 import TermsOfUse from './pages/TermsOfUse';
 import Explore from './pages/ExploreNow';
 import BookModalPro1 from './pages/BookModal';
+import Admin from './pages/Admin'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -65,22 +66,14 @@ const App = () => {
           <Route path="/termsofuse" component={TermsOfUse} />
           <Route path="/explore" component={Explore} />
           <Route path="/postbook" component={BookModalPro1} />
+          <Route path="/admin" component={Admin} />
 
           <ProtectedRoute
             path="/buyService"
             isLoggedIn={isLoggedIn}
             component={ServiceBuy}
           />
-          <ProtectedRoute
-            path="/buyService"
-            isLoggedIn={isLoggedIn}
-            component={ServiceBuy}
-          />
-          {/* <ProtectedRoute
-            path="/profile"
-            isLoggedIn={isLoggedIn}
-            component={Profile}
-          /> */}
+          
         </Switch>
       </Router>
     </div>

@@ -9,7 +9,7 @@ import './ViewBook.css';
 import Navigation from '../components/Navigation';
 import Button from '@material-ui/core/Button';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCartItem,
@@ -19,12 +19,15 @@ import {
 } from '../redux/actions/userActions';
 import axios from 'axios';
 import SendIcon from '@material-ui/icons/Send';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 
 const ViewBook = () => {
   // get array object from redux store
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
   const loggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const userid = useSelector((state) => state.userReducer.userid);
+  const email= useSelector((state) => state.userReducer.email);
 
   const [comment, setComment] = React.useState('');
   const [comments, setComments] = React.useState([]);
@@ -33,7 +36,7 @@ const ViewBook = () => {
 
   // to dispatch value to redux store
   const dispatch = useDispatch();
-
+const history = useHistory();
   // auto scroll down whenever a new comment is added
   const ScrollMessages = ({ messages }) => {
     const lastMessageRef = React.useRef(null);
@@ -74,11 +77,49 @@ const ViewBook = () => {
 
     setComment('');
 
-    // fetchComments();
+    fetchComments();
   };
 
-  let postID = viewBooks[viewBooks.length - 1].id;
+  
 
+  const handleDelete =  () => { // endpoint: /delete_book
+  
+    console.log(viewBooks[viewBooks.length - 1].id)
+    console.log(viewBooks[viewBooks.length - 1].type)
+
+    const deletebook = {
+      book_id: viewBooks[viewBooks.length - 1].id,
+      table_name: viewBooks[viewBooks.length - 1].type
+    }
+
+    axios.post((
+      `http://${window.location.hostname}:3001/delete_book`), deletebook)
+    
+      .then(response => {
+      console.log(response.data.msg)
+      store.addNotification({
+        title: '',
+        message: response.data.msg,
+        type: 'success',
+        insert: 'top',
+        container: 'top-center',
+        dismiss: {
+          duration: 2000,
+          showIcon: true,
+        },
+      });
+    }).catch(error => console.log(error));
+
+    console.log(viewBooks[viewBooks.length - 1].type)
+    setTimeout(() => {
+      history.goBack(); // redirect to book service after profile is deleted
+     }, 2000);
+  
+  }
+
+
+
+  let postID = viewBooks[viewBooks.length - 1].id;
   async function fetchComments() {
     console.log(postID);
     const res = await axios.get(
@@ -140,6 +181,8 @@ const ViewBook = () => {
     <div className="viewbook_container">
       {/** Navigation Bar */}
       <Navigation />
+      <ReactNotification />
+
       <div className="viewbook">
         <div className="viewbook_box">
           <div className="viewbook_left">
@@ -191,6 +234,16 @@ const ViewBook = () => {
               Add to cart
             </Button>
 
+
+
+             {/** Admin Email */}
+            {email === "admin@isharebooks.com" && (
+              <Button variant="contained" className ="delete__book" onClick={handleDelete} >
+              Delete
+            </Button>
+            ) }
+            
+
             <div
               key=""
               className="comment-box"
@@ -233,11 +286,11 @@ const ViewBook = () => {
                     className="comment__box"
                     onChange={(e) => setComment(e.target.value)}
                   />
-                  <div classname="commentbox-buttons">
+                  <div className="commentbox-buttons">
                     <Button
                       onClick={handleComment}
                       id="addcomment"
-                      classname="comment-button"
+                      className="comment-button"
                     >
                       {' '}
                       <SendIcon></SendIcon>

@@ -116,9 +116,7 @@ const BookModalPro1 = () => {
     if (urlpath.includes('paid')) {
       //  i.e. /postbook/paid
       setServiceType('paid');
-      setImagePlaceholderMessage(
-        'Sell Your Book To Help Your Friends For Easy Access!'
-      );
+      setImagePlaceholderMessage('Sell Your Book To Help Your Friend Succeed!');
       setPostHeader('Sell your Book!');
       setButtonMessage('Sell');
     } else if (urlpath.includes('trade')) {
