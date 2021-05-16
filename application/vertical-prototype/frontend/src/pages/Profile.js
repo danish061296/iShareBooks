@@ -8,7 +8,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import ReactStars from 'react-rating-stars-component';
-import { Link as LinkR } from 'react-router-dom';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserRating } from '../redux/actions/userActions';
@@ -18,6 +18,8 @@ import Card from '../components/Card';
 import './Profile.css';
 import Footer from '../components/Footer';
 import Tippy from '@tippyjs/react';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 
 export default function Profile() {
   // using useState hook to define local state variables
@@ -30,6 +32,7 @@ export default function Profile() {
 
   // to dispatch values to redux store
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // getting objects from redux
   const username = useSelector((state) => state.userReducer.username);
@@ -39,6 +42,7 @@ export default function Profile() {
   const sellerEmail = useSelector((state) => state.userReducer.sellerEmail);
   const userid = useSelector((state) => state.userReducer.userid);
   const userRating = useSelector((state) => state.userReducer.userRating);
+
   // const userPosts = useSelector((state) => state.userReducer.userPosts);
 
   // defining breakpoints for multiple screen sizes
@@ -118,10 +122,42 @@ export default function Profile() {
     }, 1000);
   }, []);
 
+const handleDelete =  () => { // endpoint: /delete_profile
+  
+  const deleteid = {
+    id: sellerid
+  }
+  axios.post((
+    `http://${window.location.hostname}:3001/delete_profile`) , deleteid).then(response => {
+    console.log(response.data.msg)
+    store.addNotification({
+      title: '',
+      message: response.data.msg,
+      type: 'success',
+      insert: 'top',
+      container: 'top-center',
+      dismiss: {
+        duration: 2000,
+        showIcon: true,
+      },
+    });
+
+
+  }).catch(error => console.log(error));
+
+setTimeout(() => {
+ history.goBack(); // redirect to landing page after profile is deleted
+}, 2000);
+
+}
+
+
   return (
     <div>
       {/** Navigation bar */}
       <Navigation />
+      <ReactNotification />
+
       {/** display seller's profile */}
       {name && (
         <div className="profile__Container">
@@ -173,6 +209,23 @@ export default function Profile() {
                   </div>
                 )}
               </div>
+            </div>
+            <div className="button_container">
+              {email && (
+                <LinkR
+                style={{
+                  color: 'white',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                }}
+                to="/profile"
+              >
+              
+                  <Button className="delete_button"  onClick={handleDelete}>Delete</Button>
+               
+              </LinkR>
+              )}
+              
             </div>
           </div>
 
@@ -264,7 +317,8 @@ export default function Profile() {
               </div>
             </div>
             <div className="button_container">
-              <LinkR
+              {email && (
+                <LinkR
                 style={{
                   color: 'white',
                   textDecoration: 'none',
@@ -272,13 +326,13 @@ export default function Profile() {
                 }}
                 to="/profile"
               >
-                <Tippy
-                  content="Will be implemented in future"
-                  placement="bottom"
-                >
-                  <Button className="delete_button">Delete</Button>
-                </Tippy>
+              
+                  <Button className="delete_button" onClick={handleDelete}>Delete</Button>
+            
+               
               </LinkR>
+              )}
+              
             </div>
           </div>
 

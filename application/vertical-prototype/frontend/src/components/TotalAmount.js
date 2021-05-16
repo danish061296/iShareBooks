@@ -16,19 +16,34 @@ const TotalAmount = () => {
   const handleCheckout = async () => {
     console.log('CART');
     console.log(cart);
+  
+
+    const getTotalAmount = getCartTotal(cart).toFixed(2);
+    const commission = 0.35;
+    
+    console.log(commission);
+    console.log(getTotalAmount);
 
     if (!isLoggedIn) {
       alert('You need to log in first to checkout your books!');
     } else {
+const totalObject = {
+  cart: cart,
+  totalAmount: getTotalAmount,
+  commission: commission
+}
+
+
       const res = await axios.post(
         `http://${window.location.hostname}:3001/pay`,
-        cart
+        totalObject
       );
       window.open(res.data);
       if (res.data) {
         dispatch(setDeleteCart());
         history.push('./rating');
       }
+      
 
     }
   };

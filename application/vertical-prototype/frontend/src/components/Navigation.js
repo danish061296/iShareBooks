@@ -28,6 +28,7 @@ const Navigation = () => {
   const cart = useSelector((state) => state.userReducer.cart);
   const id = useSelector((state) => state.userReducer.userid);
   const username = useSelector((state) => state.userReducer.username);
+  const email = useSelector((state) => state.userReducer.email);
 
   const history = useHistory();
 
@@ -74,6 +75,10 @@ const Navigation = () => {
     } else if (e === 'home') {
       history.push('/');
     }
+    else if (e === 'admin'){
+      history.push('/admin');
+
+    }
   };
 
   return (
@@ -119,6 +124,11 @@ const Navigation = () => {
                 <Dropdown.Item eventKey="home">Home</Dropdown.Item>
 
                 <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
+                
+                {email && (
+                                  <Dropdown.Item eventKey="admin">Admin</Dropdown.Item>
+
+                )}
                 <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
               </DropdownButton>
             </div>

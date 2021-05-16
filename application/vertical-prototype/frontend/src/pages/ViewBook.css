@@ -41,6 +41,9 @@
   background-color: #f7f8fa;
   height: 90%;
 }
+.delete__book {
+  margin-left: 20px !important;
+}
 
 .viewbook_title {
   font-size: 35px;
@@ -230,4 +233,9 @@ textarea {
 .comment__username {
   margin-left: 8px;
   font-weight: 600;
+}
+
+.delete__button {
+  color: red !important;
+  margin-left: 10px !important;
 }
