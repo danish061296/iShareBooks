@@ -17,15 +17,19 @@ paypal.configure({
 /* reciving a post request from the frontebd */
 router.post('/pay', (req, res) => {
   //getting the array of data from the frontend
-  let arrayOfBooks = req.body;
+  let totalAmount = req.body.totalAmount;
+  let commission = req.body.commission;
+  console.log(totalAmount);
+  console.log(commission);
+  let arrayOfBooks = req.body.cart;
   arrayOfBooks.push({
-    title: "iShareBooks Service Fee",
+    title: 'iShareBooks Service Fee',
     price: 0.35,
-    name: "iShareBooks, LLC",
-    department: "",
-    author: "",
-    isbn: "",
-    image: "",
+    name: 'iShareBooks, LLC',
+    department: '',
+    author: '',
+    isbn: '',
+    image: '',
     id: 0,
   });
   console.log(arrayOfBooks);
@@ -54,7 +58,6 @@ router.post('/pay', (req, res) => {
 
   //filtering data from the paymentData to make it work for paypal
   paymentData.forEach((d) => {
-
     d.name = d.title;
     delete d.id;
     delete d.author;
@@ -65,7 +68,6 @@ router.post('/pay', (req, res) => {
     delete d.type;
     delete d.condition;
   });
-
 
   /*PAYMENT INFO ARRAY */
   const create_payment_json = {
@@ -125,7 +127,6 @@ router.post('/pay', (req, res) => {
               bookId,
             ];
 
-
             data.pop();
 
             let sqlQuery = ` INSERT INTO soldBooks 
@@ -182,6 +183,4 @@ router.get('/cancel', (req, res) => {
   res.send('canceled');
 });
 
-
 module.exports = router;
-

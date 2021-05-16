@@ -4,7 +4,7 @@ import './TotalAmount.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getCartTotal } from '../redux/reducers/userReducer';
-import { setDeleteCart } from '../redux/actions/userActions'; 
+import { setDeleteCart } from '../redux/actions/userActions';
 
 const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
@@ -16,23 +16,21 @@ const TotalAmount = () => {
   const handleCheckout = async () => {
     console.log('CART');
     console.log(cart);
-  
 
     const getTotalAmount = getCartTotal(cart).toFixed(2);
     const commission = 0.35;
-    
+
     console.log(commission);
     console.log(getTotalAmount);
 
     if (!isLoggedIn) {
       alert('You need to log in first to checkout your books!');
     } else {
-const totalObject = {
-  cart: cart,
-  totalAmount: getTotalAmount,
-  commission: commission
-}
-
+      const totalObject = {
+        cart: cart,
+        totalAmount: getTotalAmount,
+        commission: commission,
+      };
 
       const res = await axios.post(
         `http://${window.location.hostname}:3001/pay`,
@@ -43,8 +41,6 @@ const totalObject = {
         dispatch(setDeleteCart());
         history.push('./rating');
       }
-      
-
     }
   };
 

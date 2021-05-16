@@ -42,6 +42,8 @@
   flex-direction: column;
 }
 
-.caro {
-  width: 350px !important;
+@media screen and (max-width: 768px) {
+  .caro {
+    width: 350px !important;
+  }
 }
