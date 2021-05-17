@@ -86,10 +86,10 @@ function Admin() {
 
   React.useEffect(() => {
     axios
-      .get(`http://${window.location.hostname}:3001/total_books`)
+      .get(`http://${window.location.hostname}:3001/sold_books`)
       .then((response) => {
         console.log(response.data);
-        setTotalBooks(response.data.results);
+        setTotalBooks(response.data);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -98,8 +98,16 @@ function Admin() {
     axios
       .get(`http://${window.location.hostname}:3001/total_commission`)
       .then((response) => {
-        console.log(response.data);
+        console.log(totalAmount);
         setCommission(response.data.commission);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
+  React.useEffect(() => {
+    axios
+      .get(`http://${window.location.hostname}:3001/total_books`)
+      .then((response) => {
         setTotalAmount(response.data.totalAmount);
       })
       .catch((e) => console.log(e));
@@ -123,18 +131,18 @@ function Admin() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {totalBooks.map((row) => (
                     <StyledTableRow key={row.name}>
-                      <StyledTableCell align="center">3</StyledTableCell>
+                      <StyledTableCell align="center">{row.id}</StyledTableCell>
                       <StyledTableCell align="center">
-                        {row.name}
+                        {row.title}
                       </StyledTableCell>
 
                       <StyledTableCell align="right">
-                        {row.calories}
+                        ${row.price}
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        {row.fat}
+                        {row.post_time}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -155,7 +163,7 @@ function Admin() {
                   component="h2"
                   className="total__card__amount"
                 >
-                  $456.84
+                  ${totalAmount}
                 </Typography>
               </CardContent>
             </Card>
@@ -170,7 +178,7 @@ function Admin() {
                   component="h2"
                   className="total__card__amount"
                 >
-                  $34.20
+                  ${commission}
                 </Typography>
               </CardContent>
             </Card>
