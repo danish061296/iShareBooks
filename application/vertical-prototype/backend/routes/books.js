@@ -6,6 +6,50 @@ const router = express.Router();
 
 router.post('/allbooks', (req, res) => {});
 
+router.get('/total_commission', (req, res) => {
+  var query =  `SELECT SUM(service_fee) FROM commissions`;
+  db.query(query, (err, result) => {
+    if (err)
+      console.log(err);
+  })
+})
+
+router.get('/total_books', (req, res) => {
+  var query = `SELECT * FROM soldBooks`;
+  db.query(query, (err, result) => {
+    if (err)
+      console.log(err);
+  })
+})
+
+/**
+ * Deletes a book from a given book table
+ */
+router.post('/delete_book', (req, res) => {
+  const { book_id, table_name } = req.body;
+  console.log(book_id, table_name);
+  var query = `DELETE FROM ${table_name} WHERE book_id = ?`;
+  var data = [book_id];
+
+  db.query(query, [data], (err, result) => {
+    if (err) {
+      console.log("Error deleting book");
+      console.log(err);
+      res.send({
+        bookDeleted: false,
+        msg: 'The book was not deleted.',
+      });
+    }
+    else {
+      res.send({
+        bookDeleted: true,
+        msg: 'The book was deleted!',
+      });
+    }
+  });
+
+});
+
 router.post('/search', (req, res) => {
   console.log('SEARCH');
   //freebooks
