@@ -27,7 +27,7 @@ const ViewBook = () => {
   const viewBooks = useSelector((state) => state.userReducer.viewBooks);
   const loggedIn = useSelector((state) => state.userReducer.isLoggedIn);
   const userid = useSelector((state) => state.userReducer.userid);
-  const email= useSelector((state) => state.userReducer.email);
+  const email = useSelector((state) => state.userReducer.email);
 
   const [comment, setComment] = React.useState('');
   const [comments, setComments] = React.useState([]);
@@ -36,7 +36,7 @@ const ViewBook = () => {
 
   // to dispatch value to redux store
   const dispatch = useDispatch();
-const history = useHistory();
+  const history = useHistory();
   // auto scroll down whenever a new comment is added
   const ScrollMessages = ({ messages }) => {
     const lastMessageRef = React.useRef(null);
@@ -80,44 +80,41 @@ const history = useHistory();
     fetchComments();
   };
 
-  
+  const handleDelete = () => {
+    // endpoint: /delete_book
 
-  const handleDelete =  () => { // endpoint: /delete_book
-  
-    console.log(viewBooks[viewBooks.length - 1].id)
-    console.log(viewBooks[viewBooks.length - 1].type)
+    console.log(viewBooks[viewBooks.length - 1].id);
+    console.log(viewBooks[viewBooks.length - 1].type);
 
     const deletebook = {
       book_id: viewBooks[viewBooks.length - 1].id,
-      table_name: viewBooks[viewBooks.length - 1].type
-    }
+      table_name: viewBooks[viewBooks.length - 1].type,
+    };
 
-    axios.post((
-      `http://${window.location.hostname}:3001/delete_book`), deletebook)
-    
-      .then(response => {
-      console.log(response.data.msg)
-      store.addNotification({
-        title: '',
-        message: response.data.msg,
-        type: 'success',
-        insert: 'top',
-        container: 'top-center',
-        dismiss: {
-          duration: 2000,
-          showIcon: true,
-        },
-      });
-    }).catch(error => console.log(error));
+    axios
+      .post(`http://${window.location.hostname}:3001/delete_book`, deletebook)
 
-    console.log(viewBooks[viewBooks.length - 1].type)
+      .then((response) => {
+        console.log(response.data.msg);
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      })
+      .catch((error) => console.log(error));
+
+    console.log(viewBooks[viewBooks.length - 1].type);
     setTimeout(() => {
       history.goBack(); // redirect to book service after profile is deleted
-     }, 2000);
-  
-  }
-
-
+    }, 2000);
+  };
 
   let postID = viewBooks[viewBooks.length - 1].id;
   async function fetchComments() {
@@ -234,15 +231,16 @@ const history = useHistory();
               Add to cart
             </Button>
 
-
-
-             {/** Admin Email */}
-            {email === "admin@isharebooks.com" && (
-              <Button variant="contained" className ="delete__book" onClick={handleDelete} >
-              Delete
-            </Button>
-            ) }
-            
+            {/** Admin Email */}
+            {email === 'admin@isharebooks.com' && (
+              <Button
+                variant="contained"
+                className="delete__book"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            )}
 
             <div
               key=""

@@ -16,6 +16,8 @@ paypal.configure({
 
 /* reciving a post request from the frontebd */
 router.post('/pay', (req, res) => {
+  console.log(req.body);
+
   //getting the array of data from the frontend
   let totalAmount = req.body.totalAmount;
   let commission = req.body.commission;
@@ -130,13 +132,21 @@ router.post('/pay', (req, res) => {
             data.pop();
 
             let sqlQuery = ` INSERT INTO soldBooks 
-            (title, price, department,author,isbn,image,id)
+            (title, price)
              VALUES (?);DELETE FROM posts WHERE id  = ?; `;
-            db.query(sqlQuery, [data, bookId], (err, results) => {
+            db.query(sqlQuery, [bookTitle, bookCost], (err, results) => {
               if (err) {
                 console.log(err, 'error inserting data');
               } else {
                 console.log(results);
+              }
+            });
+
+            // Used for admin to track commissions for each transaction
+            sqlQuery = `INSERT INTO commissions (total, service_fee) VALUES (?)`;
+            db.query(sqlQuery, [totalAmount, Commission], (err, results) => {
+              if (err) console.log(err);
+              else {
               }
             });
           }

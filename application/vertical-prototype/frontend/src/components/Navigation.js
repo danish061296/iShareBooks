@@ -74,10 +74,8 @@ const Navigation = () => {
       console.log(isLoggedIn);
     } else if (e === 'home') {
       history.push('/');
-    }
-    else if (e === 'admin'){
+    } else if (e === 'admin') {
       history.push('/admin');
-
     }
   };
 
@@ -124,10 +122,9 @@ const Navigation = () => {
                 <Dropdown.Item eventKey="home">Home</Dropdown.Item>
 
                 <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
-                
-                {email && (
-                                  <Dropdown.Item eventKey="admin">Admin</Dropdown.Item>
 
+                {email === 'admin@isharebooks.com' && (
+                  <Dropdown.Item eventKey="admin">Admin</Dropdown.Item>
                 )}
                 <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
               </DropdownButton>

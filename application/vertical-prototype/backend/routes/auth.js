@@ -88,6 +88,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -95,6 +96,7 @@ router.post('/login', async (req, res) => {
         .status(400)
         .send({ message: 'Please enter email and password' });
     }
+    
     db.query(
       'SELECT * FROM users WHERE email = ?',
       [email],
