@@ -122,35 +122,34 @@ export default function Profile() {
     }, 1000);
   }, []);
 
-const handleDelete =  () => { // endpoint: /delete_profile
-  
-  const deleteid = {
-    id: sellerid
-  }
-  axios.post((
-    `http://${window.location.hostname}:3001/delete_profile`) , deleteid).then(response => {
-    console.log(response.data.msg)
-    store.addNotification({
-      title: '',
-      message: response.data.msg,
-      type: 'success',
-      insert: 'top',
-      container: 'top-center',
-      dismiss: {
-        duration: 2000,
-        showIcon: true,
-      },
-    });
+  const handleDelete = () => {
+    // endpoint: /delete_profile
 
+    const deleteid = {
+      id: sellerid,
+    };
+    axios
+      .post(`http://${window.location.hostname}:3001/delete_profile`, deleteid)
+      .then((response) => {
+        console.log(response.data.msg);
+        store.addNotification({
+          title: '',
+          message: response.data.msg,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      })
+      .catch((error) => console.log(error));
 
-  }).catch(error => console.log(error));
-
-setTimeout(() => {
- history.goBack(); // redirect to landing page after profile is deleted
-}, 2000);
-
-}
-
+    setTimeout(() => {
+      history.goBack(); // redirect to landing page after profile is deleted
+    }, 2000);
+  };
 
   return (
     <div>
@@ -210,23 +209,22 @@ setTimeout(() => {
                 )}
               </div>
             </div>
-            <div className="button_container">
-              {email && (
+            {email === 'admin@isharebooks.com' && (
+              <div className="button_container">
                 <LinkR
-                style={{
-                  color: 'white',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-                to="/profile"
-              >
-              
-                  <Button className="delete_button"  onClick={handleDelete}>Delete</Button>
-               
-              </LinkR>
-              )}
-              
-            </div>
+                  style={{
+                    color: 'white',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                  }}
+                  to="/profile"
+                >
+                  <Button className="delete_button" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                </LinkR>
+              </div>
+            )}
           </div>
 
           <div className="user_books_container">
@@ -316,24 +314,22 @@ setTimeout(() => {
                 )}
               </div>
             </div>
-            <div className="button_container">
-              {email && (
+            {email === 'admin@isharebooks.com' && (
+              <div className="button_container">
                 <LinkR
-                style={{
-                  color: 'white',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-                to="/profile"
-              >
-              
-                  <Button className="delete_button" onClick={handleDelete}>Delete</Button>
-            
-               
-              </LinkR>
-              )}
-              
-            </div>
+                  style={{
+                    color: 'white',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                  }}
+                  to="/profile"
+                >
+                  <Button className="delete_button" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                </LinkR>
+              </div>
+            )}
           </div>
 
           <div className="user_books_container">

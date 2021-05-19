@@ -231,7 +231,7 @@ const ViewBook = () => {
               Add to cart
             </Button>
 
-            {/** Admin Email */}
+            {/** Show delete button for admin*/}
             {email === 'admin@isharebooks.com' && (
               <Button
                 variant="contained"
