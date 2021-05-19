@@ -19,11 +19,19 @@ router.post('/pay', (req, res) => {
   console.log(req.body);
 
   //getting the array of data from the frontend
+<<<<<<< HEAD
   let totalAmount = req.body.totalAmount;
   let commission = req.body.commission;
   console.log(totalAmount);
   console.log(commission);
   let arrayOfBooks = req.body.cart;
+=======
+
+  let arrayOfBooks = req.body.cart;
+  let totalAmount = req.body.totalAmount;
+  let commission = req.body.commission;
+
+>>>>>>> 8bbb82cf9dce7fff6049aeb5dd80b17dce9b6703
   arrayOfBooks.push({
     title: 'iShareBooks Service Fee',
     price: 0.35,
@@ -143,9 +151,16 @@ router.post('/pay', (req, res) => {
             });
 
             // Used for admin to track commissions for each transaction
+<<<<<<< HEAD
             sqlQuery = `INSERT INTO commissions (total, service_fee) VALUES (?)`;
             db.query(sqlQuery, [totalAmount, Commission], (err, results) => {
               if (err) console.log(err);
+=======
+            sqlQuery = `INSERT INTO commissions (total, service_fee) VALUES (?, ?)`;
+            db.query(sqlQuery, [totalAmount, commission], (err, results) => {
+              if (err)
+                console.log(err)
+>>>>>>> 8bbb82cf9dce7fff6049aeb5dd80b17dce9b6703
               else {
               }
             });

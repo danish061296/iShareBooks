@@ -4,23 +4,42 @@ const fs = require('fs');
 //var FileReader = require('filereader');
 const router = express.Router();
 
-router.post('/allbooks', (req, res) => {});
-
 router.get('/total_commission', (req, res) => {
-  var query =  `SELECT SUM(service_fee) FROM commissions`;
+  var query =  `SELECT SUM(service_fee) as commission FROM commissions`;
   db.query(query, (err, result) => {
-    if (err)
+    if (err) {
       console.log(err);
-  })
-})
+    } else {
 
-router.get('/total_books', (req, res) => {
+      res.send(result[0]);
+
+    }
+  })
+});
+
+router.get('/sold_books', (req, res) => {
   var query = `SELECT * FROM soldBooks`;
   db.query(query, (err, result) => {
-    if (err)
+    if (err) {
       console.log(err);
-  })
-})
+    } else {
+
+      res.send(result);
+
+    }
+  });
+});
+
+router.get('/total_books', (req, res) => {
+  var query = `SELECT SUM(price) as totalAmount FROM soldBooks`;
+  db.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result[0]);
+    }
+  });
+});
 
 /**
  * Deletes a book from a given book table
