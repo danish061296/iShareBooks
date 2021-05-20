@@ -22,55 +22,43 @@ const About = () => {
   const dispatch = useDispatch();
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const searchType = useSelector((state) => state.userReducer.searchType);
+  const posts = useSelector((state) => state.userReducer.posts);
+  const [filterBy, setFilterBy] = React.useState('Filter');
 
   const handleKeyDown = (e) => {
+
     const search = {
+      searchTable: 'paidbooks',
+      searchType: filterBy,
       searchField: searchField,
-      searchType: searchType,
     };
 
     if (e.key === 'Enter') {
-      Axios.get(`http://${window.location.hostname}:3001/search`, search)
-        .then((response) => {
-          if (response.data) {
-            console.log(response.data);
-            if (response.data.msg) {
-              //sending data to redux
-              dispatch(setrandomMsg(response.data.msg));
-              dispatch(setPosts(response.data.results));
-              window.scrollBy({
-                top: 500,
-                behavior: 'smooth',
-              });
-            } else {
-              console.log('Data coming from search click');
-              dispatch(setPosts(response.data));
-              dispatch(setrandomMsg(''));
-              window.scrollBy({
-                top: 500,
-                behavior: 'smooth',
-              });
-            }
-          } else {
-            dispatch(setPosts([]));
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+
+      Axios.post(`http://${window.location.hostname}:3001/search`, search).then((response) => {
+        console.log(response);
+        if (!response.data.msg) {
+          dispatch(setPosts(response.data));
+          setrandomMsg(`Showing results for ${search}`);
+        }
+        else {
+          dispatch(setPosts(response.data.results));
+          setrandomMsg(`Sorry, no results were found. Suggestions: `);
+        }
+      });
     }
   };
 
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
-    dispatch(setSearchType(e));
+    setFilterBy(e);
   };
 
   const handleClick = () => {
     const search = {
       searchField: searchField,
-      searchType: searchType,
+      searchType: filterBy,
+      searchTable: 'paidbooks',
     };
 
     Axios.get('http://localhost:3001/search', search)
