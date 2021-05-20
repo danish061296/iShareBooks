@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import './RatingMessage.css';
 import Footer from '../components/Footer';
 import UserRating from './UserRating';
+import { Box } from '@material-ui/core';
 
 export default function RatingMessage() {
   // generating receipt id
@@ -20,24 +21,25 @@ export default function RatingMessage() {
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
   const username = useSelector((state) => state.userReducer.username);
-  const ratingSeller = useSelector((state) => state.userReducer.ratingSeller);
 
-  console.log('Rating danish ' + ratingSeller);
-  // console.log('ohhh ratings ' + JSON.parse(ratings));
+  var stored_ratings = JSON.parse(localStorage.getItem('rating_store'));
+  var ratings_array = []
+  
+  for (const [key, value] of Object.entries(stored_ratings)) {
+    ratings_array.push({'id': key, 'name': value});
+  }
 
   // creating array to store distinct seller names
   var filtered = [];
 
   // filter duplilcate sellers and add distinct seller to a new array
-  var filtered_ratings = ratings.filter(function (e, i) {
-    if (filtered.includes(ratings[i].name)) {
+  var filtered_ratings = ratings_array.filter(function (e, i) {
+    if (filtered.includes(ratings_array[i].name)) {
     } else {
-      filtered.push(ratings[i].name);
-      return ratings[i];
+      filtered.push(ratings_array[i].name);
+      return ratings_array[i];
     }
   });
-
-  // console.log('ohhh ratings ' + JSON.parse(filtered_ratings));
 
   return (
     <div className="ratingmessage">
@@ -47,12 +49,8 @@ export default function RatingMessage() {
           <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
 
           <p className="confirmation__text">
-            Hi{' '}
-            <strong>
-              {username.charAt(0).toUpperCase() + username.slice(1)}
-            </strong>
-            , your confirmation number is #{confirmation_num}. A confirmation
-            has been sent to your email.
+            Hi <strong>{username}</strong>, your confirmation number is #
+            {confirmation_num}. A confirmation has been sent to your email.
           </p>
           <p className="confirmation__text2">
             Please rate one or more sellers if you liked their services.
@@ -67,6 +65,7 @@ export default function RatingMessage() {
       </div>
 
       <div>
+        <Box mt={10}></Box>
         <Footer />
       </div>
     </div>

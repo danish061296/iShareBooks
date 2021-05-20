@@ -95,6 +95,7 @@ const BookGrid = ({
         image,
         price,
         type,
+        sellerid,
         name,
       })
     );
@@ -115,25 +116,7 @@ const BookGrid = ({
       })
     );
 
-    // setData(updatedCarsArray);
 
-    // setData({
-    //   ratingData: [
-    //     ...ratingData,
-    //     {
-    //       id,
-    //       title,
-    //       author,
-    //       department,
-    //       isbn,
-    //       condition,
-    //       image,
-    //       price,
-    //       type,
-    //       name,
-    //     },
-    //   ],
-    // });
   };
   // localStorage.setItem(
   //   'ratings',

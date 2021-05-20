@@ -18,6 +18,20 @@ const TotalAmount = () => {
   const dispatch = useDispatch();
 
   const handleCheckout = async () => {
+
+    console.log('CART');
+    console.log(cart);
+    
+    var cart_dict = {}
+
+    cart.forEach(element => {
+      cart_dict[element.sellerid] = element.name;
+    });
+
+    localStorage.setItem('rating_store', JSON.stringify(cart_dict));
+
+
+
     const getTotalAmount = getCartTotal(cart).toFixed(2);
     const commission = 0.35;
 
@@ -30,6 +44,8 @@ const TotalAmount = () => {
         commission: commission,
       };
 
+
+
       const res = await axios.post(
         `http://${window.location.hostname}:3001/pay`,
         totalObject
@@ -37,7 +53,7 @@ const TotalAmount = () => {
       window.open(res.data);
       if (res.data) {
         dispatch(setDeleteCart());
-        history.push('./rating');
+        history.push('./thankyou');
       }
     }
   };
