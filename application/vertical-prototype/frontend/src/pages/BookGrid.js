@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 import './BuyBooks.css';
 
 import {
@@ -31,6 +32,8 @@ const BookGrid = ({
   name,
   sellerEmail,
 }) => {
+  const [ratingData, setData] = useState([]);
+
   // if price not a number, set price to a numeric value
   if (isNaN(price)) {
     price = 0.0;
@@ -75,7 +78,7 @@ const BookGrid = ({
     );
 
     // redirect to viewbook page
-    return <Redirect to="/viewbook" />;
+    return <Redirect to='/viewbook' />;
   };
 
   // store book post info into cart when a book is added to cart
@@ -111,19 +114,28 @@ const BookGrid = ({
     //   })
     // );
 
-    localStorage.setItem('ratings', {
-      id,
-      title,
-      author,
-      department,
-      isbn,
-      condition,
-      image,
-      price,
-      type,
-      name,
+    const ratingsArray = [];
+    setData((prev) => {
+      return [
+        ...prev,
+        {
+          id,
+          title,
+          author,
+          department,
+          isbn,
+          condition,
+          image,
+          price,
+          type,
+          name,
+        },
+      ];
     });
   };
+  localStorage.setItem('ratings', JSON.stringify(ratingData));
+
+  console.log('here is ', ratingData);
 
   // update email that's associated to selected book whose details are to be displayed
   dispatch(setSellerEmail(sellerEmail));
@@ -133,47 +145,47 @@ const BookGrid = ({
       {/** Display book grid of paid books */}
       {price !== 0 && (
         <div
-          className="post__book__details"
+          className='post__book__details'
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/viewbook" onClick={handleBookDetail}>
+          <Link to='/viewbook' onClick={handleBookDetail}>
             <img
-              style={{ height: 230, width: 170 }}
+              style={{height: 230, width: 170}}
               src={`data:image/jpeg;base64,${image}`}
-              alt="book_image"
-              className="post__book__image"
+              alt='book_image'
+              className='post__book__image'
             />
           </Link>
-          <div className="button__buy" onClick={handleAddCart}>
-            <span className="button__text">ADD TO CART</span>
+          <div className='button__buy' onClick={handleAddCart}>
+            <span className='button__text'>ADD TO CART</span>
           </div>
 
-          <p className="post__book__price">${price}</p>
+          <p className='post__book__price'>${price}</p>
         </div>
       )}
 
       {/** Dipslay book grid of trade and free books */}
       {price === 0 && (
         <div
-          className="post__book__details"
+          className='post__book__details'
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/viewbook" onClick={handleBookDetail}>
+          <Link to='/viewbook' onClick={handleBookDetail}>
             <img
-              style={{ height: 230, width: 170 }}
+              style={{height: 230, width: 170}}
               src={`data:image/jpeg;base64,${image}`}
-              alt="book_image"
+              alt='book_image'
               className={
                 mouseEnter ? 'post__book__image__hover' : 'post__book__image'
               }
             />
           </Link>
-          <div className="button__buy" onClick={handleAddCart}>
-            <span className="button__text">ADD TO CART</span>
+          <div className='button__buy' onClick={handleAddCart}>
+            <span className='button__text'>ADD TO CART</span>
           </div>
-          <p className="post__book__price">$0.00</p>
+          <p className='post__book__price'>$0.00</p>
         </div>
       )}
     </div>

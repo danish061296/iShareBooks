@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import './TotalAmount.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getCartTotal } from '../redux/reducers/userReducer';
-import { setDeleteCart } from '../redux/actions/userActions';
+import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import {getCartTotal} from '../redux/reducers/userReducer';
+import {setDeleteCart} from '../redux/actions/userActions';
 
 const TotalAmount = () => {
   const cart = useSelector((state) => state.userReducer.cart);
@@ -39,44 +39,44 @@ const TotalAmount = () => {
       window.open(res.data);
       if (res.data) {
         dispatch(setDeleteCart());
-        history.push('./rating');
+        // history.push('./rating');
       }
     }
   };
 
   return (
-    <div className="total__amount">
-      <div className="total__amount__top">
-        <div className="total__amount__summary">
-          <p className="summary">SUMMARY</p>
+    <div className='total__amount'>
+      <div className='total__amount__top'>
+        <div className='total__amount__summary'>
+          <p className='summary'>SUMMARY</p>
         </div>
-        <div className="subtotal__info">
-          <p className="subtotal">SUBTOTAL</p>
-          <p className="subtotal__cost">${getCartTotal(cart).toFixed(2)}</p>
+        <div className='subtotal__info'>
+          <p className='subtotal'>SUBTOTAL</p>
+          <p className='subtotal__cost'>${getCartTotal(cart).toFixed(2)}</p>
         </div>
-        <div className="shipping__info">
-          <p className="shipping">Service Fee</p>
-          <p className="shipping__cost">$0.35</p>
+        <div className='shipping__info'>
+          <p className='shipping'>Service Fee</p>
+          <p className='shipping__cost'>$0.35</p>
         </div>
-        <div className="shipping__info">
-          <p className="shipping">Estimated shipping & handling</p>
-          <p className="shipping__cost">$0.00</p>
+        <div className='shipping__info'>
+          <p className='shipping'>Estimated shipping & handling</p>
+          <p className='shipping__cost'>$0.00</p>
         </div>
-        <p className="shipping__standard">Standard: FREE</p>
+        <p className='shipping__standard'>Standard: FREE</p>
       </div>
-      <div className="total__amount__bottom">
-        <div className="tax__info">
-          <p className="tax">TAX</p>
-          <p className="tax__cost">$0.00</p>
+      <div className='total__amount__bottom'>
+        <div className='tax__info'>
+          <p className='tax'>TAX</p>
+          <p className='tax__cost'>$0.00</p>
         </div>
-        <div className="total__info">
-          <p className="total">TOTAL:</p>
-          <p className="total__cost">
+        <div className='total__info'>
+          <p className='total'>TOTAL:</p>
+          <p className='total__cost'>
             ${(getCartTotal(cart) + 0.35).toFixed(2)}
           </p>
         </div>
 
-        <button className="checkout__button" onClick={handleCheckout}>
+        <button className='checkout__button' onClick={handleCheckout}>
           {' '}
           CHECKOUT
         </button>

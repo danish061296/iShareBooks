@@ -4,18 +4,15 @@
  *  a seller name and their rating that is to be edited by the buyer.
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ReactStars from 'react-rating-stars-component';
 import './RatingMessage.css';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-const UserRating = ({ id, name }) => {
+const UserRating = ({id, name}) => {
   // to change styling of rated boxes after they have been rated
   const [clickedStyle, setClickedStyle] = useState({});
-
-  localStorage.setItem('ratingSeller', name);
-  localStorage.setItem('ratingSellerId', id);
 
   console.log('rating seller ' + localStorage.getItem('ratingSeller'));
 
@@ -53,12 +50,12 @@ const UserRating = ({ id, name }) => {
   };
 
   return (
-    <div className="stars_container" style={clickedStyle}>
-      <p className="stars__username">
+    <div className='stars_container' style={clickedStyle}>
+      <p className='stars__username'>
         {name == undefined ? '' : name.charAt(0).toUpperCase() + name.slice(1)}
         {/* {ratingSeller.charAt(0).toUpperCase() + ratingSeller.slice(1)} */}
       </p>
-      <div className="stars__class">
+      <div className='stars__class'>
         <ReactStars
           size={40}
           value={0}
@@ -66,7 +63,7 @@ const UserRating = ({ id, name }) => {
           edit={true}
           onChange={ratingChanged}
           numberOfStars={5}
-          name="rating"
+          name='rating'
         />
       </div>
     </div>

@@ -8,7 +8,7 @@
 
 import React from 'react';
 import Navigation from '../components/Navigation';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import './RatingMessage.css';
 import Footer from '../components/Footer';
 import UserRating from './UserRating';
@@ -38,13 +38,13 @@ export default function RatingMessage() {
   });
 
   return (
-    <div className="ratingmessage">
+    <div className='ratingmessage'>
       <Navigation />
-      <div className="main__container">
-        <div className="ratingmessage__top">
-          <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
+      <div className='main__container'>
+        <div className='ratingmessage__top'>
+          <h1 className='thankyou__text'>Thank You for Placing your Order.</h1>
 
-          <p className="confirmation__text">
+          <p className='confirmation__text'>
             Hi{' '}
             <strong>
               {username.charAt(0).toUpperCase() + username.slice(1)}
@@ -52,13 +52,13 @@ export default function RatingMessage() {
             , your confirmation number is #{confirmation_num}. A confirmation
             has been sent to your email.
           </p>
-          <p className="confirmation__text2">
+          <p className='confirmation__text2'>
             Please rate one or more sellers if you liked their services.
           </p>
         </div>
-        <div className="user__rating">
+        <div className='user__rating'>
           {ratings &&
-            filtered_ratings.map((rating, i) => {
+            JSON.parse(filtered_ratings).map((rating, i) => {
               return <UserRating key={i} id={rating.id} name={rating.name} />;
             })}
         </div>
