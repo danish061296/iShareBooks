@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../dataBase.js');
 const cors = require('cors');
 const paypal = require('paypal-rest-sdk');
+const e = require('express');
 const router = express.Router();
 router.use(cors());
 
@@ -34,10 +35,9 @@ router.post('/pay', (req, res) => {
     image: '',
     id: 0,
   });
-  console.log(arrayOfBooks);
+
   let booksPrice = 0.0; // Have to remove service fee -- paypal complaining that total amount does not add up
   arrayOfBooks.forEach((array) => {
-    console.log(array.type);
     if (array.type === 'paid') {
       booksPrice = 0;
     }
@@ -69,6 +69,7 @@ router.post('/pay', (req, res) => {
     delete d.image;
     delete d.type;
     delete d.condition;
+    delete d.sellerid;
   });
 
   /*PAYMENT INFO ARRAY */
@@ -108,6 +109,14 @@ router.post('/pay', (req, res) => {
       /*getting the link to direct to paypal after adding 
       the data to the soldBooks and deleting from the posts */
 
+      // Used for admin to track commissions for each transaction
+      var sqlQuery = `INSERT INTO commissions (total, service_fee) VALUES (?, ?)`;
+      db.query(sqlQuery, [totalAmount, commission], (err, results) => {
+        if (err) console.log(err);
+        else {
+        }
+      });
+
       payment.links.forEach((link) => {
         if (link.rel === 'approval_url') {
           for (let i = 0; i < arrayOfBooks.length; i++) {
@@ -131,9 +140,10 @@ router.post('/pay', (req, res) => {
 
             data.pop();
 
-            let sqlQuery = ` INSERT INTO soldBooks 
-            (title, price)
-             VALUES (?);DELETE FROM posts WHERE id  = ?; `;
+            if (bookTitle === "iShareBooks Service Fee") {}
+            else {
+            var sqlQuery = ` INSERT INTO soldBooks 
+            (title, price) VALUES (?, ?)`;
             db.query(sqlQuery, [bookTitle, bookCost], (err, results) => {
               if (err) {
                 console.log(err, 'error inserting data');
@@ -141,14 +151,8 @@ router.post('/pay', (req, res) => {
                 console.log(results);
               }
             });
+          }
 
-            // Used for admin to track commissions for each transaction
-            sqlQuery = `INSERT INTO commissions (total, service_fee) VALUES (?, ?)`;
-            db.query(sqlQuery, [totalAmount, commission], (err, results) => {
-              if (err) console.log(err);
-              else {
-              }
-            });
           }
 
           res.send(link.href);

@@ -94,6 +94,7 @@ const BookGrid = ({
         image,
         price,
         type,
+        sellerid,
         name,
       })
     );
