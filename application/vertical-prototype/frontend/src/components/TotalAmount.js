@@ -53,7 +53,7 @@ const TotalAmount = () => {
       window.open(res.data);
       if (res.data) {
         dispatch(setDeleteCart());
-        history.push('./rating');
+        history.push('./thankyou');
       }
     }
   };
