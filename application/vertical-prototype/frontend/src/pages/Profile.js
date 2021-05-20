@@ -163,7 +163,7 @@ export default function Profile() {
           <div className="top">
             <div className="image_container">
               <img
-                className="image_circle"
+                className="image_circle_seller"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96cmVJnAqOtv-ps5qnH-62RLVBh_ULqMD4PmBh1J6n7FTxlc7o4ZowyZT3C5v8Np_DKU&usqp=CAU"
               ></img>
             </div>
