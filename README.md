@@ -29,7 +29,7 @@
 
 # Credentials
 
-1. Server URL: http://35.215.84.127 Webpage: http://35.215.84.127:3000
+1. Server Webpage URL: http://35.215.84.127:3000
 2. SSH username: ubuntu
 3. SSH key - download team4SWE file
 4. Database URL: "team4books.c8c9xdcpvbxl.us-east-1.rds.amazonaws.com" port: 3306
