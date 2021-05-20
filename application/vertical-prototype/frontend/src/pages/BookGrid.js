@@ -96,20 +96,33 @@ const BookGrid = ({
     );
 
     // dispatch book post info into rating to retrieve data for seller review
-    dispatch(
-      setRating({
-        id,
-        title,
-        author,
-        department,
-        isbn,
-        condition,
-        image,
-        price,
-        type,
-        name,
-      })
-    );
+    // dispatch(
+    //   setRating({
+    //     id,
+    //     title,
+    //     author,
+    //     department,
+    //     isbn,
+    //     condition,
+    //     image,
+    //     price,
+    //     type,
+    //     name,
+    //   })
+    // );
+
+    localStorage.setItem('ratings', {
+      id,
+      title,
+      author,
+      department,
+      isbn,
+      condition,
+      image,
+      price,
+      type,
+      name,
+    });
   };
 
   // update email that's associated to selected book whose details are to be displayed

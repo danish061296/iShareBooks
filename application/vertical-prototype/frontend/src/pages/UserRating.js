@@ -8,11 +8,20 @@ import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import './RatingMessage.css';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const UserRating = ({ id, name }) => {
   // to change styling of rated boxes after they have been rated
   const [clickedStyle, setClickedStyle] = useState({});
 
+  localStorage.setItem('ratingSeller', name);
+  localStorage.setItem('ratingSellerId', id);
+
+  console.log('rating seller ' + localStorage.getItem('ratingSeller'));
+
+  const ratingSeller = useSelector((state) => state.userReducer.ratingSeller);
+
+  console.log(ratingSeller);
   // styles effected after a box is rated
   const ratingChanged = (newRating) => {
     setClickedStyle({
@@ -46,7 +55,8 @@ const UserRating = ({ id, name }) => {
   return (
     <div className="stars_container" style={clickedStyle}>
       <p className="stars__username">
-        {name.charAt(0).toUpperCase() + name.slice(1)}
+        {name == undefined ? '' : name.charAt(0).toUpperCase() + name.slice(1)}
+        {/* {ratingSeller.charAt(0).toUpperCase() + ratingSeller.slice(1)} */}
       </p>
       <div className="stars__class">
         <ReactStars

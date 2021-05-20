@@ -16,7 +16,9 @@ const initState = () => ({
   viewBooks: [],
   cart: [],
   ratings: [],
+  ratingSellerId: 0,
   randomMsg: '',
+  ratingSeller: '',
 });
 
 export const getCartTotal = (cart) =>
@@ -49,6 +51,12 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         name: action.name,
+      };
+    case 'SET_RATING_SELLER':
+      console.log(action);
+      return {
+        ...state,
+        ratingSeller: action.ratingSeller,
       };
     case 'SET_SELLER_EMAIL':
       return {
@@ -93,6 +101,11 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         userid: action.userid,
+      };
+    case 'SET_RATING_SELLER_ID':
+      return {
+        ...state,
+        ratingSellerId: action.ratingSellerId,
       };
     case 'SET_USER_RATING':
       return {

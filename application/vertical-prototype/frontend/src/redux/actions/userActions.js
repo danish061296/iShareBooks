@@ -11,6 +11,10 @@ export const setUserId = (userid) => ({
   type: 'SET_USERID',
   userid,
 });
+export const setRatingSellerId = (ratingSellerId) => ({
+  type: 'SET_RATING_SELLER_ID',
+  ratingSellerId,
+});
 export const setUserRating = (userRating) => ({
   type: 'SET_USER_RATING',
   userRating,
@@ -29,6 +33,11 @@ export const setEmail = (email) => ({
 export const setSeller = (name) => ({
   type: 'SET_SELLER',
   name,
+});
+
+export const setRatingSeller = (ratingSeller) => ({
+  type: 'SET_RATING_SELLER',
+  ratingSeller,
 });
 
 export const setSellerEmail = (sellerEmail) => ({

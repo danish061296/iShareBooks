@@ -67,6 +67,8 @@ const Navigation = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('isloggedin');
         localStorage.removeItem('userposts');
+        localStorage.removeItem('ratingSeller');
+        localStorage.removeItem('ratingSellerId');
 
         history.push('/login');
       }

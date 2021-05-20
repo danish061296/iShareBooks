@@ -20,6 +20,10 @@ export default function RatingMessage() {
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
   const username = useSelector((state) => state.userReducer.username);
+  const ratingSeller = useSelector((state) => state.userReducer.ratingSeller);
+
+  console.log('Rating danish ' + ratingSeller);
+  console.log('ohhh ratings ' + ratings);
 
   // creating array to store distinct seller names
   var filtered = [];
@@ -41,8 +45,12 @@ export default function RatingMessage() {
           <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
 
           <p className="confirmation__text">
-            Hi <strong>{username}</strong>, your confirmation number is #
-            {confirmation_num}. A confirmation has been sent to your email.
+            Hi{' '}
+            <strong>
+              {username.charAt(0).toUpperCase() + username.slice(1)}
+            </strong>
+            , your confirmation number is #{confirmation_num}. A confirmation
+            has been sent to your email.
           </p>
           <p className="confirmation__text2">
             Please rate one or more sellers if you liked their services.
