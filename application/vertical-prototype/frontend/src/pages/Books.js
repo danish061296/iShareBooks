@@ -4,29 +4,22 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import BookGrid from './BookGrid';
 import { Box } from '@material-ui/core';
-import {
-  setPosts,
-} from '../redux/actions/userActions';
+import { setPosts } from '../redux/actions/userActions';
 
-
-const FreeBooks = ({paidBooks}) => {
-
+const FreeBooks = ({ paidBooks }) => {
   const [open, setOpen] = React.useState(false);
   const [hasOpened, setHasOpened] = React.useState(false);
   const [hasLoaded, setHasLoaded] = React.useState(false);
 
   const [filterBy, setFilterBy] = React.useState('Filter');
-  const [searchMessage, setSearchMessage] = React.useState("Books You May Like");
+  const [searchMessage, setSearchMessage] =
+    React.useState('Books You May Like');
   const search = useSelector((state) => state.userReducer.searchField);
   const posts = useSelector((state) => state.userReducer.posts);
-  
-
- 
 
   const handleFilterChange = (e) => {
     setFilterBy(e.target.innerText);
-
-  }
+  };
 
   //const dispatch = useDispatch();
   // const handleKeyDown = (e) => {
@@ -87,7 +80,6 @@ const FreeBooks = ({paidBooks}) => {
   //   setHasOpened(true);
   // };
 
-
   // if (!open && hasOpened) {
   //   console.log("...d");
   //   setHasOpened(false);
@@ -99,21 +91,17 @@ const FreeBooks = ({paidBooks}) => {
 
   return (
     <div className="buybooks">
-  
-
       <div className="buybooks__page">
         <div className="buybooks__container">
-       
-            
           <div className="post__book__content">
-          {/* <h2 className="post__book__title">
+            {/* <h2 className="post__book__title">
                 Computer 
               </h2> */}
           </div>
         </div>
         <div className="post__book__grid">
           {posts.map((book, index) => {
-            if (book.cost == null) book.cost = 0.00;
+            if (book.cost == null) book.cost = 0.0;
             console.log(book.cost);
             return (
               <BookGrid
@@ -132,12 +120,10 @@ const FreeBooks = ({paidBooks}) => {
                 sellerEmail={book.email}
                 defaultImage="default"
               />
-              
             );
           })}
         </div>
       </div>
-
     </div>
   );
 };

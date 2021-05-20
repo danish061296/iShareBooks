@@ -7,6 +7,7 @@ import ProtectedRoute from './ProtectedRoute';
 import ServiceBuy from './pages/ServiceBuy';
 import Profile from './pages/Profile';
 import RatingMessage from './pages/RatingMessage';
+import Thankyou from './pages/Thankyou';
 import ViewListings from './pages/ViewListings';
 import BuyBooks from './pages/BuyBooks';
 import TradeBooks from './pages/TradeBooks';
@@ -46,7 +47,7 @@ const App = () => {
     dispatch(setUserPosts(localStorage.getItem('userposts')));
     dispatch(setRatingSeller(localStorage.getItem('ratingSeller')));
     dispatch(setRatingSellerId(localStorage.getItem('ratingSellerId')));
-    dispatch(setRating(localStorage.getItem('ratings')));
+    // dispatch(setRating(JSON.parse(localStorage.getItem('ratings'))));
   }
 
   const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
@@ -72,6 +73,8 @@ const App = () => {
           <Route path="/termsofuse" component={TermsOfUse} />
           <Route path="/explore" component={Explore} />
           <Route path="/postbook" component={BookModalPro1} />
+          <Route path="/thankyou" component={Thankyou} />
+
           <Route path="/admin" component={Admin} />
 
           <ProtectedRoute

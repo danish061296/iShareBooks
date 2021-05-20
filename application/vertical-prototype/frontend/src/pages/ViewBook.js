@@ -53,24 +53,16 @@ const ViewBook = () => {
   };
 
   const handleComment = () => {
-    console.log(comment);
-
-    console.log(viewBooks[viewBooks.length - 1].id);
     const commentSection = {
       comment: comment,
       id: userid,
       postID: viewBooks[viewBooks.length - 1].id,
     };
 
-    console.log(commentSection);
-
     axios
       .post(`http://${window.location.hostname}:3001/comments`, commentSection)
       .then((response) => {
         if (response.data.comment) {
-          console.log(response.data.comment);
-
-          console.log(response.data.results);
         }
       })
       .catch((e) => console.log(e));
@@ -83,9 +75,6 @@ const ViewBook = () => {
   const handleDelete = () => {
     // endpoint: /delete_book
 
-    console.log(viewBooks[viewBooks.length - 1].id);
-    console.log(viewBooks[viewBooks.length - 1].type);
-
     const deletebook = {
       book_id: viewBooks[viewBooks.length - 1].id,
       table_name: viewBooks[viewBooks.length - 1].type,
@@ -95,7 +84,6 @@ const ViewBook = () => {
       .post(`http://${window.location.hostname}:3001/delete_book`, deletebook)
 
       .then((response) => {
-        console.log(response.data.msg);
         store.addNotification({
           title: '',
           message: response.data.msg,
@@ -110,7 +98,6 @@ const ViewBook = () => {
       })
       .catch((error) => console.log(error));
 
-    console.log(viewBooks[viewBooks.length - 1].type);
     setTimeout(() => {
       history.goBack(); // redirect to book service after profile is deleted
     }, 2000);
@@ -118,11 +105,9 @@ const ViewBook = () => {
 
   let postID = viewBooks[viewBooks.length - 1].id;
   async function fetchComments() {
-    console.log(postID);
     const res = await axios.get(
       `http://${window.location.hostname}:3001/comments/${postID}`
     );
-    console.log(res.data);
     if (res.data) {
       setComments(res.data);
     }
@@ -141,7 +126,6 @@ const ViewBook = () => {
 
   // Function to add books posts to cart
   const handleAddCart = () => {
-    // console.log(itemsArray.title);
     dispatch(
       setCartItem({
         id: viewBooks[viewBooks.length - 1].id,

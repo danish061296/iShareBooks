@@ -1,3 +1,7 @@
+/**
+ * Filename: Search.js
+ * Description: This file is used to get resukts from search.
+ */
 import React, { useEffect } from 'react';
 import './Search.css';
 import SearchIcon from '@material-ui/icons/Search';
@@ -8,7 +12,6 @@ import {
   setSearchField,
   setPosts,
   setrandomMsg,
-  setSearchType,
 } from '../redux/actions/userActions';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -22,11 +25,11 @@ const About = () => {
   const dispatch = useDispatch();
 
   const searchField = useSelector((state) => state.userReducer.searchField);
-  const posts = useSelector((state) => state.userReducer.posts);
+  // for filter options
   const [filterBy, setFilterBy] = React.useState('Filter');
 
+  // on enter key presses
   const handleKeyDown = (e) => {
-
     const search = {
       searchTable: 'paidbooks',
       searchType: filterBy,
@@ -34,26 +37,28 @@ const About = () => {
     };
 
     if (e.key === 'Enter') {
-
-      Axios.post(`http://${window.location.hostname}:3001/search`, search).then((response) => {
-        console.log(response);
-        if (!response.data.msg) {
-          dispatch(setPosts(response.data));
-          setrandomMsg(`Showing results for ${search}`);
+      Axios.post(`http://${window.location.hostname}:3001/search`, search).then(
+        (response) => {
+          console.log(response);
+          if (!response.data.msg) {
+            dispatch(setPosts(response.data));
+            setrandomMsg(`Showing results for ${search}`);
+          } else {
+            dispatch(setPosts(response.data.results));
+            setrandomMsg(`Sorry, no results were found. Suggestions: `);
+          }
         }
-        else {
-          dispatch(setPosts(response.data.results));
-          setrandomMsg(`Sorry, no results were found. Suggestions: `);
-        }
-      });
+      );
     }
   };
 
+  // when filter option selected
   const handleSelect = (e) => {
     console.log(`The selected is ${e}`);
     setFilterBy(e);
   };
 
+  // on search icon clicked
   const handleClick = () => {
     const search = {
       searchField: searchField,

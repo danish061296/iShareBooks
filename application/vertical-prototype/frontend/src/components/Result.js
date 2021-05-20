@@ -1,3 +1,8 @@
+/**
+ * Filename: Result.js
+ * Description: This file displays the result of queries.
+ */
+
 import React from 'react';
 import './Result.css';
 import Carousel from 'react-elastic-carousel';

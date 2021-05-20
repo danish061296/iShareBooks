@@ -1,3 +1,8 @@
+/**
+ * Filename: DialogBox.js
+ * Description : This file is to present the post form modal.
+ */
+
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -55,6 +60,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
+// close box when back btn is click
 export default function DialogBox({ children, open, setOpen, title, button }) {
   const handleClose = () => {
     setOpen(false);

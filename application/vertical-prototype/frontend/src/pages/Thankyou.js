@@ -1,8 +1,7 @@
 /**
- * Filename: RatingMessage.js
- *  Description: This file create a rating pages that shows rating
- *  boxes of different seller whose books have been selected by the buyer.
- *  All dulicated seller rating boxes are removed and only allow a seller
+ * Filename: Thnakyou.js
+ *  Description: This file create a thank you page after seller has done shopping and wants to continue shopping.
+
  *  to be rated once.
  */
 
@@ -11,11 +10,9 @@ import Navigation from '../components/Navigation';
 import { useSelector } from 'react-redux';
 import './RatingMessage.css';
 import Footer from '../components/Footer';
-import UserRating from './UserRating';
 
-export default function RatingMessage() {
+export default function Thankyou() {
   // generating receipt id
-  var confirmation_num = Math.floor(Math.random() * 1000000000000 + 1);
 
   // importing objects from redux
   const ratings = useSelector((state) => state.userReducer.ratings);
@@ -37,32 +34,23 @@ export default function RatingMessage() {
     }
   });
 
-  // console.log('ohhh ratings ' + JSON.parse(filtered_ratings));
-
   return (
     <div className="ratingmessage">
       <Navigation />
       <div className="main__container">
         <div className="ratingmessage__top">
-          <h1 className="thankyou__text">Thank You for Placing your Order.</h1>
-
           <p className="confirmation__text">
-            Hi{' '}
-            <strong>
-              {username.charAt(0).toUpperCase() + username.slice(1)}
-            </strong>
-            , your confirmation number is #{confirmation_num}. A confirmation
-            has been sent to your email.
+            <h1>
+              Hi{' '}
+              <strong>
+                {username.charAt(0).toUpperCase() + username.slice(1)}
+              </strong>
+            </h1>
+            <h3> Thank You For Shopping With Us</h3>
           </p>
           <p className="confirmation__text2">
-            Please rate one or more sellers if you liked their services.
+            You can go back and continue shopping :){' '}
           </p>
-        </div>
-        <div className="user__rating">
-          {ratings &&
-            filtered_ratings.map((rating, i) => {
-              return <UserRating key={i} id={rating.id} name={rating.name} />;
-            })}
         </div>
       </div>
 

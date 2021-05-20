@@ -1,3 +1,7 @@
+/**
+ * Filename: Services.js
+ * Description: This file is to display our services cards
+ */
 import React from 'react';
 import './Services.css';
 import { Link } from 'react-router-dom';
