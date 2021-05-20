@@ -36,3 +36,14 @@
 .default__img {
   margin-right: 40px;
 }
+
+.trending__books {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .caro {
+    width: 350px !important;
+  }
+}

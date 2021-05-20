@@ -1,3 +1,10 @@
+/**
+ * Filename: Registration.js
+ * Description: The file creates a sign up form to let general users to
+ * create an account in order to use website services.
+ * The sign up form is also being valdiated before being sent to backend.
+ */
+
 import React, { useRef } from 'react';
 import './Registration.css';
 import Button from '@material-ui/core/Button';
@@ -6,18 +13,19 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import { Link as LinkR, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Navigation from '../components/Navigation';
-import { useHistory } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+
 import {
   setUsername,
   setEmail,
@@ -27,6 +35,7 @@ import {
 import Axios from 'axios';
 import './Registration.css';
 
+// website copyright
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -39,6 +48,7 @@ function Copyright() {
   );
 }
 
+// to style registartion form components
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -61,9 +71,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Registration = () => {
   const classes = useStyles();
+  // to dispatch sign up values to redux store
   const dispatch = useDispatch();
+  // get reference of each tag
   const ref = useRef(null);
+  // to get the browser hsitory info
+  const history = useHistory();
 
+  // initial values of sign up inputs
   const initialValues = {
     username: '',
     email: '',
@@ -71,6 +86,7 @@ const Registration = () => {
     remember: false,
   };
 
+  // function to validate sign up inputs
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, 'Username is too short!')
@@ -87,57 +103,58 @@ const Registration = () => {
     ),
   });
 
+  // send signup info to backend after valdiation
   const onSubmit = (values, props) => {
     const payload = {
       ...values,
     };
-    setTimeout(() => {
-      props.resetForm();
-      // alert(JSON.stringify(payload, null, 2));
 
-      props.setSubmitting(false);
-    }, 2000);
-
-    console.log(payload.username);
-
+    // object containing sign up info to be send to backend
     const registerUser = {
       username: payload.username,
       email: payload.email,
       password: payload.password,
     };
 
-    console.log(registerUser.username);
-    Axios.post('http://'+window.location.hostname+':3001/register', registerUser).then(
-      (response) => {
-        console.log(response.data);
-        if (!response.data.registered) {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'danger',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        } else {
-          store.addNotification({
-            title: '',
-            message: response.data.message,
-            type: 'success',
-            insert: 'top',
-            container: 'top-center',
-            dismiss: {
-              duration: 2000,
-              showIcon: true,
-            },
-          });
-        }
+    // send sign up info to backend
+    Axios.post(
+      `http://${window.location.hostname}:3001/register`,
+      registerUser
+    ).then((response) => {
+      // if not registered , show error
+      if (!response.data.registered) {
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+      } else {
+        // if registered successfully show success and redirect to login page
+        store.addNotification({
+          title: '',
+          message: response.data.message,
+          type: 'success',
+          insert: 'top',
+          container: 'top-center',
+          dismiss: {
+            duration: 2000,
+            showIcon: true,
+          },
+        });
+        // redirect to login page after 2 secs
+        setTimeout(() => {
+          history.push('/login');
+        }, 2000);
       }
-    );
+    });
 
+    // update values in redux store
     dispatch(setUsername(payload.username));
     dispatch(setEmail(payload.email));
     dispatch(setPassword(payload.password));
@@ -145,9 +162,12 @@ const Registration = () => {
 
   return (
     <div>
+      {/** Navigation bar */}
       <Navigation />
+      {/** Show success or error upon sign up */}
       <ReactNotification />
       <div className="signup__container">
+        {/** Sign up Page Content */}
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
@@ -212,16 +232,22 @@ const Registration = () => {
                       name="remember"
                       control={
                         <Checkbox
+                          required
                           value="allowExtraEmails"
                           color="color: #28918a"
                         />
                       }
                       // label="I want to receive fun updates about books via email."
                       label={
-                        <Typography variant="body2" color="textSecondary">
-                          By clicking sign up, you agree to our Terms and
-                          Privacy Policy.
-                        </Typography>
+                        <>
+                          <p className="terms__checkbox">
+                            By clicking sign up, you agree to our Terms and
+                            Privacy Policy.
+                            <LinkR className="terms__link" to="/termsofuse">
+                              Terms of Use
+                            </LinkR>
+                          </p>
+                        </>
                       }
                     />
                   </Grid>

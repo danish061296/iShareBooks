@@ -3,75 +3,92 @@ const db = require('../dataBase.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+router.use(cors());
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM users', (err, rows, fields) => {
-    if (!err) {
-      console.log(rows);
-      res.send(rows);
-    } else {
-      console.log(err);
-    }
-  });
+  //query db
+  // db.query('SELECT * FROM users', (err, rows, fields) => {
+  //   if (!err) {
+  //     console.log(rows);
+  //     //res.send(rows);
+  //   } else {
+  //     console.log(err);
+  //   }
+  // });
 });
+
 router.post('/register', (req, res) => {
-  console.log('dsads');
   const { username, email, password } = req.body;
-  const values = [email];
-  var sql = `SELECT email from users where email=?`;
-  db.query(sql, [values], (err, results) => {
+  // const values = [email];
+
+  console.log(username);
+
+  var hash = bcrypt.hashSync(password, 8);
+  const user = [username, email, hash];
+
+  var insertSQL = `INSERT INTO users (name,email,password) VALUES (?)`;
+  db.query(insertSQL, [user], (err, results) => {
     if (err) {
-      return res.status(401).send(err);
-    } else if (results.length > 0) {
-      return res.send({
-        registered: false,
-        message: 'Email is already in use!',
-      });
-    } else {
-      var hash = bcrypt.hashSync(password, 8);
-      const user = [username, email, hash];
-      var inserSql = `INSERT INTO users (name, email,password) VALUES (?)`;
-      db.query(inserSql, [user], function (err, data) {
-        console.log(user);
-        if (err) throw err;
-        res.status(200).send({
-          registered: true,
-          message: 'The user is registered successfully!',
+      if (err.sqlMessage.includes('name')) {
+        return res.send({
+          registered: false,
+          message: 'Username is already in use!',
         });
+      } else if (err.sqlMessage.includes('email')) {
+        return res.send({
+          registered: false,
+          message: 'Email is already in use!',
+        });
+      }
 
-        // res.json({
-        //   status: 200,
-        //   // data: data,
-        //   registered: true,
-        //   message: 'The user is registered successfully!',
-        // });
+      return res.status(401).send(err);
+    } else {
+      if (err) throw err;
 
-        const payload = {
-          user: {
-            id: email,
-          },
-        };
-
-        jwt.sign(
-          payload,
-          'password',
-          {
-            expiresIn: 300000,
-          },
-          (err, token) => {
-            if (err) {
-              res.status(500).send('token error');
-            } else {
-              res.json({ token });
-            }
-          }
-        );
+      // insert into ratings table
+      insertSQL =
+        'INSERT INTO Ratings (user_id, accumulated_stars, total_ratings) VALUES (?)';
+      const data = [results.insertId, 5, 1];
+      db.query(insertSQL, [data], (err2, results2) => {
+        if (err2) console.log(err2);
       });
+      res.status(200).send({
+        registered: true,
+        message: 'The user is registered successfully!',
+      });
+
+      const payload = {
+        user: {
+          id: email,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        'password',
+        {
+          expiresIn: 300000,
+        },
+        (err, token) => {
+          if (err) {
+            res.status(500).send('token error');
+          } else {
+            res.json({ token });
+          }
+        }
+      );
     }
   });
 });
 
 router.post('/login', async (req, res) => {
+
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -79,10 +96,14 @@ router.post('/login', async (req, res) => {
         .status(400)
         .send({ message: 'Please enter email and password' });
     }
+    
     db.query(
       'SELECT * FROM users WHERE email = ?',
       [email],
       async (err, results) => {
+        if (err) {
+          console.log('ERRRRR' + err);
+        }
         if (
           results[0] === undefined ||
           !bcrypt.compareSync(password, results[0].password)
@@ -92,8 +113,6 @@ router.post('/login', async (req, res) => {
             message: 'Password or email is incorrect!',
           });
         } else {
-          //  const id = results[0].email;
-
           const payload = {
             user: {
               id: results[0].email,
@@ -110,7 +129,10 @@ router.post('/login', async (req, res) => {
           res.cookie('jwt', token, cookieOptions);
           res.status(200).send({
             auth: true,
+            id: results[0].id,
+            userName: results[0].name,
             token: token,
+            email: results[0].email,
             message: "You're successfully logged in.",
           });
         }

@@ -1,3 +1,8 @@
+/**
+ * Filename: App Faq.js
+ * Description: This file displays the faqs related to website.
+ */
+
 import React from 'react';
 import { NavbarBrand } from 'react-bootstrap';
 import Accordion from '@material-ui/core/Accordion';
@@ -10,6 +15,7 @@ import './Faq.css';
 const AppFaq = () => {
   return (
     <div className="faq__container" id="faq">
+      {/** FAQ Content */}
       <div className="faq">
         <NavbarBrand
           style={{
