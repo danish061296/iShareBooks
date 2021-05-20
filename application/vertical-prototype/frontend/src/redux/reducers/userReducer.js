@@ -28,15 +28,11 @@ export const getCartTotal = (cart) =>
 const userReducer = (state = initState(), action) => {
   switch (action.type) {
     case 'SET_USERNAME':
-      console.log(action);
-
       return {
         ...state,
         username: action.username,
       };
     case 'SET_EMAIL':
-      console.log(action);
-
       return {
         ...state,
         email: action.email,
@@ -53,7 +49,6 @@ const userReducer = (state = initState(), action) => {
         name: action.name,
       };
     case 'SET_RATING_SELLER':
-      console.log(action);
       return {
         ...state,
         ratingSeller: action.ratingSeller,
@@ -91,8 +86,6 @@ const userReducer = (state = initState(), action) => {
       };
 
     case 'SET_USER_POSTS':
-      console.log(action);
-
       return {
         ...state,
         userPosts: action.userPosts,
@@ -123,28 +116,23 @@ const userReducer = (state = initState(), action) => {
         viewBooks: [...state.viewBooks, action.book],
       };
     case 'SET_RATING':
-      console.log(action);
       return {
         ...state,
         ratings: [...state.ratings, action.rating],
       };
     case 'ADD_TO_CART':
-      console.log(action);
       return {
         ...state,
         cart: [...state.cart, action.item],
       };
 
     case 'SET_DELETE_CART':
-      console.log(action);
-
       return {
         ...state,
         cart: [],
       };
 
     case 'REMOVE_FROM_CART':
-      console.log(action);
       // coping the previous items into new array
       let newCart = [...state.cart];
 

@@ -1,3 +1,7 @@
+/**
+ * Filename: ListingItem.js
+ * Description: This file shows the add to cart items
+ */
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import './ListingItem.css';

@@ -79,7 +79,7 @@ router.post('/pay', (req, res) => {
       payment_method: 'paypal',
     },
     redirect_urls: {
-      return_url: 'http://localhost:3000/rating',
+      return_url: 'http://localhost:3000/thankyou',
       cancel_url: 'http://localhost:3000/cancelPayment',
     },
     transactions: [

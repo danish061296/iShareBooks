@@ -29,11 +29,6 @@ export default function RatingMessage() {
     ratings_array.push({'id': key, 'name': value});
   }
 
-
-  console.log("!!")
-  console.log(ratings_array[0].id)
-
-
   // creating array to store distinct seller names
   var filtered = [];
 

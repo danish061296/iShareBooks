@@ -1,3 +1,8 @@
+/**
+ * Filename: Footer.js
+ * Description: This file displays our footer and links.
+ */
+
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';

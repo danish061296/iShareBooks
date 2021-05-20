@@ -1,3 +1,7 @@
+/**
+ * Filename: TotalAmount.js
+ * Description: This file shows the total amount summary
+ */
 import React from 'react';
 import axios from 'axios';
 import './TotalAmount.css';
@@ -14,6 +18,7 @@ const TotalAmount = () => {
   const dispatch = useDispatch();
 
   const handleCheckout = async () => {
+
     console.log('CART');
     console.log(cart);
     
@@ -24,6 +29,7 @@ const TotalAmount = () => {
     });
 
     localStorage.setItem('rating_store', JSON.stringify(cart_dict));
+
 
 
     const getTotalAmount = getCartTotal(cart).toFixed(2);

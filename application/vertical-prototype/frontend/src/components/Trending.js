@@ -1,3 +1,7 @@
+/**
+ * Filename: Trending.js
+ * Description: This file shows trending books in carousel
+ */
 import React, { useState } from 'react';
 import './Trending.css';
 import Carousel from 'react-elastic-carousel';
@@ -17,12 +21,12 @@ const Trending = () => {
     Aos.init({ duration: 1600 });
   }, []);
 
+  // get the trending books
   React.useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
         `http://${window.location.hostname}:3001/fire`
       );
-      console.log(res.data);
       setTrendingBooks(res.data.results);
     }
     fetchData();
@@ -40,7 +44,7 @@ const Trending = () => {
   const posts = useSelector((state) => state.userReducer.posts);
   const randomMsg = useSelector((state) => state.userReducer.randomMsg);
 
-  // console.log(trendingBooks);
+  // break points for carousel
   const breakPoints = [
     { width: 500, itemsTo0how: 3 },
     { width: 768, itemsToShow: 5 },
