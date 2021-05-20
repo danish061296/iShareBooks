@@ -1,3 +1,7 @@
+/**
+ * Filename: App.js
+ * Description: This is our main frontend file that routes to different pages
+ */
 import React from 'react';
 import './App.css';
 import Home from './pages/Home';
