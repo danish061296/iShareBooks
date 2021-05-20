@@ -158,9 +158,9 @@
   align-self: flex-end;
   position: relative !important;
   right: 200px !important;
-  top: -18% !important;
+  top: -130px !important;
 }
-/* 
+
 @media screen and (max-width: 1920px) {
   .filter__btn {
     position: relative !important;
@@ -174,12 +174,12 @@
     left: -10% !important;
     top: -140px !important;
   }
-} */
+} 
 @media screen and (max-width: 768px) {
   .filter__btn {
     position: relative !important;
-    left: -7% !important;
-    top: -160px !important;
+    left: -50px !important;
+    top: -120px !important;
     font-size: 9px !important;
     height: 0px !important;
   }
