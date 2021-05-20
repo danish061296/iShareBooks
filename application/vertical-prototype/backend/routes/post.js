@@ -216,4 +216,50 @@ router.get('/userposts/:userId', (req, res) => {
   });
 });
 
+router.get('/allbooks', (req, res) => {
+
+  var query = `SELECT foo.*, users.email, users.name FROM (SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type, user_id FROM paidbooks  
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade", user_id FROM tradebooks)
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free", user_id FROM freebooks)) foo JOIN users WHERE users.id = user_id;`;
+
+  db.query(query, (err, results) => {
+    if (err) return res.send(err);
+    
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+    res.send(results);
+  })  
+  
+});
+
+router.get('/allbooksbydept/:department', (req, res) => {
+
+  const dept = req.params.department;
+
+  var query = `SELECT foo.*, users.email, users.name FROM (SELECT book_id, title, author, \`condition\`, isbn, department, image, cost, "paid" as type, user_id FROM paidbooks WHERE department LIKE `+db.escape('%' + dept + '%') +`  
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "trade", user_id FROM tradebooks WHERE department LIKE `+db.escape('%' + dept + '%') +`)
+  UNION (SELECT book_id, title, author, \`condition\`, isbn, department, image, NULL, "free", user_id FROM freebooks WHERE department LIKE `+db.escape('%' + dept + '%') +`)) foo JOIN users WHERE users.id = user_id;`;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    
+    results.forEach(function (book, index) {
+      if (book.image) {
+        var bytes = Buffer.from(book.image, 'base64');
+        results[index].image = bytes.toString();
+      }
+    });
+    console.log(results)
+    res.send(results);
+  })  
+  
+});
+
 module.exports = router;
